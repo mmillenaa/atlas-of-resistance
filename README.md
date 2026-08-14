@@ -7,6 +7,7 @@
 ## Overview
 This repository contains the data modelling, query framework, and demonstration datasets developed for the doctoral research project **Educational initiatives of the Metallurgical Trade Union Opposition in São Paulo**, supported by FAPESP (grant **25/11544‑9**). The project builds a structured digital corpus to support historical research into state violence, legal classifications of crimes and human‑rights violations, and processes of memory and reparation across Latin American dictatorships.
 
+---
 <img width="1891" height="813" alt="image" src="https://github.com/user-attachments/assets/b3e589bb-ffcb-4a8c-a4a9-acc2a5f81c09" />
 <img width="1462" height="925" alt="image" src="https://github.com/user-attachments/assets/0dd6802b-bdda-46b1-b0da-dc912ff4e9dd" />
 <img width="1045" height="755" alt="image" src="https://github.com/user-attachments/assets/006b8a0f-3da1-4cce-8f1a-17cfdb75fa60" />
@@ -14,8 +15,6 @@ This repository contains the data modelling, query framework, and demonstration 
 <img width="1890" height="777" alt="image" src="https://github.com/user-attachments/assets/7a6a1d81-8ef6-4a7b-b406-ae6cb3a980d2" />
 <img width="1873" height="941" alt="image" src="https://github.com/user-attachments/assets/370f9dfc-9d34-4e09-a895-3d428ecc9c3a" />
 <img width="1887" height="839" alt="image" src="https://github.com/user-attachments/assets/eb2b0570-0e84-4c57-939f-6a3a5c458d0f" />
-
----
 
 ## What this project does
 - **Structures archival material as a knowledge graph** to capture relationships between people, unions, events, and legal instruments.  
