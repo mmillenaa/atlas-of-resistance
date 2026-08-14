@@ -1,17 +1,39 @@
-# Digital source corpora and data modelling: educational initiatives of the metallurgical trade union opposition in São Paulo
+# Atlas of resistance to the dictatorship (1964): a knowledge graph of memory, violations, and political agency.
 
-This repository contains the data modelling and querying framework developed for the doctoral research project *Educational initiatives of the metallurgical trade union opposition in São Paulo*, supported by FAPESP (grant 25/11544-9).
+**Tagline:** A knowledge‑graph platform for archival research on labour resistance, legal categories, and transitional justice.
 
-The primary objective of this initiative is to build a comprehensive digital source corpus to assist researchers in mapping the historical evolution of legal categories concerning crimes and human rights violations. By maintaining a neutral and humanistic approach to archival description, this project aims to provide a robust foundation for memory, justice, and reparation regarding lives lost during Latin American dictatorships.
+---
+
+## Overview
+This repository contains the data modelling, query framework, and demonstration datasets developed for the doctoral research project **Educational initiatives of the Metallurgical Trade Union Opposition in São Paulo**, supported by FAPESP (grant **25/11544‑9**). The project builds a structured digital corpus to support historical research into state violence, legal classifications of crimes and human‑rights violations, and processes of memory and reparation across Latin American dictatorships.
+
+---
+
+## What this project does
+- **Structures archival material as a knowledge graph** to capture relationships between people, unions, events, and legal instruments.  
+- **Implements SPARQL queries and examples** to extract historical patterns and legal category evolution.  
+- **Provides interactive visualisations** using R and Shiny that connect graph data to transcripts, documents, and geographic context.  
+- **Preserves a neutral, humanistic archival approach** to support memory, truth, and reparative justice without exposing unpublished research data.
+
+---
 
 ## Technical framework
+**Core components**
+- **Ontology and data modelling**: bespoke schema to represent actors, institutions, events, and legal classifications.  
+- **Query layer**: SPARQL examples and templates for reproducible extraction of research‑relevant subgraphs.  
+- **Analysis and UI**: R scripts and Shiny apps for processing query results and producing interactive interfaces.  
+- **Data handling**: curated structural samples included to demonstrate architecture and workflows while protecting sensitive or unpublished material.
 
-To effectively structure and analyse this historical data, the project relies on the following digital humanities methodologies:
+**Languages and tools**
+- RDF / OWL for ontology design  
+- SPARQL for querying  
+- R and Shiny for data processing and web interfaces  
+- Git and GitHub for versioning and collaboration
 
-- **Data modelling & ontology design**: The archival records and legal documents are structured into a bespoke knowledge graph, capturing the complex relationships between historical events, legal classifications, and individuals.  
-- **Data extraction & analysis**: The repository demonstrates advanced query methods using SPARQL to navigate the knowledge graph and extract targeted historical patterns.  
-- **Academic web interfaces**: The data extracted via SPARQL is processed and visualised using R and Shiny, creating interactive applications that link the knowledge graphs to specific historical events and transcripts.
+---
 
-## Note
-
-As this repository supports an ongoing doctoral thesis, the data provided here is a structural sample designed to demonstrate the software architecture and querying capabilities without disclosing unpublished research data.
+## Getting started
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
