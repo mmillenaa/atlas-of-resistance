@@ -1,0 +1,14 @@
+*.csv
+*.ttl
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.venv/
+__pycache__/
+*.pyc
+*.msi
+apache-jena-*/
+apache-jena-fuseki-*/
+Thumbs.db
+Desktop.ini
