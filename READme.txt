@@ -35,5 +35,5 @@ This repository contains the data modelling, query framework, and demonstration 
 ## Getting started
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/your-repo.git
+git clone https://github.com/mmillenaa/atlas-of-resistance.git
 cd your-repo
