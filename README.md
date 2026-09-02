@@ -1,7 +1,7 @@
 # Atlas of resistance to the civil-military dictatorship in Brazil: violations, crimes, and political agency (1964-1985)
 ![RStudio](https://img.shields.io/badge/RStudio-75AADB?style=flat&logo=rstudio&logoColor=white) ![Python](https://img.shields.io/badge/Python-3.14%2B-3776AB?style=flat&logo=python&logoColor=white)
 
-**Tagline:** A knowledge‑graph platform for archival research on labour resistance, legal categories, and transitional justice.
+A knowledge‑graph platform for archival research on labour resistance, legal categories, and transitional justice.
 
 ---
 
