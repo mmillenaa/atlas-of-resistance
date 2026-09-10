@@ -50,9 +50,6 @@ This repository contains the data modelling, query framework, and demonstration 
 - R and Shiny for data processing and web interfaces  
 - Git and GitHub for versioning and collaboration
 
----
-<img width="2912" height="1440" alt="overview" src="https://github.com/user-attachments/assets/730ec379-09d4-45a8-8a56-3ea71f00406b" />
-
 ## Getting started
 1. **Clone the repository**
 ```bash
