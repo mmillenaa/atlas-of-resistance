@@ -9,13 +9,25 @@ A knowledge‑graph platform for archival research on labour resistance, legal c
 This repository contains the data modelling, query framework, and demonstration datasets developed for the doctoral research project **Educational initiatives of the Metallurgical Trade Union Opposition in São Paulo**, supported by FAPESP (grant **25/11544‑9**). The project builds a structured digital corpus to support historical research into state violence, legal classifications of crimes and human‑rights violations, and processes of memory and reparation across Latin American dictatorships.
 
 ---
-**Project Demonstration**
+## Project Demonstration
 
-**General Overview**
-![Atlas of Resistance Overview](docs/presentation.gif)
+### Home
+![Home](docs/home.gif)
 
-**Semantic Query Builder**
+### Knowledge Graph
+![Knowledge Graph](docs/knowledge_graph.gif)
+
+### Semantic Query Builder
 ![Semantic Query Builder](docs/semantic_query_builder.gif)
+
+### Geography
+![Geography](docs/map.gif)
+
+### Legal Compendium
+![Legal Compendium](docs/legal_compendium.gif)
+
+### Corpora
+![Corpora](docs/cosmov.gif)
 
 ## What this project does
 - **Structures archival material as a knowledge graph** to capture relationships between people, unions, events, and legal instruments.  
