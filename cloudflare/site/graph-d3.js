@@ -118,13 +118,7 @@ function draw(nodeRows,edgeRows,onSelect){
  }
  function focus(id,opts={}){
   selectedId=id||null;
-  // O foco permanece após o movimento do mouse; ao clicar em OSM,
-  // congela-se a posição corrente do núcleo e da malha.
-  if(selectedId==='M001'&&opts.lock){
-   simulation.stop();
-  }else if(opts.release){
-   simulation.alpha(.07).restart();
-  }
+  simulation.stop();
   applyFocus(selectedId);
  }
  groups.on('mouseenter',(event,n)=>{if(!selectedId)applyFocus(n.id);})

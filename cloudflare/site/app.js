@@ -243,11 +243,9 @@ function drawGraph(){
    showDetail(id);
    // Não substituir a prévia de todas as pessoas por uma visão radial.
    // Apenas revelar vizinhos novos, mantendo os existentes no contexto.
-   const novos=id==='M001'?[]:neighbors(id).filter(x=>!visible.has(x)).slice(0,22);
-   if(novos.length){novos.forEach(x=>visible.add(x));drawGraph();}
-   if(net && typeof net.focus==='function')net.focus(id,{lock:id==='M001'});
+   if(net && typeof net.focus==='function')net.focus(id,{lock:true});
   });
-  if(selected && net?.focus)net.focus(selected,{lock:selected==='M001'});
+  if(selected && net?.focus)net.focus(selected,{lock:true});
   const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
   $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+arestasSociais().length+' vínculos sociais ou organizacionais cadastrados.';
   return;
@@ -262,70 +260,67 @@ function drawGraph(){
   edges:{smooth:{enabled:true,type:'dynamic'},width:1.1},
   configure:false
  });
- net.on('click',p=>{if(p.nodes.length){selected=p.nodes[0];showDetail(selected);expand(selected,24);}});
+ net.on('click',p=>{if(p.nodes.length){selected=p.nodes[0];showDetail(selected);if(net&&net.focus)net.focus(selected,{lock:true});}});
  const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
  $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
 }
 
 function showDetail(id){
- const n=nodeById.get(id);if(!n)return;
- const d=$('detail');
- const desc=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN'])||text(miniBiografias[id]);
- let out='<button id="closeDetail" aria-label="Fechar painel">×</button>';
- if(n.photo)out+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
- out+='<h3>'+HTML(n.label)+'</h3>';
- if(desc)out+='<p class="mini-bio">'+HTML(desc)+'</p>';
- else if(n.kind==='Pessoa')out+='<p class="mini-bio">Minibiografia ainda não disponível nesta versão pública.</p>';
+  const n=nodeById.get(id);if(!n)return;
+  const d=$('detail');
+  const resumoMovimento={
+    M001:'Articulação sindical e política de trabalhadores e trabalhadoras metalúrgicos de São Paulo, com atuação na democratização sindical, nas comissões de fábrica, na formação profissional e na educação popular durante a ditadura e a redemocratização. Incluiu militantes operários e participantes constitutivos de iniciativas pedagógicas, documentais e de organização.',
+    M018:'Corrente de atuação político-sindical formada no interior da Central Única dos Trabalhadores, com participação de militantes oriundos de diferentes oposições sindicais, inclusive da OSM-SP.',
+    M019:'Coletivo constituído no período democrático recente e relacionado a ações de memória e defesa da democracia. Seu vínculo de articulação com a rede histórica da OSM-SP não equivale a filiação sindical no período ditatorial.'
+  };
+  let descricao=first(n.raw,['Biography_ORIG','Description_ORIG','HistoricalDescription','Notes','AnalyticalNote','Biography_EN']) || text(miniBiografias[id]) || text(resumoMovimento[id]);
+  if(!descricao&&n.kind==='Movimento')descricao='Movimento registrado na pesquisa. Síntese histórica específica ainda não cadastrada.';
+  let out='<button type="button" id="closeDetail" aria-label="Fechar painel">×</button>';
+  if(n.photo)out+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
+  out+='<h3>'+HTML(n.label)+'</h3>';
+  if(descricao)out+='<p class="mini-bio">'+HTML(descricao)+'</p>';
+  else if(n.kind==='Pessoa')out+='<p class="mini-bio">Minibiografia ainda não disponível nesta versão pública.</p>';
 
- const dedup=new Set();
- const ligacoes=arestasSociais().filter(e=>e.from===id||e.to===id).map(e=>{
-   const peer=e.from===id?e.to:e.from;
-   const vizinho=nodeById.get(peer);
-   return {nome:vizinho?.label||'',papel:roleLabel(e.relation),chave:peer+'|'+e.relation};
- }).filter(v=>{if(!v.nome||dedup.has(v.chave))return false;dedup.add(v.chave);return true;});
- if(ligacoes.length){
-   out+='<h4>Participação e vínculos organizacionais</h4><ul>';
-   out+=ligacoes.map(v=>'<li>'+HTML(v.papel)+': <strong>'+HTML(v.nome)+'</strong></li>').join('');
-   out+='</ul>';
- }
-
- if(n.kind==='Pessoa'){
-   const diretamenteOSM=arestasSociais().some(e=>(e.from===id&&e.to==='M001')||(e.to===id&&e.from==='M001'));
-   if(!diretamenteOSM){
-     out+='<p class="muted" style="font-size:12px">A presença no Atlas não comprova participação na OSM-SP; não há vínculo direto registrado nesta matriz.</p>';
-   }
-   const eventos=new Map(rows('Events').map(e=>[text(e.EventID),e]));
-   const vivencias=new Map();
-   for(const r of rows('EventPersons')){
-     if(text(r.PersonID)!==id)continue;
-     const e=eventos.get(text(r.EventID));if(!e)continue;
-     // Agrupamento por tipo e papel; não converter acontecimento em conexão social.
-     const tipo=eventLabel(e.EventType);
-     const papel=roleLabel(r.Role);
-     const key=papel+'|'+tipo;
-     if(!vivencias.has(key))vivencias.set(key,{papel,tipo,quantidade:0});
-     vivencias.get(key).quantidade++;
-   }
-   if(vivencias.size){
-     out+='<details class="atlas-context"><summary>Acontecimentos e experiências registrados</summary><ul>';
-     for(const x of vivencias.values())out+='<li>'+HTML(x.papel)+': '+HTML(x.tipo)+(x.quantidade>1?' ('+x.quantidade+' ocorrências)':'')+'</li>';
-     out+='</ul></details>';
-   }
-   const docs=new Map(rows('Documents').map(r=>[text(r.DocumentID),r]));
-   const bibliografia=new Map();
-   for(const r of rows('DocumentPersons')){
-     if(text(r.PersonID)!==id)continue;
-     const doc=docs.get(text(r.DocumentID));if(!doc)continue;
-     const titulo=first(doc,['Title_ORIG','DisplayTitle_ORIG','DisplayTitle_EN','Title_EN','Repository']);
-     if(titulo)bibliografia.set(text(r.DocumentID),titulo);
-   }
-   if(bibliografia.size){
-     out+='<details class="atlas-context"><summary>Fontes relacionadas ('+bibliografia.size+')</summary><ul>';
-     for(const titulo of bibliografia.values())out+='<li>'+HTML(titulo)+'</li>';
-     out+='</ul></details>';
-   }
- }
- d.innerHTML=out;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
+  const ligados=(typeof arestasSociais==='function'?arestasSociais():edgeRows.filter(e=>{
+    const a=nodeById.get(e.from),b=nodeById.get(e.to);
+    return a&&b&&['Pessoa','Instituição','Movimento'].includes(a.kind)&&['Pessoa','Instituição','Movimento'].includes(b.kind);
+  })).filter(e=>e.from===id||e.to===id);
+  const unicos=new Map();
+  for(const e of ligados){
+    const outra=e.from===id?e.to:e.from,v=nodeById.get(outra);
+    if(!v)continue;const rel=roleLabel(e.relation);
+    const chave=outra+'|'+e.relation;
+    if(!unicos.has(chave))unicos.set(chave,{nome:v.label,papel:rel,tipo:v.kind});
+  }
+  if(unicos.size){
+    const lista=[...unicos.values()].sort((a,b)=>(a.tipo==='Movimento'?-1:a.tipo==='Instituição'?0:1)-(b.tipo==='Movimento'?-1:b.tipo==='Instituição'?0:1) || a.nome.localeCompare(b.nome,'pt'));
+    out+='<details class="atlas-context"><summary>Participação e vínculos ('+lista.length+')</summary><ul>';
+    out+=lista.map(x=>'<li>'+HTML(x.papel)+': <strong>'+HTML(x.nome)+'</strong></li>').join('');
+    out+='</ul></details>';
+  }
+  if(n.kind==='Pessoa'){
+    const diretamenteOSM=ligados.some(e=>(e.from===id&&e.to==='M001')||(e.to===id&&e.from==='M001'));
+    if(!diretamenteOSM)out+='<p class="muted" style="font-size:12px">Não há vínculo individual direto com a OSM-SP registrado nas matrizes; a presença no Atlas pode decorrer de outras trajetórias de resistência.</p>';
+    const eventos=new Map(rows('Events').map(e=>[text(e.EventID),e]));
+    const vivencias=new Map();
+    for(const r of rows('EventPersons')){
+      if(text(r.PersonID)!==id)continue;const e=eventos.get(text(r.EventID));if(!e)continue;
+      const tipo=eventLabel(e.EventType),papel=roleLabel(r.Role),chave=papel+'|'+tipo;
+      if(!vivencias.has(chave))vivencias.set(chave,{papel,tipo,total:0});vivencias.get(chave).total++;
+    }
+    if(vivencias.size){out+='<details class="atlas-context"><summary>Acontecimentos e experiências ('+vivencias.size+')</summary><ul>';
+      for(const v of vivencias.values())out+='<li>'+HTML(v.papel)+': '+HTML(v.tipo)+(v.total>1?' ('+v.total+' registros)':'')+'</li>';out+='</ul></details>';
+    }
+    const documentos=new Map(rows('Documents').map(doc=>[text(doc.DocumentID),doc]));
+    const titulos=new Map();for(const r of rows('DocumentPersons')){
+      if(text(r.PersonID)!==id)continue;const doc=documentos.get(text(r.DocumentID));if(!doc)continue;
+      const nome=first(doc,['Title_ORIG','DisplayTitle_ORIG','DisplayTitle_EN','Title_EN','Repository']);if(nome)titulos.set(text(r.DocumentID),nome);
+    }
+    if(titulos.size){out+='<details class="atlas-context"><summary>Fontes documentais ('+titulos.size+')</summary><ul>';
+      for(const nome of titulos.values())out+='<li>'+HTML(nome)+'</li>';out+='</ul></details>';
+    }
+  }
+  d.innerHTML=out;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
 }
 
 function updateCounts(){
@@ -341,7 +336,9 @@ function updateMap(){
  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
  if(!leafletMap){
   leafletMap=L.map('map',{scrollWheelZoom:true,zoomControl:true}).setView([-23.55,-46.63],5);
-  L.tileLayer(
+  // Mantém o serviço principal (CARTO se configurado). Em falha de autenticação,
+  // quota ou rede, muda automaticamente para OSM sem bloquear os marcadores.
+  const atlasMapaBase = L.tileLayer(
   "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=SUA_CHAVE_CARTO",
   {
     attribution:
@@ -349,7 +346,22 @@ function updateMap(){
     maxZoom: 19,
     className: "atlas-grayscale-tiles"
   }
-).addTo(leafletMap);
+);
+  let atlasBaseAlternativa=false;
+  atlasMapaBase.on('tileerror',function(){
+    if(atlasBaseAlternativa)return;atlasBaseAlternativa=true;
+    if(atlasMapaBase._url && atlasMapaBase._url.includes('tile.openstreetmap.org')){
+      if($('mapStatus'))$('mapStatus').textContent='O serviço público de mosaicos OSM não respondeu. Verifique a rede ou os limites de uso.';
+      return;
+    }
+    if(leafletMap.hasLayer(atlasMapaBase))leafletMap.removeLayer(atlasMapaBase);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+       attribution:'&copy; OpenStreetMap contributors',maxZoom:19,
+       className:'atlas-grayscale-tiles'
+    }).addTo(leafletMap);
+    if($('mapStatus'))$('mapStatus').textContent='A camada CARTO não respondeu; exibindo o mapa-base aberto do OpenStreetMap.';
+  });
+  atlasMapaBase.addTo(leafletMap);
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
  const chosen=$('mapConcept').value;
@@ -617,3 +629,127 @@ document.addEventListener('DOMContentLoaded',()=>{
   const panel=document.getElementById('pesquisaLocal');
   if(panel && new URLSearchParams(location.search).get('pesquisa')==='1')panel.hidden=false;
 });
+
+
+/* ATLAS_EDUCACAO_20261124_V1 — curadoria geográfica em separado. */
+const atlasIniciativas = [
+ {id:'I108', nome:'Escola Nova Piratininga — Brás', periodo:'1979–1985',
+  endereco:'Rua Melo Barreto, 104, Brás, São Paulo, SP, Brasil',
+  precisao:'Endereço histórico publicado; coordenada a conferir', localizavel:true,
+  fonte:'https://serieucdb.emnuvens.com.br/serie-estudos/article/download/324/222/956',
+  nota:'Primeira sede documentada. Não confundir com o Colégio Piratininga, instituição distinta.'},
+ {id:'I108', nome:'Escola Nova Piratininga — Rua Riachuelo', periodo:'1986–1989',
+  endereco:'Rua Riachuelo, Centro, São Paulo, SP, Brasil',
+  precisao:'Logradouro documentado; número não confirmado', localizavel:false,
+  fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',
+  nota:'Não há número confirmado. Evitar atribuir coordenada exata.'},
+ {id:'I108', nome:'Escola Nova Piratininga — Sé', periodo:'1990–1996',
+  endereco:'Rua Silveira Martins, 8, Sé, São Paulo, SP, Brasil',
+  precisao:'Endereço histórico publicado; coordenada a conferir',localizavel:true,
+  fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',
+  nota:'Sede posterior ao período ditatorial, importante para a continuidade do projeto pedagógico.'},
+ {id:'I107', nome:'IIEP — sede atual', periodo:'Endereço contemporâneo',
+  endereco:'Rua Doutor Tomaz de Lima, 151, Liberdade, São Paulo, SP, Brasil',
+  precisao:'Sede atual; NÃO é sede histórica da OSM-SP',localizavel:true,
+  fonte:'https://www.iiep.org.br/',
+  nota:'Acervo e continuidade de pesquisa/memória. Identificar separadamente da cartografia histórica.'},
+ {id:'I108', nome:'Experiências formativas — Vila Matilde', periodo:'Iniciativas antecedentes da Nova Piratininga',
+  endereco:'Vila Matilde, São Paulo, SP, Brasil',precisao:'Apenas bairro documentado',localizavel:false,
+  fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',
+  nota:'Sem edifício ou endereço específico confirmado.'},
+ {id:'I108', nome:'Experiências formativas — Tatuapé', periodo:'Iniciativas antecedentes da Nova Piratininga',
+  endereco:'Tatuapé, São Paulo, SP, Brasil',precisao:'Apenas bairro documentado',localizavel:false,
+  fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',nota:'Sem edifício ou endereço específico confirmado.'},
+ {id:'I108', nome:'Experiências formativas — Mooca', periodo:'Iniciativas antecedentes da Nova Piratininga',
+  endereco:'Mooca, São Paulo, SP, Brasil',precisao:'Apenas bairro documentado',localizavel:false,
+  fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',nota:'Sem edifício ou endereço específico confirmado.'},
+ {id:'I119', nome:'Centro de Educação, Estudos e Pesquisas (CEEP)', periodo:'Final dos anos 1990 em diante',
+  endereco:'São Paulo, SP, Brasil',precisao:'Sede específica ainda não localizada',localizavel:false,
+  fonte:'https://educa.fcc.org.br/scielo.php?lng=en&nrm=iso&pid=S1809-38762019000401885&script=sci_arttext&tlng=pt',
+  nota:'Continuidade de itinerários educativos, não se presume ocupação do imóvel da Nova Piratininga.'},
+ {id:'I137',nome:'MOVA-SP', periodo:'Desde 1989',endereco:'São Paulo, SP, Brasil',
+  precisao:'Programa descentralizado; não possui ponto único',localizavel:false,
+  fonte:'https://acebsp.org.br/mova-sp/',nota:'Cartografar cada núcleo somente após confirmação do local e do período.'},
+ {id:'I139',nome:'Construindo o Saber',periodo:'Em pesquisa',endereco:'São Paulo, SP, Brasil',
+  precisao:'Endereço da experiência ainda não identificado',localizavel:false,
+  fonte:'https://cedoc.crpsp.org.br/bitstreams/93c7f35b-fff7-4391-8dc6-29094bf3bcfb/download',
+  nota:'A fonte descreve a experiência educativa, mas não fornece endereço suficiente para um marcador.'},
+ {id:'I109',nome:'ATRI — Associação dos Trabalhadores da Região do Ipiranga',periodo:'Em pesquisa',
+  endereco:'Região do Ipiranga, São Paulo, SP, Brasil',precisao:'Região conhecida; sede não confirmada',localizavel:false,
+  fonte:'',nota:'Verificar endereço na documentação da ATRI e em entrevistas antes de mapear.'}
+];
+const atlasEduGeoCache = new Map();
+let atlasEducationLayer = null, atlasEducationVisible = false;
+let atlasEduGeocodeInProgress = false;
+function atlasEduCard(item,idx,withAction=false){
+ const btn=withAction&&item.localizavel?'<button type="button" data-edu-find="'+idx+'">Localizar no mapa</button>':'';
+ const link=item.fonte?'<a target="_blank" rel="noopener noreferrer" href="'+HTML(item.fonte)+'">Fonte</a>':'';
+ return '<article class="atlas-edu-card"><strong>'+HTML(item.nome)+'</strong><small>'+HTML(item.periodo)+'</small>'+ 
+  '<p>'+HTML(item.endereco)+'</p><p class="atlas-edu-precision">'+HTML(item.precisao)+'</p>'+ 
+  '<p>'+HTML(item.nota)+'</p>'+btn+(link?' '+link:'')+'</article>';
+}
+async function atlasEduGeocode(item){
+ if(atlasEduGeoCache.has(item.endereco))return atlasEduGeoCache.get(item.endereco);
+ // Uso esporádico, explícito, uma solicitação por clique; não fazer geocodificação em massa.
+ const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(item.endereco);
+ const resp=await fetch(url,{headers:{'Accept':'application/json'}});
+ if(!resp.ok)throw Error('O geocodificador respondeu HTTP '+resp.status);
+ const results=await resp.json(),place=results[0];
+ if(!place || !/São Paulo|Sao Paulo/i.test(place.display_name))throw Error('Endereço não localizado com segurança em São Paulo.');
+ const coords=[Number(place.lat),Number(place.lon)];
+ if(!coords.every(Number.isFinite))throw Error('Coordenadas indisponíveis.');
+ atlasEduGeoCache.set(item.endereco,coords);return coords;
+}
+function atlasEduShowList(container,withAction){
+ container.innerHTML=atlasIniciativas.map((x,i)=>atlasEduCard(x,i,withAction)).join('');
+ if(withAction)container.querySelectorAll('[data-edu-find]').forEach(button=>button.addEventListener('click',async()=>{
+  const item=atlasIniciativas[+button.dataset.eduFind];if(!item.localizavel)return;
+  if(atlasEduGeocodeInProgress)return;atlasEduGeocodeInProgress=true;
+  button.disabled=true;button.textContent='Localizando…';
+  try{
+    const [lat,lon]=await atlasEduGeocode(item);
+    if(!leafletMap)updateMap();
+    if(!leafletMap)throw Error('Abra a aba Geografia para iniciar o mapa.');
+    if(!atlasEducationLayer)atlasEducationLayer=L.layerGroup().addTo(leafletMap);
+    L.circleMarker([lat,lon],{radius:12,color:'#b0160e',weight:2.5,fillColor:'#FF2B1F',fillOpacity:.9})
+      .addTo(atlasEducationLayer)
+      .bindPopup('<b>'+HTML(item.nome)+'</b><br>'+HTML(item.periodo)+'<br>'+HTML(item.endereco)+'<br><em>Coordenada geocodificada: verificar no acervo.</em>').openPopup();
+    leafletMap.setView([lat,lon],15,{animate:false});
+    button.textContent='Marcador mostrado';
+  }catch(err){button.textContent='Não localizado — conferir';button.title=err.message;}
+  finally{atlasEduGeocodeInProgress=false;button.disabled=false;}
+ }));
+}
+function atlasEduInit(){
+ const list=$('educationList'),toggle=$('educationToggle');
+ if(list && toggle){
+  atlasEduShowList(list,false);
+  list.addEventListener('click',event=>{
+    const el=event.target.closest('[data-edu-org]');if(!el)return;
+    const id=el.getAttribute('data-edu-org');
+    // Não recalcula a física nem cria vínculos: destaca a iniciativa já existente.
+    if(!nodeById.has(id))return;
+    selected=id;showDetail(id);
+    if(net && net.focus)net.focus(id,{lock:true});
+    if($('network'))$('network').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  toggle.addEventListener('click',()=>{
+    list.hidden=!list.hidden;toggle.setAttribute('aria-expanded',String(!list.hidden));
+  });
+  list.querySelectorAll('article').forEach((article,i)=>{
+    const id=atlasIniciativas[i].id;
+    const b=document.createElement('button');b.type='button';b.textContent='Destacar no grafo';b.dataset.eduOrg=id;
+    article.appendChild(b);
+  });
+ }
+ const m=$('eduMapList'),mToggle=$('eduMapToggle');
+ if(m&&mToggle){
+  atlasEduShowList(m,true);
+  mToggle.addEventListener('click',()=>{
+    m.hidden=!m.hidden;mToggle.setAttribute('aria-expanded',String(!m.hidden));
+    if(!m.hidden && leafletMap){leafletMap.setView([-23.5505,-46.6333],11,{animate:false});}
+  });
+ }
+}
+document.addEventListener('DOMContentLoaded',atlasEduInit);
+

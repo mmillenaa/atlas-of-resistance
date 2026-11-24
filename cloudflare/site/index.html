@@ -41,16 +41,31 @@
 <section id="grafo" class="page">
 <h2>Grafo de conhecimento</h2>
 <p class="section-intro">Explore os vínculos entre pessoas, instituições, movimentos, acontecimentos, documentos e conceitos jurídicos. Use os filtros para isolar o recorte; clique em um nó para expandir a rede e consultar as biografias e fontes. Os tipos de vínculo ficam nas informações das conexões, não sobre as linhas.</p>
-<div class="filter-card"><div class="filter-col">
-  <span class="field-label">Modo de exploração:</span><label class="radio"><input type="radio" name="graphMode" value="overview" checked>Visão geral</label><label class="radio"><input type="radio" name="graphMode" value="person">Filtrar por pessoa</label><label class="radio"><input type="radio" name="graphMode" value="organization">Filtrar por instituição/movimento</label>
-</div><div class="filter-col"><label for="focus">Selecionar entidade:</label><select id="focus" aria-label="Selecionar entidade"><option value="">Núcleos principais</option></select><button class="small-button" id="reset">Redefinir visualização</button></div><div class="filter-col"><label for="role">Filtrar tipos de vínculo:</label><select id="role"><option value="">Todos</option></select><button class="small-button" id="expand">Revelar conexões</button></div></div>
+<!-- Os controles internos continuam no DOM, mas não poluem a interface. -->
+<div class="atlas-internal-filters" hidden>
+  <label><input type="radio" name="graphMode" value="overview" checked>Visão geral</label>
+  <label><input type="radio" name="graphMode" value="person">Pessoa</label>
+  <label><input type="radio" name="graphMode" value="organization">Organização</label>
+  <select id="focus"><option value="">Todas as pessoas</option></select>
+  <select id="role"><option value="">Todos os vínculos</option></select>
+  <button id="reset" type="button">Redefinir</button>
+  <button id="expand" type="button">Expandir</button>
+</div>
+<div class="education-control-bar">
+  <button id="educationToggle" type="button" aria-expanded="false" aria-controls="educationList">Iniciativas de educação</button>
+  <div id="educationList" hidden></div>
+</div>
 <div class="network-frame"><div id="network" aria-label="Rede interativa"></div><aside id="detail" class="graph-detail" hidden></aside></div><p class="auxiliary" id="graphStatus"></p><p class="auxiliary"><strong>Leitura da rede:</strong> pessoas, movimentos e instituições compõem a rede social e organizacional. Acontecimentos, violências, categorias jurídicas e fontes são apresentados nas fichas e no compêndio, sem servir de pontes entre pessoas. O compartilhamento de uma organização não comprova relação pessoal direta.</p>
 </section>
 <section id="mapa" class="page">
 <h2>Lugares de memória e resistência</h2><div class="map-grid"><div>
 <p class="section-intro">Mapa da distribuição territorial de acontecimentos de resistência e repressão, a partir das coordenadas históricas documentadas.</p>
 <div class="map-controls"><label class="checkbox"><input id="heat" type="checkbox">Exibir intensidade dos acontecimentos</label><label for="mapConcept">Destacar por categoria normativa / violação:</label><select id="mapConcept"><option value="ALL">Todas as categorias</option></select></div>
-<div id="map"></div><div class="map-legend"><span><i class="pin memory"></i> Resistência, repressão e memória</span><span><i class="pin other"></i> Outros locais históricos</span></div></div>
+<div id="map"></div>
+<div class="education-map-actions">
+ <button id="eduMapToggle" type="button" aria-expanded="false" aria-controls="eduMapList">Iniciativas educativas em São Paulo</button>
+ <div id="eduMapList" hidden></div>
+</div><div class="map-legend"><span><i class="pin memory"></i> Resistência, repressão e memória</span><span><i class="pin other"></i> Outros locais históricos</span></div></div>
 <aside id="mapSide" class="side-panel"><h3>Análise Geoespacial</h3><p>Marque a opção <strong>Exibir mapa de calor</strong> para visualizar a distribuição espacial da violência civil-militar e dos focos de agência política operária. As bolhas vermelhas expressam a densidade dos acontecimentos documentados, incluindo violações, crimes, torturas, mortes e intervenções. A documentação inclui condutas de agentes estatais e civis; os locais provêm de diferentes acervos arquivísticos.</p><p>Selecione um marcador para examinar o local e a proveniência da informação.</p></aside></div><p class="auxiliary" id="mapStatus"></p>
 </section>
 <section id="juridico" class="page">
