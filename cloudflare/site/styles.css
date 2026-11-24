@@ -116,3 +116,11 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 .graph-detail details.atlas-context ul{padding-left:20px;font-size:13px;line-height:1.55}
 .graph-detail .mini-bio{font-size:13px;line-height:1.65}
 @media(max-width:760px){#educationList,#eduMapList{grid-template-columns:1fr}}
+
+/* ATLAS_ENTREVISTA_20261124_V2 — listas recolhidas discretas, sem setas */
+.atlas-context > summary {list-style:none !important;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#AD1F34;color:#AD1F34;font-weight:400;background:none;padding:8px 0;}
+.atlas-context > summary::marker {content:'';font-size:0;}
+.atlas-context > summary::-webkit-details-marker {display:none !important;}
+.atlas-context > summary::before {content:none !important;display:none !important;}
+.atlas-context > summary:focus-visible {outline:2px solid #9D2235;outline-offset:3px;}
+.atlas-context > summary:hover {color:#751a29;}

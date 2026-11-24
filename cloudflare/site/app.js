@@ -265,6 +265,22 @@ function drawGraph(){
  $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
 }
 
+// Sínteses descritivas baseadas na entrevista coletiva de 27/09/2026 e
+// na bibliografia; requerem revisão editorial antes da publicação definitiva.
+const atlasResumoEducacional={
+ I108:'Escola de formação profissional e política de trabalhadores organizada por militantes da Oposição Sindical Metalúrgica e redes de educação popular. Atuou no Brás, depois na Rua Riachuelo e, posteriormente, na Sé. Cursos e oficinas articulavam saberes técnicos, organização coletiva e formação política.',
+ I109:'Associação dos Trabalhadores da Região do Ipiranga, atuante desde 1979. Reuniu militantes e educadoras em cursos de matemática, geometria, preparação para o SENAI, formação sindical, atividades culturais e iniciativas de organização pela base.',
+ I110:'Centro Pastoral Vergueiro, também denominado Centro de Documentação e Pesquisa Vergueiro. Ofereceu espaço e apoio à documentação e a experiências educativas, incluindo atividades do supletivo de trabalhadores da ARNO narradas na entrevista.',
+ I111:'Reconstrução de Lutas Operárias, posteriormente Reconstrução – Educação, Assessoria e Pesquisa. Articulou formação de dirigentes, assessoria sindical e circulação de materiais políticos e pedagógicos em sindicatos e instâncias da CUT.',
+ I114:'Associação dos Trabalhadores da Leopoldina, ligada às experiências de organização coletiva e de formação de trabalhadores na região oeste de São Paulo. A localização exata dos cursos e da sede ainda precisa ser documentada.',
+ I115:'Associação dos Trabalhadores e Moradores da Zona Sul, vinculada à articulação operária e comunitária na região de Santo Amaro. Promovia organização pela base, atividades culturais, encontros e cursos políticos e profissionais.',
+ I120:'União de Moradores do Parque Bristol e Jardim São Savério. Reuniu organização comunitária e alfabetização de adultos; Sueli Bossam relata participação nas atividades de ensino e nas lutas locais.',
+ I126:'Conselho de Escolas de Trabalhadores, articulação entre experiências de formação de trabalhadores, metodologias e intercâmbio pedagógico. Não corresponde a uma única sede física.',
+ I136:'Supletivo Avante, experiência de elevação da escolaridade de trabalhadoras e trabalhadores ligados à indústria Linhas Corrente. Sueli Bossam descreve o funcionamento na Rua do Fico, 100, Ipiranga, aproximadamente em 1977–1978, e o posterior deslocamento de atividades ao CPV.',
+ I137:'Movimento de Alfabetização de Jovens e Adultos de São Paulo. Iniciativa descentralizada de alfabetização e formação de educadores, com intercâmbio de metodologias e materiais de experiências anteriores de educação popular.',
+ I139:'Curso Supletivo Construindo o Saber, experiência de elevação da escolaridade de trabalhadores coordenada por Carmen Sylvia Vidigal Moraes. Sua localização física precisa continua em investigação.'
+};
+
 function showDetail(id){
   const n=nodeById.get(id);if(!n)return;
   const d=$('detail');
@@ -273,7 +289,7 @@ function showDetail(id){
     M018:'Corrente de atuação político-sindical formada no interior da Central Única dos Trabalhadores, com participação de militantes oriundos de diferentes oposições sindicais, inclusive da OSM-SP.',
     M019:'Coletivo constituído no período democrático recente e relacionado a ações de memória e defesa da democracia. Seu vínculo de articulação com a rede histórica da OSM-SP não equivale a filiação sindical no período ditatorial.'
   };
-  let descricao=first(n.raw,['Biography_ORIG','Description_ORIG','HistoricalDescription','Notes','AnalyticalNote','Biography_EN']) || text(miniBiografias[id]) || text(resumoMovimento[id]);
+  let descricao=first(n.raw,['Biography_ORIG','Description_ORIG','HistoricalDescription','Notes','AnalyticalNote','Biography_EN']) || text(miniBiografias[id]) || text(atlasResumoEducacional[id]) || text(resumoMovimento[id]);
   if(!descricao&&n.kind==='Movimento')descricao='Movimento registrado na pesquisa. Síntese histórica específica ainda não cadastrada.';
   let out='<button type="button" id="closeDetail" aria-label="Fechar painel">×</button>';
   if(n.photo)out+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
@@ -338,30 +354,12 @@ function updateMap(){
   leafletMap=L.map('map',{scrollWheelZoom:true,zoomControl:true}).setView([-23.55,-46.63],5);
   // Mantém o serviço principal (CARTO se configurado). Em falha de autenticação,
   // quota ou rede, muda automaticamente para OSM sem bloquear os marcadores.
-  const atlasMapaBase = L.tileLayer(
-  "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=SUA_CHAVE_CARTO",
-  {
-    attribution:
-      "&copy; OpenStreetMap contributors &copy; CARTO",
-    maxZoom: 19,
-    className: "atlas-grayscale-tiles"
-  }
-);
-  let atlasBaseAlternativa=false;
-  atlasMapaBase.on('tileerror',function(){
-    if(atlasBaseAlternativa)return;atlasBaseAlternativa=true;
-    if(atlasMapaBase._url && atlasMapaBase._url.includes('tile.openstreetmap.org')){
-      if($('mapStatus'))$('mapStatus').textContent='O serviço público de mosaicos OSM não respondeu. Verifique a rede ou os limites de uso.';
-      return;
-    }
-    if(leafletMap.hasLayer(atlasMapaBase))leafletMap.removeLayer(atlasMapaBase);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-       attribution:'&copy; OpenStreetMap contributors',maxZoom:19,
-       className:'atlas-grayscale-tiles'
-    }).addTo(leafletMap);
-    if($('mapStatus'))$('mapStatus').textContent='A camada CARTO não respondeu; exibindo o mapa-base aberto do OpenStreetMap.';
-  });
-  atlasMapaBase.addTo(leafletMap);
+  // ATLAS_ENTREVISTA_20261124_V2: sem chave fictícia, nem CARTO quebrado.
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'&copy; OpenStreetMap contributors',
+    maxZoom:19, className:'atlas-grayscale-tiles',
+    crossOrigin:true
+  }).addTo(leafletMap);
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
  const chosen=$('mapConcept').value;
@@ -414,7 +412,12 @@ function updateMap(){
      detalhes+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
    }
    detalhes+='<p class="auxiliary">Identificador: '+HTML(r.PlaceID)+' · Coordenadas: '+lat+', '+lon+'</p>';
-   L.circleMarker([lat,lon],{radius,color:isEvent?'#9D2235':'#808080',weight:1.4,fillOpacity:$('heat').checked?.42:.72})
+   L.circleMarker([lat,lon],{
+      radius,
+      color: /^(?:SP|São Paulo|Sao Paulo)$/i.test(text(r.State))?'#B52319':(isEvent?'#9D2235':'#808080'),
+      fillColor: /^(?:SP|São Paulo|Sao Paulo)$/i.test(text(r.State))?'#FF2B1F':(isEvent?'#9D2235':'#9AA0A6'),
+      weight:1.4, fillOpacity:$('heat').checked?.42:.77
+    })
     .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
@@ -422,7 +425,7 @@ function updateMap(){
  leafletMap.__atlasCoords=coords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
  if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Legenda: vinho = memória/acontecimentos; cinza = demais localizações.';
+ $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Vermelho vivo = estado de São Paulo identificado; demais cores = outros locais.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -522,16 +525,22 @@ function updateAdditionalData(){
   if(subjectTypes[old])s.value=old;
   refreshPredicates();refreshMapConcept();renderDatasetOptions();updateDataTable();updateConceptChart();
 }
+// Categoria de exploração. Não é predicado RDF adicional.
+const atlasPapeisDeEducacao=new Set(['teacher','professor','educator','teacher_trainer']);
+function atlasPredicadoConfere(e,valor){return valor==='__educacao__'?(
+ atlasPapeisDeEducacao.has(e.relation)&&nodeById.get(e.to)?.kind==='Instituição'
+):e.relation===valor;}
+
 function refreshPredicates(){
   const kind=typeToKind[$('subject').value],eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind).map(e=>e.relation));
-  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+[...eligible].sort().map(x=>'<option value="'+HTML(x)+'">'+HTML(roleLabel(x))+'</option>').join('');
+  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+(kind==='Pessoa'?'<option value="__educacao__">Atuação educacional — docência e formação (agrupadas)</option>':'')+[...eligible].sort().map(x=>'<option value="'+HTML(x)+'">'+HTML(roleLabel(x))+'</option>').join('');
   const icon={Person:'Pessoas',Institution:'Instituicoes',Movement:'Movimentos',Event:'Eventos',Concept:'Conceitos',Document:'Documentos',Location:'Locais'};
   $('iconSubject').src='icons/'+(icon[$('subject').value]||'Pessoas')+'.png';
   refreshObjects();
 }
 function refreshObjects(){
   const kind=typeToKind[$('subject').value],pred=$('predicate').value;
-  const eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind&&e.relation===pred).map(e=>nodeById.get(e.to)?.kind));
+  const eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind&&atlasPredicadoConfere(e,pred)).map(e=>nodeById.get(e.to)?.kind));
   $('object').innerHTML='<option value="">Selecione o objeto...</option>'+[...eligible].filter(Boolean).map(k=>'<option value="'+(kindToType[k]||'')+'">'+HTML(k)+'</option>').join('');
   const icon={Pessoa:'Pessoas',Instituição:'Instituicoes',Movimento:'Movimentos',Evento:'Eventos',Conceito:'Conceitos',Documento:'Documentos',Local:'Locais'};
   const k=typeToKind[$('object').value];$('iconObject').src='icons/'+(icon[k]||'Movimentos')+'.png';
@@ -552,10 +561,10 @@ function executeQuery(){
     });
   }else{
     const type=typeToKind[$('subject').value],pred=$('predicate').value,target=typeToKind[$('object').value];
-    matching=edgeRows.filter(e=>(!type||nodeById.get(e.from)?.kind===type)&&(!pred||e.relation===pred)&&(!target||nodeById.get(e.to)?.kind===target));
+    matching=edgeRows.filter(e=>(!type||nodeById.get(e.from)?.kind===type)&&(!pred||atlasPredicadoConfere(e,pred))&&(!target||nodeById.get(e.to)?.kind===target));
   }
   const selected=matching.slice(0,limit);
-  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])):'Nenhuma relação encontrada.';
+  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence||'Fonte não apresentada nesta versão'])):'Nenhuma relação cadastrada para esta combinação. A transcrição pode documentar novas atividades ainda pendentes de inclusão nas matrizes.';
 }
 function refreshMapConcept(){
   const c=$('mapConcept'),old=c.value;
@@ -633,7 +642,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 /* ATLAS_EDUCACAO_20261124_V1 — curadoria geográfica em separado. */
 const atlasIniciativas = [
- {id:'I108', nome:'Escola Nova Piratininga — Brás', periodo:'1979–1985',
+  {id:'I136',nome:'Supletivo Avante — Ipiranga',periodo:'aprox. 1977–1978',
+  endereco:'Rua do Fico, 100, Ipiranga, São Paulo, SP, Brasil',
+  precisao:'Endereço citado na entrevista; coordenadas de geocodificador devem ser verificadas',localizavel:true,
+  fonte:'',nota:'Elevação da escolaridade de trabalhadores, sobretudo da indústria Linhas Corrente. Formação ligada à experiência de Sueli Bossam. Fonte: entrevista coletiva, transcrição editada, p. 47 (p. 5 do PDF).'},
+ {id:'I120',nome:'Alfabetização — União de Moradores do Parque Bristol e Jardim São Savério',periodo:'a partir de 1977, com desdobramentos posteriores',
+  endereco:'Parque Bristol / Jardim São Savério, São Paulo, SP, Brasil',
+  precisao:'Região documentada; sede e local das aulas não determinados',localizavel:false,
+  fonte:'',nota:'Iniciativas de alfabetização e educação comunitária relatadas por Sueli Bossam. Não confundir a associação com uma escola única.'},
+ {id:'I115',nome:'Associação dos Trabalhadores e Moradores da Zona Sul',periodo:'a partir de fins dos anos 1970',
+  endereco:'Região de Santo Amaro, São Paulo, SP, Brasil',
+  precisao:'Território de atuação; não há endereço único estabelecido',localizavel:false,
+  fonte:'',nota:'Reuniões, formação sindical, cursos e atividades culturais de articulação entre trabalhadores e moradores, relatadas por Nadine e Rosângela.'},
+ {id:'I111',nome:'Reconstrução de Lutas Operárias / REAP',periodo:'anos 1980',
+  endereco:'São Paulo, SP, Brasil',
+  precisao:'Atuação em múltiplos sindicatos e regiões; não há ponto único',localizavel:false,
+  fonte:'',nota:'Assessoria e formação político-sindical, com atuação nas instâncias zonais, regionais e nacional da CUT.'},
+ {id:'I110',nome:'CPV — apoio ao supletivo de trabalhadores da ARNO',periodo:'aprox. 1979–1980',
+  endereco:'São Paulo, SP, Brasil',
+  precisao:'A sede histórica precisa ainda necessita de verificação',localizavel:false,
+  fonte:'',nota:'Sueli descreve a transferência de parte das atividades educativas para o Centro Pastoral Vergueiro após a interrupção do uso do local anterior.'},
+{id:'I108', nome:'Escola Nova Piratininga — Brás', periodo:'1979–1985',
   endereco:'Rua Melo Barreto, 104, Brás, São Paulo, SP, Brasil',
   precisao:'Endereço histórico publicado; coordenada a conferir', localizavel:true,
   fonte:'https://serieucdb.emnuvens.com.br/serie-estudos/article/download/324/222/956',
