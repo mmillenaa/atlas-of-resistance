@@ -46,7 +46,7 @@ function draw(nodeRows,edgeRows,onSelect){
  const width=Math.max(900,parent.clientWidth||Math.min(1600,window.innerWidth-65));
  const height=Math.max(720,parent.clientHeight||760);
  const degrees=degreeMap(edgeRows);
- const orgMode=document.querySelector('input[name="graphMode"]:checked')?.value==='organization';
+ const orgMode=(document.getElementById('graphFilter')?.value||'all')!=='all';
  const ids=new Set(nodeRows.map(n=>n.id));
  const nodes=nodeRows.map((n,i)=>{
   const p=positions.get(n.id),a=i*2.399963229728653,dist=20+Math.sqrt(i)*31;

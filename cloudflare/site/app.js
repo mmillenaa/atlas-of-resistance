@@ -159,23 +159,551 @@ function neighbors(id){
   const result=[];for(const e of arestasSociais()){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
   return [...new Set(result)].sort();
 }
+// Recorte de visualização: entrevista coletiva de 27/09/2026, apêndice pp. 43–81.
+// Identificadores EP/EI são locais ao grafo, não novos registros na matriz pública.
+const atlasInterview={
+ "existing": [
+  "P002",
+  "P007",
+  "P009",
+  "P039",
+  "P040",
+  "P044",
+  "P045",
+  "P046",
+  "P047",
+  "P048",
+  "P049",
+  "P058",
+  "M001",
+  "M018",
+  "M020",
+  "M009",
+  "I001",
+  "I007",
+  "I008",
+  "I061",
+  "I108",
+  "I109",
+  "I110",
+  "I111",
+  "I112",
+  "I113",
+  "I114",
+  "I115",
+  "I118",
+  "I120",
+  "I122",
+  "I126",
+  "I127",
+  "I128",
+  "I135",
+  "I136",
+  "I137",
+  "I139"
+ ],
+ "people": [
+  [
+   "EP01",
+   "Anizio Batista de Oliveira",
+   "47–48",
+   "Articulação do supletivo no CPV e formação sindical de trabalhadores da ARNO.",
+   [
+    [
+     "M001",
+     "member_of"
+    ],
+    [
+     "I110",
+     "educator"
+    ]
+   ]
+  ],
+  [
+   "EP02",
+   "Sérgio Florentino (Mota)",
+   "48, 66–67, 78–80",
+   "Operário metalúrgico e educador; formação profissional e política.",
+   [
+    [
+     "M001",
+     "member_of"
+    ],
+    [
+     "I115",
+     "educator"
+    ],
+    [
+     "I108",
+     "teaches_at"
+    ],
+    [
+     "I137",
+     "teacher_trainer"
+    ]
+   ]
+  ],
+  [
+   "EP03",
+   "Leonildo",
+   "48, 66–67, 78–80",
+   "Operário e educador da Nova Piratininga. Sobrenome não informado na entrevista.",
+   [
+    [
+     "I108",
+     "teaches_at"
+    ]
+   ]
+  ],
+  [
+   "EP04",
+   "Patrocínio",
+   "48, 78",
+   "Monitor e educador da Nova Piratininga. Identificação nominal incompleta.",
+   [
+    [
+     "I108",
+     "teaches_at"
+    ]
+   ]
+  ],
+  [
+   "EP05",
+   "José da Costa Prado",
+   "67–68",
+   "Metalúrgico, militante e educador; atuou no curso Construindo o Saber.",
+   [
+    [
+     "M001",
+     "member_of"
+    ],
+    [
+     "I139",
+     "teaches_at"
+    ]
+   ]
+  ],
+  [
+   "EP06",
+   "Cícera Bombardi",
+   "44",
+   "Apresentou Nádia Gebara a militantes da OSM-SP.",
+   []
+  ],
+  [
+   "EP07",
+   "Hélio Bombardi",
+   "44",
+   "Mencionado na aproximação de Nádia Gebara à OSM-SP.",
+   []
+  ],
+  [
+   "EP08",
+   "Régis (nome incompleto)",
+   "44",
+   "Mencionado na aproximação de Nádia Gebara à OSM-SP.",
+   []
+  ],
+  [
+   "EP09",
+   "Celso (nome incompleto)",
+   "52, 78",
+   "Mencionado por Nadine na aproximação à OSM-SP e no início da Reconstrução; não identificado com outro Celso da matriz.",
+   [
+    [
+     "I111",
+     "associated_with"
+    ],
+    [
+     "M009",
+     "member_of"
+    ]
+   ]
+  ],
+  [
+   "EP10",
+   "Giuseppina de Grazia (Pina)",
+   "66",
+   "Mencionada pela experiência e pesquisa sobre associações de trabalhadores, sobretudo na Mooca.",
+   []
+  ],
+  [
+   "EP11",
+   "Carlúcio",
+   "72–73",
+   "Militante citado pela contribuição à formação profissional e à atuação na CIPA da ARNO.",
+   [
+    [
+     "EI05",
+     "educator"
+    ]
+   ]
+  ],
+  [
+   "EP12",
+   "Célia Rossi",
+   "63",
+   "Mencionada pela participação das mulheres no movimento.",
+   [
+    [
+     "M001",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP13",
+   "Elissam",
+   "72",
+   "Mencionado na atuação da zona sul; identidade completa a conferir.",
+   []
+  ],
+  [
+   "EP14",
+   "Franco",
+   "73",
+   "Mencionado na documentação de experiências de organização dos trabalhadores.",
+   []
+  ],
+  [
+   "EP15",
+   "Marlene",
+   "68",
+   "Professora de História mencionada no relato do curso Construindo o Saber.",
+   [
+    [
+     "I139",
+     "teaches_at"
+    ]
+   ]
+  ],
+  [
+   "EP16",
+   "Cristiane",
+   "75",
+   "Participante da adaptação radiofônica realizada no CPV; vinculada ao Galo de Briga.",
+   [
+    [
+     "I135",
+     "member_of"
+    ],
+    [
+     "I110",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP17",
+   "Fábio",
+   "75",
+   "Participante da adaptação radiofônica no CPV.",
+   [
+    [
+     "I110",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP18",
+   "Ney",
+   "79",
+   "Estudante mencionado na discussão sobre as turmas da Nova Piratininga.",
+   [
+    [
+     "I108",
+     "student"
+    ]
+   ]
+  ],
+  [
+   "EP19",
+   "Milton",
+   "79",
+   "Estudante mencionado na discussão sobre as turmas da Nova Piratininga.",
+   [
+    [
+     "I108",
+     "student"
+    ]
+   ]
+  ],
+  [
+   "EP20",
+   "Nalu",
+   "80",
+   "Educadora mencionada no relato da formação e interpretação de textos.",
+   [
+    [
+     "I108",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP21",
+   "Neide",
+   "80",
+   "Educadora mencionada no relato da formação e interpretação de textos.",
+   [
+    [
+     "I108",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP22",
+   "Célia Borges",
+   "80",
+   "Educadora mencionada na articulação de novas participantes.",
+   [
+    [
+     "I108",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EP23",
+   "Raimundo (padre operário)",
+   "46",
+   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+   [
+    [
+     "I122",
+     "priest"
+    ]
+   ]
+  ],
+  [
+   "EP24",
+   "Ricardo (padre operário)",
+   "46",
+   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+   [
+    [
+     "I122",
+     "priest"
+    ]
+   ]
+  ],
+  [
+   "EP25",
+   "Virgíneo (padre operário)",
+   "46",
+   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+   [
+    [
+     "I122",
+     "priest"
+    ]
+   ]
+  ],
+  [
+   "EP26",
+   "Pedro Jacobi",
+   "55",
+   "Referência mencionada na discussão da articulação entre movimento operário e população.",
+   []
+  ],
+  [
+   "EP27",
+   "Celso Rui Beisiegel",
+   "55",
+   "Referência na discussão educacional, não filiação à OSM-SP.",
+   []
+  ],
+  [
+   "EP28",
+   "Paulo Fontes",
+   "55",
+   "Referência historiográfica mencionada na discussão da classe trabalhadora.",
+   []
+  ],
+  [
+   "EP29",
+   "Murilo (nome incompleto)",
+   "55",
+   "Referência historiográfica mencionada; identificação a conferir.",
+   []
+  ],
+  [
+   "EP30",
+   "Antônio Assiz",
+   "66–67",
+   "Documentarista mencionado na recuperação da memória de Leonildo.",
+   []
+  ]
+ ],
+ "initiatives": [
+  [
+   "EI01",
+   "Supletivo sem nome — zona leste",
+   "44, 78",
+   "Experiência anterior à aproximação de Nádia à OSM-SP; não era iniciativa da OSM-SP.",
+   [
+    [
+     "P046",
+     "teaches_at"
+    ]
+   ]
+  ],
+  [
+   "EI02",
+   "Cursos de matemática industrial — Osasco",
+   "44–45",
+   "Formação profissional de metalúrgicos, com matemática e geometria.",
+   [
+    [
+     "P046",
+     "educator"
+    ]
+   ]
+  ],
+  [
+   "EI03",
+   "Curso supletivo para trabalhadores da ARNO",
+   "47–48",
+   "Elevação da escolaridade no CPV, articulada à formação sindical.",
+   [
+    [
+     "P049",
+     "teaches_at"
+    ],
+    [
+     "EP01",
+     "educator"
+    ],
+    [
+     "I110",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EI04",
+   "Cursos preparatórios Pré-SENAI — ATRI",
+   "48",
+   "Preparação em matemática e geometria para ingresso nos cursos do SENAI.",
+   [
+    [
+     "P049",
+     "educator"
+    ],
+    [
+     "I109",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EI05",
+   "CTC — escola de trabalhadores",
+   "72, 77",
+   "Experiência autônoma de formação e cultura; intercâmbio posterior com a Nova Piratininga.",
+   [
+    [
+     "I108",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EI06",
+   "Casa de Cultura — Jardim Ubirajara",
+   "56",
+   "Iniciativa cultural com trabalhadores das comissões de fábrica e orientação da OSM-SP.",
+   [
+    [
+     "M001",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EI07",
+   "Alfabetização comunitária — Parque Bristol e Jardim São Savério",
+   "46–47",
+   "Alfabetização de militantes da associação, anterior ao MOVA.",
+   [
+    [
+     "P049",
+     "teaches_at"
+    ],
+    [
+     "I120",
+     "associated_with"
+    ]
+   ]
+  ],
+  [
+   "EI08",
+   "Formação política e sindical — CUT pela Base",
+   "45, 51, 57, 63–65",
+   "Formação de trabalhadores e dirigentes sindicais, incluindo a Reconstrução.",
+   [
+    [
+     "M018",
+     "associated_with"
+    ],
+    [
+     "I111",
+     "associated_with"
+    ],
+    [
+     "P046",
+     "educator"
+    ],
+    [
+     "P047",
+     "educator"
+    ],
+    [
+     "P045",
+     "educator"
+    ]
+   ]
+  ],
+  [
+   "EI09",
+   "Associação de trabalhadores — Mooca",
+   "65–66",
+   "Experiência regional mencionada no depoimento; denominação formal a confirmar.",
+   [
+    [
+     "EP10",
+     "associated_with"
+    ]
+   ]
+  ]
+ ]
+};
+let atlasInterviewEdges=[];
+function graphSocialEdges(){return $('graphFilter')?.value==='education'?[...arestasSociais(),...atlasInterviewEdges]:arestasSociais();}
+function interviewNodes(enabled){
+ for(const [id,n] of nodeById)if(n.interviewOnly)nodeById.delete(id);
+ atlasInterviewEdges=[];if(!enabled)return new Set();
+ const ids=new Set(atlasInterview.existing.filter(id=>nodeById.has(id)));
+ for(const [kind,records] of [['Pessoa',atlasInterview.people],['Instituição',atlasInterview.initiatives]])for(const [id,label,pages,summary] of records){nodeById.set(id,{id,label,kind,photo:'',interviewOnly:true,raw:{Notes:summary+' Fonte: entrevista coletiva de 27/09/2026, p. '+pages+'. Registro de visualização, não identidade validada na matriz.'}});ids.add(id);}
+ for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to))atlasInterviewEdges.push({from:id,to,relation,evidence:'Entrevista coletiva de 27/09/2026, p. '+pages+'.',status:'documented'});
+ return ids;
+}
 function resetGraph(){
- const mode=document.querySelector('input[name="graphMode"]:checked')?.value||'overview';
- const focus=$('focus').value;
+ const mode=$('graphFilter')?.value||'all';
+ const edu=interviewNodes(mode==='education');
  visible=new Set();
- if(mode==='overview'){
-   // Todas as pessoas e TODAS as instituições e movimentos aos quais elas se vinculam.
-   for(const n of nodeById.values())if(n.kind==='Pessoa')visible.add(n.id);
-   for(const e of edgeRows){
-     const a=nodeById.get(e.from),b=nodeById.get(e.to);
-     if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
-     if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
-   }
-   // Ligações diretas entre organizações já cadastradas; sem criar nós ausentes.
- } else if(focus&&nodeById.has(focus)) {
-   visible.add(focus);neighbors(focus).forEach(x=>visible.add(x));
- }
- if(!visible.size){for(const id of hubs)if(nodeById.has(id))visible.add(id);}
+ if(mode==='education')visible=edu;
+ else if(mode==='all'){
+  for(const n of nodeById.values())if(n.kind==='Pessoa')visible.add(n.id);
+  for(const e of edgeRows){
+   const a=nodeById.get(e.from),b=nodeById.get(e.to);
+   if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
+   if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
+  }
+ }else for(const n of nodeById.values())if(n.kind===mode)visible.add(n.id);
+ if($('graphFilterNote'))$('graphFilterNote').hidden=mode!=='education';
  selected='';$('detail').hidden=true;drawGraph();
 }
 
@@ -206,7 +734,7 @@ function coAffiliationEdges(){
 
 function graphNode(n){
  const isPerson=n.kind==='Pessoa';
- const label=(isPerson || n.id===selected)?n.label:'';
+ const label=(isPerson || n.id===selected || $('graphFilter')?.value!=='all')?n.label:'';
  return {id:n.id,label,group:n.kind,
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
   image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:16,
@@ -215,7 +743,7 @@ function graphNode(n){
 }
 function drawGraph(){
  const el=$('network');if(!window.vis&&!window.d3){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
- const visibleEdges=arestasSociais().filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
+ const visibleEdges=graphSocialEdges().filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
   // Coparticipação permanece consultável, sem gerar ligação pessoal automática.
  const groups=new Map();
  for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
@@ -294,10 +822,7 @@ function showDetail(id){
   if(descricao)out+='<p class="mini-bio">'+HTML(descricao)+'</p>';
   else if(n.kind==='Pessoa')out+='<p class="mini-bio">Minibiografia ainda não disponível nesta versão pública.</p>';
 
-  const ligados=(typeof arestasSociais==='function'?arestasSociais():edgeRows.filter(e=>{
-    const a=nodeById.get(e.from),b=nodeById.get(e.to);
-    return a&&b&&['Pessoa','Instituição','Movimento'].includes(a.kind)&&['Pessoa','Instituição','Movimento'].includes(b.kind);
-  })).filter(e=>e.from===id||e.to===id);
+  const ligados=graphSocialEdges().filter(e=>e.from===id||e.to===id);
   const unicos=new Map();
   for(const e of ligados){
     const outra=e.from===id?e.to:e.from,v=nodeById.get(outra);
@@ -313,7 +838,7 @@ function showDetail(id){
   }
   if(n.kind==='Pessoa'){
     const diretamenteOSM=ligados.some(e=>(e.from===id&&e.to==='M001')||(e.to===id&&e.from==='M001'));
-    if(!diretamenteOSM)out+='<p class="muted" style="font-size:12px">Não há vínculo individual direto com a OSM-SP registrado nas matrizes; a presença no Atlas pode decorrer de outras trajetórias de resistência.</p>';
+    if(!diretamenteOSM&&!n.interviewOnly)out+='<p class="muted" style="font-size:12px">Não há vínculo individual direto com a OSM-SP registrado nas matrizes; a presença no Atlas pode decorrer de outras trajetórias de resistência.</p>';
     const eventos=new Map(rows('Events').map(e=>[text(e.EventID),e]));
     const vivencias=new Map();
     for(const r of rows('EventPersons')){
@@ -480,7 +1005,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
     if(b.dataset.page==='mapa')requestAnimationFrame(()=>{try{updateMap();leafletMap?.invalidateSize();}catch(e){console.error('Mapa:',e);$('mapStatus').textContent='Erro ao atualizar os marcadores: '+e.message;}});
     if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
-  $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
+  $('graphFilter').onchange=resetGraph;$('focus').onchange=resetGraph;$('role').onchange=drawGraph;
   $('reset').onclick=()=>{$('focus').value='';resetGraph();};
   $('expand').onclick=()=>{if(selected)expand(selected,50);else hubs.forEach(h=>{if(nodeById.has(h))neighbors(h).slice(0,8).forEach(x=>visible.add(x));});drawGraph();};
   $('concept').onchange=()=>{updateLaw();updateConceptChart();};
@@ -502,15 +1027,7 @@ const subjectTypes={Person:'Pessoa',Document:'Documento',Institution:'Instituiç
 const typeToKind={Person:'Pessoa',Document:'Documento',Institution:'Instituição',Movement:'Movimento',Event:'Evento',Location:'Local',Concept:'Conceito'};
 const kindToType=Object.fromEntries(Object.entries(typeToKind).map(([k,v])=>[v,k]));
 function setupAdditionalUI(){
-  document.querySelectorAll('input[name="graphMode"]').forEach(x=>x.onchange=()=>{
-    const mode=document.querySelector('input[name="graphMode"]:checked')?.value||'overview';
-    const s=$('focus');const options=[...nodeById.values()].filter(n=>
-      mode==='person'?n.kind==='Pessoa':mode==='organization'?['Movimento','Instituição'].includes(n.kind):false
-    ).sort((a,b)=>a.label.localeCompare(b.label,'pt'));
-    s.innerHTML=mode==='overview'?'<option value="">Todas as pessoas</option>':
-      '<option value="">Selecione...</option>'+options.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+'</option>').join('');
-    resetGraph();
-  });
+  // The visible graphFilter is the sole graph mode selector.
 
   $('heat').onchange=updateMap;
   $('mapConcept').onchange=()=>{primeiroAjusteMapa=false;updateMap();};
@@ -716,55 +1233,5 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.historicalBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.historical,weight:1.4,fillOpacity:$('heat').checked?.42:.77,priority:item.educacional===false?0:1,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
-const atlasEduGeoCache = new Map();
-let atlasEduGeocodeInProgress = false;
-function atlasEduCard(item,idx,withAction=false){
- const btn=withAction&&item.localizavel?'<button type="button" data-edu-find="'+idx+'">Localizar no mapa</button>':'';
- const link=item.fonte?'<a target="_blank" rel="noopener noreferrer" href="'+HTML(item.fonte)+'">Fonte</a>':'';
- return '<article class="atlas-edu-card"><strong class="atlas-edu-title">'+HTML(item.nome)+'</strong><small>'+HTML(item.periodo)+'</small>'+ 
-  '<p class="atlas-edu-address">'+HTML(item.endereco)+'</p><p class="atlas-edu-precision">'+HTML(item.precisao)+'</p>'+ 
-  '<p>'+HTML(item.nota)+'</p>'+ '<div class="atlas-edu-actions">'+btn+link+'</div></article>';
-}
-async function atlasEduGeocode(item){
- if(item.coords)return item.coords;
- if(atlasEduGeoCache.has(item.endereco))return atlasEduGeoCache.get(item.endereco);
- // Uso esporádico, explícito, uma solicitação por clique; não fazer geocodificação em massa.
- const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(item.endereco);
- const resp=await fetch(url,{headers:{'Accept':'application/json'}});
- if(!resp.ok)throw Error('O geocodificador respondeu HTTP '+resp.status);
- const results=await resp.json(),place=results[0];
- if(!place || !/São Paulo|Sao Paulo/i.test(place.display_name))throw Error('Endereço não localizado com segurança em São Paulo.');
- const coords=[Number(place.lat),Number(place.lon)];
- if(!coords.every(Number.isFinite))throw Error('Coordenadas indisponíveis.');
- atlasEduGeoCache.set(item.endereco,coords);return coords;
-}
-function atlasEduShowList(container,withAction){
- container.innerHTML=atlasIniciativas.map((x,i)=>atlasEduCard(x,i,withAction)).join('');
- if(withAction)container.querySelectorAll('[data-edu-find]').forEach(button=>button.addEventListener('click',async()=>{
-  const item=atlasIniciativas[+button.dataset.eduFind];if(!item.localizavel)return;
-  if(atlasEduGeocodeInProgress)return;atlasEduGeocodeInProgress=true;
-  button.disabled=true;button.textContent='Localizando…';
-  try{
-    const [lat,lon]=await atlasEduGeocode(item);
-    if(!leafletMap)updateMap();
-    if(!leafletMap)throw Error('Abra a aba Geografia para iniciar o mapa.');
-    if($('mapConcept').value!=='ALL'){$('mapConcept').value='ALL';updateMap();}
-    leafletMap.eachLayer(l=>{if(l instanceof window.AtlasRaster.CircleMarker&&l.popup?.includes(HTML(item.nome)))leafletMap.removeLayer(l);});
-    atlasPlotEducation(item,true,[lat,lon]);
-    button.textContent='Marcador mostrado';
-  }catch(err){button.textContent='Não localizado — conferir';button.title=err.message;}
-  finally{atlasEduGeocodeInProgress=false;button.disabled=false;}
- }));
-}
-function atlasEduInit(){
-
- const m=$('eduMapList'),mToggle=$('eduMapToggle');
- if(m&&mToggle){
-  atlasEduShowList(m,true);
-  mToggle.addEventListener('click',()=>{
-    m.hidden=!m.hidden;mToggle.setAttribute('aria-expanded',String(!m.hidden));
-  });
- }
-}
-document.addEventListener('DOMContentLoaded',atlasEduInit);
+// Address records remain available as map markers; no address-list UI or geocoding.
 
