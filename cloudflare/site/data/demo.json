@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "mode": "demo",
+    "description": "Corpus demonstrativo público mínimo; não inclui a planilha integral."
+  },
+  "Persons": [
+    {
+      "PersonID": "P001",
+      "Name": "Santo Dias da Silva",
+      "Biography_ORIG": "Metalúrgico e militante da Oposição Sindical Metalúrgica de São Paulo, assassinado em 1979."
+    },
+    {
+      "PersonID": "P007",
+      "Name": "Vito Giannotti",
+      "Biography_ORIG": "Militante e comunicador sindical associado à Oposição Sindical Metalúrgica de São Paulo."
+    },
+    {
+      "PersonID": "P039",
+      "Name": "Carmen Sylvia Vidigal Moraes",
+      "Biography_ORIG": "Educadora e pesquisadora ligada a experiências de formação de trabalhadores.",
+      "ImageURL": "https://imagens.usp.br/wp-content/uploads/Carmen-Sylvia-Vidigal-Moraes-267-11-Foto-Cec%C3%ADlia-Bastos-06.jpeg"
+    }
+  ],
+  "Institutions": [
+    {
+      "InstitutionID": "I005",
+      "Name_ORIG": "Sindicato dos Metalúrgicos de São Paulo"
+    },
+    {
+      "InstitutionID": "I008",
+      "Name_ORIG": "Central Única dos Trabalhadores (CUT)"
+    },
+    {
+      "InstitutionID": "I107",
+      "Name_ORIG": "Intercâmbio, Informações, Estudos e Pesquisas (IIEP)"
+    },
+    {
+      "InstitutionID": "I108",
+      "Name_ORIG": "Escola Nova Piratininga"
+    },
+    {
+      "InstitutionID": "I112",
+      "Name_ORIG": "CUT Regional da Grande São Paulo"
+    },
+    {
+      "InstitutionID": "I113",
+      "Name_ORIG": "CUT Zonal Oeste"
+    },
+    {
+      "InstitutionID": "I116",
+      "Name_ORIG": "Comissão de Fábrica da Asama"
+    },
+    {
+      "InstitutionID": "I117",
+      "Name_ORIG": "Asama"
+    },
+    {
+      "InstitutionID": "I119",
+      "Name_ORIG": "Centro de Educação, Estudos e Pesquisas (CEEP)"
+    }
+  ],
+  "Movements": [
+    {
+      "MovementID": "M001",
+      "Name_ORIG": "Oposição Sindical Metalúrgica de São Paulo"
+    },
+    {
+      "MovementID": "M018",
+      "Name_ORIG": "CUT pela Base"
+    }
+  ],
+  "PersonMovements": [
+    {
+      "PersonID": "P001",
+      "MovementID": "M001",
+      "Role": "member_of"
+    },
+    {
+      "PersonID": "P007",
+      "MovementID": "M001",
+      "Role": "member_of"
+    },
+    {
+      "PersonID": "P039",
+      "MovementID": "M001",
+      "Role": "integral_participant"
+    }
+  ],
+  "PersonInstitutions": [
+    {
+      "PersonID": "P039",
+      "InstitutionID": "I108",
+      "Role": "pedagogical_collaborator"
+    }
+  ],
+  "MovementRelations": [
+    {
+      "SourceMovementID": "M001",
+      "TargetMovementID": "M018",
+      "RelationshipType": "contributed_to_formation_of",
+      "ReviewStatus": "documented"
+    }
+  ],
+  "InstitutionRelations": [
+    {
+      "SourceInstitutionID": "I112",
+      "TargetInstitutionID": "I008",
+      "RelationshipType": "territorial_body_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I113",
+      "TargetInstitutionID": "I008",
+      "RelationshipType": "territorial_body_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I116",
+      "TargetInstitutionID": "I117",
+      "RelationshipType": "operated_at",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I119",
+      "TargetInstitutionID": "I108",
+      "RelationshipType": "pedagogical_continuation_of",
+      "ReviewStatus": "documented"
+    }
+  ],
+  "MovementInstitutionRelations": [
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I005",
+      "RelationshipType": "contested_leadership_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I108",
+      "RelationshipType": "contributed_to_creation_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I107",
+      "RelationshipType": "documented_by",
+      "ReviewStatus": "documented"
+    },
+    {
+      "MovementID": "M018",
+      "InstitutionID": "I008",
+      "RelationshipType": "political_current_within",
+      "ReviewStatus": "documented"
+    }
+  ],
+  "Events": [],
+  "EventPersons": [],
+  "Concepts": [],
+  "EventConcepts": [],
+  "Documents": [],
+  "DocumentPersons": [],
+  "Locations": [],
+  "DocumentEvents": [],
+  "DocumentLocations": []
+}

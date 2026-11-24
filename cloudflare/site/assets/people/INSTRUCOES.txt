@@ -1,0 +1,1 @@
+Coloque nesta pasta os PNGs autorizados com os nomes registrados no manifest.json. Arquivos em C:\ do Windows não são acessíveis pelo Cloudflare. Não publique imagens sem autorização.

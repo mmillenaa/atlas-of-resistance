@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas da Resistência</title>
+<meta name="description" content="Atlas da Resistência: conhecimento histórico, movimentos, instituições, pessoas e direitos.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+<script defer src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<header><div class="heading"><p class="eyebrow">PROJETO DE PESQUISA · DEMONSTRAÇÃO</p><h1>Atlas da Resistência à Ditadura Civil-Militar no Brasil: violações, crimes e agência política (1964–1985)</h1><p>Memória operária · Educação · Organizações · Relações históricas</p></div>
+<figure><img src="https://raw.githubusercontent.com/mmillenaa/atlas-of-resistance/main/app/assets/pngegg.png" alt="América Invertida — Joaquín Torres García"><figcaption>América Invertida (1943) · Joaquín Torres García</figcaption></figure></header>
+<nav id="tabs" aria-label="Navegação principal"><button class="active" data-page="sobre">Sobre o projeto</button><button data-page="grafo">Grafo de conhecimento</button><button data-page="mapa">Geografia da resistência</button><button data-page="juridico">Compêndio jurídico</button><button data-page="consulta">Consultas semânticas</button><button data-page="dados">Dados</button><button data-page="cosmov">Cosmov</button></nav>
+<div class="banner">Demonstração pública com dados históricos mínimos. As matrizes completas de pesquisa não estão incluídas.</div>
+<main>
+<section id="sobre" class="page active"><h2>Apresentação da pesquisa</h2>
+<p>Este Atlas investiga as relações entre pessoas, instituições, movimentos, acontecimentos e violações de direitos na resistência à ditadura civil-militar brasileira. Seu núcleo inicial é a Oposição Sindical Metalúrgica de São Paulo, considerando a educação popular, a formação, a documentação e a organização política como dimensões constitutivas do movimento.</p>
+<p>A versão JavaScript constitui uma migração não destrutiva da aplicação R Shiny. Excel/CSV permanecem como matrizes de pesquisa; a geração RDF/CIDOC-CRM pode permanecer em Python. O grafo visual é uma projeção exploratória dos vínculos históricos, e não substitui a análise das fontes.</p>
+<div class="notice"><strong>Privacidade:</strong> nenhum corpus inédito foi incluído. Para testar suas matrizes, abra os CSVs no painel Dados: eles serão lidos no navegador, sem upload para o servidor. Configure o controle de acesso e revise o corpus antes de publicar a base destinada à banca.</div><div class="stats" id="summary"></div>
+<p class="muted">Pesquisa e desenvolvimento: Millena Miranda Franco · Universidade de São Paulo.</p></section>
+<section id="grafo" class="page"><h2>Grafo de conhecimento</h2><p class="muted">Núcleos históricos conectados, com expansão por clique. Passe o cursor nas arestas para ler o tipo de vínculo e as evidências.</p>
+<div class="controls"><label>Núcleo ou pessoa<select id="focus"></select></label><label>Tipo de vínculo<select id="role"></select></label><button id="reset" class="secondary">Restabelecer núcleos</button><button id="expand" class="secondary">Expandir vínculos</button></div><div class="graphbox"><div id="network"></div><aside id="detail" class="detail" hidden></aside></div><p id="graphStatus" class="muted"></p></section>
+<section id="mapa" class="page"><h2>Geografia da memória e da resistência</h2><p class="muted">Localizações derivadas de Locations.csv, com OpenStreetMap e sem chave de API.</p><div id="map"></div><p id="mapStatus" class="muted"></p></section>
+<section id="juridico" class="page"><h2>Compêndio jurídico</h2><label>Categoria jurídica<select id="concept"></select></label><div id="conceptDetail" class="card"></div><div id="conceptEvents" class="card"></div></section>
+<section id="consulta" class="page"><h2>Consulta de relações</h2><p class="muted">Exploração local de vínculos históricos. Esta tela não pretende substituir o SPARQL executado sobre o RDF.</p><label>Entidade<select id="entity"></select></label><div id="relations" class="card"></div></section>
+<section id="dados" class="page"><h2>Dados e matrizes</h2><p>Abra os CSVs exportados do Excel. Eles são processados somente no seu navegador, sem envio à Cloudflare.</p><div class="card"><label>Selecionar matrizes CSV<input id="upload" type="file" multiple accept=".csv,text/csv"></label><button id="restore" class="secondary">Restaurar demonstração</button><p id="uploadStatus" class="muted"></p></div><div id="dataCounts" class="stats"></div><p class="muted">Os dados científicos continuam nas suas matrizes. A versão pública não disponibiliza download integral de testemunhos ou biografias inéditas.</p></section>
+<section id="cosmov" class="page"><h2>Cosmov — busca bibliográfica</h2><p class="muted">Busca pública via OpenAlex, sem enviar dados do acervo automaticamente.</p><div class="controls"><label>Termo de pesquisa<input id="cosQuery" value="Oposição Sindical Metalúrgica de São Paulo"></label><button id="cosSearch">Pesquisar publicações</button></div><div class="card" id="cosResults">Informe uma expressão e clique em pesquisar.</div></section>
+</main><footer>Atlas da Resistência · Protótipo acadêmico · Aplicação R Shiny preservada no repositório original</footer>
+</body></html>
