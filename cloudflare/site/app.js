@@ -687,7 +687,7 @@ function interviewNodes(enabled){
  atlasInterviewEdges=[];if(!enabled)return new Set();
  const ids=new Set(atlasInterview.existing.filter(id=>nodeById.has(id)));
  for(const [kind,records] of [['Pessoa',atlasInterview.people],['Instituição',atlasInterview.initiatives]])for(const [id,label,pages,summary] of records){nodeById.set(id,{id,label,kind,photo:'',interviewOnly:true,raw:{Notes:summary+' Fonte: entrevista coletiva de 27/09/2026, p. '+pages+'. Registro de visualização, não identidade validada na matriz.'}});ids.add(id);}
- for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to))atlasInterviewEdges.push({from:id,to,relation,evidence:'Entrevista coletiva de 27/09/2026, p. '+pages+'.',status:'documented'});
+ for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to)){const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence:'Entrevista coletiva de 27/09/2026, p. '+pages+'.',status:'documented'});}
  return ids;
 }
 function resetGraph(){
