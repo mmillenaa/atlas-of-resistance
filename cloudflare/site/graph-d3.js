@@ -77,7 +77,7 @@ function draw(nodeRows,edgeRows,onSelect){
  groups.each(function(n){
   const g=d3.select(this),osm=n.id==='M001';
   g.append('circle').attr('r',n.r).attr('class',osm?'member-highlight':'')
-    .attr('fill',osm?'#9D2235':palette[n.kind]||'#ccc');
+    .attr('fill',osm||n.osmLinked?'#9D2235':palette[n.kind]||'#ccc');
   if(n.image){
    const clipId='clip-'+n.id.replace(/[^a-zA-Z0-9_-]/g,'');
    defs.append('clipPath').attr('id',clipId).append('circle').attr('r',Math.max(5,n.r-2));

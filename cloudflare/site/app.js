@@ -702,6 +702,7 @@ function resetGraph(){
    if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
    if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
   }
+  for(const id of osmOrganizationIds())if(nodeById.has(id))visible.add(id);
  }else for(const n of nodeById.values())if(n.kind===mode)visible.add(n.id);
  if($('graphFilterNote'))$('graphFilterNote').hidden=mode!=='education';
  selected='';$('detail').hidden=true;drawGraph();
@@ -732,14 +733,19 @@ function coAffiliationEdges(){
  return inferred;
 }
 
-function graphNode(n){
+function osmOrganizationIds(edges=graphSocialEdges()){
+ const ids=new Set(['M001']);
+ for(const e of edges){const id=e.from==='M001'?e.to:e.to==='M001'?e.from:null;if(id&&nodeById.has(id)&&nodeById.get(id).kind!=='Pessoa')ids.add(id);}
+ return ids;
+}
+function graphNode(n,osmIds=new Set()){
  const isPerson=n.kind==='Pessoa';
  const label=(isPerson || n.id===selected || $('graphFilter')?.value!=='all')?n.label:'';
- return {id:n.id,label,group:n.kind,
+ return {id:n.id,label,group:n.kind,osmLinked:!isPerson&&osmIds.has(n.id),
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
   image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:16,
   borderWidth:2,title:'<b>'+HTML(n.label)+'</b>',
-  color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
+  color:{background:!isPerson&&osmIds.has(n.id)?'#9D2235':color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
 }
 function drawGraph(){
  const el=$('network');if(!window.vis&&!window.d3){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
@@ -752,7 +758,8 @@ function drawGraph(){
   dashes:g.some(e=>e.status==='inferred'),
   // Não desenhar rótulos sobre linhas; a proposta de pesquisa é diferenciada no tooltip.
   color:{color:'#b7b7b7',highlight:'#9D2235',hover:'#9D2235'},width:1.1}));
- const graphNodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(graphNode);
+ const osmIds=osmOrganizationIds();
+ const graphNodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(n=>graphNode(n,osmIds));
  if(window.d3 && window.drawAtlasD3Graph){
   if(net && typeof net.destroy==='function')net.destroy();
   net=window.drawAtlasD3Graph(graphNodes,graphEdges,(id,kind)=>{
