@@ -34,11 +34,13 @@ def clean_literal(valor):
 
 def ler_csv(nome_arquivo):
     """Lê CSV e retorna lista de dicionários."""
-    caminho = os.path.join(os.path.dirname(__file__), nome_arquivo)
-    if not os.path.exists(caminho):
-        print(f"AVISO: Arquivo {nome_arquivo} não encontrado. Pulando.")
+    pasta = os.path.dirname(__file__)
+    candidatos = [os.path.join(pasta, 'data', nome_arquivo), os.path.join(pasta, nome_arquivo)]
+    caminho = next((c for c in candidatos if os.path.isfile(c)), None)
+    if caminho is None:
+        print(f"AVISO: Arquivo {nome_arquivo} não encontrado em app/data ou app. Pulando.")
         return []
-    with open(caminho, 'r', encoding='utf-8') as f:
+    with open(caminho, 'r', encoding='utf-8-sig') as f:
         leitor = csv.DictReader(f, delimiter=',')
         return list(leitor)
 
