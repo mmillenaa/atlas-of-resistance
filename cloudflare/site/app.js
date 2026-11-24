@@ -33,7 +33,7 @@ let historicosLocais={};
 let primeiroAjusteMapa=false;
 // Destaques experimentais de iniciativas de educação de trabalhadores.
 // A lista é explícita e pode ser revisada após a qualificação.
-const focosEducacionais = new Set(['I108','I119','I126','I137','I139']);
+const focosEducacionais = new Set(['I108','I119','I121','I126','I129','I136','I137','I139']);
 
 let miniBiografias={};
 const rows=key=>Array.isArray(db[key])?db[key]:[];
@@ -79,9 +79,9 @@ const rolePT = Object.freeze({
  founder_and_president:'Fundador e presidente de', founder_of:'Fundador de',
  lawyer:'Advocacia em', lay_representative:'Representação leiga em',
  opposition_candidate:'Candidato de oposição em', parish_priest:'Pároco de',
- pastoral_agent:'Agente pastoral de', priest:'Sacerdote em', professor:'Professor em',
+ pastoral_agent:'Agente pastoral de', priest:'Sacerdote em', professor:'Docência em',
  researcher:'Pesquisa em', resident:'Morador de', secretary_of:'Secretaria de',
- student:'Estudante em', teacher:'Docência em', teacher_trainer:'Formação docente em',
+ student:'Estudante em', teacher:'Docência em', teacher_trainer:'Formação docente em', teaches_at:'Docência em', facilitated_funding_for:'Articulação de financiamento para',
  union_delegate:'Delegado sindical de', volunteer:'Voluntário de',
  beneficiary_of:'Beneficiário de', candidate_in:'Candidato em', lawyer_at:'Advogado em',
  organizer_of:'Organizador de', participant_in:'Participante em', victim_of:'Vítima de',
@@ -139,7 +139,7 @@ async function normalize(){
     for(const raw of rows(table)){
       const from=text(raw[fromKey]),to=text(raw[toKey]);
       if(!nodeById.has(from)||!nodeById.has(to)||from===to)continue;
-      edgeRows.push({from,to,relation:text(raw[relationKey])||'related_to',evidence:first(raw,['EvidenceText_ORIG','EvidenceText_EN']),status:text(raw.ReviewStatus)||'documented'});
+      edgeRows.push({from,to,relation:(table==='PersonInstitutions'&&['teacher','professor'].includes(text(raw[relationKey]))?'teaches_at':text(raw[relationKey])||'related_to'),evidence:first(raw,['EvidenceText_ORIG','EvidenceText_EN']),status:text(raw.ReviewStatus)||'documented'});
     }
   }
   await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa').map(async n=>{n.photo=await portrait(n);}));
@@ -268,6 +268,7 @@ function drawGraph(){
 // Sínteses descritivas baseadas na entrevista coletiva de 27/09/2026 e
 // na bibliografia; requerem revisão editorial antes da publicação definitiva.
 const atlasResumoEducacional={
+ I129:'Rede pública de Ginásios Vocacionais de São Paulo coordenada pelo Serviço de Ensino Vocacional na década de 1960. Maria Nilde Mascellani participou de sua implantação e coordenação; Cecília Guaraná atuou como educadora e diretora em unidades do projeto. Sua proposta integrava currículo, trabalho em equipe, estudos do meio e participação da comunidade. A experiência foi encerrada sob a ditadura militar.',
  I108:'Escola de formação profissional e política de trabalhadores organizada por militantes da Oposição Sindical Metalúrgica e redes de educação popular. Atuou no Brás, depois na Rua Riachuelo e, posteriormente, na Sé. Cursos e oficinas articulavam saberes técnicos, organização coletiva e formação política.',
  I109:'Associação dos Trabalhadores da Região do Ipiranga, atuante desde 1979. Reuniu militantes e educadoras em cursos de matemática, geometria, preparação para o SENAI, formação sindical, atividades culturais e iniciativas de organização pela base.',
  I110:'Centro Pastoral Vergueiro, também denominado Centro de Documentação e Pesquisa Vergueiro. Ofereceu espaço e apoio à documentação e a experiências educativas, incluindo atividades do supletivo de trabalhadores da ARNO narradas na entrevista.',
@@ -526,7 +527,7 @@ function updateAdditionalData(){
   refreshPredicates();refreshMapConcept();renderDatasetOptions();updateDataTable();updateConceptChart();
 }
 // Categoria de exploração. Não é predicado RDF adicional.
-const atlasPapeisDeEducacao=new Set(['teacher','professor','educator','teacher_trainer']);
+const atlasPapeisDeEducacao=new Set(['teaches_at','teacher','professor','educator','teacher_trainer']);
 function atlasPredicadoConfere(e,valor){return valor==='__educacao__'?(
  atlasPapeisDeEducacao.has(e.relation)&&nodeById.get(e.to)?.kind==='Instituição'
 ):e.relation===valor;}
@@ -556,7 +557,7 @@ function executeQuery(){
     }
     const parts=m[2].trim().replace(/\s*\.\s*$/,'').split(/\s+/);if(parts.length!==3){$('sparqlResults').textContent='Use um padrão simples: SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10';return;}
     limit=Math.min(2000,Number(m[3])||100);matching=edgeRows.filter(e=>{
-      const matches=(pat,val)=>pat.startsWith('?')||pat===val||pat.replace(/^ex:/,'')===val;
+      const matches=(pat,val)=>{const cleaned=pat.replace(/^(?:ex:|atlas:)/,'');const canonical=['teacher','professor'].includes(cleaned)?'teaches_at':cleaned;return pat.startsWith('?')||canonical===val;};
       return matches(parts[0],e.from)&&matches(parts[1],e.relation)&&matches(parts[2],e.to);
     });
   }else{

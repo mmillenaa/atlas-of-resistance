@@ -230,7 +230,9 @@ def gerar_ttl():
     for row in dados:
         person = clean_uri(row.get('PersonID', ''))
         inst = clean_uri(row.get('InstitutionID', ''))
-        pred = clean_uri(row.get('Role', ''))
+        # teacher/professor são variantes de docência, não relações diferentes.
+        raw_role = row.get('Role', '')
+        pred = clean_uri({'teacher': 'teaches_at', 'professor': 'teaches_at'}.get(raw_role, raw_role))
         if person and inst and pred:
             triples.append(f"atlas:{person} atlas:{pred} atlas:{inst} .")
             contador += 1
