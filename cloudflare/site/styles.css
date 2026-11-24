@@ -124,7 +124,7 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 /* Geografia: três categorias; mapa independente de CDN. */
 .map-grid{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
 .map-grid>div,.legal-grid>div{min-width:0}
-.map-legend .pin.memory{background:#DC143C;border-color:#A10F2D}
+.map-legend .pin.memory{background:#9D2235;border-color:#791A29}
 .map-legend .pin.other{background:#9AA0A6;border-color:#777}
 #map.atlas-raster{height:600px;min-height:340px;position:relative;overflow:hidden;touch-action:none;background-color:#f0f2f3;background-image:linear-gradient(#dce2e5 1px,transparent 1px),linear-gradient(90deg,#dce2e5 1px,transparent 1px);background-size:64px 64px;cursor:grab;isolation:isolate}
 .atlas-raster:active{cursor:grabbing}

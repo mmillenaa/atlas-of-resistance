@@ -869,7 +869,7 @@ function updateCounts(){
 const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
 const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
-const atlasMapColors={historical:'#DC143C',education:'#FF2B1F',other:'#9AA0A6',historicalBorder:'#A10F2D',educationBorder:'#A51A12',otherBorder:'#777'};
+const atlasMapColors={historical:'#9D2235',education:'#FF2B1F',other:'#9AA0A6',historicalBorder:'#791A29',educationBorder:'#A51A12',otherBorder:'#777'};
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
  const L=window.AtlasRaster;
