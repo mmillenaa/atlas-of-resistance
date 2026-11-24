@@ -124,3 +124,39 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 .atlas-context > summary::before {content:none !important;display:none !important;}
 .atlas-context > summary:focus-visible {outline:2px solid #9D2235;outline-offset:3px;}
 .atlas-context > summary:hover {color:#751a29;}
+
+/* Geografia: três categorias; mapa independente de CDN. */
+.map-grid{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.map-grid>div,.legal-grid>div{min-width:0}
+.map-legend .pin.education{background:#FF2B1F;border-color:#A51A12}
+.map-legend .pin.memory{background:#365E7D;border-color:#244967}
+.map-legend .pin.other{background:#9AA0A6;border-color:#777}
+#map.atlas-raster{height:600px;min-height:340px;position:relative;overflow:hidden;touch-action:none;background-color:#f0f2f3;background-image:linear-gradient(#dce2e5 1px,transparent 1px),linear-gradient(90deg,#dce2e5 1px,transparent 1px);background-size:64px 64px;cursor:grab;isolation:isolate}
+.atlas-raster:active{cursor:grabbing}
+.atlas-raster-tiles,.atlas-raster-markers{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.atlas-raster-tiles img{position:absolute;left:0;top:0;width:256px;height:256px;max-width:none;filter:grayscale(1) saturate(.12) contrast(.85) brightness(1.05);user-select:none}
+.atlas-raster-marker{position:absolute;transform:translate(-50%,-50%);padding:0;border-radius:50%;pointer-events:auto;cursor:pointer;min-width:0;box-shadow:0 0 0 1px white}
+.atlas-raster-marker:focus-visible{outline:3px solid #111;z-index:10}
+.atlas-raster-controls{position:absolute;top:12px;left:12px;display:grid;z-index:5;box-shadow:0 1px 5px #0003}
+.atlas-raster-controls button{background:#fff;color:#333;width:36px;height:36px;border:1px solid #ccc;font:22px Arial;cursor:pointer}
+.atlas-raster-credit{position:absolute;right:0;bottom:0;background:#fffe;padding:2px 6px;font:11px Arial;z-index:6}
+.atlas-raster-credit a{color:#333}
+.atlas-raster-warning{position:absolute;top:12px;left:58px;right:12px;background:#fffffff0;padding:7px 10px;font:12px/1.4 Roboto,Arial,sans-serif;color:#555;z-index:4;pointer-events:none}
+.atlas-raster-popup{position:absolute;transform:translate(-50%,-100%);width:min(250px,90%);background:#fff;border:1px solid #ddd;box-shadow:0 2px 8px #0003;padding:12px 28px 12px 12px;border-radius:4px;font:13px/1.5 Roboto,Arial,sans-serif;z-index:7;cursor:auto}
+.atlas-raster-popup button{position:absolute;right:4px;top:4px;border:0;background:white;cursor:pointer;font-size:20px}
+#map .atlas-raster-popup[hidden],#map .atlas-raster-warning[hidden]{display:none}
+#juridico .legal-grid{grid-template-columns:minmax(240px,1fr) minmax(0,2fr)}
+#juridico .side-panel{box-shadow:none;border:0;padding:0 18px 0 0}
+#juridico .side-panel h3{font-size:23px}
+#juridico #conceptDetail{border-top:1px solid #ccc;padding-top:20px}
+#juridico .legal-note{background:#f7f7f7;border-left:3px solid var(--wine);padding:12px}
+#juridico .inner-tabs{margin-bottom:12px}
+#juridico .table-shell,#dados .table-shell{background:white;border:0;padding:0;max-height:none}
+#juridico .table,#dados .table{font:14px/1.55 Roboto,Arial,sans-serif}
+#juridico .table th,#dados .table th{color:#333;border-bottom:1px solid #aaa;padding:10px}
+#juridico .table td,#dados .table td{padding:12px 10px;border-bottom:1px solid #ddd}
+#juridico .table tbody tr:nth-child(odd),#dados .table tbody tr:nth-child(odd){background:#f5f5f5}
+#dados .table td{min-width:120px}
+#dados .table td:nth-child(4),#dados .table td:nth-child(5){min-width:180px;white-space:normal}
+#dados .data-tools{margin:14px 0 12px;flex-wrap:wrap}
+@media(max-width:920px){.map-grid,#juridico .legal-grid{grid-template-columns:minmax(0,1fr)}#juridico .side-panel{padding:0}#map.atlas-raster{height:460px}}

@@ -6,13 +6,13 @@
 <meta name="description" content="Atlas da Resistência à Ditadura Civil-Militar no Brasil: violações, crimes e agência política (1964–1985)">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="./styles.css">
+
+<link rel="stylesheet" href="./styles.css?v=atlas3">
 <script defer src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
-<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="./atlas-map.js?v=3"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script defer src="./graph-d3.js"></script>
-<script defer src="./app.js"></script>
+<script defer src="./app.js?v=atlas3"></script>
 </head>
 <body>
 <header class="original-header">
@@ -61,12 +61,12 @@
 <h2>Lugares de memória e resistência</h2><div class="map-grid"><div>
 <p class="section-intro">Mapa da distribuição territorial de acontecimentos de resistência e repressão, a partir das coordenadas históricas documentadas.</p>
 <div class="map-controls"><label class="checkbox"><input id="heat" type="checkbox">Exibir intensidade dos acontecimentos</label><label for="mapConcept">Destacar por categoria normativa / violação:</label><select id="mapConcept"><option value="ALL">Todas as categorias</option></select></div>
-<div id="map"></div>
+<div id="map"></div><div class="map-legend" aria-label="Legenda do mapa"><span><i class="pin education"></i> Iniciativas educacionais</span><span><i class="pin memory"></i> Resistência, repressão e memória</span><span><i class="pin other"></i> Outros locais históricos</span></div>
 <div class="education-map-actions">
  <button id="eduMapToggle" type="button" aria-expanded="false" aria-controls="eduMapList">Iniciativas educativas em São Paulo</button>
  <div id="eduMapList" hidden></div>
-</div><div class="map-legend"><span><i class="pin memory"></i> Estado de São Paulo (vermelho vivo)</span><span><i class="pin other"></i> Demais localidades (cores discretas)</span></div></div>
-<aside id="mapSide" class="side-panel"><h3>Análise Geoespacial</h3><p>Marque a opção <strong>Exibir mapa de calor</strong> para visualizar a distribuição espacial da violência civil-militar e dos focos de agência política operária. As bolhas vermelhas expressam a densidade dos acontecimentos documentados, incluindo violações, crimes, torturas, mortes e intervenções. A documentação inclui condutas de agentes estatais e civis; os locais provêm de diferentes acervos arquivísticos.</p><p>Selecione um marcador para examinar o local e a proveniência da informação.</p></aside></div><p class="auxiliary" id="mapStatus"></p>
+</div></div>
+<aside id="mapSide" class="side-panel"><h3>Análise Geoespacial</h3><p>Marque a opção <strong>Exibir mapa de calor</strong> para visualizar a distribuição espacial da violência civil-militar e dos focos de agência política operária. O tamanho das bolhas expressa a densidade dos acontecimentos documentados, incluindo violações, crimes, torturas, mortes e intervenções. A documentação inclui condutas de agentes estatais e civis; os locais provêm de diferentes acervos arquivísticos.</p><p>Selecione um marcador para examinar o local e a proveniência da informação.</p></aside></div><p class="auxiliary" id="mapStatus"></p>
 </section>
 <section id="juridico" class="page">
 <h2>Conceitos jurídicos</h2><p class="section-intro">Glossário de categorias jurídicas, violações de direitos e crimes mobilizados no conjunto documental histórico.</p>

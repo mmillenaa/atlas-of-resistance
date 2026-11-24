@@ -143,7 +143,8 @@ async function normalize(){
     }
   }
   await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa').map(async n=>{n.photo=await portrait(n);}));
-  updateSelectors();updateCounts();resetGraph();updateLaw();updateMap();
+  updateSelectors();updateCounts();updateLaw();updateMap();
+  try{resetGraph();}catch(e){console.error("Grafo:",e);$("network").textContent="Grafo indisponível; outras abas continuam acessíveis."; }
 }
 
 function updateSelectors(){
@@ -351,17 +352,11 @@ const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
- if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
+ const L=window.AtlasRaster;
+ if(!L){$('mapStatus').textContent='Componente cartográfico indisponível. Atualize a página.';return;}
  if(!leafletMap){
   leafletMap=L.map('map',{scrollWheelZoom:true,zoomControl:true}).setView([-23.55,-46.63],5);
-  // Mantém o serviço principal (CARTO se configurado). Em falha de autenticação,
-  // quota ou rede, muda automaticamente para OSM sem bloquear os marcadores.
-  // ATLAS_ENTREVISTA_20261124_V2: sem chave fictícia, nem CARTO quebrado.
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:'&copy; OpenStreetMap contributors',
-    maxZoom:19, className:'atlas-grayscale-tiles',
-    crossOrigin:true
-  }).addTo(leafletMap);
+  // O componente local controla CARTO e OSM.
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
  const chosen=$('mapConcept').value;
@@ -416,18 +411,20 @@ function updateMap(){
    detalhes+='<p class="auxiliary">Identificador: '+HTML(r.PlaceID)+' · Coordenadas: '+lat+', '+lon+'</p>';
    L.circleMarker([lat,lon],{
       radius,
-      color: /^(?:SP|São Paulo|Sao Paulo)$/i.test(text(r.State))?'#B52319':(isEvent?'#9D2235':'#808080'),
-      fillColor: /^(?:SP|São Paulo|Sao Paulo)$/i.test(text(r.State))?'#FF2B1F':(isEvent?'#9D2235':'#9AA0A6'),
+      color:isEvent?'#244967':'#777',
+       fillColor:isEvent?'#365E7D':'#9AA0A6',priority:isEvent?1:0,
       weight:1.4, fillOpacity:$('heat').checked?.42:.77
     })
     .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
+ const education=atlasIniciativas.filter(i=>Array.isArray(i.coords));
+ if(!chosen||chosen==='ALL')for(const item of education){atlasPlotEducation(item,false);coords.push(item.coords);}
  leafletMap.__atlasCoords=coords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
  if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Vermelho vivo = estado de São Paulo identificado; demais cores = outros locais.';
+ $('mapStatus').textContent=total+' locais históricos · '+eventPlaces+' associados a eventos ou memória · '+((!chosen||chosen==='ALL')?education.length:0)+' iniciativas educacionais georreferenciadas. Contorno tracejado = localização aproximada.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -437,11 +434,14 @@ function updateLaw(){
   select.innerHTML=items.map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_PT','Label_ORIG','ConceptName_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
   if(items.some(r=>r.ConceptID===old))select.value=old;
   const c=items.find(r=>r.ConceptID===select.value);
-  $('conceptDetail').innerHTML=c?'<p><b>Tipo:</b> '+HTML(legalLabel(c.ConceptType))+'</p><p><b>Natureza:</b> '+HTML(legalLabel(c.ConceptNature))+'</p><p><b>Estatuto legal histórico:</b> '+HTML(legalLabel(c.HistoricalLegalStatus))+'</p><p><b>Estatuto prático:</b> '+HTML(legalLabel(c.HistoricalPracticalStatus))+'</p><p><b>Referência histórica:</b> '+HTML(legalLabel(c.HistoricalAnchor))+'</p><p><b>Referência atual:</b> '+HTML(legalLabel(c.CurrentAnchor))+'</p><hr><p><b>Nota analítica:</b><br>'+HTML(legalLabel(c.AnalyticalNote))+'</p>':'Carregue Concepts.csv para consultar o compêndio.';
+  $('conceptDetail').innerHTML=c?'<p><b>Tipo:</b> '+HTML(legalLabel(c.ConceptType))+'</p><p><b>Natureza:</b> '+HTML(legalLabel(c.ConceptNature))+'</p><p><b>Estatuto legal histórico:</b> '+HTML(legalLabel(c.HistoricalLegalStatus))+'</p><p><b>Estatuto prático:</b> '+HTML(legalLabel(c.HistoricalPracticalStatus))+'</p><p><b>Referência histórica:</b> '+HTML(legalLabel(c.HistoricalAnchor))+'</p><p><b>Referência atual:</b> '+HTML(legalLabel(c.CurrentAnchor))+'</p><hr><p class="legal-note"><b>Nota analítica:</b><br>'+HTML(legalLabel(c.AnalyticalNote)||'Não disponível na matriz pública.')+'</p>':'Carregue Concepts.csv para consultar o compêndio.';
   const ids=new Set(rows('EventConcepts').filter(r=>r.ConceptID===select.value).map(r=>r.EventID));
   const ev=rows('Events').filter(e=>ids.has(e.EventID));
-  const evPersons=new Map();for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(nodeById.get(ep.PersonID)?.label||ep.PersonID);}
-  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa(s)','Evento','Início','Fim'],ev.map(e=>[(evPersons.get(e.EventID)||[]).join(', ')||'Em mapeamento',eventLabel(e.EventType),e.StartDate,e.EndDate])):'Os vínculos dessa categoria ainda estão em mapeamento.';
+  const evPersons=new Map(), docs=new Map(rows('Documents').map(d=>[d.DocumentID,d])),docLinks=new Map();
+  for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(ep);}
+  for(const de of rows('DocumentEvents')){if(!docLinks.has(de.EventID))docLinks.set(de.EventID,new Set());docLinks.get(de.EventID).add(de.DocumentID);}
+  const records=ev.flatMap(e=>(evPersons.get(e.EventID)||[{}]).map(ep=>[nodeById.get(ep.PersonID)?.label||ep.PersonID||'Em mapeamento',ep.Role?roleLabel(ep.Role):'—',eventLabel(e.EventType),[...(docLinks.get(e.EventID)||[])].map(id=>docs.get(id)?.Repository||docs.get(id)?.DisplayTitle_EN||id).filter((v,i,a)=>a.indexOf(v)===i).join(' · ')||'—',e.StartDate||'—',e.EndDate||'—']));
+  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa','Relação jurídica','Evento','Documento / acervo','Início','Fim'],records):'Os vínculos dessa categoria ainda estão em mapeamento.';
   updateConceptChart();
 }
 function updateConceptChart(){
@@ -458,7 +458,7 @@ function updateConceptChart(){
 
 async function restore(){
   const response=await fetch('data/atlas-estrutura.json',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
-  db=await response.json();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
+  db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
   const updated={};let count=0;
@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
     document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));
-    if(b.dataset.page==='mapa')setTimeout(()=>{updateMap();if(leafletMap)leafletMap.invalidateSize();},140);
+    if(b.dataset.page==='mapa')requestAnimationFrame(()=>{try{updateMap();leafletMap?.invalidateSize();}catch(e){console.error('Mapa:',e);$('mapStatus').textContent='Erro ao atualizar os marcadores: '+e.message;}});
     if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
   $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
@@ -587,13 +587,13 @@ const matrixLabels = {
   MovementInstitutionRelations:'Relações movimento–instituição'
 };
 let dataPage=0;
-const DATA_PAGE_SIZE=50;
+const DATA_PAGE_SIZE=15;
 function renderDatasetOptions(){
  const el=$('datasetSelect');if(!el)return;
  const prior=el.value;
- el.innerHTML=Object.entries(matrixLabels).map(([k,v])=>
+ el.innerHTML='<option value="__links">Vínculos integrados</option>'+Object.entries(matrixLabels).map(([k,v])=>
   '<option value="'+HTML(k)+'">'+HTML(v)+' ('+rows(k).length+')</option>').join('');
- if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;else el.value='Persons';
+ if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;else el.value='__links';
 }
 function updateDataTable(){
  const dest=$('dataTable'),pager=$('dataPager');if(!dest)return;
@@ -601,11 +601,8 @@ function updateDataTable(){
  const term=text($('dataFilter')?.value).toLocaleLowerCase('pt');
  let names=[],entries=[];
  if(table==='__links'){
-   names=['Pessoa','Papel no vínculo','Instituição ou movimento','Evidência documental'];
-   const found=edgeRows.filter(e=>nodeById.get(e.from)?.kind==='Pessoa' &&
-     ['Instituição','Movimento'].includes(nodeById.get(e.to)?.kind));
-   entries=found.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),
-     nodeById.get(e.to)?.label||e.to,e.evidence]);
+   names=['Pessoa','Vínculo','Instituição ou movimento','EvidenceText_EN','EvidenceText_ORIG','Início','Fim'];
+   entries=['PersonInstitutions','PersonMovements'].flatMap(k=>rows(k).map(r=>{const dest=r.InstitutionID||r.MovementID;return [nodeById.get(r.PersonID)?.label||r.PersonID,roleLabel(r.Role),nodeById.get(dest)?.label||dest,r.EvidenceText_EN||'',r.EvidenceText_ORIG||'',r.StartDate||'',r.EndDate||''];}));
  }else{
    const source=rows(table);names=[...new Set(source.flatMap(x=>Object.keys(x)))];
    entries=source.map(x=>names.map(k=>{
@@ -646,8 +643,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 const atlasIniciativas = [
   {id:'I136',nome:'Supletivo Avante — Ipiranga',periodo:'aprox. 1977–1978',
   endereco:'Rua do Fico, 100, Ipiranga, São Paulo, SP, Brasil',
-  precisao:'Endereço citado na entrevista; coordenadas de geocodificador devem ser verificadas',localizavel:true,
-  fonte:'',nota:'Elevação da escolaridade de trabalhadores, sobretudo da indústria Linhas Corrente. Formação ligada à experiência de Sueli Bossam. Fonte: entrevista coletiva, transcrição editada, p. 47 (p. 5 do PDF).'},
+  coords:[-23.5759512,-46.6068974],aproximado:true,precisao:'Endereço citado na entrevista; coordenada aproximada do logradouro (CEP 04201-000), não do imóvel',localizavel:true,
+  fonte:'https://arquisp.org.br/regiao-ipiranga/paroquia-nossa-senhora-das-dores-e-sao-peregrino/',nota:'Segundo Sueli Bossam, o supletivo atendia trabalhadores da Linhas Corrente e buscava formar uma oposição sindical. A atividade durou cerca de dois anos; a mudança do padre levou à perda do espaço. Coordenada aproximada: https://cepbrasil.org/sao-paulo/sao-paulo/ipiranga/04201000.'},
  {id:'I120',nome:'Alfabetização — União de Moradores do Parque Bristol e Jardim São Savério',periodo:'a partir de 1977, com desdobramentos posteriores',
   endereco:'Parque Bristol / Jardim São Savério, São Paulo, SP, Brasil',
   precisao:'Região documentada; sede e local das aulas não determinados',localizavel:false,
@@ -661,9 +658,9 @@ const atlasIniciativas = [
   precisao:'Atuação em múltiplos sindicatos e regiões; não há ponto único',localizavel:false,
   fonte:'',nota:'Assessoria e formação político-sindical, com atuação nas instâncias zonais, regionais e nacional da CUT.'},
  {id:'I110',nome:'CPV — apoio ao supletivo de trabalhadores da ARNO',periodo:'aprox. 1979–1980',
-  endereco:'São Paulo, SP, Brasil',
-  precisao:'A sede histórica precisa ainda necessita de verificação',localizavel:false,
-  fonte:'',nota:'Sueli descreve a transferência de parte das atividades educativas para o Centro Pastoral Vergueiro após a interrupção do uso do local anterior.'},
+  endereco:'Rua Vergueiro, 7290, Vila Firmiano Pinto, São Paulo, SP, Brasil',
+ coords:[-23.609160798970166,-46.61226552883585],precisao:'Sede histórica e coordenadas publicadas pelo Memorial da Resistência (inventário 072-06.001)',localizavel:true,
+ fonte:'https://memorialdaresistenciasp.org.br/lugares/centro-de-pastoral-vergueiro-cpv/',nota:'Sueli relata a transferência do supletivo para o CPV e o contato com Anizio Batista de Oliveira, da OSM-SP. O trabalho articulava formação sindical e militância com escrita e elevação da escolaridade dos trabalhadores da ARNO. As aulas duraram aproximadamente dois anos, antes da ida à ATRI.'},
 {id:'I108', nome:'Escola Nova Piratininga — Brás', periodo:'1979–1985',
   endereco:'Rua Melo Barreto, 104, Brás, São Paulo, SP, Brasil',
   precisao:'Endereço histórico publicado; coordenada a conferir', localizavel:true,
@@ -707,8 +704,15 @@ const atlasIniciativas = [
   nota:'A fonte descreve a experiência educativa, mas não fornece endereço suficiente para um marcador.'},
  {id:'I109',nome:'ATRI — Associação dos Trabalhadores da Região do Ipiranga',periodo:'Em pesquisa',
   endereco:'Região do Ipiranga, São Paulo, SP, Brasil',precisao:'Região conhecida; sede não confirmada',localizavel:false,
-  fonte:'',nota:'Verificar endereço na documentação da ATRI e em entrevistas antes de mapear.'}
+  fonte:'',nota:'Segundo Sueli Bossam, após a experiência no CPV, as educadoras passaram à ATRI, onde preparavam trabalhadores para testes de ingresso nas fábricas. Sede e local das aulas ainda não confirmados.'}
 ];
+function atlasPlotEducation(item,open=false,coords=item.coords){
+ if(!leafletMap||!coords)return;
+ const L=window.AtlasRaster;
+ const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
+ const marker=L.circleMarker(coords,{radius:10,color:'#A51A12',fillColor:'#FF2B1F',weight:2,fillOpacity:.94,priority:3,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
+ if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
+}
 const atlasEduGeoCache = new Map();
 let atlasEducationLayer = null, atlasEducationVisible = false;
 let atlasEduGeocodeInProgress = false;
@@ -720,6 +724,7 @@ function atlasEduCard(item,idx,withAction=false){
   '<p>'+HTML(item.nota)+'</p>'+btn+(link?' '+link:'')+'</article>';
 }
 async function atlasEduGeocode(item){
+ if(item.coords)return item.coords;
  if(atlasEduGeoCache.has(item.endereco))return atlasEduGeoCache.get(item.endereco);
  // Uso esporádico, explícito, uma solicitação por clique; não fazer geocodificação em massa.
  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=br&q='+encodeURIComponent(item.endereco);
@@ -741,11 +746,9 @@ function atlasEduShowList(container,withAction){
     const [lat,lon]=await atlasEduGeocode(item);
     if(!leafletMap)updateMap();
     if(!leafletMap)throw Error('Abra a aba Geografia para iniciar o mapa.');
-    if(!atlasEducationLayer)atlasEducationLayer=L.layerGroup().addTo(leafletMap);
-    L.circleMarker([lat,lon],{radius:12,color:'#b0160e',weight:2.5,fillColor:'#FF2B1F',fillOpacity:.9})
-      .addTo(atlasEducationLayer)
-      .bindPopup('<b>'+HTML(item.nome)+'</b><br>'+HTML(item.periodo)+'<br>'+HTML(item.endereco)+'<br><em>Coordenada geocodificada: verificar no acervo.</em>').openPopup();
-    leafletMap.setView([lat,lon],15,{animate:false});
+    if($('mapConcept').value!=='ALL'){$('mapConcept').value='ALL';updateMap();}
+    leafletMap.eachLayer(l=>{if(l instanceof window.AtlasRaster.CircleMarker&&l.popup?.includes(HTML(item.nome)))leafletMap.removeLayer(l);});
+    atlasPlotEducation(item,true,[lat,lon]);
     button.textContent='Marcador mostrado';
   }catch(err){button.textContent='Não localizado — conferir';button.title=err.message;}
   finally{atlasEduGeocodeInProgress=false;button.disabled=false;}
@@ -778,7 +781,7 @@ function atlasEduInit(){
   atlasEduShowList(m,true);
   mToggle.addEventListener('click',()=>{
     m.hidden=!m.hidden;mToggle.setAttribute('aria-expanded',String(!m.hidden));
-    if(!m.hidden && leafletMap){leafletMap.setView([-23.5505,-46.6333],11,{animate:false});}
+    if(!m.hidden && leafletMap){leafletMap.fitBounds(atlasIniciativas.filter(i=>i.coords).map(i=>i.coords),{maxZoom:13});}
   });
  }
 }
