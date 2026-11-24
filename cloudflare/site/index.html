@@ -1,32 +1,76 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Atlas da Resistência</title>
-<meta name="description" content="Atlas da Resistência: conhecimento histórico, movimentos, instituições, pessoas e direitos.">
+<meta name="description" content="Atlas da Resistência à Ditadura Civil-Militar no Brasil: violações, crimes e agência política (1964–1985)">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="./styles.css">
 <script defer src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script defer src="app.js"></script>
+<script defer src="./app.js"></script>
 </head>
 <body>
-<header><div class="heading"><p class="eyebrow">PROJETO DE PESQUISA · DEMONSTRAÇÃO</p><h1>Atlas da Resistência à Ditadura Civil-Militar no Brasil: violações, crimes e agência política (1964–1985)</h1><p>Memória operária · Educação · Organizações · Relações históricas</p></div>
-<figure><img src="https://raw.githubusercontent.com/mmillenaa/atlas-of-resistance/main/app/assets/pngegg.png" alt="América Invertida — Joaquín Torres García"><figcaption>América Invertida (1943) · Joaquín Torres García</figcaption></figure></header>
-<nav id="tabs" aria-label="Navegação principal"><button class="active" data-page="sobre">Sobre o projeto</button><button data-page="grafo">Grafo de conhecimento</button><button data-page="mapa">Geografia da resistência</button><button data-page="juridico">Compêndio jurídico</button><button data-page="consulta">Consultas semânticas</button><button data-page="dados">Dados</button><button data-page="cosmov">Cosmov</button></nav>
-<div class="banner">Demonstração pública com dados históricos mínimos. As matrizes completas de pesquisa não estão incluídas.</div>
+<header class="original-header">
+<div class="header-copy"><h1>Atlas da Resistência à Ditadura Civil-Militar no Brasil: violações, crimes e agência política (1964–1985)</h1></div>
+<figure class="inverted-america"><img src="assets/pngegg.png" alt="América Invertida, de Joaquín Torres García"><figcaption>América Invertida (1943). Joaquín Torres García.</figcaption></figure>
+</header>
+<nav id="tabs" aria-label="Navegação principal">
+  <button data-page="sobre" class="active">Sobre o projeto</button>
+  <button data-page="grafo">Grafo de conhecimento</button>
+  <button data-page="mapa">Geografia da resistência</button>
+  <button data-page="juridico">Compêndio jurídico</button>
+  <button data-page="semantica">Assistente semântico</button>
+  <button data-page="dados">Repositório de dados</button>
+  <button data-page="cosmov"><img src="icons/stars.png" class="stars" alt="">Cosmov</button>
+</nav>
 <main>
-<section id="sobre" class="page active"><h2>Apresentação da pesquisa</h2>
-<p>Este Atlas investiga as relações entre pessoas, instituições, movimentos, acontecimentos e violações de direitos na resistência à ditadura civil-militar brasileira. Seu núcleo inicial é a Oposição Sindical Metalúrgica de São Paulo, considerando a educação popular, a formação, a documentação e a organização política como dimensões constitutivas do movimento.</p>
-<p>A versão JavaScript constitui uma migração não destrutiva da aplicação R Shiny. Excel/CSV permanecem como matrizes de pesquisa; a geração RDF/CIDOC-CRM pode permanecer em Python. O grafo visual é uma projeção exploratória dos vínculos históricos, e não substitui a análise das fontes.</p>
-<div class="notice"><strong>Privacidade:</strong> nenhum corpus inédito foi incluído. Para testar suas matrizes, abra os CSVs no painel Dados: eles serão lidos no navegador, sem upload para o servidor. Configure o controle de acesso e revise o corpus antes de publicar a base destinada à banca.</div><div class="stats" id="summary"></div>
-<p class="muted">Pesquisa e desenvolvimento: Millena Miranda Franco · Universidade de São Paulo.</p></section>
-<section id="grafo" class="page"><h2>Grafo de conhecimento</h2><p class="muted">Núcleos históricos conectados, com expansão por clique. Passe o cursor nas arestas para ler o tipo de vínculo e as evidências.</p>
-<div class="controls"><label>Núcleo ou pessoa<select id="focus"></select></label><label>Tipo de vínculo<select id="role"></select></label><button id="reset" class="secondary">Restabelecer núcleos</button><button id="expand" class="secondary">Expandir vínculos</button></div><div class="graphbox"><div id="network"></div><aside id="detail" class="detail" hidden></aside></div><p id="graphStatus" class="muted"></p></section>
-<section id="mapa" class="page"><h2>Geografia da memória e da resistência</h2><p class="muted">Localizações derivadas de Locations.csv, com OpenStreetMap e sem chave de API.</p><div id="map"></div><p id="mapStatus" class="muted"></p></section>
-<section id="juridico" class="page"><h2>Compêndio jurídico</h2><label>Categoria jurídica<select id="concept"></select></label><div id="conceptDetail" class="card"></div><div id="conceptEvents" class="card"></div></section>
-<section id="consulta" class="page"><h2>Consulta de relações</h2><p class="muted">Exploração local de vínculos históricos. Esta tela não pretende substituir o SPARQL executado sobre o RDF.</p><label>Entidade<select id="entity"></select></label><div id="relations" class="card"></div></section>
-<section id="dados" class="page"><h2>Dados e matrizes</h2><p>Abra os CSVs exportados do Excel. Eles são processados somente no seu navegador, sem envio à Cloudflare.</p><div class="card"><label>Selecionar matrizes CSV<input id="upload" type="file" multiple accept=".csv,text/csv"></label><button id="restore" class="secondary">Restaurar demonstração</button><p id="uploadStatus" class="muted"></p></div><div id="dataCounts" class="stats"></div><p class="muted">Os dados científicos continuam nas suas matrizes. A versão pública não disponibiliza download integral de testemunhos ou biografias inéditas.</p></section>
-<section id="cosmov" class="page"><h2>Cosmov — busca bibliográfica</h2><p class="muted">Busca pública via OpenAlex, sem enviar dados do acervo automaticamente.</p><div class="controls"><label>Termo de pesquisa<input id="cosQuery" value="Oposição Sindical Metalúrgica de São Paulo"></label><button id="cosSearch">Pesquisar publicações</button></div><div class="card" id="cosResults">Informe uma expressão e clique em pesquisar.</div></section>
-</main><footer>Atlas da Resistência · Protótipo acadêmico · Aplicação R Shiny preservada no repositório original</footer>
+<section id="sobre" class="page active">
+<h2>Apresentação da pesquisa</h2>
+<p>Esta plataforma está intrinsecamente vinculada ao projeto de pesquisa de doutorado <em>Movimento operário na resistência à Ditadura Civil-Militar: lutas pela educação e iniciativas educativas da Oposição Sindical Metalúrgica de São Paulo (1960–1988)</em>, orientado pela Profa. Dra. Carmen Sylvia Vidigal Moraes (2021–). Ao mapear relações semânticas entre indivíduos, sindicatos e aparatos de repressão estatal em um grafo de conhecimento abrangente, o Atlas oferece subsídios para a investigação da evolução histórica de categorias jurídicas relacionadas à violência de Estado e às violações de direitos humanos. Por meio da interoperabilidade semântica e da estruturação de dados, a iniciativa contribui para a memória, a verdade e a justiça de transição relacionadas às vidas atingidas pelos regimes autoritários latino-americanos.</p>
+<p>A pesquisa está em andamento. Seu núcleo histórico principal é a Oposição Sindical Metalúrgica de São Paulo (OSM-SP), com trabalhadores e trabalhadoras, educadores, assessores, comissões de fábrica e organizações envolvidas em processos de mobilização, resistência e formação. A pesquisa incorpora também outros agentes, movimentos sociais, instituições e acontecimentos relacionados. A participação constitutiva em projetos do movimento não deve ser confundida automaticamente com filiação sindical formal.</p>
+<div class="research-card"><h3>Pesquisa e desenvolvimento</h3>
+<p><b>Millena Miranda Franco</b> desenvolve pesquisa em Educação e estuda Direito na Universidade de São Paulo (USP). É mestre em Educação pela USP, com período de mobilidade Erasmus+ na Universität Potsdam, Alemanha. Desenvolve projeto financiado pela FAPESP, <em>Organização e disponibilização pública de acervo documental envolvendo violência de estado</em> (processo 2025/11544-9), no âmbito da FGV DIREITO SP, sob supervisão da Profa. Dra. Maíra Rocha Machado.</p>
+<div class="author-links"><a href="http://lattes.cnpq.br/3848824456283762" target="_blank" rel="noopener">Currículo Lattes</a><a href="https://bv.fapesp.br/pt/pesquisador/743339/millena-miranda-franco/" target="_blank" rel="noopener">BV FAPESP</a><a href="https://orcid.org/0000-0002-0292-0797" target="_blank" rel="noopener">ORCID</a><a href="https://github.com/mmillenaa/" target="_blank" rel="noopener">GitHub</a></div></div>
+<p class="subtle-note">A versão Cloudflare preserva a arquitetura editorial e visual da plataforma R. As matrizes completas são carregadas localmente pelo pesquisador até que a publicação do acervo seja autorizada e protegida.</p>
+</section>
+<section id="grafo" class="page">
+<h2>Grafo de conhecimento</h2>
+<p class="section-intro">Explore os vínculos entre pessoas, instituições, movimentos, acontecimentos, documentos e conceitos jurídicos. Use os filtros para isolar o recorte; clique em um nó para expandir a rede e consultar as biografias e fontes. Os tipos de vínculo ficam nas informações das conexões, não sobre as linhas.</p>
+<div class="filter-card"><div class="filter-col">
+  <span class="field-label">Modo de exploração:</span><label class="radio"><input type="radio" name="graphMode" value="overview" checked>Visão geral</label><label class="radio"><input type="radio" name="graphMode" value="person">Filtrar por pessoa</label><label class="radio"><input type="radio" name="graphMode" value="organization">Filtrar por instituição/movimento</label>
+</div><div class="filter-col"><label for="focus">Selecionar entidade:</label><select id="focus" aria-label="Selecionar entidade"><option value="">Núcleos principais</option></select><button class="small-button" id="reset">Redefinir visualização</button></div><div class="filter-col"><label for="role">Filtrar tipos de vínculo:</label><select id="role"><option value="">Todos</option></select><button class="small-button" id="expand">Revelar conexões</button></div></div>
+<div class="network-frame"><div id="network" aria-label="Rede interativa"></div><aside id="detail" class="graph-detail" hidden></aside></div><p class="auxiliary" id="graphStatus"></p>
+</section>
+<section id="mapa" class="page">
+<h2>Lugares de memória e resistência</h2><div class="map-grid"><div>
+<p class="section-intro">Mapa da distribuição territorial de acontecimentos de resistência e repressão, a partir das coordenadas históricas documentadas.</p>
+<div class="map-controls"><label class="checkbox"><input id="heat" type="checkbox">Exibir mapa de calor (densidade de eventos)</label><label for="mapConcept">Destacar por categoria normativa / violação:</label><select id="mapConcept"><option value="ALL">Todas as categorias</option></select></div>
+<div id="map"></div></div>
+<aside id="mapSide" class="side-panel"><h3>Análise Geoespacial</h3><p>Marque a opção <strong>Exibir mapa de calor</strong> para visualizar a distribuição espacial da violência civil-militar e dos focos de agência política operária. As bolhas vermelhas expressam a densidade dos acontecimentos documentados, incluindo violações, crimes, torturas, mortes e intervenções. A documentação inclui condutas de agentes estatais e civis; os locais provêm de diferentes acervos arquivísticos.</p><p>Selecione um marcador para examinar o local e a proveniência da informação.</p></aside></div><p class="auxiliary" id="mapStatus"></p>
+</section>
+<section id="juridico" class="page">
+<h2>Conceitos jurídicos</h2><p class="section-intro">Glossário de categorias jurídicas, violações de direitos e crimes mobilizados no conjunto documental histórico.</p>
+<div class="legal-grid"><aside class="side-panel"><h3>Selecionar conceito</h3><label for="concept">Categoria normativa / crime:</label><select id="concept"></select><div id="conceptDetail"></div></aside>
+<div><div class="inner-tabs"><button id="legalEventsTab" class="active">Eventos relacionados</button><button id="legalTrendsTab">Evolução histórica</button></div><div id="conceptEvents" class="table-shell"></div><div id="conceptChart" class="table-shell" hidden></div></div></div>
+</section>
+<section id="semantica" class="page">
+<h2>Construtor de consultas semânticas</h2>
+<p>O construtor semântico do projeto original utiliza uma arquitetura de dados interligados, fundamentada no <em>Resource Description Framework</em> (RDF), com triplas serializadas em Turtle (.ttl) e consultas SPARQL. Esta migração preserva a lógica sujeito–predicado–objeto, os controles e o botão animado; nesta etapa, as consultas são executadas sobre as relações carregadas no navegador. O suporte à sintaxe SPARQL é parcial e não substitui o Apache Jena Fuseki.</p>
+<div class="query-block"><div class="query-entity"><img src="icons/Pessoas.png" id="iconSubject" alt="Ícone da entidade"><label for="subject">Sujeito<select id="subject"></select></label></div><img class="query-arrow" src="icons/seta.png" alt=""><div class="query-entity"><label for="predicate">Predicado<select id="predicate"></select></label></div><img class="query-arrow" src="icons/seta.png" alt=""><div class="query-entity"><img src="icons/Movimentos.png" id="iconObject" alt="Ícone da entidade"><label for="object">Objeto<select id="object"></select></label></div><button class="run-query-btn" id="runQuery" aria-label="Executar consulta" title="Executar consulta"></button></div>
+<div class="query-advanced"><label for="sparqlText">Avançado: consulta SPARQL simples (substitui os filtros acima). Atualmente aceita um padrão de tripla e LIMIT.</label><textarea id="sparqlText" rows="3" placeholder="SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10"></textarea></div>
+<h3>Resultados da consulta</h3><div id="sparqlResults" class="table-shell"></div>
+</section>
+<section id="dados" class="page">
+<h2>Dados brutos integrados</h2><p class="section-intro">Explore as relações entre pessoas, instituições, movimentos e suas evidências. Os filtros e arquivos são processados no navegador.</p>
+<div class="research-card"><label for="csvUpload"><strong>Carregar CSVs do diretório app/data (sem enviar ao servidor):</strong></label><input id="csvUpload" type="file" accept=".csv,text/csv" multiple><button id="restore" class="small-button">Restaurar demonstração</button><p class="auxiliary" id="uploadStatus">A demonstração pública não contém as matrizes inéditas. Escolha todos os CSVs da pasta app/data para consultar o acervo completo localmente.</p></div>
+<div id="dataCounts" class="data-stats"></div><div class="data-tools"><input type="search" id="dataFilter" placeholder="Pesquisar nos registros, vínculos e evidências"><button id="exportSelected" class="small-button">Exportar seleção (CSV)</button></div><div id="dataTable" class="table-shell"></div>
+</section>
+<section id="cosmov" class="page">
+<h2><img src="icons/stars.png" class="stars-head" alt="">Corpora of Social Movements (Cosmov)</h2><p>Pesquisa bibliográfica automatizada pela API OpenAlex. Explore artigos acadêmicos, teses e publicações que mencionam os movimentos sociais catalogados no Atlas.</p>
+<div class="cos-search"><label for="cosQuery">Termo de pesquisa:</label><input id="cosQuery" type="search" value="Oposição Sindical Metalúrgica de São Paulo"><button id="cosSearch">Pesquisar publicações</button></div><div id="cosResults" class="table-shell"></div>
+</section>
+</main><footer>Atlas da Resistência · Projeto de pesquisa em desenvolvimento · Universidade de São Paulo</footer>
 </body></html>

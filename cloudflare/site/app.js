@@ -9,7 +9,7 @@ const schema = {
   Institutions:['InstitutionID',['Name_ORIG','Name_ENG'],'Instituição'],
   Movements:['MovementID',['Name_ORIG','Name_EN'],'Movimento'],
   Events:['EventID',['EventType'],'Evento'],
-  Concepts:['ConceptID',['Label_ORIG','ConceptName_ORIG','Label_EN'],'Conceito'],
+  Concepts:['ConceptID',['Label_PT','Label_ORIG','ConceptName_ORIG','Label_EN'],'Conceito'],
   Documents:['DocumentID',['Title_ORIG','DisplayTitle_ORIG','DisplayTitle_EN','Repository'],'Documento'],
   Locations:['PlaceID',['PlaceName_ORIG','PlaceName_EN','PlaceName'],'Local']
 };
@@ -77,15 +77,14 @@ async function normalize(){
     }
   }
   await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa').map(async n=>{n.photo=await portrait(n);}));
-  updateSelectors();updateCounts();resetGraph();updateLaw();updateRelations();updateMap();
+  updateSelectors();updateCounts();resetGraph();updateLaw();updateMap();
 }
 
 function updateSelectors(){
-  const focus=$('focus'),role=$('role'),entity=$('entity'),old=focus.value;
+  const focus=$('focus'),role=$('role'),old=focus.value;
   const sorted=[...nodeById.values()].sort((a,b)=>a.label.localeCompare(b.label,'pt'));
   focus.innerHTML='<option value="">Núcleos principais</option>'+sorted.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+' ('+HTML(n.id)+')</option>').join('');
   if(nodeById.has(old))focus.value=old;
-  entity.innerHTML=sorted.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+'</option>').join('');
   role.innerHTML='<option value="">Todos os vínculos</option>'+[...new Set(edgeRows.map(e=>e.relation))].sort().map(x=>'<option>'+HTML(x)+'</option>').join('');
 }
 function neighbors(id){
@@ -136,45 +135,67 @@ function showDetail(id){
 function updateCounts(){
   const keys=[['Persons','Pessoas'],['Institutions','Instituições'],['Movements','Movimentos'],['Events','Acontecimentos'],['Documents','Documentos'],['Concepts','Conceitos']];
   const html=keys.map(([k,l])=>'<div class="stat"><strong>'+rows(k).length+'</strong>'+l+'</div>').join('');
-  $('summary').innerHTML=html;$('dataCounts').innerHTML=html;
+  if($('summary'))$('summary').innerHTML=html;$('dataCounts').innerHTML=html;updateDataTable();
 }
 function updateMap(){
-  if(!window.L){$('mapStatus').textContent='Biblioteca do mapa indisponível.';return;}
+  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
   if(!leafletMap){leafletMap=L.map('map',{scrollWheelZoom:false}).setView([-23.55,-46.63],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(leafletMap);}
   leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
-  let count=0;
-  for(const raw of rows('Locations')){
-    if(!text(raw.Latitude)||!text(raw.Longitude))continue;
-    const lat=Number(text(raw.Latitude).replace(',','.')),lon=Number(text(raw.Longitude).replace(',','.'));
-    if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
-    L.circleMarker([lat,lon],{radius:7,color:'#9D2235',fillOpacity:.7}).addTo(leafletMap).bindPopup(HTML(first(raw,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||raw.PlaceID));count++;
+  const selected=$('mapConcept').value;
+  let events=rows('Events');if(selected&&selected!=='ALL'){
+    const ids=new Set(rows('EventConcepts').filter(e=>e.ConceptID===selected).map(e=>e.EventID));events=events.filter(e=>ids.has(e.EventID));
   }
-  $('mapStatus').textContent=count?count+' localidades representadas.':'Demonstração sem localizações: carregue Locations.csv para visualizar as coordenadas da matriz.';
+  const countByPlace=new Map();events.forEach(e=>{if(e.PlaceID)countByPlace.set(e.PlaceID,(countByPlace.get(e.PlaceID)||0)+1);});
+  let total=0;
+  for(const r of rows('Locations')){
+    if(!text(r.Latitude)||!text(r.Longitude))continue;
+    const lat=Number(text(r.Latitude).replace(',','.')),lon=Number(text(r.Longitude).replace(',','.'));
+    if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
+    const n=countByPlace.get(r.PlaceID)||0;if(selected!=='ALL'&&n===0)continue;
+    const label=first(r,['PlaceName_ORIG','PlaceName_EN'])||r.PlaceID;
+    const color=n>0?'#9D2235':'#808080';
+    const radius=$('heat').checked?Math.max(5,Math.sqrt(n)*10):8;
+    const marker=L.circleMarker([lat,lon],{radius,color,weight:2,fillOpacity:$('heat').checked?.42:.8}).addTo(leafletMap).bindPopup(HTML(label)+'<br>Acontecimentos: '+n);
+    marker.on('click',()=>{$('mapSide').innerHTML='<h3>'+HTML(label)+'</h3><p><b>Localidade:</b> '+HTML(r.Municipality||'')+' · '+HTML(r.State||'')+'</p><p><b>Tipo de local:</b> '+HTML(r.PlaceType||'')+'</p><p><b>Acontecimentos documentados:</b> '+n+'</p><p>'+HTML(first(r,['MDH_Summary','Notes','MDH_Summary_EN']))+'</p><p class="auxiliary">Coordenadas: '+lat+', '+lon+'</p>';});
+    total++;
+  }
+  $('mapStatus').textContent=total?total+' localidades representadas.':'Não há pontos com coordenadas disponíveis nesse recorte. Carregue Locations.csv para visualizar o mapa completo.';
   setTimeout(()=>leafletMap.invalidateSize(),100);
 }
+
 function tableHtml(head,body){return '<table class="table"><thead><tr>'+head.map(x=>'<th>'+HTML(x)+'</th>').join('')+'</tr></thead><tbody>'+body.map(row=>'<tr>'+row.map(x=>'<td>'+HTML(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}
 function updateLaw(){
   const items=rows('Concepts'),select=$('concept'),old=select.value;
-  select.innerHTML=items.map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_ORIG','ConceptName_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
+  select.innerHTML=items.map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_PT','Label_ORIG','ConceptName_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
   if(items.some(r=>r.ConceptID===old))select.value=old;
-  const concept=items.find(r=>r.ConceptID===select.value);
-  $('conceptDetail').innerHTML=concept?'<h3>'+HTML(first(concept,['Label_ORIG','ConceptName_ORIG','Label_EN']))+'</h3><p>'+HTML(first(concept,['AnalyticalNote','HistoricalAnchor','CurrentAnchor']))+'</p>':'Carregue Concepts.csv para consultar conceitos jurídicos.';
+  const c=items.find(r=>r.ConceptID===select.value);
+  $('conceptDetail').innerHTML=c?'<p><b>Tipo:</b> '+HTML(c.ConceptType)+'</p><p><b>Natureza:</b> '+HTML(c.ConceptNature)+'</p><p><b>Estatuto legal histórico:</b> '+HTML(c.HistoricalLegalStatus)+'</p><p><b>Estatuto prático:</b> '+HTML(c.HistoricalPracticalStatus)+'</p><p><b>Referência histórica:</b> '+HTML(c.HistoricalAnchor)+'</p><p><b>Referência atual:</b> '+HTML(c.CurrentAnchor)+'</p><hr><p><b>Nota analítica:</b><br>'+HTML(c.AnalyticalNote)+'</p>':'Carregue Concepts.csv para consultar o compêndio.';
   const ids=new Set(rows('EventConcepts').filter(r=>r.ConceptID===select.value).map(r=>r.EventID));
-  const events=rows('Events').filter(e=>ids.has(e.EventID));
-  $('conceptEvents').innerHTML=events.length?tableHtml(['Evento','Tipo','Data'],events.map(e=>[e.EventID,e.EventType,e.StartDate])):'Sem eventos relacionados nesta demonstração.';
+  const ev=rows('Events').filter(e=>ids.has(e.EventID));
+  const evPersons=new Map();for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(nodeById.get(ep.PersonID)?.label||ep.PersonID);}
+  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa(s)','Evento','Início','Fim'],ev.map(e=>[(evPersons.get(e.EventID)||[]).join(', ')||'Em mapeamento',e.EventType,e.StartDate,e.EndDate])):'Os vínculos dessa categoria ainda estão em mapeamento.';
+  updateConceptChart();
 }
-function updateRelations(){
-  const id=$('entity').value,items=edgeRows.filter(e=>e.from===id||e.to===id);
-  $('relations').innerHTML=items.length?tableHtml(['Entidade','Relação','Status'],items.map(e=>[nodeById.get(e.from===id?e.to:e.from)?.label,e.relation,e.status==='documented'?'Documentada':'A confirmar'])):'Nenhuma relação disponível.';
+function updateConceptChart(){
+  const evIDs=new Set(rows('EventConcepts').filter(r=>r.ConceptID===$('concept').value).map(r=>r.EventID));
+  const years=new Map();for(const e of rows('Events')){if(!evIDs.has(e.EventID))continue;const year=/\b(?:19|20)\d{2}\b/.exec(text(e.StartDate));if(!year)continue;years.set(year[0],(years.get(year[0])||0)+1);}
+  const chart=$('conceptChart');if(!years.size){chart.textContent='Não há dados cronológicos disponíveis para essa categoria.';return;}
+  const vals=[...years].sort((a,b)=>+a[0]-+b[0]),max=Math.max(...vals.map(x=>x[1])),w=Math.max(550,vals.length*35),h=350;
+  let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Frequência de acontecimentos por ano" style="width:100%;max-height:410px">';
+  svg+='<line x1="40" y1="300" x2="'+(w-20)+'" y2="300" stroke="#888"/>';
+  vals.forEach(([year,value],i)=>{const x=50+i*((w-80)/vals.length),bh=240*value/max;svg+='<rect x="'+x+'" y="'+(300-bh)+'" width="'+Math.max(9,(w-100)/vals.length-5)+'" height="'+bh+'" fill="#9D2235"><title>'+year+': '+value+' acontecimentos</title></rect><text x="'+x+'" y="320" font-size="12" fill="#666">'+year+'</text>';});
+  chart.innerHTML=svg+'</svg><p class="auxiliary">Ocorrências documentadas por ano — visualização construída a partir de Events.csv e EventConcepts.csv.</p>';
 }
+
+
 async function restore(){
   const response=await fetch('data/demo.json',{cache:'no-store'});if(!response.ok)throw Error('Dados de demonstração indisponíveis');
-  db=await response.json();await normalize();$('uploadStatus').textContent='Demonstração restaurada.';
+  db=await response.json();await normalize();updateAdditionalData();$('uploadStatus').textContent='Demonstração restaurada.';
 }
 async function importFiles(list){
   const updated={...db};let count=0;
   for(const f of list){const key=f.name.replace(/\.csv$/i,'').replace(/\s*\(\d+\)$/,'');if(!key)continue;updated[key]=parseCSV(await f.text());count++;}
-  db=updated;await normalize();$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
+  db=updated;await normalize();updateAdditionalData();$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
 }
 async function cosmov(){
   const term=$('cosQuery').value.trim(),box=$('cosResults');if(!term)return;box.textContent='Consultando OpenAlex...';
@@ -187,15 +208,103 @@ document.addEventListener('DOMContentLoaded',async()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
     document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));
     if(b.dataset.page==='mapa'&&leafletMap)setTimeout(()=>leafletMap.invalidateSize(),100);
-    if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();net.fit({animation:false});},120);
+    if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();net.fit({animation:false});},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
   $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
   $('reset').onclick=()=>{$('focus').value='';resetGraph();};
   $('expand').onclick=()=>{if(selected)expand(selected,50);else hubs.forEach(h=>{if(nodeById.has(h))neighbors(h).slice(0,8).forEach(x=>visible.add(x));});drawGraph();};
-  $('concept').onchange=updateLaw;$('entity').onchange=updateRelations;
-  $('upload').onchange=async e=>{try{await importFiles([...e.target.files]);}catch(err){$('uploadStatus').textContent='Erro: '+err.message;}};
+  $('concept').onchange=()=>{updateLaw();updateConceptChart();};
+  $('csvUpload').onchange=async e=>{try{await importFiles([...e.target.files]);}catch(err){$('uploadStatus').textContent='Erro: '+err.message;}};
   $('restore').onclick=()=>restore().catch(e=>$('uploadStatus').textContent=e.message);
-  $('cosSearch').onclick=cosmov;
+  $('cosSearch').onclick=cosmov;setupAdditionalUI();
   try{manifest=await (await fetch('assets/people/manifest.json')).json();await restore();}
   catch(e){$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
+
+
+// Componentes fiéis à estrutura original, sem servidor R permanente.
+const localizations={Person:'Pessoa',Institution:'Instituição',Movement:'Movimento',Event:'Evento',Location:'Local',Concept:'Conceito',Document:'Documento'};
+const subjectTypes={Person:'Pessoa',Document:'Documento',Institution:'Instituição',Movement:'Movimento',Event:'Evento',Location:'Local',Concept:'Conceito'};
+const typeToKind={Person:'Pessoa',Document:'Documento',Institution:'Instituição',Movement:'Movimento',Event:'Evento',Location:'Local',Concept:'Conceito'};
+const kindToType=Object.fromEntries(Object.entries(typeToKind).map(([k,v])=>[v,k]));
+function setupAdditionalUI(){
+  document.querySelectorAll('input[name="graphMode"]').forEach(x=>x.onchange=()=>{
+    const mode=document.querySelector('input[name="graphMode"]:checked')?.value;
+    const select=$('focus');
+    const available=[...nodeById.values()].filter(n=>mode==='overview'?false:mode==='person'?n.kind==='Pessoa':n.kind==='Movimento'||n.kind==='Instituição').sort((a,b)=>a.label.localeCompare(b.label,'pt'));
+    if(mode==='overview'){select.value='';}else{
+      select.innerHTML=available.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+'</option>').join('');
+    }
+    resetGraph();
+  });
+  $('heat').onchange=updateMap;$('mapConcept').onchange=updateMap;
+  $('legalEventsTab').onclick=()=>showLegalTab(false);$('legalTrendsTab').onclick=()=>showLegalTab(true);
+  $('dataFilter').oninput=updateDataTable;
+  $('exportSelected').onclick=exportDataTable;
+  $('subject').onchange=refreshPredicates;$('predicate').onchange=refreshObjects;
+  $('runQuery').onclick=executeQuery;
+}
+function showLegalTab(trends){
+  $('legalTrendsTab').classList.toggle('active',trends);$('legalEventsTab').classList.toggle('active',!trends);
+  $('conceptEvents').hidden=trends;$('conceptChart').hidden=!trends;
+}
+function updateAdditionalData(){
+  const s=$('subject'),old=s.value;
+  s.innerHTML='<option value="">Selecione...</option>'+Object.entries(subjectTypes).map(([x,label])=>'<option value="'+x+'">'+label+'</option>').join('');
+  if(subjectTypes[old])s.value=old;
+  refreshPredicates();refreshMapConcept();updateDataTable();updateConceptChart();
+}
+function refreshPredicates(){
+  const kind=typeToKind[$('subject').value],eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind).map(e=>e.relation));
+  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+[...eligible].sort().map(x=>'<option>'+HTML(x)+'</option>').join('');
+  const icon={Person:'Pessoas',Institution:'Instituicoes',Movement:'Movimentos',Event:'Eventos',Concept:'Conceitos',Document:'Documentos',Location:'Locais'};
+  $('iconSubject').src='icons/'+(icon[$('subject').value]||'Pessoas')+'.png';
+  refreshObjects();
+}
+function refreshObjects(){
+  const kind=typeToKind[$('subject').value],pred=$('predicate').value;
+  const eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind&&e.relation===pred).map(e=>nodeById.get(e.to)?.kind));
+  $('object').innerHTML='<option value="">Selecione o objeto...</option>'+[...eligible].filter(Boolean).map(k=>'<option value="'+(kindToType[k]||'')+'">'+HTML(k)+'</option>').join('');
+  const icon={Pessoa:'Pessoas',Instituição:'Instituicoes',Movimento:'Movimentos',Evento:'Eventos',Conceito:'Conceitos',Documento:'Documentos',Local:'Locais'};
+  const k=typeToKind[$('object').value];$('iconObject').src='icons/'+(icon[k]||'Movimentos')+'.png';
+}
+function executeQuery(){
+  const btn=$('runQuery');btn.classList.add('is-loading');setTimeout(()=>btn.classList.remove('is-loading'),1700);
+  const sparql=$('sparqlText').value.trim();let matching=[],limit=100;
+  if(sparql){
+    // Subconjunto documentado: uma única tripla SELECT com variáveis; sem FILTER, JOIN ou PREFIX.
+    const m=/select\s+([\s\S]*?)\s+where\s*\{\s*([^{}]+?)\s*\}\s*(?:limit\s+(\d+))?\s*$/i.exec(sparql);
+    if(!m||m[2].includes(';')||m[2].includes(',')||/\b(filter|optional|union|bind|service)\b/i.test(m[2])){
+      $('sparqlResults').textContent='A versão local aceita somente SELECT com um padrão de tripla e LIMIT. Consultas SPARQL completas dependem do mecanismo RDF/Fuseki.';return;
+    }
+    const parts=m[2].trim().replace(/\s*\.\s*$/,'').split(/\s+/);if(parts.length!==3){$('sparqlResults').textContent='Use um padrão simples: SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10';return;}
+    limit=Math.min(2000,Number(m[3])||100);matching=edgeRows.filter(e=>{
+      const matches=(pat,val)=>pat.startsWith('?')||pat===val||pat.replace(/^ex:/,'')===val;
+      return matches(parts[0],e.from)&&matches(parts[1],e.relation)&&matches(parts[2],e.to);
+    });
+  }else{
+    const type=typeToKind[$('subject').value],pred=$('predicate').value,target=typeToKind[$('object').value];
+    matching=edgeRows.filter(e=>(!type||nodeById.get(e.from)?.kind===type)&&(!pred||e.relation===pred)&&(!target||nodeById.get(e.to)?.kind===target));
+  }
+  const selected=matching.slice(0,limit);
+  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence])):'Nenhuma relação encontrada.';
+}
+function refreshMapConcept(){
+  const c=$('mapConcept'),old=c.value;
+  c.innerHTML='<option value="ALL">Todas as categorias</option>'+rows('Concepts').map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_PT','Label_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
+  if(old&&[...c.options].some(x=>x.value===old))c.value=old;
+}
+function updateDataTable(){
+  if(!$('dataTable'))return;
+  const term=text($('dataFilter').value).toLocaleLowerCase('pt');
+  let matches=edgeRows.filter(e=>{if(!term)return true;return [e.from,e.to,e.relation,e.evidence,nodeById.get(e.from)?.label,nodeById.get(e.to)?.label].some(x=>text(x).toLocaleLowerCase('pt').includes(term));});
+  $('dataTable').dataset.matches=matches.length;
+  $('dataTable').innerHTML='<p class="auxiliary">'+matches.length+' vínculos encontrados. Exibindo os primeiros 100 registros.</p>'+tableHtml(['Indivíduo/Origem','Relação','Instituição/Destino','Evidência'],matches.slice(0,100).map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence]));
+}
+function exportDataTable(){
+  const term=text($('dataFilter').value).toLocaleLowerCase('pt');
+  const matches=edgeRows.filter(e=>!term||[e.from,e.to,e.relation,e.evidence,nodeById.get(e.from)?.label,nodeById.get(e.to)?.label].some(x=>text(x).toLocaleLowerCase('pt').includes(term)));
+  const quote=x=>'"'+text(x).replace(/"/g,'""')+'"';
+  const csv=[['Origem','Relacao','Destino','Evidencia'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='atlas-relacoes-filtradas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+}

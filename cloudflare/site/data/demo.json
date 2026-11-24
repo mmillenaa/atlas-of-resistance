@@ -1,7 +1,7 @@
 {
   "meta": {
-    "mode": "demo",
-    "description": "Corpus demonstrativo público mínimo; não inclui a planilha integral."
+    "mode": "demo-publico",
+    "description": "Demonstração estrutural baseada em nomes de organizações e relações propostas já compartilhadas; biografias e depoimentos inéditos permanecem privados"
   },
   "Persons": [
     {
@@ -19,54 +19,6 @@
       "Name": "Carmen Sylvia Vidigal Moraes",
       "Biography_ORIG": "Educadora e pesquisadora ligada a experiências de formação de trabalhadores.",
       "ImageURL": "https://imagens.usp.br/wp-content/uploads/Carmen-Sylvia-Vidigal-Moraes-267-11-Foto-Cec%C3%ADlia-Bastos-06.jpeg"
-    }
-  ],
-  "Institutions": [
-    {
-      "InstitutionID": "I005",
-      "Name_ORIG": "Sindicato dos Metalúrgicos de São Paulo"
-    },
-    {
-      "InstitutionID": "I008",
-      "Name_ORIG": "Central Única dos Trabalhadores (CUT)"
-    },
-    {
-      "InstitutionID": "I107",
-      "Name_ORIG": "Intercâmbio, Informações, Estudos e Pesquisas (IIEP)"
-    },
-    {
-      "InstitutionID": "I108",
-      "Name_ORIG": "Escola Nova Piratininga"
-    },
-    {
-      "InstitutionID": "I112",
-      "Name_ORIG": "CUT Regional da Grande São Paulo"
-    },
-    {
-      "InstitutionID": "I113",
-      "Name_ORIG": "CUT Zonal Oeste"
-    },
-    {
-      "InstitutionID": "I116",
-      "Name_ORIG": "Comissão de Fábrica da Asama"
-    },
-    {
-      "InstitutionID": "I117",
-      "Name_ORIG": "Asama"
-    },
-    {
-      "InstitutionID": "I119",
-      "Name_ORIG": "Centro de Educação, Estudos e Pesquisas (CEEP)"
-    }
-  ],
-  "Movements": [
-    {
-      "MovementID": "M001",
-      "Name_ORIG": "Oposição Sindical Metalúrgica de São Paulo"
-    },
-    {
-      "MovementID": "M018",
-      "Name_ORIG": "CUT pela Base"
     }
   ],
   "PersonMovements": [
@@ -93,12 +45,818 @@
       "Role": "pedagogical_collaborator"
     }
   ],
-  "MovementRelations": [
+  "Institutions": [
     {
-      "SourceMovementID": "M001",
-      "TargetMovementID": "M018",
-      "RelationshipType": "contributed_to_formation_of",
-      "ReviewStatus": "documented"
+      "InstitutionID": "I001",
+      "Name_ORIG": "Pastoral Operária",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I002",
+      "Name_ORIG": "Conferência Nacional dos Bispos do Brasil (CNBB)",
+      "InstitutionType": "religious_institution"
+    },
+    {
+      "InstitutionID": "I003",
+      "Name_ORIG": "Comunidades Eclesiais de Base de Vila Remo",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I004",
+      "Name_ORIG": "Filtros-Mann",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I005",
+      "Name_ORIG": "Sindicato dos Metalúrgicos de São Paulo",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I006",
+      "Name_ORIG": "Metal Leve S/A",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I007",
+      "Name_ORIG": "Juventude Operária Católica (JOC)",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I008",
+      "Name_ORIG": "Central Única dos Trabalhadores (CUT)",
+      "InstitutionType": "labor_central"
+    },
+    {
+      "InstitutionID": "I009",
+      "Name_ORIG": "Partido dos Trabalhadores (PT)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I010",
+      "Name_ORIG": "Congregação Mariana",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I011",
+      "Name_ORIG": "Indústria Eletro Walita",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I012",
+      "Name_ORIG": "Escola Superior de Agricultura Luiz de Queiroz (ESALQ/USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I013",
+      "Name_ORIG": "Juventude Universitária Católica (JUC)",
+      "InstitutionType": "religious_student_organization"
+    },
+    {
+      "InstitutionID": "I014",
+      "Name_ORIG": "Mangels",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I015",
+      "Name_ORIG": "Companhia Brasileira de Materiais Ferroviários (Cobrasma)",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I016",
+      "Name_ORIG": "Ginásio Estadual de Presidente Altino",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I017",
+      "Name_ORIG": "Sindicato dos Trabalhadores Metalúrgicos de Osasco",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I018",
+      "Name_ORIG": "Força Sindical",
+      "InstitutionType": "labor_union_federation"
+    },
+    {
+      "InstitutionID": "I019",
+      "Name_ORIG": "União Geral dos Trabalhadores (UGT)",
+      "InstitutionType": "labor_union_federation"
+    },
+    {
+      "InstitutionID": "I020",
+      "Name_ORIG": "Partido Social Democrático (PSD)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I021",
+      "Name_ORIG": "Metal Arte",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I022",
+      "Name_ORIG": "Partido Comunista Brasileiro (PCB)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I023",
+      "Name_ORIG": "Núcleo Piratininga de Comunicação (NPC)",
+      "InstitutionType": "educational_media_institution"
+    },
+    {
+      "InstitutionID": "I024",
+      "Name_ORIG": "Tecelagem de Seda Sul Americana",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I025",
+      "Name_ORIG": "Escola Politécnica da Universidade de São Paulo (Poli-USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I026",
+      "Name_ORIG": "Grêmio Politécnico",
+      "InstitutionType": "student_organization"
+    },
+    {
+      "InstitutionID": "I027",
+      "Name_ORIG": "Partido Operário Revolucionário Trotskista (PORT)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I028",
+      "Name_ORIG": "Massari S.A. Indústria de Viaturas",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I029",
+      "Name_ORIG": "Instituto Lidas",
+      "InstitutionType": "non_governmental_organization"
+    },
+    {
+      "InstitutionID": "I030",
+      "Name_ORIG": "Casa dos Meninos",
+      "InstitutionType": "non_governmental_organization"
+    },
+    {
+      "InstitutionID": "I031",
+      "Name_ORIG": "Lab Macambira",
+      "InstitutionType": "technology_collective"
+    },
+    {
+      "InstitutionID": "I032",
+      "Name_ORIG": "Monark",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I033",
+      "Name_ORIG": "Cooperativa de Logística Urbana (COOPLURB)",
+      "InstitutionType": "cooperative"
+    },
+    {
+      "InstitutionID": "I034",
+      "Name_ORIG": "Grupo Tortura Nunca Mais",
+      "InstitutionType": "human_rights_organization"
+    },
+    {
+      "InstitutionID": "I035",
+      "Name_ORIG": "Comissão Pastoral da Terra (CPT)",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I036",
+      "Name_ORIG": "Sindicato dos Trabalhadores Rurais de Conceição do Araguaia",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I037",
+      "Name_ORIG": "Indústria Jafet S/A",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I038",
+      "Name_ORIG": "Archivio Storico del Movimento Operaio Brasiliano",
+      "InstitutionType": "historical_archive"
+    },
+    {
+      "InstitutionID": "I039",
+      "Name_ORIG": "Partido da Refundação Comunista",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I040",
+      "Name_ORIG": "Pontifícia Universidade Católica de São Paulo (PUC-SP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I041",
+      "Name_ORIG": "Escola de Comunicações e Artes da USP (ECA-USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I042",
+      "Name_ORIG": "Sindicato dos Metalúrgicos do ABC",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I043",
+      "Name_ORIG": "Faculdade de Educação Física da Universidade de São Paulo (USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I044",
+      "Name_ORIG": "Philco",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I045",
+      "Name_ORIG": "Fórum Permanente dos Ex-Presos e Perseguidos Políticos do Estado de São Paulo",
+      "InstitutionType": "human_rights_organization"
+    },
+    {
+      "InstitutionID": "I046",
+      "Name_ORIG": "Partido Comunista do Brasil (PCdoB)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I047",
+      "Name_ORIG": "Universidade Federal de Minas Gerais (UFMG)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I048",
+      "Name_ORIG": "União Nacional dos Estudantes (UNE)",
+      "InstitutionType": "student_organization"
+    },
+    {
+      "InstitutionID": "I049",
+      "Name_ORIG": "Diretório Acadêmico da Faculdade de Economia (UFMG)",
+      "InstitutionType": "student_organization"
+    },
+    {
+      "InstitutionID": "I050",
+      "Name_ORIG": "Faculdade de Medicina de Belém",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I051",
+      "Name_ORIG": "Clube do Remo",
+      "InstitutionType": "sports_club"
+    },
+    {
+      "InstitutionID": "I052",
+      "Name_ORIG": "Partido Social Progressista (PSP)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I053",
+      "Name_ORIG": "Partido Operário Comunista (POC)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I054",
+      "Name_ORIG": "Instituto Zequinha Barreto",
+      "InstitutionType": "non_governmental_organization"
+    },
+    {
+      "InstitutionID": "I055",
+      "Name_ORIG": "Associação dos Anistiados e dos Aposentados Políticos (ANAP)",
+      "InstitutionType": "civil_society_organization"
+    },
+    {
+      "InstitutionID": "I056",
+      "Name_ORIG": "Indústrias Villares",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I057",
+      "Name_ORIG": "General Eletric do Nordeste",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I058",
+      "Name_ORIG": "Prefeitura de São Paulo",
+      "InstitutionType": "government_institution"
+    },
+    {
+      "InstitutionID": "I059",
+      "Name_ORIG": "Sindicato dos Metalúrgicos de São Bernardo do Campo",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I060",
+      "Name_ORIG": "Partido Trabalhista Brasileiro (PTB)",
+      "InstitutionType": "political_party"
+    },
+    {
+      "InstitutionID": "I061",
+      "Name_ORIG": "Clubes de Mães",
+      "InstitutionType": "civil_society_organization"
+    },
+    {
+      "InstitutionID": "I062",
+      "Name_ORIG": "Ação Operária Católica (AOC)",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I063",
+      "Name_ORIG": "Frente Nacional do Trabalho (FNT)",
+      "InstitutionType": "labor_organization"
+    },
+    {
+      "InstitutionID": "I064",
+      "Name_ORIG": "Ação Católica Brasileira",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I065",
+      "Name_ORIG": "Seminário Menor de Diamantina",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I066",
+      "Name_ORIG": "Colégio do Caraça",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I067",
+      "Name_ORIG": "Seminário de Mariana",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I068",
+      "Name_ORIG": "Ordem dos Dominicanos",
+      "InstitutionType": "religious_institution"
+    },
+    {
+      "InstitutionID": "I069",
+      "Name_ORIG": "Jornal Brasil Urgente",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I070",
+      "Name_ORIG": "Universidade de Friburgo",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I071",
+      "Name_ORIG": "Escola Dominicana de Teologia",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I072",
+      "Name_ORIG": "Instituto Teológico do Estado de São Paulo (ITESP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I073",
+      "Name_ORIG": "Sindicato dos Ferroviários da Estrada de Ferro Santos-Jundiaí",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I074",
+      "Name_ORIG": "Memorial da Resistência de São Paulo",
+      "InstitutionType": "historical_archive"
+    },
+    {
+      "InstitutionID": "I075",
+      "Name_ORIG": "Volkswagen do Brasil",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I076",
+      "Name_ORIG": "Associação dos Trabalhadores e Trabalhadoras da VW do Brasil Vitimado por Perseguições Políticas e Ideológicas",
+      "InstitutionType": "civil_society_organization"
+    },
+    {
+      "InstitutionID": "I077",
+      "Name_ORIG": "Centro Popular de Cultura (CPC)",
+      "InstitutionType": "cultural_organization"
+    },
+    {
+      "InstitutionID": "I078",
+      "Name_ORIG": "Sindicato dos Metalúrgicos de Santo André",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I079",
+      "Name_ORIG": "Universidade de São Paulo (USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I080",
+      "Name_ORIG": "Conjunto Residencial da USP (CRUSP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I081",
+      "Name_ORIG": "Cursinho do Grêmio da Faculdade de Filosofia da USP",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I082",
+      "Name_ORIG": "Faculdade de Filosofia em Lorena/SP",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I083",
+      "Name_ORIG": "Paróquia Nossa Senhora do Carmo em Itaquera",
+      "InstitutionType": "religious_institution"
+    },
+    {
+      "InstitutionID": "I084",
+      "Name_ORIG": "Arquidiocese de São Paulo",
+      "InstitutionType": "religious_institution"
+    },
+    {
+      "InstitutionID": "I085",
+      "Name_ORIG": "Comissão Justiça e Paz da Arquidiocese de São Paulo",
+      "InstitutionType": "human_rights_organization"
+    },
+    {
+      "InstitutionID": "I086",
+      "Name_ORIG": "Núcleo Memória",
+      "InstitutionType": "human_rights_organization"
+    },
+    {
+      "InstitutionID": "I087",
+      "Name_ORIG": "Folha de S. Paulo",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I088",
+      "Name_ORIG": "Jornal do Brasil",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I089",
+      "Name_ORIG": "TV Manchete",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I090",
+      "Name_ORIG": "Jornal da Tarde",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I091",
+      "Name_ORIG": "Granma",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I092",
+      "Name_ORIG": "Jornal Primeira Mão",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I093",
+      "Name_ORIG": "Agência Brasileira de Reportagens (ABR)",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I094",
+      "Name_ORIG": "Jornal ABCD Maior",
+      "InstitutionType": "media_organization"
+    },
+    {
+      "InstitutionID": "I095",
+      "Name_ORIG": "Comitê Santo Dias",
+      "InstitutionType": "human_rights_organization"
+    },
+    {
+      "InstitutionID": "I096",
+      "Name_ORIG": "Fazenda Camargo Correia",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I097",
+      "Name_ORIG": "Operação Bandeirante (OBAN)",
+      "InstitutionType": "repressive_state_agency"
+    },
+    {
+      "InstitutionID": "I098",
+      "Name_ORIG": "Fundação Giangiacomo Feltrinelli",
+      "InstitutionType": "historical_archive"
+    },
+    {
+      "InstitutionID": "I099",
+      "Name_ORIG": "Centro de Documentação e Memória da UNESP (Cedem-Unesp)",
+      "InstitutionType": "historical_archive"
+    },
+    {
+      "InstitutionID": "I100",
+      "Name_ORIG": "Assembleia Parlamentar do Conselho da Europa",
+      "InstitutionType": "international_organization"
+    },
+    {
+      "InstitutionID": "I101",
+      "Name_ORIG": "União Europeia Ocidental",
+      "InstitutionType": "international_organization"
+    },
+    {
+      "InstitutionID": "I102",
+      "Name_ORIG": "Faculdade de Filosofia, Letras e Ciências Humanas da USP (FFLCH-USP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I103",
+      "Name_ORIG": "Polícia Militar do Estado de São Paulo",
+      "InstitutionType": "repressive_state_agency"
+    },
+    {
+      "InstitutionID": "I104",
+      "Name_ORIG": "DEOPS/SP",
+      "InstitutionType": "repressive_state_agency"
+    },
+    {
+      "InstitutionID": "I105",
+      "Name_ORIG": "DOI-CODI/SP",
+      "InstitutionType": "repressive_state_agency"
+    },
+    {
+      "InstitutionID": "I107",
+      "Name_ORIG": "Intercâmbio, Informações, Estudos e Pesquisas (IIEP)",
+      "InstitutionType": "non_governmental_organization"
+    },
+    {
+      "InstitutionID": "I108",
+      "Name_ORIG": "Núcleo de Ensino Profissional Livre Nova Piratininga / Escola Nova Piratininga",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I109",
+      "Name_ORIG": "Associação dos Trabalhadores da Região do Ipiranga (ATRI)",
+      "InstitutionType": "labor_organization"
+    },
+    {
+      "InstitutionID": "I110",
+      "Name_ORIG": "Centro Pastoral Vergueiro / Centro de Documentação e Pesquisa Vergueiro (CPV)",
+      "InstitutionType": "documentation_center"
+    },
+    {
+      "InstitutionID": "I111",
+      "Name_ORIG": "Reconstrução de Lutas Operárias (RLO) / Reconstrução – Educação, Assessoria e Pesquisa (REAP)",
+      "InstitutionType": "labor_education_organization"
+    },
+    {
+      "InstitutionID": "I112",
+      "Name_ORIG": "CUT Regional da Grande São Paulo",
+      "InstitutionType": "territorial_union_body"
+    },
+    {
+      "InstitutionID": "I113",
+      "Name_ORIG": "CUT Zonal Oeste",
+      "InstitutionType": "territorial_union_body"
+    },
+    {
+      "InstitutionID": "I114",
+      "Name_ORIG": "Associação dos Trabalhadores da Leopoldina",
+      "InstitutionType": "labor_organization"
+    },
+    {
+      "InstitutionID": "I115",
+      "Name_ORIG": "Associação dos Trabalhadores e Moradores da Zona Sul",
+      "InstitutionType": "labor_organization"
+    },
+    {
+      "InstitutionID": "I116",
+      "Name_ORIG": "Comissão de Fábrica da Asama",
+      "InstitutionType": "workers_factory_committee"
+    },
+    {
+      "InstitutionID": "I117",
+      "Name_ORIG": "Asama",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I118",
+      "Name_ORIG": "Serviço Nacional de Aprendizagem Industrial (SENAI)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I119",
+      "Name_ORIG": "Centro de Educação, Estudos e Pesquisas (CEEP)",
+      "InstitutionType": "educational_institution"
+    },
+    {
+      "InstitutionID": "I120",
+      "Name_ORIG": "União de Moradores do Parque Bristol e Jardim São Savério",
+      "InstitutionType": "residents_association"
+    },
+    {
+      "InstitutionID": "I121",
+      "Name_ORIG": "Cursinho Popular Vito Giannotti",
+      "InstitutionType": "popular_education_organization"
+    },
+    {
+      "InstitutionID": "I122",
+      "Name_ORIG": "Comunidade Santa Cristina",
+      "InstitutionType": "religious_social_organization"
+    },
+    {
+      "InstitutionID": "I123",
+      "Name_ORIG": "Linhas Corrente",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I124",
+      "Name_ORIG": "Arno",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I125",
+      "Name_ORIG": "Sharp",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I126",
+      "Name_ORIG": "Conselho de Escolas de Trabalhadores",
+      "InstitutionType": "educational_network"
+    },
+    {
+      "InstitutionID": "I127",
+      "Name_ORIG": "Sindicato dos Trabalhadores na Indústria do Plástico de São Paulo",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I128",
+      "Name_ORIG": "Sindicato dos Químicos de São Paulo",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I129",
+      "Name_ORIG": "Ginásios Vocacionais do Estado de São Paulo",
+      "InstitutionType": "educational_network"
+    },
+    {
+      "InstitutionID": "I130",
+      "Name_ORIG": "Caterpillar do Brasil",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I131",
+      "Name_ORIG": "Braseixos",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I132",
+      "Name_ORIG": "General Electric – Vila Leopoldina",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I133",
+      "Name_ORIG": "Wapsa / Vapsa",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I134",
+      "Name_ORIG": "Magneligas",
+      "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I135",
+      "Name_ORIG": "Grupo de Teatro Galo de Briga",
+      "InstitutionType": "cultural_organization"
+    },
+    {
+      "InstitutionID": "I136",
+      "Name_ORIG": "Supletivo Avante",
+      "InstitutionType": "educational_program"
+    },
+    {
+      "InstitutionID": "I137",
+      "Name_ORIG": "Movimento de Alfabetização de Jovens e Adultos – MOVA-SP",
+      "InstitutionType": "educational_program"
+    },
+    {
+      "InstitutionID": "I138",
+      "Name_ORIG": "Comissão Interna de Prevenção de Acidentes da Sharp (CIPA)",
+      "InstitutionType": "workers_factory_committee"
+    },
+    {
+      "InstitutionID": "I139",
+      "Name_ORIG": "Curso Supletivo Construindo o Saber",
+      "InstitutionType": "educational_program"
+    },
+    {
+      "InstitutionID": "I140",
+      "Name_ORIG": "Sindicato dos Servidores Públicos de Taboão da Serra",
+      "InstitutionType": "labor_union"
+    },
+    {
+      "InstitutionID": "I141",
+      "Name_ORIG": "Superior Tribunal Militar (STM)",
+      "InstitutionType": "military_court"
+    },
+    {
+      "InstitutionID": "I142",
+      "Name_ORIG": "Fábrica Sylvania (unidade de Santo Amaro)",
+      "InstitutionType": "private_company"
+    }
+  ],
+  "Movements": [
+    {
+      "MovementID": "M001",
+      "Name_ORIG": "Oposição Sindical Metalúrgica de São Paulo",
+      "MovementType": "labor_opposition_movement"
+    },
+    {
+      "MovementID": "M002",
+      "Name_ORIG": "Movimento do Custo de Vida (Contra a Carestia)",
+      "MovementType": "social_movement"
+    },
+    {
+      "MovementID": "M003",
+      "Name_ORIG": "Comitê Brasileiro pela Anistia (CBA/SP)",
+      "MovementType": "human_rights_movement"
+    },
+    {
+      "MovementID": "M004",
+      "Name_ORIG": "Ala Vermelha (ALA)",
+      "MovementType": "left_wing_organization"
+    },
+    {
+      "MovementID": "M005",
+      "Name_ORIG": "Movimento Popular de Libertação (MPL)",
+      "MovementType": "left_wing_organization"
+    },
+    {
+      "MovementID": "M006",
+      "Name_ORIG": "Ação Popular (AP)",
+      "MovementType": "left_wing_organization"
+    },
+    {
+      "MovementID": "M007",
+      "Name_ORIG": "Vanguarda Popular Revolucionária (VPR)",
+      "MovementType": "guerrilla_movement"
+    },
+    {
+      "MovementID": "M008",
+      "Name_ORIG": "Comitê de Apoio a Jânio Quadros",
+      "MovementType": "political_movement"
+    },
+    {
+      "MovementID": "M009",
+      "Name_ORIG": "Política Operária (POLOP)",
+      "MovementType": "political_organization"
+    },
+    {
+      "MovementID": "M010",
+      "Name_ORIG": "Ação Libertadora Nacional (ALN)",
+      "MovementType": "guerrilla_movement"
+    },
+    {
+      "MovementID": "M011",
+      "Name_ORIG": "Agrupamento Comunista de São Paulo",
+      "MovementType": "political_movement"
+    },
+    {
+      "MovementID": "M012",
+      "Name_ORIG": "Ação Popular Marxista-Leninista (APML)",
+      "MovementType": "political_organization"
+    },
+    {
+      "MovementID": "M013",
+      "Name_ORIG": "Revolução Constitucionalista de 1932",
+      "MovementType": "armed_rebellion"
+    },
+    {
+      "MovementID": "M014",
+      "Name_ORIG": "Movimento de Evangelização",
+      "MovementType": "religious_social_movement"
+    },
+    {
+      "MovementID": "M015",
+      "Name_ORIG": "Comando Geral dos Trabalhadores (CGT)",
+      "MovementType": "labor_movement"
+    },
+    {
+      "MovementID": "M016",
+      "Name_ORIG": "Liga Latino-Americana dos Irredentos",
+      "MovementType": "human_rights_movement"
+    },
+    {
+      "MovementID": "M017",
+      "Name_ORIG": "Movimento Estudantil",
+      "MovementType": "student_movement"
+    },
+    {
+      "MovementID": "M018",
+      "Name_ORIG": "CUT pela Base",
+      "MovementType": "labor_political_current"
+    },
+    {
+      "MovementID": "M019",
+      "Name_ORIG": "Coletivo Flores pela Democracia",
+      "MovementType": "political_movement"
+    },
+    {
+      "MovementID": "M020",
+      "Name_ORIG": "Organização de Combate Marxista-Leninista – Política Operária (OCML-PO)",
+      "MovementType": "left_wing_organization"
+    },
+    {
+      "MovementID": "M021",
+      "Name_ORIG": "Movimento Feminino pela Anistia",
+      "MovementType": "human_rights_movement"
     }
   ],
   "InstitutionRelations": [
@@ -106,13 +864,13 @@
       "SourceInstitutionID": "I112",
       "TargetInstitutionID": "I008",
       "RelationshipType": "territorial_body_of",
-      "ReviewStatus": "documented"
+      "ReviewStatus": "review_period"
     },
     {
       "SourceInstitutionID": "I113",
       "TargetInstitutionID": "I008",
       "RelationshipType": "territorial_body_of",
-      "ReviewStatus": "documented"
+      "ReviewStatus": "review_period"
     },
     {
       "SourceInstitutionID": "I116",
@@ -121,10 +879,60 @@
       "ReviewStatus": "documented"
     },
     {
+      "SourceInstitutionID": "I138",
+      "TargetInstitutionID": "I125",
+      "RelationshipType": "operated_at",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I085",
+      "TargetInstitutionID": "I084",
+      "RelationshipType": "organizational_unit_of",
+      "ReviewStatus": "documented"
+    },
+    {
       "SourceInstitutionID": "I119",
       "TargetInstitutionID": "I108",
       "RelationshipType": "pedagogical_continuation_of",
       "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I107",
+      "TargetInstitutionID": "I108",
+      "RelationshipType": "emerged_from_pedagogical_network_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceInstitutionID": "I108",
+      "TargetInstitutionID": "I137",
+      "RelationshipType": "collaborated_with",
+      "ReviewStatus": "review_scope"
+    },
+    {
+      "SourceInstitutionID": "I110",
+      "TargetInstitutionID": "I108",
+      "RelationshipType": "supported_educational_work_of",
+      "ReviewStatus": "review_scope"
+    }
+  ],
+  "MovementRelations": [
+    {
+      "SourceMovementID": "M001",
+      "TargetMovementID": "M018",
+      "RelationshipType": "contributed_to_formation_of",
+      "ReviewStatus": "documented"
+    },
+    {
+      "SourceMovementID": "M006",
+      "TargetMovementID": "M012",
+      "RelationshipType": "organizational_reconfiguration_into",
+      "ReviewStatus": "review_period"
+    },
+    {
+      "SourceMovementID": "M019",
+      "TargetMovementID": "M001",
+      "RelationshipType": "articulates_with",
+      "ReviewStatus": "researcher_reported"
     }
   ],
   "MovementInstitutionRelations": [
@@ -151,12 +959,30 @@
       "InstitutionID": "I008",
       "RelationshipType": "political_current_within",
       "ReviewStatus": "documented"
+    },
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I116",
+      "RelationshipType": "articulated_with",
+      "ReviewStatus": "review_scope"
+    },
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I109",
+      "RelationshipType": "articulated_with",
+      "ReviewStatus": "review_scope"
+    },
+    {
+      "MovementID": "M001",
+      "InstitutionID": "I110",
+      "RelationshipType": "collaborated_with",
+      "ReviewStatus": "review_scope"
     }
   ],
   "Events": [],
   "EventPersons": [],
-  "Concepts": [],
   "EventConcepts": [],
+  "Concepts": [],
   "Documents": [],
   "DocumentPersons": [],
   "Locations": [],
