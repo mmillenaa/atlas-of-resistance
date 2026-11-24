@@ -1,0 +1,8 @@
+"PersonID","MovementID","Role","StartDate","EndDate","DatePrecision","EvidenceText_ORIG","EvidenceText_EN","SourceDocumentID","Confidence","Notes"
+"P059","M001","member_of","","","","","","D072","high","p. 48; membro da OSM; também D081 PDF pp. 235, 360."
+"P060","M001","integral_participant","","","","","","D072","high","p. 68; atuação continuada."
+"P061","M001","member_of","","","","","","D072","high","p. 69; militante."
+"P062","M001","member_of","","","","","","D081","high","PDF pp. 218, 405; núcleo histórico."
+"P063","M001","member_of","","","","","","D081","high","PDF pp. 6, 382, 493."
+"P064","M001","associated_with","","","","","","D072","high","pp. 63–64; vínculo contextual, sem filiação comprovada."
+"P064","M022","member_of","","","","","","D087","high","Ficha pública da Prefeitura."

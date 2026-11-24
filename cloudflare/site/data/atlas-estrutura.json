@@ -285,6 +285,48 @@
       "PersonID": "P058",
       "Name": "Maria Nilde Mascellani",
       "ImageURL": "https://revistacenarium.com.br/wp-content/uploads/2023/10/maria-nilde5.jpg"
+    },
+    {
+      "PersonID": "P059",
+      "Name": "Anizio Batista de Oliveira",
+      "ImageURL": "",
+      "Biography_ORIG": "Metalúrgico e militante da OSM-SP, atuou na organização de base da Toshiba e nas lutas de 1978. Batistoni o identifica como cabeça da Chapa 3 e representante da OSM em congresso. Segundo Sueli Bossam, articulou no Centro Pastoral Vergueiro a proposta de um curso supletivo para trabalhadores da ARNO, combinando elevação da escolaridade e formação sindical. A tese registra também as grafias Anísio Batista e Anizio B. Oliveira.",
+      "Notes": "Fontes: D081, PDF pp. 213, 235, 330, 360; D072, p. 48, nota 9; D082 (transcrição pendente)."
+    },
+    {
+      "PersonID": "P060",
+      "Name": "Sérgio Florentino (Mota)",
+      "ImageURL": "",
+      "Biography_ORIG": "Operário metalúrgico e militante da OSM-SP, conhecido como Mota, estudou no SENAI Suíço-Brasileiro com Sebastião Lopes Neto. Segundo Sueli Bossam, iniciou sua atuação educacional na Associação dos Trabalhadores e Moradores da Zona Sul, ensinou na Escola Nova Piratininga e desenvolveu formação também na região sudeste. Sua prática articulava os conhecimentos técnicos do trabalho fabril, as experiências cotidianas e a elaboração teórica. Seu nome de registro era Sérgio Florentino, não Sérgio Mota.",
+      "Notes": "Fontes: D072, pp. 60, 67–68, 80–81, notas 18 e 24–25; D086 (transcrição pendente)."
+    },
+    {
+      "PersonID": "P061",
+      "Name": "José da Costa Prado",
+      "ImageURL": "",
+      "Biography_ORIG": "Metalúrgico e militante da OSM-SP, participou de experiências de educação de jovens e adultos relacionadas à Escola Nova Piratininga. Segundo Carmen Moraes e Sueli Bossam, participou da elaboração e administração de projetos educacionais como aluno, professor e formador. No Supletivo Construindo o Saber, assumiu aulas de História em substituição a uma professora afastada.",
+      "Notes": "Fontes: D072, pp. 68–69, nota 26; D084 (transcrição pendente)."
+    },
+    {
+      "PersonID": "P062",
+      "Name": "Hélio Bombardi",
+      "ImageURL": "",
+      "Biography_ORIG": "Metalúrgico da Massey Ferguson e militante do núcleo histórico da OSM-SP. Participou da organização operária na fábrica e da Chapa 3 da oposição. Batistoni registra sua representação da OSM em congresso, sua participação na elaboração de teses do movimento e a subscrição, em 1983, de propostas apresentadas ao VI Congresso dos Metalúrgicos de São Paulo.",
+      "Notes": "Fontes: D081, PDF pp. 218, 235, 330, 360, 382, 405, 493; D072, p. 44; D083 (transcrição pendente)."
+    },
+    {
+      "PersonID": "P063",
+      "Name": "Carlúcio Castanha",
+      "ImageURL": "",
+      "Biography_ORIG": "Militante da OSM-SP, atuou na região leste de São Paulo e na CIPA da ARNO. Batistoni registra sua participação como delegado na elaboração de propostas da OSM ao VI Congresso dos Metalúrgicos, em 1983, e sua indicação pelo MOSM como cabeça de chapa em 1987. Segundo Nádia Gebara, dedicou-se à formação profissional e, ao retornar ao Recife, levou contribuições dessas experiências à atuação no CTC, organização que não derivou da OSM-SP.",
+      "Notes": "Fontes: D081, PDF pp. 6, 382, 449, 493; D072, pp. 72–74; D085 (transcrição pendente)."
+    },
+    {
+      "PersonID": "P064",
+      "Name": "Maria Célia Vieira Rossi",
+      "ImageURL": "",
+      "Biography_ORIG": "Educadora popular e militante dos movimentos sociais da zona leste de São Paulo, conhecida como Célia Rossi. Integrou a Juventude Operária Católica, a Pastoral Operária e o Movimento de Saúde da Zona Leste, e coordenou o IN-FORMAR Cultura e Educação Popular nas décadas de 1970 e 1980. Carmen Sylvia Vidigal Moraes destaca sua participação nas lutas do movimento operário na entrevista coletiva. Não se presume filiação formal à OSM-SP.",
+      "Notes": "Fontes: D072, pp. 63–64; D087, Prefeitura de São Paulo; D088, identificação nominal"
     }
   ],
   "Institutions": [
@@ -1133,6 +1175,22 @@
       "Name_ORIG": "Fábrica Sylvania (unidade de Santo Amaro)",
       "Name_ENG": "Sylvania Factory, Santo Amaro unit",
       "InstitutionType": "private_company"
+    },
+    {
+      "InstitutionID": "I143",
+      "Name_ORIG": "IN-FORMAR Cultura e Educação Popular",
+      "Name_ENG": "IN-FORMAR Culture and Popular Education",
+      "InstitutionType": "educational_institution",
+      "Country": "Brazil",
+      "Notes": "D087; D088."
+    },
+    {
+      "InstitutionID": "I144",
+      "Name_ORIG": "Escola SENAI Suíço-Brasileira",
+      "Name_ENG": "Swiss-Brazilian SENAI School",
+      "InstitutionType": "educational_institution",
+      "Country": "Brazil",
+      "Notes": "D072, nota 25; não confundir com SENAI nacional I118."
     }
   ],
   "Movements": [
@@ -1261,6 +1319,13 @@
       "Name_ORIG": "Movimento Feminino pela Anistia",
       "Name_EN": "Women’s Movement for Amnesty",
       "MovementType": "human_rights_movement"
+    },
+    {
+      "MovementID": "M022",
+      "Name_ORIG": "Movimento de Saúde da Zona Leste",
+      "Name_EN": "East Zone Health Movement",
+      "MovementType": "social_movement",
+      "Notes": "D087"
     }
   ],
   "Events": [
@@ -6391,6 +6456,20 @@
       "Longitude": "",
       "GeoPrecision": "neighborhood_centroid",
       "Source_MDH": ""
+    },
+    {
+      "PlaceID": "L255",
+      "PlaceName_ORIG": "Recife",
+      "PlaceName_EN": "Recife",
+      "PlaceType": "municipality",
+      "Municipality": "Recife",
+      "State": "Pernambuco",
+      "Country": "Brazil",
+      "Latitude": "",
+      "Longitude": "",
+      "GeoPrecision": "municipality",
+      "Source_MDH": "false",
+      "Notes": "Atuação posterior de Carlúcio Castanha em formação profissional, D072 pp. 72–73. Sem endereço do CTC confirmado."
     }
   ],
   "Documents": [
@@ -6869,6 +6948,86 @@
       "DocumentType": "journal_article",
       "Repository": "R7 Notícias",
       "DisplayTitle_EN": "Amnesty Caravan in São Paulo recognizes the persecution of a religious figure from Botucatu"
+    },
+    {
+      "DocumentID": "D081",
+      "Title_ORIG": "Entre a fábrica e o sindicato: os dilemas da Oposição Sindical Metalúrgica de São Paulo (1967–1987)",
+      "DisplayTitle_EN": "Between the factory and the union: the dilemmas of the São Paulo metalworkers' union opposition (1967–1987)",
+      "Repository": "PUC-SP / Centro Victor Meyer",
+      "DocumentType": "doctoral_thesis",
+      "SourceURL": "https://centrovictormeyer.org.br/wp-content/uploads/2010/04/MOSMSP-Tese-de-Maria-R-Batistoni.pdf",
+      "Notes": "Tese consultada; páginas do PDF indicadas nas relações.",
+      "StandardCitation": "BATISTONI, Maria Rosângela. Entre a fábrica e o sindicato: os dilemas da Oposição Sindical Metalúrgica de São Paulo (1967–1987). 2001. Tese (Doutorado em Serviço Social) – Pontifícia Universidade Católica de São Paulo, São Paulo, 2001."
+    },
+    {
+      "DocumentID": "D082",
+      "Title_ORIG": "Depoimento de Anizio Batista de Oliveira",
+      "DisplayTitle_EN": "Oral testimony of Anizio Batista de Oliveira",
+      "Repository": "YouTube",
+      "DocumentType": "interview",
+      "SourceURL": "https://www.youtube.com/watch?v=mFMo_YTmmPg",
+      "Notes": "Link fornecido pela pesquisadora; título descritivo provisório. Transcrição, canal e data não verificados.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D086",
+      "Title_ORIG": "Depoimento de Sérgio Florentino (Mota)",
+      "DisplayTitle_EN": "Oral testimony of Sérgio Florentino (Mota)",
+      "Repository": "YouTube",
+      "DocumentType": "interview",
+      "SourceURL": "https://www.youtube.com/watch?v=vvlxfvwFlG0",
+      "Notes": "Link fornecido pela pesquisadora; título descritivo provisório. Transcrição, canal e data não verificados.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D084",
+      "Title_ORIG": "Depoimento de José da Costa Prado",
+      "DisplayTitle_EN": "Oral testimony of José da Costa Prado",
+      "Repository": "YouTube",
+      "DocumentType": "interview",
+      "SourceURL": "https://www.youtube.com/watch?v=gi9E3znluQE",
+      "Notes": "Link fornecido pela pesquisadora; título descritivo provisório. Transcrição, canal e data não verificados.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D083",
+      "Title_ORIG": "Depoimento de Hélio Bombardi",
+      "DisplayTitle_EN": "Oral testimony of Hélio Bombardi",
+      "Repository": "YouTube",
+      "DocumentType": "interview",
+      "SourceURL": "https://www.youtube.com/watch?v=xqvsvLTRNnY",
+      "Notes": "Link fornecido pela pesquisadora; título descritivo provisório. Transcrição, canal e data não verificados.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D085",
+      "Title_ORIG": "Depoimento de Carlúcio Castanha",
+      "DisplayTitle_EN": "Oral testimony of Carlúcio Castanha",
+      "Repository": "YouTube",
+      "DocumentType": "interview",
+      "SourceURL": "https://www.youtube.com/watch?v=Vx77rZeqPoM",
+      "Notes": "Link fornecido pela pesquisadora; título descritivo provisório. Transcrição, canal e data não verificados.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D087",
+      "Title_ORIG": "A luta é contínua",
+      "DisplayTitle_EN": "The struggle continues",
+      "Repository": "Prefeitura de São Paulo / Secretaria Municipal de Cultura",
+      "DocumentType": "institutional_report",
+      "SourceURL": "https://prefeitura.sp.gov.br/web/cultura/w/bibliotecas/noticias/12279",
+      "Notes": "Programa de atividades; ficha de Célia Rossi.",
+      "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D088",
+      "Title_ORIG": "O In.Formar: do movimento de massa para a consciência de classe (1979 até 1992)",
+      "DisplayTitle_EN": "In.Formar: from the mass movement to class consciousness",
+      "Repository": "PUC-SP",
+      "DocumentType": "dissertation",
+      "SourceURL": "https://tede.pucsp.br/bitstream/handle/44427/1/JAINE%20FERNANDA%20MENDON%C3%87A%20ANUNCIA%C3%87%C3%83O.pdf",
+      "Notes": "Identificação nominal Maria Célia Vieira Rossi; nota sobre entrevista de 05/12/2019. Datas biográficas não cadastradas.",
+      "StandardCitation": ""
     }
   ],
   "Concepts": [
@@ -7734,6 +7893,76 @@
       "StartDate": "",
       "EndDate": "",
       "SourceDocumentID": "D064"
+    },
+    {
+      "PersonID": "P059",
+      "MovementID": "M001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 48; membro da OSM; também D081 PDF pp. 235, 360."
+    },
+    {
+      "PersonID": "P060",
+      "MovementID": "M001",
+      "Role": "integral_participant",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 68; atuação continuada."
+    },
+    {
+      "PersonID": "P061",
+      "MovementID": "M001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 69; militante."
+    },
+    {
+      "PersonID": "P062",
+      "MovementID": "M001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D081",
+      "Confidence": "high",
+      "Notes": "PDF pp. 218, 405; núcleo histórico."
+    },
+    {
+      "PersonID": "P063",
+      "MovementID": "M001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D081",
+      "Confidence": "high",
+      "Notes": "PDF pp. 6, 382, 493."
+    },
+    {
+      "PersonID": "P064",
+      "MovementID": "M001",
+      "Role": "associated_with",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "pp. 63–64; vínculo contextual, sem filiação comprovada."
+    },
+    {
+      "PersonID": "P064",
+      "MovementID": "M022",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D087",
+      "Confidence": "high",
+      "Notes": "Ficha pública da Prefeitura."
     }
   ],
   "PersonInstitutions": [
@@ -9390,6 +9619,96 @@
       "Role": "facilitated_funding_for",
       "StartDate": "",
       "EndDate": ""
+    },
+    {
+      "PersonID": "P059",
+      "InstitutionID": "I110",
+      "Role": "associated_with",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 48; articulação do curso, não docência comprovada."
+    },
+    {
+      "PersonID": "P060",
+      "InstitutionID": "I115",
+      "Role": "teaches_at",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 67; início da atuação educativa."
+    },
+    {
+      "PersonID": "P060",
+      "InstitutionID": "I108",
+      "Role": "teaches_at",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 60; docência."
+    },
+    {
+      "PersonID": "P060",
+      "InstitutionID": "I144",
+      "Role": "student",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 68; nota 25."
+    },
+    {
+      "PersonID": "P061",
+      "InstitutionID": "I139",
+      "Role": "teaches_at",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 69; aulas de História."
+    },
+    {
+      "PersonID": "P061",
+      "InstitutionID": "I139",
+      "Role": "student",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D072",
+      "Confidence": "high",
+      "Notes": "p. 69; cursou supletivo."
+    },
+    {
+      "PersonID": "P064",
+      "InstitutionID": "I007",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D087",
+      "Confidence": "high",
+      "Notes": "Ficha pública."
+    },
+    {
+      "PersonID": "P064",
+      "InstitutionID": "I001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D087",
+      "Confidence": "high",
+      "Notes": "Ficha pública."
+    },
+    {
+      "PersonID": "P064",
+      "InstitutionID": "I143",
+      "Role": "coordinator_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D087",
+      "Confidence": "high",
+      "Notes": "Décadas de 1970 e 1980."
     }
   ],
   "EventPersons": [
@@ -14492,6 +14811,139 @@
       "DocumentID": "D077",
       "PersonID": "P011",
       "RelationshipType": "is_about"
+    },
+    {
+      "DocumentID": "D082",
+      "PersonID": "P059",
+      "RelationshipType": "is_about",
+      "RoleInDocument": "interviewee",
+      "EvidenceType": "researcher_supplied_link",
+      "Confidence": "pending_transcript",
+      "Notes": "Depoimento identificado pela pesquisadora; conteúdo ainda não conferido."
+    },
+    {
+      "DocumentID": "D086",
+      "PersonID": "P060",
+      "RelationshipType": "is_about",
+      "RoleInDocument": "interviewee",
+      "EvidenceType": "researcher_supplied_link",
+      "Confidence": "pending_transcript",
+      "Notes": "Depoimento identificado pela pesquisadora; conteúdo ainda não conferido."
+    },
+    {
+      "DocumentID": "D084",
+      "PersonID": "P061",
+      "RelationshipType": "is_about",
+      "RoleInDocument": "interviewee",
+      "EvidenceType": "researcher_supplied_link",
+      "Confidence": "pending_transcript",
+      "Notes": "Depoimento identificado pela pesquisadora; conteúdo ainda não conferido."
+    },
+    {
+      "DocumentID": "D083",
+      "PersonID": "P062",
+      "RelationshipType": "is_about",
+      "RoleInDocument": "interviewee",
+      "EvidenceType": "researcher_supplied_link",
+      "Confidence": "pending_transcript",
+      "Notes": "Depoimento identificado pela pesquisadora; conteúdo ainda não conferido."
+    },
+    {
+      "DocumentID": "D085",
+      "PersonID": "P063",
+      "RelationshipType": "is_about",
+      "RoleInDocument": "interviewee",
+      "EvidenceType": "researcher_supplied_link",
+      "Confidence": "pending_transcript",
+      "Notes": "Depoimento identificado pela pesquisadora; conteúdo ainda não conferido."
+    },
+    {
+      "DocumentID": "D081",
+      "PersonID": "P059",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "PDF pp. 213, 235, 330, 360"
+    },
+    {
+      "DocumentID": "D081",
+      "PersonID": "P062",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "PDF pp. 218, 235, 382, 405"
+    },
+    {
+      "DocumentID": "D081",
+      "PersonID": "P063",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "PDF pp. 6, 382, 449, 493"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P059",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "p. 48, nota 9; proposta do supletivo"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P060",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "pp. 60, 67–68, 80–81; formação profissional"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P061",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "pp. 68–69; EJA e docência"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P062",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "p. 44; menção nominal"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P063",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "pp. 72–74; CTC, Recife e CIPA"
+    },
+    {
+      "DocumentID": "D072",
+      "PersonID": "P064",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "pp. 63–64; atuação no movimento"
+    },
+    {
+      "DocumentID": "D087",
+      "PersonID": "P064",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "Ficha pública da Prefeitura"
+    },
+    {
+      "DocumentID": "D088",
+      "PersonID": "P064",
+      "RelationshipType": "mentions",
+      "EvidenceType": "documentary_reference",
+      "Confidence": "high",
+      "Notes": "Nome completo na nota sobre entrevista de 05/12/2019"
     }
   ],
   "DocumentEvents": [
@@ -15862,6 +16314,13 @@
       "DocumentID": "D072",
       "PlaceID": "L004",
       "RelationType": "place_of_interview"
+    },
+    {
+      "DocumentID": "D072",
+      "PlaceID": "L255",
+      "RelationType": "mentions",
+      "Confidence": "high",
+      "Notes": "pp. 72–73; retorno de Carlúcio ao Recife e atuação educativa."
     }
   ],
   "EventActors": [

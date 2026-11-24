@@ -193,7 +193,7 @@ async function normalize(){
       edgeRows.push({from,to,...relationRecord(table,raw,relationKey),status:text(raw.ReviewStatus)||'documented'});
     }
   }
-  await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa').map(async n=>{n.photo=await portrait(n);}));
+  await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa'||n.id==='M001').map(async n=>{n.photo=await portrait(n);}));
   updateSelectors();updateCounts();updateLaw();updateMap();
   try{resetGraph();}catch(e){console.error("Grafo:",e);$("network").textContent="Grafo indisponível; outras abas continuam acessíveis."; }
 }
@@ -254,49 +254,18 @@ const atlasInterview= {
     "I135",
     "I136",
     "I137",
-    "I139"
+    "I139",
+    "P059",
+    "P060",
+    "P061",
+    "P062",
+    "P063",
+    "P064",
+    "I143",
+    "I144",
+    "M022"
   ],
   "people": [
-    [
-      "EP01",
-      "Anizio Batista de Oliveira",
-      "47–48",
-      "Articulação do supletivo no CPV e formação sindical de trabalhadores da ARNO.",
-      [
-        [
-          "M001",
-          "member_of"
-        ],
-        [
-          "I110",
-          "educator"
-        ]
-      ]
-    ],
-    [
-      "EP02",
-      "Sérgio Florentino (Mota)",
-      "48, 66–67, 78–80",
-      "Operário metalúrgico e educador; formação profissional e política.",
-      [
-        [
-          "M001",
-          "member_of"
-        ],
-        [
-          "I115",
-          "educator"
-        ],
-        [
-          "I108",
-          "teaches_at"
-        ],
-        [
-          "I137",
-          "teacher_trainer"
-        ]
-      ]
-    ],
     [
       "EP03",
       "Leonildo",
@@ -322,39 +291,11 @@ const atlasInterview= {
       ]
     ],
     [
-      "EP05",
-      "José da Costa Prado",
-      "67–68",
-      "Metalúrgico, militante e educador; atuou no curso Construindo o Saber.",
-      [
-        [
-          "M001",
-          "member_of"
-        ],
-        [
-          "I139",
-          "teaches_at"
-        ]
-      ]
-    ],
-    [
       "EP06",
       "Cícera Bombardi",
       "44",
       "Apresentou Nádia Gebara a militantes da OSM-SP.",
       []
-    ],
-    [
-      "EP07",
-      "Hélio Bombardi",
-      "44",
-      "Operário da Massey Ferguson, militante do núcleo histórico da OSM-SP e integrante da Chapa 3. Batistoni (2001), PDF pp. 218, 405; citado por Nádia na entrevista, p. 44.",
-      [
-        [
-          "M001",
-          "member_of"
-        ]
-      ]
     ],
     [
       "EP08",
@@ -381,30 +322,6 @@ const atlasInterview= {
       "66",
       "Referida por Rosângela e Nadine pela experiência e pesquisa sobre associações da Mooca, p. 66. Vínculo pessoal com a OSM-SP não demonstrado.",
       []
-    ],
-    [
-      "EP11",
-      "Carlúcio Castanha",
-      "72–73",
-      "Militante da OSM-SP e delegado em 1983; atuou na CIPA da ARNO e contribuiu à formação profissional. Batistoni (2001), PDF pp. 6, 382, 493; entrevista pp. 72–73.",
-      [
-        [
-          "M001",
-          "member_of"
-        ]
-      ]
-    ],
-    [
-      "EP12",
-      "Célia Rossi",
-      "63",
-      "Mencionada pela participação das mulheres no movimento.",
-      [
-        [
-          "M001",
-          "associated_with"
-        ]
-      ]
     ],
     [
       "EP13",
@@ -600,7 +517,7 @@ const atlasInterview= {
           "teaches_at"
         ],
         [
-          "EP01",
+          "P059",
           "educator"
         ],
         [
@@ -633,6 +550,10 @@ const atlasInterview= {
       [
         [
           "I108",
+          "associated_with"
+        ],
+        [
+          "P063",
           "associated_with"
         ]
       ]
@@ -708,7 +629,7 @@ const atlasInterview= {
   ]
 };
 let atlasInterviewEdges=[];
-const verifiedInterviewOSM=new Set(['EP01','EP02','EP05','EP07','EP11']);
+const verifiedInterviewOSM=new Set();
 function graphSocialEdges(){return [...arestasSociais(),...atlasInterviewEdges];}
 function interviewNodes(mode){
  for(const [id,n] of nodeById)if(n.interviewOnly)nodeById.delete(id);
@@ -1033,7 +954,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json?v=atlas12',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas13',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1085,7 +1006,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   try{
     // Optional enrichments never prevent the public dataset/map from loading.
     const optional=async(url,apply)=>{try{const r=await fetch(url);if(r.ok)apply(await r.json());}catch(e){console.info('Dados auxiliares indisponíveis:',url);}};
-    await Promise.all([optional('assets/people/manifest.json',x=>manifest=x),optional('data/minibiografias-publicas.json',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
+    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas13',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
     await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
