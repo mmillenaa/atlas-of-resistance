@@ -81,9 +81,9 @@ const rolePT = Object.freeze({
  researcher:'Pesquisa em', resident:'Morador de', secretary_of:'Secretaria de',
  student:'Estudante em', teacher:'Docência em', teacher_trainer:'Formação docente em', teaches_at:'Docência em', facilitated_funding_for:'Articulação de financiamento para',
  union_delegate:'Delegado sindical de', volunteer:'Voluntário de',
- beneficiary_of:'Beneficiário de', candidate_in:'Candidato em', lawyer_at:'Advogado em',
- organizer_of:'Organizador de', participant_in:'Participante em', victim_of:'Vítima de',
- characterized_as:'Caracterizado como', claims:'Reivindica', exercises:'Exerce',
+ beneficiary_of:'Destinatário de decisão favorável em', represented_in_appeal:'Foi representado em', candidate_in:'Candidatou-se em', lawyer_at:'Exerceu a defesa em',
+ organizer_of:'Organizou', participant_in:'Participou de', victim_of:'Foi vítima de',
+ characterized_as:'Caracteriza-se como', claims:'Reivindica', exercises:'Exerce',
  violates:'Viola', cites:'Cita', is_about:'Trata de', mentions:'Menciona',
  collaborated_with:'Colaborou com', emerged_from_pedagogical_network_of:'Surgiu da rede pedagógica de',
  operated_at:'Atuou em', organizational_unit_of:'Unidade de',
@@ -106,10 +106,34 @@ const legalPT={"right":"Direito","violation":"Violação","crime":"Crime","Labor
 const legalLabel=x=>legalPT[text(x)]||text(x).replace(/\bConstitution of\b/g,'Constituição de').replace(/\bPenal Code\b/g,'Código Penal').replace(/\bLaw\b/g,'Lei').replace(/\bCreation of\b/g,'Criação de').replace(/\bPress Law\b/g,'Lei de Imprensa').replace(/\bILO Conventions\b/g,'Convenções da OIT').replace(/\bState\b/g,'Estado');
 const roleStatus = s => s==='inferred' ? 'inferência visual, não comprova vínculo pessoal' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
 const eventLabels = {
- assassination:'Assassinato',strike:'Greve',torture:'Tortura',persecution:'Perseguição',
- dismissal:'Demissão',intimidation:'Intimidação',incarceration:'Prisão',surveillance:'Vigilância',
- protest:'Manifestação',campaign:'Campanha',congress:'Congresso',censorship:'Censura',
- exile:'Exílio','arbitrary detention':'Detenção arbitrária','summary execution':'Execução sumária'
+  "assassination": "Assassinato",
+  "forced displacement": "Deslocamento forçado",
+  "incarceration": "Encarceramento",
+  "torture": "Tortura",
+  "persecution": "Perseguição",
+  "surveillance": "Vigilância",
+  "arbitrary detention": "Detenção arbitrária",
+  "intimidation": "Intimidação",
+  "concealment of a body": "Ocultação de cadáver",
+  "falsification of cause of death / evidence tampering": "Falsificação da causa da morte / adulteração de provas",
+  "political retaliation": "Retaliação política",
+  "dismissal": "Demissão",
+  "exile": "Exílio",
+  "censorship": "Censura",
+  "banishment / expulsion": "Banimento / expulsão",
+  "armed_rebellion": "Rebelião armada",
+  "campaign": "Campanha",
+  "protest": "Manifestação",
+  "congress": "Congresso",
+  "union_election": "Eleição sindical",
+  "strike": "Greve",
+  "armed_action": "Ação armada",
+  "picket": "Piquete",
+  "union_election_campaign": "Campanha eleitoral sindical",
+  "political_mobilization": "Mobilização política",
+  "judicial_appeal": "Recurso judicial",
+  "union_intervention": "Intervenção sindical",
+  "summary execution": "Execução sumária"
 };
 const eventLabel = x => eventLabels[text(x)]||text(x).replace(/_/g,' ');
 function canDisplayEdge(e){ return $('role').value==='' || e.relation===$('role').value; }
@@ -131,11 +155,12 @@ function sourceReference(id){
  const doc=rows('Documents').find(d=>d.DocumentID===id);
  if(!doc)return id+' — referência cadastrada; ficha ainda não disponível.';
  const titles={'D072':'Entrevista coletiva com cinco educadoras da OSM-SP, concedida à pesquisadora','D073':'Relato de experiência sobre a luta dos trabalhadores pela educação e formação profissional','D069':'Entrevista de história oral de Cecília Guaraná','D041':'Perfil biográfico de Carlos Josaphat','D046':'Perfil biográfico de Ricardo Frota de Albuquerque Maranhão'};
- return id+' — '+(first(doc,['Title_ORIG','DisplayTitle_ORIG'])||titles[id]||first(doc,['DisplayTitle_EN','Repository'])||id)+(doc.Repository?' · '+doc.Repository:'');
+ return id+' — '+(first(doc,['Title_ORIG','DisplayTitle_ORIG'])||titles[id]||first(doc,['DisplayTitle_EN','Repository'])||id)+(doc.Repository?' · '+doc.Repository:'')+(doc.SourceURL?' · '+doc.SourceURL:'');
 }
 function relationEvidence(table,raw){
  const passage=first(raw,['EvidenceText_ORIG','EvidenceText_EN']);
  let ids=[text(raw.SourceDocumentID)].filter(Boolean);
+ if(table==='EventPersons'&&raw.EventID==='E202'&&['P033','P037'].includes(raw.PersonID))ids=['D075'];
  if(!ids.length&&['DocumentPersons','DocumentEvents','DocumentLocations'].includes(table)&&raw.DocumentID)ids=[raw.DocumentID];
  const refs=ids.map(sourceReference);
  const url=first(raw,['SourceURL'])||(/^https?:\/\//i.test(text(raw.Confidence))?text(raw.Confidence):'');
@@ -148,7 +173,8 @@ function relationEvidence(table,raw){
  return 'Referência específica ainda não identificada na matriz pública.';
 }
 function relationRecord(table,raw,relationKey){
- const original=first(raw,[relationKey,'RelationType','RelationshipType','Role'])||(table==='DocumentEvents'?'documents_event':'related_to');
+ let original=first(raw,[relationKey,'RelationType','RelationshipType','Role'])||(table==='DocumentEvents'?'documents_event':'related_to');
+ if(table==='EventPersons'&&raw.PersonID==='P037'&&raw.EventID==='E202'&&original==='beneficiary_of')original='represented_in_appeal';
  return {relation:canonicalRole(original),originalRole:original,evidence:relationEvidence(table,raw)};
 }
 async function normalize(){
@@ -156,7 +182,7 @@ async function normalize(){
   for(const [table,[key,labels,kind]] of Object.entries(schema)){
     for(const raw of rows(table)){
       const id=text(raw[key]);if(!id)continue;
-      nodeById.set(id,{id,label:first(raw,labels)||id,kind,raw,photo:''});
+      nodeById.set(id,{id,label:kind==='Evento'?eventLabel(raw.EventType):(first(raw,labels)||id),kind,raw,photo:''});
     }
   }
   for(const [table,fromKey,toKey,relationKey] of relations){
@@ -188,524 +214,497 @@ function neighbors(id){
 }
 // Recorte de visualização: entrevista coletiva de 27/09/2026, apêndice pp. 43–81.
 // Identificadores EP/EI são locais ao grafo, não novos registros na matriz pública.
-const atlasInterview={
- "existing": [
-  "P002",
-  "P007",
-  "P009",
-  "P039",
-  "P040",
-  "P044",
-  "P045",
-  "P046",
-  "P047",
-  "P048",
-  "P049",
-  "P058",
-  "M001",
-  "M018",
-  "M020",
-  "M009",
-  "I001",
-  "I007",
-  "I008",
-  "I061",
-  "I108",
-  "I109",
-  "I110",
-  "I111",
-  "I112",
-  "I113",
-  "I114",
-  "I115",
-  "I118",
-  "I120",
-  "I122",
-  "I126",
-  "I127",
-  "I128",
-  "I135",
-  "I136",
-  "I137",
-  "I139"
- ],
- "people": [
-  [
-   "EP01",
-   "Anizio Batista de Oliveira",
-   "47–48",
-   "Articulação do supletivo no CPV e formação sindical de trabalhadores da ARNO.",
-   [
+const atlasInterview= {
+  "existing": [
+    "P002",
+    "P007",
+    "P009",
+    "P039",
+    "P040",
+    "P044",
+    "P045",
+    "P046",
+    "P047",
+    "P048",
+    "P049",
+    "P058",
+    "M001",
+    "M018",
+    "M020",
+    "M009",
+    "I001",
+    "I007",
+    "I008",
+    "I061",
+    "I108",
+    "I109",
+    "I110",
+    "I111",
+    "I112",
+    "I113",
+    "I114",
+    "I115",
+    "I118",
+    "I120",
+    "I122",
+    "I126",
+    "I127",
+    "I128",
+    "I135",
+    "I136",
+    "I137",
+    "I139"
+  ],
+  "people": [
     [
-     "M001",
-     "member_of"
+      "EP01",
+      "Anizio Batista de Oliveira",
+      "47–48",
+      "Articulação do supletivo no CPV e formação sindical de trabalhadores da ARNO.",
+      [
+        [
+          "M001",
+          "member_of"
+        ],
+        [
+          "I110",
+          "educator"
+        ]
+      ]
     ],
     [
-     "I110",
-     "educator"
-    ]
-   ]
-  ],
-  [
-   "EP02",
-   "Sérgio Florentino (Mota)",
-   "48, 66–67, 78–80",
-   "Operário metalúrgico e educador; formação profissional e política.",
-   [
-    [
-     "M001",
-     "member_of"
+      "EP02",
+      "Sérgio Florentino (Mota)",
+      "48, 66–67, 78–80",
+      "Operário metalúrgico e educador; formação profissional e política.",
+      [
+        [
+          "M001",
+          "member_of"
+        ],
+        [
+          "I115",
+          "educator"
+        ],
+        [
+          "I108",
+          "teaches_at"
+        ],
+        [
+          "I137",
+          "teacher_trainer"
+        ]
+      ]
     ],
     [
-     "I115",
-     "educator"
+      "EP03",
+      "Leonildo",
+      "48, 66–67, 78–80",
+      "Operário e educador da Nova Piratininga. Sobrenome não informado na entrevista.",
+      [
+        [
+          "I108",
+          "teaches_at"
+        ]
+      ]
     ],
     [
-     "I108",
-     "teaches_at"
+      "EP04",
+      "Patrocínio",
+      "48, 78",
+      "Monitor e educador da Nova Piratininga. Identificação nominal incompleta.",
+      [
+        [
+          "I108",
+          "teaches_at"
+        ]
+      ]
     ],
     [
-     "I137",
-     "teacher_trainer"
-    ]
-   ]
-  ],
-  [
-   "EP03",
-   "Leonildo",
-   "48, 66–67, 78–80",
-   "Operário e educador da Nova Piratininga. Sobrenome não informado na entrevista.",
-   [
-    [
-     "I108",
-     "teaches_at"
-    ]
-   ]
-  ],
-  [
-   "EP04",
-   "Patrocínio",
-   "48, 78",
-   "Monitor e educador da Nova Piratininga. Identificação nominal incompleta.",
-   [
-    [
-     "I108",
-     "teaches_at"
-    ]
-   ]
-  ],
-  [
-   "EP05",
-   "José da Costa Prado",
-   "67–68",
-   "Metalúrgico, militante e educador; atuou no curso Construindo o Saber.",
-   [
-    [
-     "M001",
-     "member_of"
+      "EP05",
+      "José da Costa Prado",
+      "67–68",
+      "Metalúrgico, militante e educador; atuou no curso Construindo o Saber.",
+      [
+        [
+          "M001",
+          "member_of"
+        ],
+        [
+          "I139",
+          "teaches_at"
+        ]
+      ]
     ],
     [
-     "I139",
-     "teaches_at"
-    ]
-   ]
-  ],
-  [
-   "EP06",
-   "Cícera Bombardi",
-   "44",
-   "Apresentou Nádia Gebara a militantes da OSM-SP.",
-   []
-  ],
-  [
-   "EP07",
-   "Hélio Bombardi",
-   "44",
-   "Mencionado na aproximação de Nádia Gebara à OSM-SP.",
-   []
-  ],
-  [
-   "EP08",
-   "Régis (nome incompleto)",
-   "44",
-   "Mencionado na aproximação de Nádia Gebara à OSM-SP.",
-   []
-  ],
-  [
-   "EP09",
-   "Celso (nome incompleto)",
-   "52, 78",
-   "Mencionado por Nadine na aproximação à OSM-SP e no início da Reconstrução; não identificado com outro Celso da matriz.",
-   [
-    [
-     "I111",
-     "associated_with"
+      "EP06",
+      "Cícera Bombardi",
+      "44",
+      "Apresentou Nádia Gebara a militantes da OSM-SP.",
+      []
     ],
     [
-     "M009",
-     "member_of"
-    ]
-   ]
-  ],
-  [
-   "EP10",
-   "Giuseppina de Grazia (Pina)",
-   "66",
-   "Mencionada pela experiência e pesquisa sobre associações de trabalhadores, sobretudo na Mooca.",
-   []
-  ],
-  [
-   "EP11",
-   "Carlúcio",
-   "72–73",
-   "Militante citado pela contribuição à formação profissional e à atuação na CIPA da ARNO.",
-   [
-    [
-     "EI05",
-     "educator"
-    ]
-   ]
-  ],
-  [
-   "EP12",
-   "Célia Rossi",
-   "63",
-   "Mencionada pela participação das mulheres no movimento.",
-   [
-    [
-     "M001",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP13",
-   "Elissam",
-   "72",
-   "Mencionado na atuação da zona sul; identidade completa a conferir.",
-   []
-  ],
-  [
-   "EP14",
-   "Franco",
-   "73",
-   "Mencionado na documentação de experiências de organização dos trabalhadores.",
-   []
-  ],
-  [
-   "EP15",
-   "Marlene",
-   "68",
-   "Professora de História mencionada no relato do curso Construindo o Saber.",
-   [
-    [
-     "I139",
-     "teaches_at"
-    ]
-   ]
-  ],
-  [
-   "EP16",
-   "Cristiane",
-   "75",
-   "Participante da adaptação radiofônica realizada no CPV; vinculada ao Galo de Briga.",
-   [
-    [
-     "I135",
-     "member_of"
+      "EP07",
+      "Hélio Bombardi",
+      "44",
+      "Operário da Massey Ferguson, militante do núcleo histórico da OSM-SP e integrante da Chapa 3. Batistoni (2001), PDF pp. 218, 405; citado por Nádia na entrevista, p. 44.",
+      [
+        [
+          "M001",
+          "member_of"
+        ]
+      ]
     ],
     [
-     "I110",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP17",
-   "Fábio",
-   "75",
-   "Participante da adaptação radiofônica no CPV.",
-   [
+      "EP08",
+      "Régis (identificação pendente)",
+      "44",
+      "Contato na aproximação de Nádia com a OSM-SP, p. 44; identificação e pertencimento ainda não demonstrados.",
+      []
+    ],
     [
-     "I110",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP18",
-   "Ney",
-   "79",
-   "Estudante mencionado na discussão sobre as turmas da Nova Piratininga.",
-   [
+      "EP09",
+      "Celso (nome incompleto)",
+      "52, 78",
+      "Companheiro de Nadine Habert, atuou no início da Reconstrução e trabalhava como tradutor; entrevista pp. 52, 78. Não identificado com Celso Antunes Horta nem com outro Celso.",
+      [
+        [
+          "I111",
+          "associated_with"
+        ]
+      ]
+    ],
     [
-     "I108",
-     "student"
-    ]
-   ]
-  ],
-  [
-   "EP19",
-   "Milton",
-   "79",
-   "Estudante mencionado na discussão sobre as turmas da Nova Piratininga.",
-   [
+      "EP10",
+      "Giuseppina de Grazia (Pina)",
+      "66",
+      "Referida por Rosângela e Nadine pela experiência e pesquisa sobre associações da Mooca, p. 66. Vínculo pessoal com a OSM-SP não demonstrado.",
+      []
+    ],
     [
-     "I108",
-     "student"
-    ]
-   ]
-  ],
-  [
-   "EP20",
-   "Nalu",
-   "80",
-   "Educadora mencionada no relato da formação e interpretação de textos.",
-   [
+      "EP11",
+      "Carlúcio Castanha",
+      "72–73",
+      "Militante da OSM-SP e delegado em 1983; atuou na CIPA da ARNO e contribuiu à formação profissional. Batistoni (2001), PDF pp. 6, 382, 493; entrevista pp. 72–73.",
+      [
+        [
+          "M001",
+          "member_of"
+        ]
+      ]
+    ],
     [
-     "I108",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP21",
-   "Neide",
-   "80",
-   "Educadora mencionada no relato da formação e interpretação de textos.",
-   [
+      "EP12",
+      "Célia Rossi",
+      "63",
+      "Mencionada pela participação das mulheres no movimento.",
+      [
+        [
+          "M001",
+          "associated_with"
+        ]
+      ]
+    ],
     [
-     "I108",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP22",
-   "Célia Borges",
-   "80",
-   "Educadora mencionada na articulação de novas participantes.",
-   [
+      "EP13",
+      "Elissam (identificação pendente)",
+      "72",
+      "Nadine menciona atuação na zona sul, p. 72; vínculo individual e identidade completa não confirmados.",
+      []
+    ],
     [
-     "I108",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EP23",
-   "Raimundo (padre operário)",
-   "46",
-   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
-   [
+      "EP14",
+      "Franco (identificação pendente)",
+      "73",
+      "Nádia cita Franco, trabalhador da indústria de marcenaria, p. 73. Franco Farinazzi aparece em Batistoni (2001), PDF pp. 288, 306, 311, mas a identidade comum não está demonstrada.",
+      []
+    ],
     [
-     "I122",
-     "priest"
-    ]
-   ]
-  ],
-  [
-   "EP24",
-   "Ricardo (padre operário)",
-   "46",
-   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
-   [
+      "EP15",
+      "Marlene",
+      "68",
+      "Professora de História mencionada no relato do curso Construindo o Saber.",
+      [
+        [
+          "I139",
+          "teaches_at"
+        ]
+      ]
+    ],
     [
-     "I122",
-     "priest"
-    ]
-   ]
-  ],
-  [
-   "EP25",
-   "Virgíneo (padre operário)",
-   "46",
-   "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
-   [
+      "EP16",
+      "Cristiane",
+      "75",
+      "Participante da adaptação radiofônica realizada no CPV; vinculada ao Galo de Briga.",
+      [
+        [
+          "I135",
+          "member_of"
+        ],
+        [
+          "I110",
+          "associated_with"
+        ]
+      ]
+    ],
     [
-     "I122",
-     "priest"
+      "EP17",
+      "Fábio",
+      "75",
+      "Participante da adaptação radiofônica no CPV.",
+      [
+        [
+          "I110",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EP18",
+      "Ney (identificação pendente)",
+      "79",
+      "Aluno da Nova Piratininga, mencionado por Nádia, p. 79. Idade relativamente maior; profissão, identidade e participação na OSM-SP não individualizadas.",
+      [
+        [
+          "I108",
+          "student"
+        ]
+      ]
+    ],
+    [
+      "EP19",
+      "Milton (identificação pendente)",
+      "79",
+      "Aluno jovem da Nova Piratininga, mencionado por Nádia, p. 79. Profissão, identidade e participação na OSM-SP não individualizadas.",
+      [
+        [
+          "I108",
+          "student"
+        ]
+      ]
+    ],
+    [
+      "EP20",
+      "Nalu",
+      "80",
+      "Educadora mencionada no relato da formação e interpretação de textos.",
+      [
+        [
+          "I108",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EP21",
+      "Neide",
+      "80",
+      "Educadora mencionada no relato da formação e interpretação de textos.",
+      [
+        [
+          "I108",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EP22",
+      "Célia Borges",
+      "80",
+      "Educadora mencionada na articulação de novas participantes.",
+      [
+        [
+          "I108",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EP23",
+      "Raimundo (padre operário)",
+      "46",
+      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+      [
+        [
+          "I122",
+          "priest"
+        ]
+      ]
+    ],
+    [
+      "EP24",
+      "Ricardo (padre operário)",
+      "46",
+      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+      [
+        [
+          "I122",
+          "priest"
+        ]
+      ]
+    ],
+    [
+      "EP25",
+      "Virgíneo (padre operário)",
+      "46",
+      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+      [
+        [
+          "I122",
+          "priest"
+        ]
+      ]
+    ],
+    [
+      "EP30",
+      "Antônio Assiz",
+      "66–67",
+      "Documentarista mencionado na recuperação da memória de Leonildo.",
+      []
     ]
-   ]
   ],
-  [
-   "EP26",
-   "Pedro Jacobi",
-   "55",
-   "Referência mencionada na discussão da articulação entre movimento operário e população.",
-   []
-  ],
-  [
-   "EP27",
-   "Celso Rui Beisiegel",
-   "55",
-   "Referência na discussão educacional, não filiação à OSM-SP.",
-   []
-  ],
-  [
-   "EP28",
-   "Paulo Fontes",
-   "55",
-   "Referência historiográfica mencionada na discussão da classe trabalhadora.",
-   []
-  ],
-  [
-   "EP29",
-   "Murilo (nome incompleto)",
-   "55",
-   "Referência historiográfica mencionada; identificação a conferir.",
-   []
-  ],
-  [
-   "EP30",
-   "Antônio Assiz",
-   "66–67",
-   "Documentarista mencionado na recuperação da memória de Leonildo.",
-   []
+  "initiatives": [
+    [
+      "EI01",
+      "Supletivo sem nome — zona leste",
+      "44, 78",
+      "Experiência anterior à aproximação de Nádia à OSM-SP; não era iniciativa da OSM-SP.",
+      [
+        [
+          "P046",
+          "teaches_at"
+        ]
+      ]
+    ],
+    [
+      "EI02",
+      "Cursos de matemática industrial — Osasco",
+      "44–45",
+      "Formação profissional de metalúrgicos, com matemática e geometria.",
+      [
+        [
+          "P046",
+          "educator"
+        ]
+      ]
+    ],
+    [
+      "EI03",
+      "Curso supletivo para trabalhadores da ARNO",
+      "47–48",
+      "Elevação da escolaridade no CPV, articulada à formação sindical.",
+      [
+        [
+          "P049",
+          "teaches_at"
+        ],
+        [
+          "EP01",
+          "educator"
+        ],
+        [
+          "I110",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EI04",
+      "Cursos preparatórios Pré-SENAI — ATRI",
+      "48",
+      "Preparação em matemática e geometria para ingresso nos cursos do SENAI.",
+      [
+        [
+          "P049",
+          "educator"
+        ],
+        [
+          "I109",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EI05",
+      "CTC — escola de trabalhadores",
+      "72, 77",
+      "Experiência autônoma de formação e cultura; intercâmbio posterior com a Nova Piratininga.",
+      [
+        [
+          "I108",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EI06",
+      "Casa de Cultura — Jardim Ubirajara",
+      "56",
+      "Iniciativa cultural com trabalhadores das comissões de fábrica e orientação da OSM-SP.",
+      [
+        [
+          "M001",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EI07",
+      "Alfabetização comunitária — Parque Bristol e Jardim São Savério",
+      "46–47",
+      "Alfabetização de militantes da associação, anterior ao MOVA.",
+      [
+        [
+          "P049",
+          "teaches_at"
+        ],
+        [
+          "I120",
+          "associated_with"
+        ]
+      ]
+    ],
+    [
+      "EI08",
+      "Formação política e sindical — CUT pela Base",
+      "45, 51, 57, 63–65",
+      "Formação de trabalhadores e dirigentes sindicais, incluindo a Reconstrução.",
+      [
+        [
+          "M018",
+          "associated_with"
+        ],
+        [
+          "I111",
+          "associated_with"
+        ],
+        [
+          "P046",
+          "educator"
+        ],
+        [
+          "P047",
+          "educator"
+        ],
+        [
+          "P045",
+          "educator"
+        ]
+      ]
+    ],
+    [
+      "EI09",
+      "Associação de trabalhadores — Mooca",
+      "65–66",
+      "Experiência regional mencionada no depoimento; denominação formal a confirmar.",
+      [
+        [
+          "EP10",
+          "associated_with"
+        ]
+      ]
+    ]
   ]
- ],
- "initiatives": [
-  [
-   "EI01",
-   "Supletivo sem nome — zona leste",
-   "44, 78",
-   "Experiência anterior à aproximação de Nádia à OSM-SP; não era iniciativa da OSM-SP.",
-   [
-    [
-     "P046",
-     "teaches_at"
-    ]
-   ]
-  ],
-  [
-   "EI02",
-   "Cursos de matemática industrial — Osasco",
-   "44–45",
-   "Formação profissional de metalúrgicos, com matemática e geometria.",
-   [
-    [
-     "P046",
-     "educator"
-    ]
-   ]
-  ],
-  [
-   "EI03",
-   "Curso supletivo para trabalhadores da ARNO",
-   "47–48",
-   "Elevação da escolaridade no CPV, articulada à formação sindical.",
-   [
-    [
-     "P049",
-     "teaches_at"
-    ],
-    [
-     "EP01",
-     "educator"
-    ],
-    [
-     "I110",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EI04",
-   "Cursos preparatórios Pré-SENAI — ATRI",
-   "48",
-   "Preparação em matemática e geometria para ingresso nos cursos do SENAI.",
-   [
-    [
-     "P049",
-     "educator"
-    ],
-    [
-     "I109",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EI05",
-   "CTC — escola de trabalhadores",
-   "72, 77",
-   "Experiência autônoma de formação e cultura; intercâmbio posterior com a Nova Piratininga.",
-   [
-    [
-     "I108",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EI06",
-   "Casa de Cultura — Jardim Ubirajara",
-   "56",
-   "Iniciativa cultural com trabalhadores das comissões de fábrica e orientação da OSM-SP.",
-   [
-    [
-     "M001",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EI07",
-   "Alfabetização comunitária — Parque Bristol e Jardim São Savério",
-   "46–47",
-   "Alfabetização de militantes da associação, anterior ao MOVA.",
-   [
-    [
-     "P049",
-     "teaches_at"
-    ],
-    [
-     "I120",
-     "associated_with"
-    ]
-   ]
-  ],
-  [
-   "EI08",
-   "Formação política e sindical — CUT pela Base",
-   "45, 51, 57, 63–65",
-   "Formação de trabalhadores e dirigentes sindicais, incluindo a Reconstrução.",
-   [
-    [
-     "M018",
-     "associated_with"
-    ],
-    [
-     "I111",
-     "associated_with"
-    ],
-    [
-     "P046",
-     "educator"
-    ],
-    [
-     "P047",
-     "educator"
-    ],
-    [
-     "P045",
-     "educator"
-    ]
-   ]
-  ],
-  [
-   "EI09",
-   "Associação de trabalhadores — Mooca",
-   "65–66",
-   "Experiência regional mencionada no depoimento; denominação formal a confirmar.",
-   [
-    [
-     "EP10",
-     "associated_with"
-    ]
-   ]
-  ]
- ]
 };
 let atlasInterviewEdges=[];
 function graphSocialEdges(){return $('graphFilter')?.value==='education'?[...arestasSociais(),...atlasInterviewEdges]:arestasSociais();}
@@ -714,7 +713,7 @@ function interviewNodes(enabled){
  atlasInterviewEdges=[];if(!enabled)return new Set();
  const ids=new Set(atlasInterview.existing.filter(id=>nodeById.has(id)));
  for(const [kind,records] of [['Pessoa',atlasInterview.people],['Instituição',atlasInterview.initiatives]])for(const [id,label,pages,summary] of records){nodeById.set(id,{id,label,kind,photo:'',interviewOnly:true,raw:{Notes:summary+' Fonte: entrevista coletiva de 27/09/2026, p. '+pages+'. Registro de visualização, não identidade validada na matriz.'}});ids.add(id);}
- for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to)){const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence:'Entrevista coletiva de 27/09/2026, p. '+pages+'.',status:'documented'});}
+ for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to)){const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence:(id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.'),status:'documented'});}
  return ids;
 }
 function resetGraph(){
@@ -1020,7 +1019,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json?v=atlas11',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas12',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1028,11 +1027,32 @@ async function importFiles(list){
   for(const f of list){if(/\.json$/i.test(f.name)){const parsed=JSON.parse(await f.text());for(const [key,val] of Object.entries(parsed)){if(Array.isArray(val))updated[key]=val;}count++;continue;}let key=f.name.replace(/\.csv$/i,'').replace(/\s*\(\d+\)$/,'');if(!key)continue;if(key==='MovementInstitution')key='MovementInstitutionRelations';updated[key]=parseCSV(await f.text());count++;}
   db=updated;await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
 }
+const atlasThesisURL='https://centrovictormeyer.org.br/wp-content/uploads/2010/04/MOSMSP-Tese-de-Maria-R-Batistoni.pdf';
+const cosmovLocal=[{publication_year:2001,title:'Entre a fábrica e o sindicato: os dilemas da Oposição Sindical Metalúrgica de São Paulo (1967–1987)',authors:['Maria Rosângela Batistoni'],url:atlasThesisURL,curated:true}];
+const searchNorm=s=>text(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+function abntAuthor(name){
+ const words=text(name).split(/\s+/).filter(Boolean);if(words.length<2)return words.join('').toUpperCase();
+ let surname=words.pop();if(/^(filho|neto|junior|júnior|sobrinho)$/i.test(surname)&&words.length>1)surname=words.pop()+' '+surname;
+ return surname.toLocaleUpperCase('pt-BR')+', '+words.join(' ');
+}
+function cosmovCurated(term){const t=searchNorm(term);return cosmovLocal.filter(w=>/\b(osm|mosm)( sp)?\b/.test(t)||/oposicao (sindical )?metalurgica/.test(t)||(t.length>2&&searchNorm(w.title+' '+w.authors.join(' ')).includes(t)));}
+function renderCosmov(box,works,note=''){
+ const htmlRows=works.map(w=>{
+  const authors=w.authors||(w.authorships||[]).map(a=>a.author?.display_name).filter(Boolean);
+  const url=w.url||w.doi||w.id;const link=/^https?:\/\//i.test(url||'')?'<a href="'+HTML(url)+'" target="_blank" rel="noopener noreferrer">'+(w.curated?'PDF integral':'Acessar publicação')+'</a>':HTML(url||'—');
+  return '<tr><td>'+HTML(w.publication_year||'—')+'</td><td>'+HTML(authors.map(abntAuthor).join('; ')||'Autoria não informada')+'</td><td>'+HTML(w.title||'')+'</td><td>'+link+'</td></tr>';
+ });
+ box.innerHTML=(note?'<p class="auxiliary">'+HTML(note)+'</p>':'')+(htmlRows.length?'<table class="table"><thead><tr><th>Ano</th><th>Autoria</th><th>Título</th><th>Acesso</th></tr></thead><tbody>'+htmlRows.join('')+'</tbody></table>':'Nenhuma publicação encontrada.');
+}
 async function cosmov(){
-  const term=$('cosQuery').value.trim(),box=$('cosResults');if(!term)return;box.textContent='Consultando OpenAlex...';
-  try{const response=await fetch('https://api.openalex.org/works?search='+encodeURIComponent(term)+'&per-page=15');if(!response.ok)throw Error('HTTP '+response.status);
-    const result=await response.json(),works=result.results||[];box.innerHTML=works.length?tableHtml(['Ano','Título','Identificador'],works.map(w=>[w.publication_year,w.title,w.doi||w.id])):'Nenhuma publicação encontrada.';
-  }catch(e){box.textContent='Falha na consulta pública: '+e.message;}
+ const term=$('cosQuery').value.trim(),box=$('cosResults');if(!term)return;
+ const local=cosmovCurated(term);renderCosmov(box,local,'Consultando OpenAlex…');
+ try{
+  const response=await fetch('https://api.openalex.org/works?search='+encodeURIComponent(term)+'&per-page=15');if(!response.ok)throw Error('HTTP '+response.status);
+  const result=await response.json();if($('cosQuery').value.trim()!==term)return;
+  const works=(result.results||[]).filter(w=>!local.some(x=>searchNorm(x.title)===searchNorm(w.title)||searchNorm(w.title).includes('entre a fabrica e o sindicato os dilemas da oposicao sindical metalurgica')));
+  renderCosmov(box,[...local,...works]);
+ }catch(e){if($('cosQuery').value.trim()===term)renderCosmov(box,local,'OpenAlex indisponível: '+e.message+'. As referências selecionadas localmente continuam acessíveis.');}
 }
 document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
@@ -1143,13 +1163,14 @@ const DATA_PAGE_SIZE=15;
 function renderDatasetOptions(){
  const el=$('datasetSelect');if(!el)return;
  const prior=el.value;
- el.innerHTML='<option value="__links">Vínculos integrados</option>'+Object.entries(matrixLabels).map(([k,v])=>
+ el.innerHTML='<option value="__links">Vínculos integrados</option>'+Object.entries(matrixLabels).filter(([k])=>relations.some(r=>r[0]===k)).map(([k,v])=>
   '<option value="'+HTML(k)+'">'+HTML(v)+' ('+rows(k).length+')</option>').join('');
  if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;else el.value='__links';
 }
 function updateDataTable(){
  const dest=$('dataTable'),pager=$('dataPager');if(!dest)return;
- const table=$('datasetSelect')?.value||'__links';
+ const selectedTable=$('datasetSelect')?.value||'__links';
+ const table=relations.some(r=>r[0]===selectedTable)?selectedTable:'__links';
  const term=text($('dataFilter')?.value).toLocaleLowerCase('pt');
  let names=[],entries=[];
  const label=id=>nodeById.get(id)?.label||id;

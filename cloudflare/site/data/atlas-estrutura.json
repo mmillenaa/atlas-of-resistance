@@ -6836,7 +6836,9 @@
       "DocumentID": "D075",
       "DocumentType": "institutional_report",
       "Repository": "Núcleo Memória",
-      "DisplayTitle_EN": "Tribute to Dr Mário de Passos Simas"
+      "DisplayTitle_EN": "Tribute to Dr Mário de Passos Simas",
+      "Title_ORIG": "Dr. Mário de Passos Simas, presente agora e sempre",
+      "SourceURL": "https://www.nucleomemoria.com.br/dr-mario-de-passos-simas-presente-agora-e-sempre"
     },
     {
       "DocumentID": "D076",
@@ -10474,12 +10476,14 @@
     {
       "EventID": "E202",
       "PersonID": "P033",
-      "Role": "lawyer_at"
+      "Role": "lawyer_at",
+      "SourceDocumentID": "D075"
     },
     {
       "EventID": "E202",
       "PersonID": "P037",
-      "Role": "beneficiary_of"
+      "Role": "represented_in_appeal",
+      "SourceDocumentID": "D075"
     },
     {
       "EventID": "E204",
@@ -16074,8 +16078,8 @@
     },
     {
       "RoleID": "R009",
-      "RoleName": "beneficiary_of",
-      "Description": "Pessoa favorecida pelo resultado de decisão/recurso judicial; diferente de autoria do recurso."
+      "RoleName": "represented_in_appeal",
+      "Description": "Pessoa representada por defensor no recurso judicial; não pressupõe autoria do recurso nem concessão de benefício."
     }
   ],
   "EventDetails": [

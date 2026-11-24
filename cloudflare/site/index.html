@@ -12,8 +12,8 @@
 <script defer src="./atlas-map.js?v=3"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script defer src="./graph-d3.js?v=atlas10"></script>
-<script defer src="./app.js?v=atlas11"></script>
-<meta name="atlas-release" content="atlas11-20261124">
+<script defer src="./app.js?v=atlas12"></script>
+<meta name="atlas-release" content="atlas12-20261124">
 </head>
 <body>
 <header class="original-header">
@@ -67,7 +67,7 @@
 <h3>Resultados da consulta</h3><div id="sparqlResults" class="table-shell"></div>
 </section>
 <section id="dados" class="page">
-<h2>Repositório de dados</h2><p class="section-intro">Consulte os vínculos integrados entre as entidades ou explore as tabelas da matriz. As referências documentais identificadas são apresentadas; os excertos inéditos permanecem reservados à matriz de pesquisa.</p>
+<h2>Repositório de dados</h2><p class="section-intro">Consulte exclusivamente as tabelas relacionais entre entidades. As referências documentais identificadas são apresentadas; os excertos inéditos permanecem reservados à matriz de pesquisa.</p>
 <div class="research-card" id="pesquisaLocal" hidden><details class="dataset-loader"><summary>Carregar a matriz completa, com evidências, neste navegador</summary>
 <p class="auxiliary">Selecione os CSVs da pasta app/data do seu computador. Nenhum arquivo será transmitido ao Cloudflare.</p>
 <label for="csvUpload"><strong>Selecionar arquivos CSV:</strong></label><input id="csvUpload" type="file" accept=".csv,text/csv,.json,application/json" multiple>
@@ -75,7 +75,7 @@
 <div class="data-tools"><label for="datasetSelect">Selecionar aba ou visão relacional:</label><select id="datasetSelect" aria-label="Escolher tabela da matriz"></select><input type="search" id="dataFilter" placeholder="Pesquisar nos registros da aba selecionada"></div><div id="dataTable" class="table-shell"></div><div id="dataPager" class="data-pager" aria-label="Paginação da tabela"></div>
 </section>
 <section id="cosmov" class="page">
-<h2><img src="icons/stars.png" class="stars-head" alt="">Acervos de Movimentos Sociais (Cosmov)</h2><p>Pesquisa bibliográfica automatizada pela API OpenAlex. Explore artigos acadêmicos, teses e publicações que mencionam os movimentos sociais catalogados no Atlas.</p>
+<h2><img src="icons/stars.png" class="stars-head" alt="">Acervos de Movimentos Sociais (Cosmov)</h2><p>Pesquisa bibliográfica pela API OpenAlex, complementada por referências selecionadas pela pesquisadora. Explore artigos acadêmicos, teses e publicações relacionadas aos movimentos sociais catalogados no Atlas.</p>
 <div class="cos-search"><label for="cosQuery">Termo de pesquisa:<input id="cosQuery" type="search" value="Oposição Sindical Metalúrgica de São Paulo"></label><button id="cosSearch">Pesquisar publicações</button></div><div id="cosResults" class="table-shell"></div>
 </section>
 </main><footer>Atlas da Resistência · Projeto de pesquisa em desenvolvimento · Universidade de São Paulo</footer>
