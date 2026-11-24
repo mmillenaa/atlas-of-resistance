@@ -29,6 +29,12 @@ const color={Pessoa:'#9D2235',Movimento:'#e2c68e',Instituição:'#d5d5d5',Evento
 const hubs=['M001','I008','I108','I107','M018','I116','I119','I005'];
 let db={}, nodeById=new Map(), edgeRows=[], visible=new Set(), selected='', net=null, leafletMap=null, manifest={};
 let imageCache=new Map();
+let historicosLocais={};
+let primeiroAjusteMapa=false;
+// Destaques experimentais de iniciativas de educação de trabalhadores.
+// A lista é explícita e pode ser revisada após a qualificação.
+const focosEducacionais = new Set(['I108','I119','I126','I137','I139']);
+
 let miniBiografias={};
 const rows=key=>Array.isArray(db[key])?db[key]:[];
 
@@ -154,6 +160,9 @@ function resetGraph(){
      if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
      if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
    }
+   // As iniciativas educacionais da pesquisa aparecem mesmo sem vínculo
+   // individual imediato, sem inventar nenhuma aresta documental.
+   for(const id of focosEducacionais)if(nodeById.has(id))visible.add(id);
    // Ligações diretas entre organizações já cadastradas; sem criar nós ausentes.
  } else if(focus&&nodeById.has(focus)) {
    visible.add(focus);neighbors(focus).forEach(x=>visible.add(x));
@@ -189,15 +198,15 @@ function coAffiliationEdges(){
 
 function graphNode(n){
  const isPerson=n.kind==='Pessoa';
- const label=(isPerson||hubs.includes(n.id)||n.id===selected)?n.label:'';
- return {id:n.id,label,group:n.kind,
+ const label=(isPerson || n.id===selected)?n.label:'';
+ return {id:n.id,label,group:n.kind,educational:focosEducacionais.has(n.id),
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
-  image:n.photo||undefined,size:isPerson?22:hubs.includes(n.id)?30:19,
+  image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:focosEducacionais.has(n.id)?28:16,
   borderWidth:2,title:'<b>'+HTML(n.label)+'</b><br>'+HTML(n.id)+' · '+HTML(n.kind),
   color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
 }
 function drawGraph(){
- const el=$('network');if(!window.vis){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
+ const el=$('network');if(!window.vis&&!window.d3){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
  const visibleEdges=edgeRows.filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
  if(!$('role').value)visibleEdges.push(...coAffiliationEdges().filter(e=>visible.has(e.from)&&visible.has(e.to)));
  const groups=new Map();
@@ -210,9 +219,22 @@ function drawGraph(){
  const graphNodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(graphNode);
  if(window.d3 && window.drawAtlasD3Graph){
   if(net && typeof net.destroy==='function')net.destroy();
-  net=window.drawAtlasD3Graph(graphNodes,graphEdges,id=>{
-   selected=id;showDetail(id);expand(id,24);
+  net=window.drawAtlasD3Graph(graphNodes,graphEdges,(id,kind)=>{
+   if(!id){
+     selected='';
+     $('detail').hidden=true;
+     if(net?.clearFocus)net.clearFocus();
+     return;
+   }
+   selected=id;
+   showDetail(id);
+   // Não substituir a prévia de todas as pessoas por uma visão radial.
+   // Apenas revelar vizinhos novos, mantendo os existentes no contexto.
+   const novos=id==='M001'?[]:neighbors(id).filter(x=>!visible.has(x)).slice(0,22);
+   if(novos.length){novos.forEach(x=>visible.add(x));drawGraph();}
+   if(net && typeof net.focus==='function')net.focus(id,{lock:id==='M001'});
   });
+  if(selected && net?.focus)net.focus(selected,{lock:selected==='M001'});
   const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
   $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
   return;
@@ -250,13 +272,15 @@ function updateCounts(){
   const html=keys.map(([k,l])=>'<div class="stat"><strong>'+rows(k).length+'</strong>'+l+'</div>').join('');
   if($('summary'))$('summary').innerHTML=html;if($('dataCounts'))$('dataCounts').innerHTML=html;updateDataTable();
 }
+const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
+const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
+
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
  if(!leafletMap){
-  leafletMap=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([-23.55,-46.63],5);
-  
-L.tileLayer(
+  leafletMap=L.map('map',{scrollWheelZoom:true,zoomControl:true}).setView([-23.55,-46.63],5);
+  L.tileLayer(
   "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=SUA_CHAVE_CARTO",
   {
     attribution:
@@ -265,7 +289,6 @@ L.tileLayer(
     className: "atlas-grayscale-tiles"
   }
 ).addTo(leafletMap);
-
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
  const chosen=$('mapConcept').value;
@@ -286,12 +309,46 @@ L.tileLayer(
    const isEvent=ne>0 || /^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH));
    const label=first(r,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||r.PlaceID;
    const radius=$('heat').checked?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
+   const memoria=historicosLocais[text(r.PlaceID)]||{};
+   const born=rows('Persons').filter(p=>text(p.BirthPlaceID)===text(r.PlaceID)).map(p=>p.Name);
+   const died=rows('Persons').filter(p=>text(p.DeathPlaceID)===text(r.PlaceID)).map(p=>p.Name);
+   const relacionados=events.filter(e=>text(e.PlaceID)===text(r.PlaceID));
+   const eventPersonIds=new Map();
+   for(const ep of rows('EventPersons')){
+     if(!eventPersonIds.has(ep.EventID))eventPersonIds.set(ep.EventID,[]);
+     eventPersonIds.get(ep.EventID).push(ep.PersonID);
+   }
+   const descr=first(r,['MDH_Summary','Notes','MDH_Summary_EN'])||text(memoria.descricao);
+   let detalhes='<h3>'+HTML(label)+'</h3>';
+   const endereco=first(r,['Address'])||text(memoria.endereco);
+   if(endereco)detalhes+='<p class="map-address">'+HTML(endereco)+'</p>';
+   detalhes+='<p><b>Município:</b> '+HTML(r.Municipality)+' · '+HTML(r.State)+'</p>';
+   detalhes+='<p><b>Categoria:</b> '+HTML(tipoLocalPT(r.PlaceType))+'</p>';
+   if(descr)detalhes+='<h4>Histórico do local</h4><div class="map-history">'+HTML(descr)+'</div>';
+   else detalhes+='<p class="auxiliary">Este local ainda não possui síntese histórica pública cadastrada. Consulte as fontes relacionadas abaixo.</p>';
+   if(born.length)detalhes+='<p><b>Nascimentos associados:</b> '+HTML([...new Set(born)].join(', '))+'</p>';
+   if(died.length)detalhes+='<p><b>Falecimentos associados:</b> '+HTML([...new Set(died)].join(', '))+'</p>';
+   detalhes+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4>';
+   if(relacionados.length){
+      detalhes+='<ul class="map-events">'+relacionados.slice(0,35).map(ev=>{
+        const people=(eventPersonIds.get(ev.EventID)||[]).map(pid=>nodeById.get(pid)?.label).filter(Boolean);
+        const dates=[text(ev.StartDate),text(ev.EndDate)].filter(Boolean).join(' – ');
+        return '<li><b>'+HTML(eventLabel(ev.EventType))+'</b>'+(dates?' · '+HTML(dates):'')+
+          (people.length?' — '+HTML([...new Set(people)].join(', ')):'')+'</li>';
+      }).join('')+'</ul>';
+   }else detalhes+='<p class="auxiliary">Nenhum evento diretamente vinculado a este identificador na tabela Events.</p>';
+   if(text(r.Source_MDH).toUpperCase()==='TRUE' || memoria.fonte==='MDH'){
+     detalhes+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
+   }
+   detalhes+='<p class="auxiliary">Identificador: '+HTML(r.PlaceID)+' · Coordenadas: '+lat+', '+lon+'</p>';
    L.circleMarker([lat,lon],{radius,color:isEvent?'#9D2235':'#808080',weight:1.4,fillOpacity:$('heat').checked?.42:.72})
     .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
-    .on('click',()=>{$('mapSide').innerHTML='<h3>'+HTML(label)+'</h3><p><b>Município:</b> '+HTML(r.Municipality)+' · '+HTML(r.State)+'</p><p><b>Tipo de local:</b> '+HTML(r.PlaceType)+'</p><p><b>Acontecimentos relacionados:</b> '+ne+'</p><p>'+HTML(first(r,['MDH_Summary','Notes','MDH_Summary_EN']))+'</p><p class="auxiliary">Coordenadas: '+lat+', '+lon+'</p>';});
+    .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
- leafletMap.__atlasCoords=coords; if(coords.length&&chosen==='ALL'&&document.getElementById('mapa').classList.contains('active')){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});}
+ leafletMap.__atlasCoords=coords;
+ // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
+ if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
  $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Legenda: vinho = memória/acontecimentos; cinza = demais localizações.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
@@ -340,8 +397,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
     document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));
-    if(b.dataset.page==='mapa')setTimeout(()=>{updateMap();if(leafletMap){leafletMap.invalidateSize();if(leafletMap.__atlasCoords?.length)leafletMap.fitBounds(leafletMap.__atlasCoords,{padding:[25,25],maxZoom:9});}},140);
-    if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();net.fit({animation:false});},120);if(b.dataset.page==='juridico')updateConceptChart();
+    if(b.dataset.page==='mapa')setTimeout(()=>{updateMap();if(leafletMap)leafletMap.invalidateSize();},140);
+    if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
   $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
   $('reset').onclick=()=>{$('focus').value='';resetGraph();};
@@ -352,6 +409,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   $('cosSearch').onclick=cosmov;setupAdditionalUI();
   try{manifest=await (await fetch('assets/people/manifest.json')).json();
    const b=await fetch('data/minibiografias-publicas.json');if(b.ok)miniBiografias=await b.json();
+   try{const resp=await fetch('data/lugares-memoria.json');if(resp.ok)historicosLocais=await resp.json();}catch(e){console.info('Descrição pública de lugares não disponível',e);}
    await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
@@ -373,7 +431,8 @@ function setupAdditionalUI(){
     resetGraph();
   });
 
-  $('heat').onchange=updateMap;$('mapConcept').onchange=updateMap;
+  $('heat').onchange=updateMap;
+  $('mapConcept').onchange=()=>{primeiroAjusteMapa=false;updateMap();};
   $('legalEventsTab').onclick=()=>showLegalTab(false);$('legalTrendsTab').onclick=()=>showLegalTab(true);
   $('dataFilter').oninput=()=>{dataPage=0;updateDataTable();};$('datasetSelect').onchange=()=>{dataPage=0;updateDataTable();};
   if($('exportSelected'))$('exportSelected').onclick=exportDataTable;

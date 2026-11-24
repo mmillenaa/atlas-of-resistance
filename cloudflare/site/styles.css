@@ -70,3 +70,30 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 #pesquisaLocal[hidden]{display:none!important}
 @media(max-width:930px){.legal-grid{grid-template-columns:1fr}.cos-search{grid-template-columns:1fr}.cos-search button{max-width:230px}}
 @media(max-width:640px){#network{height:600px;min-height:470px}.graph-detail img{width:108px;height:108px}}
+
+/* Foco humano e geográfico — sem refazer identidade visual do Shiny */
+#grafo{width:100%;max-width:none;margin:0 auto}
+#grafo .network-frame{width:100%;max-width:none;min-width:0}
+#grafo .filter-card{width:100%;max-width:none}
+#network{height:clamp(650px,72vh,960px)}
+#network .atlas-organization .node-label{display:none}
+#network .atlas-person .node-label{font:600 13px/1.2 Roboto,Arial,sans-serif;fill:#2f3033;stroke:#fff;stroke-width:4px;paint-order:stroke;pointer-events:none}
+#network .lj-node.atlas-person>circle{stroke:#9D2235;stroke-width:2.3px}
+#network .lj-node.atlas-educational>circle.educational-focus{stroke:#ff2b1f;stroke-width:5px;filter:drop-shadow(0 0 3px rgba(255,40,20,.3))}
+#network .lj-node.atlas-educational.atlas-selected>circle{stroke:#9a0900;stroke-width:6px}
+#network .lj-node.atlas-selected>circle{stroke:#141414;stroke-width:5px}
+#network .lj-node.atlas-linked.atlas-person>circle{stroke:#9D2235;stroke-width:3px}
+#network .lj-node.atlas-dimmed{opacity:.095}
+#network .lj-edge.atlas-dimmed{stroke-opacity:.025!important}
+#network .lj-edge.atlas-highlight-link{stroke:#9D2235;stroke-opacity:.85!important;stroke-width:2.6px}
+#network .lj-node.atlas-educational .node-label{fill:#df291c}
+#network .lj-node.atlas-selected .node-label{display:block!important;font-weight:700;fill:#222}
+#network .lj-node.atlas-dimmed .node-label{display:none!important}
+.map-history{font:14px/1.75 Roboto,Arial,sans-serif;white-space:pre-line;text-align:left;color:#383838;margin-bottom:18px}
+.map-address{border-bottom:1px solid #ececec;padding-bottom:10px;color:#555;font-style:italic}
+.map-events{padding-left:20px;font:13px/1.7 Roboto,Arial,sans-serif}
+.map-events li{padding-bottom:7px}
+.map-source{border-top:1px dashed #ccc;padding-top:10px;font-size:11px!important;color:#6c6c6c}
+#map{touch-action:pan-x pan-y}
+@media(max-width:920px){#grafo .filter-card{grid-template-columns:1fr}#network{height:740px}}
+@media(max-width:600px){#grafo .network-frame{margin-inline:-6px;width:calc(100% + 12px)}#network{height:660px}#network .atlas-person .node-label{font-size:12px}}
