@@ -419,12 +419,13 @@ function updateMap(){
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
- const education=atlasIniciativas.filter(i=>Array.isArray(i.coords));
- if(!chosen||chosen==='ALL')for(const item of education){atlasPlotEducation(item,false);coords.push(item.coords);}
+ const education=atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords));
+ // A camada educacional permanece visível mesmo ao filtrar os acontecimentos jurídicos.
+ for(const item of education){atlasPlotEducation(item,false);coords.push(item.coords);}
  leafletMap.__atlasCoords=coords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
  if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais históricos · '+eventPlaces+' associados a eventos ou memória · '+((!chosen||chosen==='ALL')?education.length:0)+' iniciativas educacionais georreferenciadas. Contorno tracejado = localização aproximada.';
+ $('mapStatus').textContent=total+' locais históricos · '+eventPlaces+' associados a eventos ou memória · '+education.length+' iniciativas educacionais georreferenciadas. Contorno tracejado = localização aproximada.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -448,11 +449,15 @@ function updateConceptChart(){
   const evIDs=new Set(rows('EventConcepts').filter(r=>r.ConceptID===$('concept').value).map(r=>r.EventID));
   const years=new Map();for(const e of rows('Events')){if(!evIDs.has(e.EventID))continue;const year=/\b(?:19|20)\d{2}\b/.exec(text(e.StartDate));if(!year)continue;years.set(year[0],(years.get(year[0])||0)+1);}
   const chart=$('conceptChart');if(!years.size){chart.textContent='Não há dados cronológicos disponíveis para essa categoria.';return;}
-  const vals=[...years].sort((a,b)=>+a[0]-+b[0]),max=Math.max(...vals.map(x=>x[1])),w=Math.max(550,vals.length*35),h=350;
-  let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Frequência de acontecimentos por ano" style="width:100%;max-height:410px">';
-  svg+='<line x1="40" y1="300" x2="'+(w-20)+'" y2="300" stroke="#888"/>';
-  vals.forEach(([year,value],i)=>{const x=50+i*((w-80)/vals.length),bh=240*value/max;svg+='<rect x="'+x+'" y="'+(300-bh)+'" width="'+Math.max(9,(w-100)/vals.length-5)+'" height="'+bh+'" fill="#9D2235"><title>'+year+': '+value+' acontecimentos</title></rect><text x="'+x+'" y="320" font-size="12" fill="#666">'+year+'</text>';});
-  chart.innerHTML=svg+'</svg><p class="auxiliary">Ocorrências documentadas por ano — visualização construída a partir de Events.csv e EventConcepts.csv.</p>';
+  const vals=Array.from({length:25},(_,i)=>[1964+i,years.get(String(1964+i))||0]);
+  const max=Math.max(1,...vals.map(x=>x[1])),w=780,h=410,left=54,right=20,top=48,bottom=345,step=(w-left-right)/vals.length;
+  const y=v=>bottom-(bottom-top)*v/max;
+  let svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Frequência histórica 1964 a 1988" style="width:100%;max-height:500px"><text x="'+left+'" y="22" font-family="Merriweather, Georgia, serif" font-size="14" fill="#9D2235">Frequência histórica: '+HTML($('concept').selectedOptions?.[0]?.textContent||'categoria selecionada')+'</text>';
+  const tick=Math.max(1,Math.ceil(max/5));
+  for(let v=0;v<=max;v+=tick)svg+='<line x1="'+left+'" y1="'+y(v)+'" x2="'+(w-right)+'" y2="'+y(v)+'" stroke="#e3e3e3"/><text x="'+(left-8)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="12" fill="#555">'+v+'</text>';
+  for(const [i,[year,value]] of vals.entries()){const x=left+i*step+step*.125;svg+='<rect x="'+x+'" y="'+y(value)+'" width="'+step*.75+'" height="'+(bottom-y(value))+'" fill="#9D2235" stroke="#7a1a29" stroke-width=".5"><title>'+year+': '+value+' acontecimentos</title></rect>';if(i%2===0)svg+='<text x="'+(left+i*step+step/2)+'" y="'+(bottom+18)+'" text-anchor="middle" font-size="11" fill="#555">'+year+'</text>';}
+  svg+='<polyline points="'+vals.map(([yr,v],i)=>(left+(i+.5)*step)+','+y(v)).join(' ')+'" fill="none" stroke="#424242" stroke-width="1.5" opacity=".55"/><text x="'+w/2+'" y="'+(h-9)+'" text-anchor="middle" font-size="12" fill="#555">Ano de ocorrência</text><text transform="translate(14,200) rotate(-90)" text-anchor="middle" font-size="12" fill="#555">Acontecimentos documentados</text>';
+  chart.innerHTML=svg+'</svg><p class="auxiliary">Recorte original (1964–1988). Anos sem ocorrências datadas na matriz são apresentados como zero; não significam ausência histórica de violações.</p>';
 }
 
 
@@ -485,10 +490,11 @@ document.addEventListener('DOMContentLoaded',async()=>{
   if($('csvUpload'))$('csvUpload').onchange=async e=>{try{await importFiles([...e.target.files]);}catch(err){if($('uploadStatus'))$('uploadStatus').textContent='Erro: '+err.message;}};
   if($('restore'))$('restore').onclick=()=>restore().catch(e=>{if($('uploadStatus'))$('uploadStatus').textContent=e.message;});
   $('cosSearch').onclick=cosmov;setupAdditionalUI();
-  try{manifest=await (await fetch('assets/people/manifest.json')).json();
-   const b=await fetch('data/minibiografias-publicas.json');if(b.ok)miniBiografias=await b.json();
-   try{const resp=await fetch('data/lugares-memoria.json');if(resp.ok)historicosLocais=await resp.json();}catch(e){console.info('Descrição pública de lugares não disponível',e);}
-   await restore();}
+  try{
+    // Optional enrichments never prevent the public dataset/map from loading.
+    const optional=async(url,apply)=>{try{const r=await fetch(url);if(r.ok)apply(await r.json());}catch(e){console.info('Dados auxiliares indisponíveis:',url);}};
+    await Promise.all([optional('assets/people/manifest.json',x=>manifest=x),optional('data/minibiografias-publicas.json',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
+    await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
 
@@ -663,20 +669,20 @@ const atlasIniciativas = [
  fonte:'https://memorialdaresistenciasp.org.br/lugares/centro-de-pastoral-vergueiro-cpv/',nota:'Sueli relata a transferência do supletivo para o CPV e o contato com Anizio Batista de Oliveira, da OSM-SP. O trabalho articulava formação sindical e militância com escrita e elevação da escolaridade dos trabalhadores da ARNO. As aulas duraram aproximadamente dois anos, antes da ida à ATRI.'},
 {id:'I108', nome:'Escola Nova Piratininga — Brás', periodo:'1979–1985',
   endereco:'Rua Melo Barreto, 104, Brás, São Paulo, SP, Brasil',
-  precisao:'Endereço histórico publicado; coordenada a conferir', localizavel:true,
+  coords:[-23.54704,-46.62067],aproximado:true,precisao:'Endereço histórico publicado; coordenada aproximada do logradouro (CEP 03041-040), não do imóvel', localizavel:true,
   fonte:'https://serieucdb.emnuvens.com.br/serie-estudos/article/download/324/222/956',
-  nota:'Primeira sede documentada. Não confundir com o Colégio Piratininga, instituição distinta.'},
+  nota:'Primeira sede documentada. Não confundir com o Colégio Piratininga, instituição distinta. Coordenada aproximada: https://www.ruacep.com.br/sp/sao-paulo/bras/03041040-rua-melo-barreto/.'},
  {id:'I108', nome:'Escola Nova Piratininga — Rua Riachuelo', periodo:'1986–1989',
   endereco:'Rua Riachuelo, Centro, São Paulo, SP, Brasil',
   precisao:'Logradouro documentado; número não confirmado', localizavel:false,
   fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',
   nota:'Não há número confirmado. Evitar atribuir coordenada exata.'},
- {id:'I108', nome:'Escola Nova Piratininga — Sé', periodo:'1990–1996',
+ {id:'I108', nome:'Escola Nova Piratininga — Sé', periodo:'1989/1990–1996 (transição a conferir)',
   endereco:'Rua Silveira Martins, 8, Sé, São Paulo, SP, Brasil',
-  precisao:'Endereço histórico publicado; coordenada a conferir',localizavel:true,
+  coords:[-23.5518407,-46.6310495],aproximado:true,precisao:'Endereço histórico publicado; coordenada aproximada do logradouro (CEP 01019-000), não do imóvel',localizavel:true,
   fonte:'https://periodicos.uff.br/trabalhonecessario/article/download/57854/34051/203785?inline=1',
-  nota:'Sede posterior ao período ditatorial, importante para a continuidade do projeto pedagógico.'},
- {id:'I107', nome:'IIEP — sede atual', periodo:'Endereço contemporâneo',
+  nota:'Sede posterior à ditadura, importante para a continuidade do projeto pedagógico. A bibliografia registra transferência em 1989; conferir o ano de início das aulas no imóvel. Coordenada aproximada: https://cepbrasil.org/sao-paulo/sao-paulo/se/01019000.'},
+ {id:'I107', nome:'IIEP — sede atual', educacional:false, periodo:'Endereço contemporâneo',
   endereco:'Rua Doutor Tomaz de Lima, 151, Liberdade, São Paulo, SP, Brasil',
   precisao:'Sede atual; NÃO é sede histórica da OSM-SP',localizavel:true,
   fonte:'https://www.iiep.org.br/',
@@ -710,7 +716,7 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  if(!leafletMap||!coords)return;
  const L=window.AtlasRaster;
  const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
- const marker=L.circleMarker(coords,{radius:10,color:'#A51A12',fillColor:'#FF2B1F',weight:2,fillOpacity:.94,priority:3,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
+ const marker=L.circleMarker(coords,{radius:10,color:item.educacional===false?'#777':'#A51A12',fillColor:item.educacional===false?'#9AA0A6':'#FF2B1F',weight:2,fillOpacity:.94,priority:item.educacional===false?0:3,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
 const atlasEduGeoCache = new Map();
@@ -781,7 +787,7 @@ function atlasEduInit(){
   atlasEduShowList(m,true);
   mToggle.addEventListener('click',()=>{
     m.hidden=!m.hidden;mToggle.setAttribute('aria-expanded',String(!m.hidden));
-    if(!m.hidden && leafletMap){leafletMap.fitBounds(atlasIniciativas.filter(i=>i.coords).map(i=>i.coords),{maxZoom:13});}
+    if(!m.hidden && leafletMap){leafletMap.fitBounds(atlasIniciativas.filter(i=>i.coords&&i.educacional!==false).map(i=>i.coords),{maxZoom:13});}
   });
  }
 }
