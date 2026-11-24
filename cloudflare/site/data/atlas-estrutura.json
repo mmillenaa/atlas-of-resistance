@@ -10226,7 +10226,8 @@
     {
       "EventID": "E151",
       "PersonID": "P032",
-      "Role": "victim_of"
+      "Role": "victim_of",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E152_A",
@@ -10461,11 +10462,6 @@
     {
       "EventID": "E193",
       "PersonID": "P024",
-      "Role": "participant_in"
-    },
-    {
-      "EventID": "E151",
-      "PersonID": "P032",
       "Role": "participant_in"
     },
     {

@@ -34,7 +34,7 @@ let historicosLocais={};
 let primeiroAjusteMapa=false;
 
 let miniBiografias={};
-const rows=key=>Array.isArray(db[key])?db[key]:[];
+const rows=key=>{const records=Array.isArray(db[key])?db[key]:[];return key==='EventPersons'?records.filter(r=>!(r.EventID==='E151'&&r.PersonID==='P032'&&r.Role==='participant_in')):records;};
 
 function parseCSV(csv){
   const all=[];let row=[],val='',quoted=false;
@@ -83,7 +83,7 @@ const rolePT = Object.freeze({
  union_delegate:'Delegado sindical de', volunteer:'Voluntário de',
  beneficiary_of:'Destinatário de decisão favorável em', represented_in_appeal:'Foi representado em', candidate_in:'Candidatou-se em', lawyer_at:'Exerceu a defesa em',
  organizer_of:'Organizou', participant_in:'Participou de', victim_of:'Foi vítima de',
- characterized_as:'Caracteriza-se como', claims:'Reivindica', exercises:'Exerce',
+ characterized_as:'Caracteriza-se como', claims:'Expressa reivindicação de', exercises:'Constitui exercício de',
  violates:'Viola', cites:'Cita', is_about:'Trata de', mentions:'Menciona',
  collaborated_with:'Colaborou com', emerged_from_pedagogical_network_of:'Surgiu da rede pedagógica de',
  operated_at:'Atuou em', organizational_unit_of:'Unidade de',
@@ -161,6 +161,7 @@ function relationEvidence(table,raw){
  const passage=first(raw,['EvidenceText_ORIG','EvidenceText_EN']);
  let ids=[text(raw.SourceDocumentID)].filter(Boolean);
  if(table==='EventPersons'&&raw.EventID==='E202'&&['P033','P037'].includes(raw.PersonID))ids=['D075'];
+ if(table==='EventPersons'&&raw.EventID==='E151'&&raw.PersonID==='P032')ids=['D048'];
  if(!ids.length&&['DocumentPersons','DocumentEvents','DocumentLocations'].includes(table)&&raw.DocumentID)ids=[raw.DocumentID];
  const refs=ids.map(sourceReference);
  const url=first(raw,['SourceURL'])||(/^https?:\/\//i.test(text(raw.Confidence))?text(raw.Confidence):'');
@@ -209,7 +210,7 @@ function updateSelectors(){
 }
 
 function neighbors(id){
-  const result=[];for(const e of arestasSociais()){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
+  const result=[];for(const e of graphSocialEdges()){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
   return [...new Set(result)].sort();
 }
 // Recorte de visualização: entrevista coletiva de 27/09/2026, apêndice pp. 43–81.
@@ -707,18 +708,31 @@ const atlasInterview= {
   ]
 };
 let atlasInterviewEdges=[];
-function graphSocialEdges(){return $('graphFilter')?.value==='education'?[...arestasSociais(),...atlasInterviewEdges]:arestasSociais();}
-function interviewNodes(enabled){
+const verifiedInterviewOSM=new Set(['EP01','EP02','EP05','EP07','EP11']);
+function graphSocialEdges(){return [...arestasSociais(),...atlasInterviewEdges];}
+function interviewNodes(mode){
  for(const [id,n] of nodeById)if(n.interviewOnly)nodeById.delete(id);
- atlasInterviewEdges=[];if(!enabled)return new Set();
- const ids=new Set(atlasInterview.existing.filter(id=>nodeById.has(id)));
- for(const [kind,records] of [['Pessoa',atlasInterview.people],['Instituição',atlasInterview.initiatives]])for(const [id,label,pages,summary] of records){nodeById.set(id,{id,label,kind,photo:'',interviewOnly:true,raw:{Notes:summary+' Fonte: entrevista coletiva de 27/09/2026, p. '+pages+'. Registro de visualização, não identidade validada na matriz.'}});ids.add(id);}
- for(const [id,label,pages,summary,links] of [...atlasInterview.people,...atlasInterview.initiatives])for(const [to,relation] of links)if(ids.has(to)){const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence:(id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.'),status:'documented'});}
+ atlasInterviewEdges=[];
+ const education=mode===true||mode==='education';
+ const general=mode==='all'||mode==='Pessoa';
+ if(!education&&!general)return new Set();
+ const people=education?atlasInterview.people:atlasInterview.people.filter(r=>verifiedInterviewOSM.has(r[0]));
+ const initiatives=education?atlasInterview.initiatives:[];
+ const ids=new Set(education?atlasInterview.existing.filter(id=>nodeById.has(id)):['M001'].filter(id=>nodeById.has(id)));
+ for(const [kind,records] of [['Pessoa',people],['Instituição',initiatives]])for(const [id,label,pages,summary] of records){
+  nodeById.set(id,{id,label,kind,photo:'',interviewOnly:true,raw:{Notes:summary+' Fonte: entrevista coletiva de 27/09/2026, p. '+pages+'. Identificador provisório de visualização; ficha cadastral em revisão.'}});ids.add(id);
+ }
+ for(const [id,label,pages,summary,links] of [...people,...initiatives])for(const [to,original] of links)if(ids.has(to)&&(education||to==='M001')){
+  const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';
+  const relation=id==='EP02'&&to==='M001'?'integral_participant':original;
+  const evidence=id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.';
+  atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence,status:'documented'});
+ }
  return ids;
 }
 function resetGraph(){
  const mode=$('graphFilter')?.value||'all';
- const edu=interviewNodes(mode==='education');
+ const edu=interviewNodes(mode);
  visible=new Set();
  if(mode==='education')visible=edu;
  else if(mode==='all'){
