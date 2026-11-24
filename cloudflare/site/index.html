@@ -64,9 +64,12 @@
 <h3>Resultados da consulta</h3><div id="sparqlResults" class="table-shell"></div>
 </section>
 <section id="dados" class="page">
-<h2>Dados brutos integrados</h2><p class="section-intro">Explore as relações entre pessoas, instituições, movimentos e suas evidências. Os filtros e arquivos são processados no navegador.</p>
-<div class="research-card"><label for="csvUpload"><strong>Carregar CSVs do diretório app/data (sem enviar ao servidor):</strong></label><input id="csvUpload" type="file" accept=".csv,text/csv" multiple><button id="restore" class="small-button">Restaurar demonstração</button><p class="auxiliary" id="uploadStatus">A demonstração pública não contém as matrizes inéditas. Escolha todos os CSVs da pasta app/data para consultar o acervo completo localmente.</p></div>
-<div id="dataCounts" class="data-stats"></div><div class="data-tools"><input type="search" id="dataFilter" placeholder="Pesquisar nos registros, vínculos e evidências"><button id="exportSelected" class="small-button">Exportar seleção (CSV)</button></div><div id="dataTable" class="table-shell"></div>
+<h2>Repositório de dados</h2><p class="section-intro">Consulte o registro de pessoas, instituições, movimentos e vínculos documentados, organizado conforme a matriz de pesquisa.</p>
+<div class="research-card"><details class="dataset-loader"><summary>Carregar a matriz completa, com evidências, neste navegador</summary>
+<p class="auxiliary">Selecione os CSVs da pasta app/data do seu computador. Nenhum arquivo será transmitido ao Cloudflare.</p>
+<label for="csvUpload"><strong>Selecionar arquivos CSV:</strong></label><input id="csvUpload" type="file" accept=".csv,text/csv,.json,application/json" multiple>
+<button id="restore" class="small-button">Restaurar estrutura pública</button><p class="auxiliary" id="uploadStatus"></p></details></div>
+<div class="data-tools"><label for="datasetSelect">Selecionar aba ou visão relacional:</label><select id="datasetSelect" aria-label="Escolher tabela da matriz"></select><input type="search" id="dataFilter" placeholder="Pesquisar nos registros da aba selecionada"></div><div id="dataTable" class="table-shell"></div><div id="dataPager" class="data-pager" aria-label="Paginação da tabela"></div>
 </section>
 <section id="cosmov" class="page">
 <h2><img src="icons/stars.png" class="stars-head" alt="">Corpora of Social Movements (Cosmov)</h2><p>Pesquisa bibliográfica automatizada pela API OpenAlex. Explore artigos acadêmicos, teses e publicações que mencionam os movimentos sociais catalogados no Atlas.</p>

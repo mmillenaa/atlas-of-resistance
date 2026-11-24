@@ -61,6 +61,50 @@ async function portrait(n){
   imageCache.set(id,result);return result;
 }
 
+const rolePT = Object.freeze({
+ active_member:'Integrante ativo', associated_with:'Vinculado a', coordinator_of:'Coordenação de',
+ founding_member:'Integrante fundador', integral_participant:'Integrante constitutivo do coletivo',
+ leader_of:'Liderança de', member_of:'Integrante de', organizer:'Organização',
+ participant:'Participante', president_of:'Presidência de', representative_of:'Representante de',
+ subcommander_of:'Subcomandante de', advisor:'Assessoria a', athlete:'Atleta em',
+ director_of:'Direção de', educator:'Educação em', elected_member:'Representante eleito de',
+ employee:'Trabalhador em', federal_deputy:'Deputado federal',
+ founder_and_president:'Fundador e presidente de', founder_of:'Fundador de',
+ lawyer:'Advocacia em', lay_representative:'Representação leiga em',
+ opposition_candidate:'Candidato de oposição em', parish_priest:'Pároco de',
+ pastoral_agent:'Agente pastoral de', priest:'Sacerdote em', professor:'Professor em',
+ researcher:'Pesquisa em', resident:'Morador de', secretary_of:'Secretaria de',
+ student:'Estudante em', teacher:'Docência em', teacher_trainer:'Formação docente em',
+ union_delegate:'Delegado sindical de', volunteer:'Voluntário de',
+ beneficiary_of:'Beneficiário de', candidate_in:'Candidato em', lawyer_at:'Advogado em',
+ organizer_of:'Organizador de', participant_in:'Participante em', victim_of:'Vítima de',
+ characterized_as:'Caracterizado como', claims:'Reivindica', exercises:'Exerce',
+ violates:'Viola', cites:'Cita', is_about:'Trata de', mentions:'Menciona',
+ collaborated_with:'Colaborou com', emerged_from_pedagogical_network_of:'Surgiu da rede pedagógica de',
+ operated_at:'Atuou em', organizational_unit_of:'Unidade de',
+ pedagogical_continuation_of:'Continuidade pedagógica de',
+ supported_educational_work_of:'Apoiou a formação de',
+ territorial_body_of:'Instância territorial de', articulates_with:'Articula-se com',
+ contributed_to_formation_of:'Contribuiu para formar',
+ organizational_reconfiguration_into:'Reorganizou-se em',
+ articulated_with:'Articulou-se com', contested_leadership_of:'Disputou a direção de',
+ contributed_to_creation_of:'Contribuiu para criar', documented_by:'Documentado por',
+ political_current_within:'Corrente política em', related_to:'Relacionado a',
+ co_present_at:'Participaram do mesmo evento'
+});
+
+const additionalRoleLabels = {"place_of_surveillance": "Local de vigilância", "adjudicating_court": "Órgão julgador", "place_of_interview": "Local de entrevista", "supporting_agency": "Órgão de apoio", "place_of_arbitrary_detention": "Local de detenção arbitrária", "participant_agency": "Órgão participante", "place_of_violation": "Local da violação", "target_agency": "Órgão visado", "depicts": "Retrata", "place_of_intimidation": "Local de intimidação", "place_of_persecution": "Local de perseguição", "place_of_torture": "Local de tortura", "perpetrator_agency": "Órgão responsável pela violação", "organizer_agency": "Órgão organizador", "place_of_falsification_of_cause_of_death_or_evidence_tampering": "Local de falsificação da causa da morte ou adulteração de provas", "place_of_incarceration": "Local de encarceramento", "place_of_concealment_of_a_body": "Local de ocultação de cadáver"};
+const roleLabel = x => rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
+const roleStatus = s => s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
+const eventLabels = {
+ assassination:'Assassinato',strike:'Greve',torture:'Tortura',persecution:'Perseguição',
+ dismissal:'Demissão',intimidation:'Intimidação',incarceration:'Prisão',surveillance:'Vigilância',
+ protest:'Manifestação',campaign:'Campanha',congress:'Congresso',censorship:'Censura',
+ exile:'Exílio','arbitrary detention':'Detenção arbitrária','summary execution':'Execução sumária'
+};
+const eventLabel = x => eventLabels[text(x)]||text(x).replace(/_/g,' ');
+function canDisplayEdge(e){ return $('role').value==='' || e.relation===$('role').value; }
+
 async function normalize(){
   nodeById=new Map();edgeRows=[];imageCache=new Map();
   for(const [table,[key,labels,kind]] of Object.entries(schema)){
@@ -81,86 +125,128 @@ async function normalize(){
 }
 
 function updateSelectors(){
-  const focus=$('focus'),role=$('role'),old=focus.value;
-  const sorted=[...nodeById.values()].sort((a,b)=>a.label.localeCompare(b.label,'pt'));
-  focus.innerHTML='<option value="">Núcleos principais</option>'+sorted.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+' ('+HTML(n.id)+')</option>').join('');
-  if(nodeById.has(old))focus.value=old;
-  role.innerHTML='<option value="">Todos os vínculos</option>'+[...new Set(edgeRows.map(e=>e.relation))].sort().map(x=>'<option>'+HTML(x)+'</option>').join('');
+ const focus=$('focus'),role=$('role'),previous=focus.value;
+ const sorted=[...nodeById.values()].sort((a,b)=>a.label.localeCompare(b.label,'pt'));
+ focus.innerHTML='<option value="">Todas as pessoas</option>'+sorted.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+' ('+n.id+')</option>').join('');
+ if(nodeById.has(previous)) focus.value=previous;
+ const current=role.value;
+ role.innerHTML='<option value="">Todos os vínculos</option>'+
+   [...new Set(edgeRows.map(e=>e.relation))].sort((a,b)=>roleLabel(a).localeCompare(roleLabel(b),'pt')).map(raw=>'<option value="'+HTML(raw)+'">'+HTML(roleLabel(raw))+'</option>').join('');
+ if([...role.options].some(o=>o.value===current))role.value=current;
 }
+
 function neighbors(id){
   const result=[];for(const e of edgeRows){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
   return [...new Set(result)].sort();
 }
 function resetGraph(){
-  visible=new Set(hubs.filter(x=>nodeById.has(x)));
-  const focus=$('focus').value;
-  if(focus&&nodeById.has(focus)){visible.add(focus);neighbors(focus).slice(0,24).forEach(x=>visible.add(x));}
-  else{
-    for(const n of nodeById.values()){
-      if(n.kind==='Pessoa'&&neighbors(n.id).filter(x=>visible.has(x)).length>=2)visible.add(n.id);
-    }
-    if(visible.size<6){for(const n of nodeById.values()){if(n.kind==='Pessoa'&&neighbors(n.id).some(x=>visible.has(x)))visible.add(n.id);}}
-  }
-  selected='';$('detail').hidden=true;drawGraph();
+ const mode=document.querySelector('input[name="graphMode"]:checked')?.value||'overview';
+ const focus=$('focus').value;
+ visible=new Set();
+ if(mode==='overview'){
+   // Todas as pessoas e TODAS as instituições e movimentos aos quais elas se vinculam.
+   for(const n of nodeById.values())if(n.kind==='Pessoa')visible.add(n.id);
+   for(const e of edgeRows){
+     const a=nodeById.get(e.from),b=nodeById.get(e.to);
+     if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
+     if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
+   }
+   // Ligações diretas entre organizações já cadastradas; sem criar nós ausentes.
+ } else if(focus&&nodeById.has(focus)) {
+   visible.add(focus);neighbors(focus).forEach(x=>visible.add(x));
+ }
+ if(!visible.size){for(const id of hubs)if(nodeById.has(id))visible.add(id);}
+ selected='';$('detail').hidden=true;drawGraph();
 }
+
 function expand(id,cap=24){if(!nodeById.has(id))return;neighbors(id).filter(x=>!visible.has(x)).slice(0,cap).forEach(x=>visible.add(x));drawGraph();}
 function graphNode(n){
-  const label=hubs.includes(n.id)||n.id===selected?n.label:'';
-  return {id:n.id,label,group:n.kind,shape:n.photo?'circularImage':n.kind==='Movimento'?'diamond':'dot',image:n.photo||undefined,size:n.kind==='Pessoa'?29:hubs.includes(n.id)?35:23,borderWidth:2,title:'<b>'+HTML(n.label)+'</b><br>'+HTML(n.id)+' · '+HTML(n.kind),color:{background:color[n.kind]||'#ddd',border:'#666',highlight:{border:'#9D2235'}}};
+ const isPerson=n.kind==='Pessoa';
+ const label=(isPerson||hubs.includes(n.id)||n.id===selected)?n.label:'';
+ return {id:n.id,label,group:n.kind,
+  shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
+  image:n.photo||undefined,size:isPerson?22:hubs.includes(n.id)?30:19,
+  borderWidth:2,title:'<b>'+HTML(n.label)+'</b><br>'+HTML(n.id)+' · '+HTML(n.kind),
+  color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}}};
 }
 function drawGraph(){
-  const el=$('network');if(!window.vis){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
-  const filter=$('role').value;
-  const visibleEdges=edgeRows.filter(e=>visible.has(e.from)&&visible.has(e.to)&&(!filter||e.relation===filter));
-  const groups=new Map();
-  for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
-  const edges=[...groups.values()].map((g,i)=>({id:'edge'+i,from:g[0].from,to:g[0].to,title:g.map(e=>'<b>'+HTML(e.relation)+'</b>'+(e.status!=='documented'?' (em revisão)':'')+(e.evidence?'<br>'+HTML(e.evidence.slice(0,270)):'')).join('<hr>'),dashes:g.some(e=>e.status!=='documented'),color:{color:'#bbb',highlight:'#9D2235'}}));
-  const nodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(graphNode);
-  if(net){net.destroy();net=null;}
-  net=new vis.Network(el,{nodes,edges},{layout:{randomSeed:42},interaction:{hover:true,navigationButtons:true},physics:{solver:'barnesHut',barnesHut:{gravitationalConstant:-4800,centralGravity:.09,springLength:180,springConstant:.018,damping:.46,avoidOverlap:.5},stabilization:{enabled:true,iterations:180}},nodes:{font:{face:'Roboto',size:13,color:'#444'}},edges:{smooth:{type:'continuous'},width:1.25}});
-  net.on('click',p=>{if(p.nodes.length){selected=p.nodes[0];showDetail(selected);expand(selected,24);}});
-  $('graphStatus').textContent=nodes.length+' nós · '+edges.length+' conexões visíveis · '+edgeRows.length+' relações disponíveis.';
+ const el=$('network');if(!window.vis){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
+ const visibleEdges=edgeRows.filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
+ const groups=new Map();
+ for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
+ const graphEdges=[...groups.values()].map((g,i)=>({id:'e'+i,from:g[0].from,to:g[0].to,
+  title:g.map(e=>'<b>'+HTML(roleLabel(e.relation))+'</b> — '+roleStatus(e.status)+(e.evidence?'<br>'+HTML(e.evidence.slice(0,340)):'')).join('<hr>'),
+  // Não desenhar rótulos sobre linhas; a proposta de pesquisa é diferenciada no tooltip.
+  color:{color:'#b7b7b7',highlight:'#9D2235',hover:'#9D2235'},width:1.1}));
+ const graphNodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(graphNode);
+ if(net){net.destroy();net=null;}
+ net=new vis.Network(el,{nodes:graphNodes,edges:graphEdges},{
+  layout:{randomSeed:42,improvedLayout:false},
+  interaction:{hover:true,navigationButtons:false,zoomView:true,dragView:true},
+  physics:{enabled:true,solver:'forceAtlas2Based',forceAtlas2Based:{gravitationalConstant:-75,centralGravity:.012,springLength:145,springConstant:.065,damping:.65,avoidOverlap:.5},
+    stabilization:{enabled:true,iterations:240,fit:true}},
+  nodes:{font:{face:'Roboto',size:10,color:'#444',strokeWidth:2,strokeColor:'#fff'}},
+  edges:{smooth:{enabled:true,type:'dynamic'},width:1.1},
+  configure:false
+ });
+ net.on('click',p=>{if(p.nodes.length){selected=p.nodes[0];showDetail(selected);expand(selected,24);}});
+ const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
+ $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
 }
+
 function showDetail(id){
-  const n=nodeById.get(id);if(!n)return;
-  const d=$('detail'),desc=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN']);
-  let html='<button id="closeDetail" aria-label="Fechar painel">×</button>';
-  if(n.photo)html+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
-  html+='<h3>'+HTML(n.label)+'</h3><p class="muted">'+HTML(n.kind)+' · '+HTML(n.id)+'</p>';
-  if(desc)html+='<p>'+HTML(desc)+'</p>';
-  const links=edgeRows.filter(e=>e.from===id||e.to===id);
-  html+='<strong>'+links.length+' relações</strong><ul>'+links.slice(0,10).map(e=>'<li>'+HTML(e.relation)+' → '+HTML(nodeById.get(e.from===id?e.to:e.from)?.label)+'</li>').join('')+'</ul>';
-  d.innerHTML=html;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
+ const n=nodeById.get(id);if(!n)return;
+ const d=$('detail'),description=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN']);
+ let html='<button id="closeDetail" aria-label="Fechar painel">×</button>';
+ if(n.photo)html+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
+ html+='<h3>'+HTML(n.label)+'</h3><p class="muted">'+HTML(n.kind)+' · '+HTML(n.id)+'</p>';
+ if(description)html+='<p>'+HTML(description)+'</p>';
+ const related=edgeRows.filter(e=>e.from===id||e.to===id);
+ html+='<strong>'+related.length+' vínculos documentados ou em revisão</strong><ul>'+related.slice(0,16).map(e=>
+  '<li>'+HTML(roleLabel(e.relation))+' — '+HTML(nodeById.get(e.from===id?e.to:e.from)?.label||'')+'</li>').join('')+'</ul>';
+ d.innerHTML=html;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
 }
+
 function updateCounts(){
   const keys=[['Persons','Pessoas'],['Institutions','Instituições'],['Movements','Movimentos'],['Events','Acontecimentos'],['Documents','Documentos'],['Concepts','Conceitos']];
   const html=keys.map(([k,l])=>'<div class="stat"><strong>'+rows(k).length+'</strong>'+l+'</div>').join('');
-  if($('summary'))$('summary').innerHTML=html;$('dataCounts').innerHTML=html;updateDataTable();
+  if($('summary'))$('summary').innerHTML=html;if($('dataCounts'))$('dataCounts').innerHTML=html;updateDataTable();
 }
 function updateMap(){
-  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
-  if(!leafletMap){leafletMap=L.map('map',{scrollWheelZoom:false}).setView([-23.55,-46.63],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(leafletMap);}
-  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
-  const selected=$('mapConcept').value;
-  let events=rows('Events');if(selected&&selected!=='ALL'){
-    const ids=new Set(rows('EventConcepts').filter(e=>e.ConceptID===selected).map(e=>e.EventID));events=events.filter(e=>ids.has(e.EventID));
-  }
-  const countByPlace=new Map();events.forEach(e=>{if(e.PlaceID)countByPlace.set(e.PlaceID,(countByPlace.get(e.PlaceID)||0)+1);});
-  let total=0;
-  for(const r of rows('Locations')){
-    if(!text(r.Latitude)||!text(r.Longitude))continue;
-    const lat=Number(text(r.Latitude).replace(',','.')),lon=Number(text(r.Longitude).replace(',','.'));
-    if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
-    const n=countByPlace.get(r.PlaceID)||0;if(selected!=='ALL'&&n===0)continue;
-    const label=first(r,['PlaceName_ORIG','PlaceName_EN'])||r.PlaceID;
-    const color=n>0?'#9D2235':'#808080';
-    const radius=$('heat').checked?Math.max(5,Math.sqrt(n)*10):8;
-    const marker=L.circleMarker([lat,lon],{radius,color,weight:2,fillOpacity:$('heat').checked?.42:.8}).addTo(leafletMap).bindPopup(HTML(label)+'<br>Acontecimentos: '+n);
-    marker.on('click',()=>{$('mapSide').innerHTML='<h3>'+HTML(label)+'</h3><p><b>Localidade:</b> '+HTML(r.Municipality||'')+' · '+HTML(r.State||'')+'</p><p><b>Tipo de local:</b> '+HTML(r.PlaceType||'')+'</p><p><b>Acontecimentos documentados:</b> '+n+'</p><p>'+HTML(first(r,['MDH_Summary','Notes','MDH_Summary_EN']))+'</p><p class="auxiliary">Coordenadas: '+lat+', '+lon+'</p>';});
-    total++;
-  }
-  $('mapStatus').textContent=total?total+' localidades representadas.':'Não há pontos com coordenadas disponíveis nesse recorte. Carregue Locations.csv para visualizar o mapa completo.';
-  setTimeout(()=>leafletMap.invalidateSize(),100);
+ if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
+ if(!leafletMap){
+  leafletMap=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([-23.55,-46.63],5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap contributors · © CARTO',maxZoom:19,subdomains:'abcd'
+  }).addTo(leafletMap);
+ }
+ leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
+ const chosen=$('mapConcept').value;
+ let events=rows('Events');
+ if(chosen&&chosen!=='ALL'){
+  const ids=new Set(rows('EventConcepts').filter(e=>e.ConceptID===chosen).map(e=>e.EventID));
+  events=events.filter(e=>ids.has(e.EventID));
+ }
+ const eventCounts=new Map();for(const e of events){const id=text(e.PlaceID);if(id)eventCounts.set(id,(eventCounts.get(id)||0)+1);}
+ let total=0;const coords=[];let eventPlaces=0;
+ for(const r of rows('Locations')){
+   const latRaw=text(r.Latitude),lonRaw=text(r.Longitude);if(!latRaw||!lonRaw)continue;
+   const lat=Number(latRaw.replace(',','.')),lon=Number(lonRaw.replace(',','.'));
+   if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
+   const ne=eventCounts.get(text(r.PlaceID))||0;
+   // Filtrar por categoria somente quando a opção está selecionada; na visão geral, todas as localizações.
+   if(chosen&&chosen!=='ALL'&&ne===0)continue;
+   const isEvent=ne>0 || /^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH));
+   const label=first(r,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||r.PlaceID;
+   const radius=$('heat').checked?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
+   L.circleMarker([lat,lon],{radius,color:isEvent?'#9D2235':'#808080',weight:1.4,fillOpacity:$('heat').checked?.42:.72})
+    .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
+    .on('click',()=>{$('mapSide').innerHTML='<h3>'+HTML(label)+'</h3><p><b>Município:</b> '+HTML(r.Municipality)+' · '+HTML(r.State)+'</p><p><b>Tipo de local:</b> '+HTML(r.PlaceType)+'</p><p><b>Acontecimentos relacionados:</b> '+ne+'</p><p>'+HTML(first(r,['MDH_Summary','Notes','MDH_Summary_EN']))+'</p><p class="auxiliary">Coordenadas: '+lat+', '+lon+'</p>';});
+   total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
+ }
+ leafletMap.__atlasCoords=coords; if(coords.length&&chosen==='ALL'&&document.getElementById('mapa').classList.contains('active')){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:7});}
+ $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Legenda: vinho = memória/acontecimentos; cinza = demais localizações.';
+ setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
 function tableHtml(head,body){return '<table class="table"><thead><tr>'+head.map(x=>'<th>'+HTML(x)+'</th>').join('')+'</tr></thead><tbody>'+body.map(row=>'<tr>'+row.map(x=>'<td>'+HTML(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}
@@ -173,7 +259,7 @@ function updateLaw(){
   const ids=new Set(rows('EventConcepts').filter(r=>r.ConceptID===select.value).map(r=>r.EventID));
   const ev=rows('Events').filter(e=>ids.has(e.EventID));
   const evPersons=new Map();for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(nodeById.get(ep.PersonID)?.label||ep.PersonID);}
-  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa(s)','Evento','Início','Fim'],ev.map(e=>[(evPersons.get(e.EventID)||[]).join(', ')||'Em mapeamento',e.EventType,e.StartDate,e.EndDate])):'Os vínculos dessa categoria ainda estão em mapeamento.';
+  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa(s)','Evento','Início','Fim'],ev.map(e=>[(evPersons.get(e.EventID)||[]).join(', ')||'Em mapeamento',eventLabel(e.EventType),e.StartDate,e.EndDate])):'Os vínculos dessa categoria ainda estão em mapeamento.';
   updateConceptChart();
 }
 function updateConceptChart(){
@@ -189,12 +275,12 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/demo.json',{cache:'no-store'});if(!response.ok)throw Error('Dados de demonstração indisponíveis');
-  db=await response.json();await normalize();updateAdditionalData();$('uploadStatus').textContent='Demonstração restaurada.';
+  const response=await fetch('data/atlas-estrutura.json',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  db=await response.json();await normalize();updateAdditionalData();$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (biografias e evidências textuais não são publicadas).';
 }
 async function importFiles(list){
-  const updated={...db};let count=0;
-  for(const f of list){const key=f.name.replace(/\.csv$/i,'').replace(/\s*\(\d+\)$/,'');if(!key)continue;updated[key]=parseCSV(await f.text());count++;}
+  const updated={};let count=0;
+  for(const f of list){if(/\.json$/i.test(f.name)){const parsed=JSON.parse(await f.text());for(const [key,val] of Object.entries(parsed)){if(Array.isArray(val))updated[key]=val;}count++;continue;}let key=f.name.replace(/\.csv$/i,'').replace(/\s*\(\d+\)$/,'');if(!key)continue;if(key==='MovementInstitution')key='MovementInstitutionRelations';updated[key]=parseCSV(await f.text());count++;}
   db=updated;await normalize();updateAdditionalData();$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
 }
 async function cosmov(){
@@ -207,7 +293,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
     document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));
-    if(b.dataset.page==='mapa'&&leafletMap)setTimeout(()=>leafletMap.invalidateSize(),100);
+    if(b.dataset.page==='mapa'&&leafletMap)setTimeout(()=>{leafletMap.invalidateSize();if(leafletMap.__atlasCoords?.length)leafletMap.fitBounds(leafletMap.__atlasCoords,{padding:[25,25],maxZoom:7});},120);
     if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();net.fit({animation:false});},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
   $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
@@ -229,18 +315,19 @@ const typeToKind={Person:'Pessoa',Document:'Documento',Institution:'Instituiçã
 const kindToType=Object.fromEntries(Object.entries(typeToKind).map(([k,v])=>[v,k]));
 function setupAdditionalUI(){
   document.querySelectorAll('input[name="graphMode"]').forEach(x=>x.onchange=()=>{
-    const mode=document.querySelector('input[name="graphMode"]:checked')?.value;
-    const select=$('focus');
-    const available=[...nodeById.values()].filter(n=>mode==='overview'?false:mode==='person'?n.kind==='Pessoa':n.kind==='Movimento'||n.kind==='Instituição').sort((a,b)=>a.label.localeCompare(b.label,'pt'));
-    if(mode==='overview'){select.value='';}else{
-      select.innerHTML=available.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+'</option>').join('');
-    }
+    const mode=document.querySelector('input[name="graphMode"]:checked')?.value||'overview';
+    const s=$('focus');const options=[...nodeById.values()].filter(n=>
+      mode==='person'?n.kind==='Pessoa':mode==='organization'?['Movimento','Instituição'].includes(n.kind):false
+    ).sort((a,b)=>a.label.localeCompare(b.label,'pt'));
+    s.innerHTML=mode==='overview'?'<option value="">Todas as pessoas</option>':
+      '<option value="">Selecione...</option>'+options.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+'</option>').join('');
     resetGraph();
   });
+
   $('heat').onchange=updateMap;$('mapConcept').onchange=updateMap;
   $('legalEventsTab').onclick=()=>showLegalTab(false);$('legalTrendsTab').onclick=()=>showLegalTab(true);
-  $('dataFilter').oninput=updateDataTable;
-  $('exportSelected').onclick=exportDataTable;
+  $('dataFilter').oninput=()=>{dataPage=0;updateDataTable();};$('datasetSelect').onchange=()=>{dataPage=0;updateDataTable();};
+  if($('exportSelected'))$('exportSelected').onclick=exportDataTable;
   $('subject').onchange=refreshPredicates;$('predicate').onchange=refreshObjects;
   $('runQuery').onclick=executeQuery;
 }
@@ -252,11 +339,11 @@ function updateAdditionalData(){
   const s=$('subject'),old=s.value;
   s.innerHTML='<option value="">Selecione...</option>'+Object.entries(subjectTypes).map(([x,label])=>'<option value="'+x+'">'+label+'</option>').join('');
   if(subjectTypes[old])s.value=old;
-  refreshPredicates();refreshMapConcept();updateDataTable();updateConceptChart();
+  refreshPredicates();refreshMapConcept();renderDatasetOptions();updateDataTable();updateConceptChart();
 }
 function refreshPredicates(){
   const kind=typeToKind[$('subject').value],eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind).map(e=>e.relation));
-  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+[...eligible].sort().map(x=>'<option>'+HTML(x)+'</option>').join('');
+  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+[...eligible].sort().map(x=>'<option value="'+HTML(x)+'">'+HTML(roleLabel(x))+'</option>').join('');
   const icon={Person:'Pessoas',Institution:'Instituicoes',Movement:'Movimentos',Event:'Eventos',Concept:'Conceitos',Document:'Documentos',Location:'Locais'};
   $('iconSubject').src='icons/'+(icon[$('subject').value]||'Pessoas')+'.png';
   refreshObjects();
@@ -287,24 +374,72 @@ function executeQuery(){
     matching=edgeRows.filter(e=>(!type||nodeById.get(e.from)?.kind===type)&&(!pred||e.relation===pred)&&(!target||nodeById.get(e.to)?.kind===target));
   }
   const selected=matching.slice(0,limit);
-  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence])):'Nenhuma relação encontrada.';
+  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])):'Nenhuma relação encontrada.';
 }
 function refreshMapConcept(){
   const c=$('mapConcept'),old=c.value;
   c.innerHTML='<option value="ALL">Todas as categorias</option>'+rows('Concepts').map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_PT','Label_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
   if(old&&[...c.options].some(x=>x.value===old))c.value=old;
 }
-function updateDataTable(){
-  if(!$('dataTable'))return;
-  const term=text($('dataFilter').value).toLocaleLowerCase('pt');
-  let matches=edgeRows.filter(e=>{if(!term)return true;return [e.from,e.to,e.relation,e.evidence,nodeById.get(e.from)?.label,nodeById.get(e.to)?.label].some(x=>text(x).toLocaleLowerCase('pt').includes(term));});
-  $('dataTable').dataset.matches=matches.length;
-  $('dataTable').innerHTML='<p class="auxiliary">'+matches.length+' vínculos encontrados. Exibindo os primeiros 100 registros.</p>'+tableHtml(['Indivíduo/Origem','Relação','Instituição/Destino','Evidência'],matches.slice(0,100).map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence]));
+const matrixLabels = {
+  Persons:'Pessoas', Events:'Eventos', Locations:'Localizações', Documents:'Documentos',
+  EventPersons:'Pessoas e eventos', DocumentEvents:'Documentos e eventos',
+  DocumentPersons:'Documentos e pessoas', Institutions:'Instituições',
+  Concepts:'Conceitos jurídicos', EventConcepts:'Eventos e conceitos', Movements:'Movimentos',
+  PersonMovements:'Pessoas e movimentos', EventActors:'Agentes dos eventos',
+  PersonInstitutions:'Pessoas e instituições', EventRoles:'Papéis nos eventos',
+  EventDetails:'Detalhes dos eventos', DocumentLocations:'Documentos e locais',
+  Controlled_vocab:'Vocabulário controlado', Regras_Conceitos:'Regras dos conceitos',
+  InstitutionRelations:'Relações instituição–instituição',
+  MovementRelations:'Relações movimento–movimento',
+  MovementInstitutionRelations:'Relações movimento–instituição'
+};
+let dataPage=0;
+const DATA_PAGE_SIZE=50;
+function renderDatasetOptions(){
+ const el=$('datasetSelect');if(!el)return;
+ const prior=el.value;
+ el.innerHTML='<option value="__links">Vínculos pessoa–organização</option>'+Object.entries(matrixLabels).map(([k,v])=>
+  '<option value="'+HTML(k)+'">'+HTML(v)+' ('+rows(k).length+')</option>').join('');
+ if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;
 }
+function updateDataTable(){
+ const dest=$('dataTable'),pager=$('dataPager');if(!dest)return;
+ const table=$('datasetSelect')?.value||'__links';
+ const term=text($('dataFilter')?.value).toLocaleLowerCase('pt');
+ let names=[],entries=[];
+ if(table==='__links'){
+   names=['Pessoa','Papel no vínculo','Instituição ou movimento','Evidência documental'];
+   const found=edgeRows.filter(e=>nodeById.get(e.from)?.kind==='Pessoa' &&
+     ['Instituição','Movimento'].includes(nodeById.get(e.to)?.kind));
+   entries=found.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),
+     nodeById.get(e.to)?.label||e.to,e.evidence]);
+ }else{
+   const source=rows(table);names=[...new Set(source.flatMap(x=>Object.keys(x)))];
+   entries=source.map(x=>names.map(k=>{
+     const v=x[k];
+     return ['Role','RelationType','RelationshipType'].includes(k)?roleLabel(v):v;
+   }));
+ }
+ if(term)entries=entries.filter(r=>r.some(v=>text(v).toLocaleLowerCase('pt').includes(term)));
+ const pageCount=Math.max(1,Math.ceil(entries.length/DATA_PAGE_SIZE));
+ if(dataPage>=pageCount)dataPage=0;
+ const pageRows=entries.slice(dataPage*DATA_PAGE_SIZE,(dataPage+1)*DATA_PAGE_SIZE);
+ dest.innerHTML='<p class="auxiliary">'+entries.length+' registros · '+(table==='__links'?'Visão relacional':HTML(matrixLabels[table]||table))+'</p>'+
+   (names.length?tableHtml(names,pageRows):'<p>Esta tabela não contém registros nesta seleção.</p>');
+ if(pager){
+  pager.innerHTML='<span>Página '+(dataPage+1)+' de '+pageCount+'</span> '+
+   '<button type="button" id="prevData" '+(dataPage===0?'disabled':'')+'>Anterior</button> '+
+   '<button type="button" id="nextData" '+(dataPage===pageCount-1?'disabled':'')+'>Próxima</button>';
+  $('prevData').onclick=()=>{dataPage--;updateDataTable();};
+  $('nextData').onclick=()=>{dataPage++;updateDataTable();};
+ }
+}
+
 function exportDataTable(){
   const term=text($('dataFilter').value).toLocaleLowerCase('pt');
   const matches=edgeRows.filter(e=>!term||[e.from,e.to,e.relation,e.evidence,nodeById.get(e.from)?.label,nodeById.get(e.to)?.label].some(x=>text(x).toLocaleLowerCase('pt').includes(term)));
   const quote=x=>'"'+text(x).replace(/"/g,'""')+'"';
-  const csv=[['Origem','Relacao','Destino','Evidencia'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,e.relation,nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
+  const csv=[['Origem','Relacao','Destino','Evidencia'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
   const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='atlas-relacoes-filtradas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
