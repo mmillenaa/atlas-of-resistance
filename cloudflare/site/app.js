@@ -20,7 +20,8 @@ const relations = [
  ['EventConcepts','EventID','ConceptID','RelationType'],
  ['DocumentPersons','DocumentID','PersonID','RelationshipType'],
  ['DocumentEvents','DocumentID','EventID','RelationshipType'],
- ['DocumentLocations','DocumentID','PlaceID','RelationshipType'],
+ ['DocumentLocations','DocumentID','PlaceID','RelationType'],
+  ['EventActors','ActorID','EventID','Role'],
  ['InstitutionRelations','SourceInstitutionID','TargetInstitutionID','RelationshipType'],
  ['MovementRelations','SourceMovementID','TargetMovementID','RelationshipType'],
  ['MovementInstitutionRelations','MovementID','InstitutionID','RelationshipType']
@@ -98,7 +99,9 @@ const rolePT = Object.freeze({
 });
 
 const additionalRoleLabels = {"place_of_surveillance": "Local de vigilância", "adjudicating_court": "Órgão julgador", "place_of_interview": "Local de entrevista", "supporting_agency": "Órgão de apoio", "place_of_arbitrary_detention": "Local de detenção arbitrária", "participant_agency": "Órgão participante", "place_of_violation": "Local da violação", "target_agency": "Órgão visado", "depicts": "Retrata", "place_of_intimidation": "Local de intimidação", "place_of_persecution": "Local de perseguição", "place_of_torture": "Local de tortura", "perpetrator_agency": "Órgão responsável pela violação", "organizer_agency": "Órgão organizador", "place_of_falsification_of_cause_of_death_or_evidence_tampering": "Local de falsificação da causa da morte ou adulteração de provas", "place_of_incarceration": "Local de encarceramento", "place_of_concealment_of_a_body": "Local de ocultação de cadáver"};
-const roleLabel = x => rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
+const educationRoles=new Set(['teacher','professor','teaches_at','educator','teacher_trainer','educational_activity_at']);
+const canonicalRole=x=>educationRoles.has(text(x))?'educational_activity_at':text(x);
+const roleLabel = x => text(x)==='educational_activity_at'?'Atuação educacional em':text(x)==='documents_event'?'Documenta': rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
 const legalPT={"right":"Direito","violation":"Violação","crime":"Crime","Labor Law":"Direito do Trabalho","Positive Penal Law":"Direito Penal positivo","Human Rights":"Direitos humanos","Analytical Category":"Categoria analítica","Civil Rights / Constitutional Law":"Direitos civis / Direito Constitucional","International Law":"Direito Internacional","Human Rights / Transitional Justice":"Direitos humanos / Justiça de transição","Human Rights / Constitutional Law":"Direitos humanos / Direito Constitucional","Analytical Category / Int. Criminal Law":"Categoria analítica / Direito Penal Internacional","Human Rights / Int. Law":"Direitos humanos / Direito Internacional","Codified as Crime":"Tipificado como crime"," (Analytical)":"Categoria analítica","Formally recognized / Selective suppression":"Formalmente reconhecido / supressão seletiva","Suspended / Regulated by State":"Suspenso / regulamentado pelo Estado","Treated as Subversion / Criminalized":"Tratado como subversão / criminalizado","Uncodified Crime / Officially denied":"Não tipificado / oficialmente negado","Legalized Exception (Habeas Corpus suspended)":"Exceção legalizada (habeas corpus suspenso)","Partially Maintained / Politically Controlled":"Parcialmente mantido / controlado politicamente","Ignored / ":"Ignorado","Suspended / State Intervention":"Suspenso / intervenção estatal","Unregulated / Permitted":"Sem regulamentação / permitido","Facilitated by State":"Facilitado pelo Estado","Uncodified / Ignored":"Não tipificado / ignorado","Denied / Eradicated":"Negado / reprimido","Formally recognised / Heavily censored":"Formalmente reconhecido / fortemente censurado","Suspended for political targets":"Suspenso para alvos políticos","Restricted by decree":"Restringido por decreto","Framed as National Security defence":"Enquadrado como defesa da segurança nacional","Falsified as legitimate defence":"Apresentado falsamente como legítima defesa","Violated by State Policy (executions, disappearances)":"Violado por política estatal (execuções, desaparecimentos)","Repression of political and civil groups":"Repressão de grupos políticos e civis","Violent repression / Military intervention":"Repressão violenta / intervenção militar","Selective enforcement / Falsified as suicide":"Aplicação seletiva / falsificação como suicídio","Ignored for political crimes / Impunity":"Ignorado em crimes políticos / impunidade","Institutional Policy":"Política institucional","Institutional Practice / Systemic tool":"Prática institucional / instrumento sistêmico","Institutional Practice / Mass detentions":"Prática institucional / detenções em massa","State intervention / Peleguismo":"Intervenção estatal / peleguismo","Incompatible with economic model":"Incompatível com o modelo econômico","Intervention in unions / Cassation of leaders":"Intervenção nos sindicatos / cassação de dirigentes","Institutional Practice (SNI / Listas Sujas)":"Prática institucional (SNI / listas sujas)","Institutional Practice / State-Corporate Complicity":"Prática institucional / conivência entre Estado e empresas","Corporate-State complicity / Mass dismissals":"Conivência entre empresas e Estado / demissões em massa","Institutional Practice / Mass graves":"Prática institucional / valas comuns","Systemic institutional cover-up":"Encobrimento institucional sistêmico","Systematic elimination / State terrorism":"Eliminação sistemática / terrorismo de Estado","State secrecy / Censorship":"Sigilo estatal / censura","Prior censorship / Banning of books and arts":"Censura prévia / proibição de livros e manifestações artísticas","Systemic surveillance / Wiretapping":"Vigilância sistêmica / interceptações telefônicas","Exile, banishment, and passport confiscation":"Exílio, banimento e apreensão de passaportes","Purges, cassations, and institutional targeting":"Expurgos, cassações e perseguição institucional","Institutional practice / Death squads":"Prática institucional / esquadrões da morte","Constitution of 1967/1969":"Constituição de 1967/1969","Penal Code (1940)":"Código Penal (1940)","Law 4.898/1965":"Lei 4.898/1965","Law 4.330/1964 / LSN":"Lei 4.330/1964 / LSN","CLT (1943)":"CLT (1943)","None (State denied practice)":"Nenhuma (prática negada pelo Estado)","State repression apparatus":"Aparato estatal de repressão","Law 9.029/1995":"Lei 9.029/1995","Law 13.869/2019":"Lei 13.869/2019","Transitional Justice framework":"Marco da justiça de transição","Law 9.455/1997":"Lei 9.455/1997","Penal Code (1940) Art. 211":"Código Penal (1940), art. 211","Penal Code (1940) Arts. 299 and 347":"Código Penal (1940), arts. 299 e 347","Inter-American Convention on Forced Disappearance":"Convenção Interamericana sobre o Desaparecimento Forçado de Pessoas","Inter-American Court Jurisprudence / LAI":"Jurisprudência da Corte Interamericana / Lei de Acesso à Informação","Rome Statute / Lei de Anistia (1979)":"Estatuto de Roma / Lei de Anistia (1979)","UN Principles on Extra-legal Executions / Rome Statute":"Princípios da ONU sobre execuções extralegais / Estatuto de Roma"," (Emergent post-dictatorship)":"(Categoria emergente após a ditadura)"," (Modern ILO framework)":"(Marco contemporâneo da OIT)"," (Prosecuted as kidnapping/homicide)":"(Processado como sequestro/homicídio)"," (State denied practice)":"(Prática negada pelo Estado)","AI-1 to AI-5 (Cassation of rights) / LSN":"AI-1 a AI-5 (cassação de direitos) / LSN","AI-5 (1968) / Banishment Penalty (Decree-Law 898/1969 - LSN)":"AI-5 (1968) / pena de banimento (Decreto-Lei 898/1969 — LSN)","AI-5 (1968) / Creation of SNI (Law 4.341/1964)":"AI-5 (1968) / criação do SNI (Lei 4.341/1964)","AI-5 (1968) / LSN":"AI-5 (1968) / Lei de Segurança Nacional","CLT (corporatist base) / LSN":"CLT (estrutura corporativista) / LSN","Constitution of 1967 / Press Law (Law 5.250/1967)":"Constituição de 1967 / Lei de Imprensa (Lei 5.250/1967)","Corporate practices backed by DOPS":"Práticas empresariais respaldadas pelo DOPS","Creation of FGTS (Law 5.107/1966)":"Criação do FGTS (Lei 5.107/1966)","Information exchange network":"Rede de intercâmbio de informações","Art. 5, CF/88":"Art. 5º, CF/88","Art. 5, CF/88; Law 13.869":"Art. 5º, CF/88; Lei 13.869","Art. 5, IV and IX, CF/88":"Art. 5º, IV e IX, CF/88","Art. 5, X and XII, CF/88 / LGPD":"Art. 5º, X e XII, CF/88 / LGPD","Art. 5, XV, CF/88":"Art. 5º, XV, CF/88","Art. 6, CF/88; ILO Conventions":"Art. 6º, CF/88; Convenções da OIT","Art. 7, CF/88":"Art. 7º, CF/88","Art. 7, I, CF/88; CLT":"Art. 7º, I, CF/88; CLT","Art. 8, CF/88":"Art. 8º, CF/88","Art. 9, CF/88":"Art. 9º, CF/88"};
 const legalLabel=x=>legalPT[text(x)]||text(x).replace(/\bConstitution of\b/g,'Constituição de').replace(/\bPenal Code\b/g,'Código Penal').replace(/\bLaw\b/g,'Lei').replace(/\bCreation of\b/g,'Criação de').replace(/\bPress Law\b/g,'Lei de Imprensa').replace(/\bILO Conventions\b/g,'Convenções da OIT').replace(/\bState\b/g,'Estado');
 const roleStatus = s => s==='inferred' ? 'inferência visual, não comprova vínculo pessoal' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
@@ -124,6 +127,30 @@ function arestaSocial(e){
 }
 function arestasSociais(){return edgeRows.filter(arestaSocial);}
 
+function sourceReference(id){
+ const doc=rows('Documents').find(d=>d.DocumentID===id);
+ if(!doc)return id+' — referência cadastrada; ficha ainda não disponível.';
+ const titles={'D072':'Entrevista coletiva com cinco educadoras da OSM-SP, concedida à pesquisadora','D073':'Relato de experiência sobre a luta dos trabalhadores pela educação e formação profissional','D069':'Entrevista de história oral de Cecília Guaraná','D041':'Perfil biográfico de Carlos Josaphat','D046':'Perfil biográfico de Ricardo Frota de Albuquerque Maranhão'};
+ return id+' — '+(first(doc,['Title_ORIG','DisplayTitle_ORIG'])||titles[id]||first(doc,['DisplayTitle_EN','Repository'])||id)+(doc.Repository?' · '+doc.Repository:'');
+}
+function relationEvidence(table,raw){
+ const passage=first(raw,['EvidenceText_ORIG','EvidenceText_EN']);
+ let ids=[text(raw.SourceDocumentID)].filter(Boolean);
+ if(!ids.length&&['DocumentPersons','DocumentEvents','DocumentLocations'].includes(table)&&raw.DocumentID)ids=[raw.DocumentID];
+ const refs=ids.map(sourceReference);
+ const url=first(raw,['SourceURL'])||(/^https?:\/\//i.test(text(raw.Confidence))?text(raw.Confidence):'');
+ if(url)refs.push(url);
+ if(refs.length||passage)return [...new Set([...refs,...(passage?[passage]:[])])].join(' · ');
+ if(['EventPersons','EventActors'].includes(table)){
+  const docs=[...new Set(rows('DocumentEvents').filter(d=>d.EventID===raw.EventID).map(d=>d.DocumentID).filter(Boolean))];
+  if(docs.length)return 'Documentos do evento (referência contextual, não individualizada para este vínculo): '+docs.map(sourceReference).join(' · ');
+ }
+ return 'Referência específica ainda não identificada na matriz pública.';
+}
+function relationRecord(table,raw,relationKey){
+ const original=first(raw,[relationKey,'RelationType','RelationshipType','Role'])||(table==='DocumentEvents'?'documents_event':'related_to');
+ return {relation:canonicalRole(original),originalRole:original,evidence:relationEvidence(table,raw)};
+}
 async function normalize(){
   nodeById=new Map();edgeRows=[];imageCache=new Map();
   for(const [table,[key,labels,kind]] of Object.entries(schema)){
@@ -136,7 +163,7 @@ async function normalize(){
     for(const raw of rows(table)){
       const from=text(raw[fromKey]),to=text(raw[toKey]);
       if(!nodeById.has(from)||!nodeById.has(to)||from===to)continue;
-      edgeRows.push({from,to,relation:(table==='PersonInstitutions'&&['teacher','professor'].includes(text(raw[relationKey]))?'teaches_at':text(raw[relationKey])||'related_to'),evidence:first(raw,['EvidenceText_ORIG','EvidenceText_EN']),status:text(raw.ReviewStatus)||'documented'});
+      edgeRows.push({from,to,...relationRecord(table,raw,relationKey),status:text(raw.ReviewStatus)||'documented'});
     }
   }
   await Promise.all([...nodeById.values()].filter(n=>n.kind==='Pessoa').map(async n=>{n.photo=await portrait(n);}));
@@ -970,8 +997,10 @@ function updateLaw(){
   const evPersons=new Map(), docs=new Map(rows('Documents').map(d=>[d.DocumentID,d])),docLinks=new Map();
   for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(ep);}
   for(const de of rows('DocumentEvents')){if(!docLinks.has(de.EventID))docLinks.set(de.EventID,new Set());docLinks.get(de.EventID).add(de.DocumentID);}
-  const records=ev.flatMap(e=>(evPersons.get(e.EventID)||[{}]).map(ep=>[nodeById.get(ep.PersonID)?.label||ep.PersonID||'Em mapeamento',ep.Role?roleLabel(ep.Role):'—',eventLabel(e.EventType),[...(docLinks.get(e.EventID)||[])].map(id=>docs.get(id)?.Repository||docs.get(id)?.DisplayTitle_EN||id).filter((v,i,a)=>a.indexOf(v)===i).join(' · ')||'—',e.StartDate||'—',e.EndDate||'—']));
-  $('conceptEvents').innerHTML=ev.length?tableHtml(['Pessoa','Relação jurídica','Evento','Documento / acervo','Início','Fim'],records):'Os vínculos dessa categoria ainda estão em mapeamento.';
+  const label=id=>nodeById.get(id)?.label||id;
+  const records=ev.flatMap(e=>(evPersons.get(e.EventID)||[]).map(ep=>[label(ep.PersonID),roleLabel(ep.Role),eventLabel(e.EventType)+' ('+e.EventID+')',relationEvidence('EventPersons',ep),e.StartDate||'—',e.EndDate||'—']));
+  const conceptRecords=rows('EventConcepts').filter(r=>r.ConceptID===select.value).map(r=>[eventLabel(rows('Events').find(e=>e.EventID===r.EventID)?.EventType)+' ('+r.EventID+')',roleLabel(r.RelationType),label(r.ConceptID),relationEvidence('EventConcepts',r)]);
+  $('conceptEvents').innerHTML=ev.length?'<h3>Eventos e conceitos</h3>'+tableHtml(['Sujeito','Predicado','Objeto','Evidência / referência documental'],conceptRecords)+'<h3>Pessoas e eventos</h3>'+(records.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência / referência documental','Início','Fim'],records):'<p>Nenhum vínculo pessoal individualizado nesta seleção.</p>'):'Os vínculos dessa categoria ainda estão em mapeamento.';
   updateConceptChart();
 }
 function updateConceptChart(){
@@ -991,7 +1020,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas11',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1054,15 +1083,11 @@ function updateAdditionalData(){
   if(subjectTypes[old])s.value=old;
   refreshPredicates();refreshMapConcept();renderDatasetOptions();updateDataTable();updateConceptChart();
 }
-// Categoria de exploração. Não é predicado RDF adicional.
-const atlasPapeisDeEducacao=new Set(['teaches_at','teacher','professor','educator','teacher_trainer']);
-function atlasPredicadoConfere(e,valor){return valor==='__educacao__'?(
- atlasPapeisDeEducacao.has(e.relation)&&nodeById.get(e.to)?.kind==='Instituição'
-):e.relation===valor;}
+function atlasPredicadoConfere(e,valor){return e.relation===canonicalRole(valor)||valor==='__educacao__'&&e.relation==='educational_activity_at';}
 
 function refreshPredicates(){
   const kind=typeToKind[$('subject').value],eligible=new Set(edgeRows.filter(e=>nodeById.get(e.from)?.kind===kind).map(e=>e.relation));
-  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+(kind==='Pessoa'?'<option value="__educacao__">Atuação educacional — docência e formação (agrupadas)</option>':'')+[...eligible].sort().map(x=>'<option value="'+HTML(x)+'">'+HTML(roleLabel(x))+'</option>').join('');
+  $('predicate').innerHTML='<option value="">Selecione o predicado...</option>'+[...eligible].sort((a,b)=>roleLabel(a).localeCompare(roleLabel(b),'pt')).map(x=>'<option value="'+HTML(x)+'">'+HTML(roleLabel(x))+'</option>').join('');
   const icon={Person:'Pessoas',Institution:'Instituicoes',Movement:'Movimentos',Event:'Eventos',Concept:'Conceitos',Document:'Documentos',Location:'Locais'};
   $('iconSubject').src='icons/'+(icon[$('subject').value]||'Pessoas')+'.png';
   refreshObjects();
@@ -1085,7 +1110,7 @@ function executeQuery(){
     }
     const parts=m[2].trim().replace(/\s*\.\s*$/,'').split(/\s+/);if(parts.length!==3){$('sparqlResults').textContent='Use um padrão simples: SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10';return;}
     limit=Math.min(2000,Number(m[3])||100);matching=edgeRows.filter(e=>{
-      const matches=(pat,val)=>{const cleaned=pat.replace(/^(?:ex:|atlas:)/,'');const canonical=['teacher','professor'].includes(cleaned)?'teaches_at':cleaned;return pat.startsWith('?')||canonical===val;};
+      const matches=(pat,val)=>{const cleaned=pat.replace(/^(?:ex:|atlas:)/,'');const canonical=canonicalRole(cleaned);return pat.startsWith('?')||canonical===val;};
       return matches(parts[0],e.from)&&matches(parts[1],e.relation)&&matches(parts[2],e.to);
     });
   }else{
@@ -1093,7 +1118,7 @@ function executeQuery(){
     matching=edgeRows.filter(e=>(!type||nodeById.get(e.from)?.kind===type)&&(!pred||atlasPredicadoConfere(e,pred))&&(!target||nodeById.get(e.to)?.kind===target));
   }
   const selected=matching.slice(0,limit);
-  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence||'Fonte não apresentada nesta versão'])):'Nenhuma relação cadastrada para esta combinação. A transcrição pode documentar novas atividades ainda pendentes de inclusão nas matrizes.';
+  $('sparqlResults').innerHTML=selected.length?tableHtml(['Sujeito','Predicado','Objeto','Evidência / referência documental','Papel específico'],selected.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence, e.relation==='educational_activity_at'?roleLabel(e.originalRole):'—'])):'Nenhuma relação cadastrada para esta combinação. A transcrição pode documentar novas atividades ainda pendentes de inclusão nas matrizes.';
 }
 function refreshMapConcept(){
   const c=$('mapConcept'),old=c.value;
@@ -1127,15 +1152,19 @@ function updateDataTable(){
  const table=$('datasetSelect')?.value||'__links';
  const term=text($('dataFilter')?.value).toLocaleLowerCase('pt');
  let names=[],entries=[];
+ const label=id=>nodeById.get(id)?.label||id;
+ const relationSpec=relations.find(r=>r[0]===table);
  if(table==='__links'){
-   names=['Pessoa','Vínculo','Instituição ou movimento','EvidenceText_EN','EvidenceText_ORIG','Início','Fim'];
-   entries=['PersonInstitutions','PersonMovements'].flatMap(k=>rows(k).map(r=>{const dest=r.InstitutionID||r.MovementID;return [nodeById.get(r.PersonID)?.label||r.PersonID,roleLabel(r.Role),nodeById.get(dest)?.label||dest,r.EvidenceText_EN||'',r.EvidenceText_ORIG||'',r.StartDate||'',r.EndDate||''];}));
+   names=['Sujeito','Predicado','Objeto','Evidência / referência documental','Papel específico','Início','Fim'];
+   entries=relations.flatMap(([k,from,to,role])=>rows(k).map(r=>{const rel=relationRecord(k,r,role);return [label(r[from]),roleLabel(rel.relation),label(r[to]),rel.evidence,rel.relation==='educational_activity_at'?roleLabel(rel.originalRole):'—',r.StartDate||'',r.EndDate||''];}));
+ }else if(relationSpec){
+   const [k,from,to,role]=relationSpec,source=rows(k);
+   const extra=[...new Set(source.flatMap(x=>Object.keys(x)))].filter(x=>![from,to,role,'Role','RelationType','RelationshipType','EvidenceText_ORIG','EvidenceText_EN'].includes(x));
+   names=['Sujeito','Predicado','Objeto','Evidência / referência documental','Papel específico',...extra];
+   entries=source.map(r=>{const rel=relationRecord(k,r,role);return [label(r[from]),roleLabel(rel.relation),label(r[to]),rel.evidence,rel.relation==='educational_activity_at'?roleLabel(rel.originalRole):'—',...extra.map(x=>r[x])];});
  }else{
    const source=rows(table);names=[...new Set(source.flatMap(x=>Object.keys(x)))];
-   entries=source.map(x=>names.map(k=>{
-     const v=x[k];
-     return ['Role','RelationType','RelationshipType'].includes(k)?roleLabel(v):v;
-   }));
+   entries=source.map(x=>names.map(k=>['Role','RelationType','RelationshipType'].includes(k)?roleLabel(x[k]):x[k]));
  }
  if(term)entries=entries.filter(r=>r.some(v=>text(v).toLocaleLowerCase('pt').includes(term)));
  const pageCount=Math.max(1,Math.ceil(entries.length/DATA_PAGE_SIZE));
@@ -1156,7 +1185,7 @@ function exportDataTable(){
   const term=text($('dataFilter').value).toLocaleLowerCase('pt');
   const matches=edgeRows.filter(e=>!term||[e.from,e.to,e.relation,e.evidence,nodeById.get(e.from)?.label,nodeById.get(e.to)?.label].some(x=>text(x).toLocaleLowerCase('pt').includes(term)));
   const quote=x=>'"'+text(x).replace(/"/g,'""')+'"';
-  const csv=[['Origem','Relacao','Destino','Evidencia'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
+  const csv=[['Sujeito','Predicado','Objeto','Evidência / referência documental'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
   const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='atlas-relacoes-filtradas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
 

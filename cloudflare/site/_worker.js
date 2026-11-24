@@ -15,7 +15,7 @@ export default {
   }
   const asset=await env.ASSETS.fetch(request);
   if(/\/(?:index\.html|app\.js|graph-d3\.js|styles\.css)?$/.test(url.pathname)){
-   const headers=new Headers(asset.headers);headers.set('Cache-Control','no-cache, must-revalidate');headers.set('X-Atlas-Release','atlas10-20261124');
+   const headers=new Headers(asset.headers);headers.set('Cache-Control','no-cache, must-revalidate');headers.set('X-Atlas-Release','atlas11-20261124');
    return new Response(asset.body,{status:asset.status,statusText:asset.statusText,headers});
   }
   return asset;

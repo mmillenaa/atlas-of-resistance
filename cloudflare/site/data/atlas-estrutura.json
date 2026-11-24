@@ -7130,532 +7130,608 @@
       "MovementID": "M001",
       "Role": "leader_of",
       "StartDate": "1978",
-      "EndDate": "1978"
+      "EndDate": "1978",
+      "SourceDocumentID": "D001"
     },
     {
       "PersonID": "P001",
       "MovementID": "M002",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D002"
     },
     {
       "PersonID": "P001",
       "MovementID": "M003",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D002"
     },
     {
       "PersonID": "P002",
       "MovementID": "M001",
       "Role": "leader_of",
       "StartDate": "1967",
-      "EndDate": "1981"
+      "EndDate": "1981",
+      "SourceDocumentID": "D004"
     },
     {
       "PersonID": "P002",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D005"
     },
     {
       "PersonID": "P003",
       "MovementID": "M004",
       "Role": "member_of",
       "StartDate": "1967",
-      "EndDate": "1971"
+      "EndDate": "1971",
+      "SourceDocumentID": "D007"
     },
     {
       "PersonID": "P003",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1971",
-      "EndDate": "1971"
+      "EndDate": "1971",
+      "SourceDocumentID": "D007"
     },
     {
       "PersonID": "P003",
       "MovementID": "M005",
       "Role": "associated_with",
       "StartDate": "1974",
-      "EndDate": "1974"
+      "EndDate": "1974",
+      "SourceDocumentID": "D007"
     },
     {
       "PersonID": "P004",
       "MovementID": "M006",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D009"
     },
     {
       "PersonID": "P004",
       "MovementID": "M001",
       "Role": "coordinator_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D008"
     },
     {
       "PersonID": "P005",
       "MovementID": "M007",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P007",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D012"
     },
     {
       "PersonID": "P008",
       "MovementID": "M008",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D015"
     },
     {
       "PersonID": "P008",
       "MovementID": "M001",
       "Role": "active_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P009",
       "MovementID": "M001",
       "Role": "coordinator_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P009",
       "MovementID": "M009",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P010",
       "MovementID": "M006",
       "Role": "member_of",
       "StartDate": "1965",
-      "EndDate": "1965"
+      "EndDate": "1965",
+      "SourceDocumentID": "D017"
     },
     {
       "PersonID": "P010",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1974",
-      "EndDate": "1974"
+      "EndDate": "1974",
+      "SourceDocumentID": "D017"
     },
     {
       "PersonID": "P012",
       "MovementID": "M007",
       "Role": "member_of",
       "StartDate": "1967",
-      "EndDate": "1970"
+      "EndDate": "1970",
+      "SourceDocumentID": "D020"
     },
     {
       "PersonID": "P013",
       "MovementID": "M010",
       "Role": "founding_member",
       "StartDate": "1967",
-      "EndDate": "1967"
+      "EndDate": "1967",
+      "SourceDocumentID": "D022"
     },
     {
       "PersonID": "P013",
       "MovementID": "M011",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D022"
     },
     {
       "PersonID": "P014",
       "MovementID": "M010",
       "Role": "member_of",
       "StartDate": "1968",
-      "EndDate": "1969"
+      "EndDate": "1969",
+      "SourceDocumentID": "D023"
     },
     {
       "PersonID": "P015",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1977",
-      "EndDate": "1979"
+      "EndDate": "1979",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P017",
       "MovementID": "M006",
       "Role": "leader_of",
       "StartDate": "1963",
-      "EndDate": "1969"
+      "EndDate": "1969",
+      "SourceDocumentID": "D028"
     },
     {
       "PersonID": "P017",
       "MovementID": "M012",
       "Role": "member_of",
       "StartDate": "1969",
-      "EndDate": "1969"
+      "EndDate": "1969",
+      "SourceDocumentID": "D029"
     },
     {
       "PersonID": "P018",
       "MovementID": "M013",
       "Role": "participant",
       "StartDate": "1932",
-      "EndDate": "1932"
+      "EndDate": "1932",
+      "SourceDocumentID": "D030"
     },
     {
       "PersonID": "P019",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D032"
     },
     {
       "PersonID": "P020",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D033"
     },
     {
       "PersonID": "P021",
       "MovementID": "M014",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P021",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P022",
       "MovementID": "M006",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D035"
     },
     {
       "PersonID": "P023",
       "MovementID": "M002",
       "Role": "organizer",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D036"
     },
     {
       "PersonID": "P024",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1968",
-      "EndDate": "1968"
+      "EndDate": "1968",
+      "SourceDocumentID": "D037"
     },
     {
       "PersonID": "P025",
       "MovementID": "M010",
       "Role": "member_of",
       "StartDate": "1967",
-      "EndDate": "1969"
+      "EndDate": "1969",
+      "SourceDocumentID": "D038"
     },
     {
       "PersonID": "P025",
       "MovementID": "M001",
       "Role": "representative_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D038"
     },
     {
       "PersonID": "P025",
       "MovementID": "M003",
       "Role": "representative_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D038"
     },
     {
       "PersonID": "P026",
       "MovementID": "M006",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P027",
       "MovementID": "M015",
       "Role": "leader_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D043"
     },
     {
       "PersonID": "P027",
       "MovementID": "M010",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D042"
     },
     {
       "PersonID": "P027",
       "MovementID": "M016",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D043"
     },
     {
       "PersonID": "P028",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D044"
     },
     {
       "PersonID": "P030",
       "MovementID": "M017",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "MovementID": "M009",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "MovementID": "M001",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P031",
       "MovementID": "M006",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D047"
     },
     {
       "PersonID": "P031",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D047"
     },
     {
       "PersonID": "P032",
       "MovementID": "M017",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P032",
       "MovementID": "M001",
       "Role": "associated_with",
       "StartDate": "1981",
-      "EndDate": "1981"
+      "EndDate": "1981",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P014",
       "MovementID": "M010",
       "Role": "subcommander_of",
       "StartDate": "1969",
-      "EndDate": "1969"
+      "EndDate": "1969",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P037",
       "MovementID": "M017",
       "Role": "member_of",
       "StartDate": "1968",
-      "EndDate": "1970"
+      "EndDate": "1970",
+      "SourceDocumentID": "D053"
     },
     {
       "PersonID": "P037",
       "MovementID": "M010",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D053"
     },
     {
       "PersonID": "P039",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P041",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D059"
     },
     {
       "PersonID": "P041",
       "MovementID": "M018",
       "Role": "associated_with",
       "StartDate": "1987",
-      "EndDate": "1989"
+      "EndDate": "1989",
+      "SourceDocumentID": "D068"
     },
     {
       "PersonID": "P042",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P043",
       "MovementID": "M021",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D063"
     },
     {
       "PersonID": "P044",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1978",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P045",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P045",
       "MovementID": "M006",
       "Role": "member_of",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P045",
       "MovementID": "M020",
       "Role": "member_of",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P045",
       "MovementID": "M018",
       "Role": "associated_with",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "MovementID": "M018",
       "Role": "associated_with",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D065"
     },
     {
       "PersonID": "P047",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1977",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P047",
       "MovementID": "M018",
       "Role": "associated_with",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D066"
     },
     {
       "PersonID": "P048",
       "MovementID": "M001",
       "Role": "leader_of",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P049",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1970",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D066"
     },
     {
       "PersonID": "P051",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P053",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "1982",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P052",
       "MovementID": "M019",
       "Role": "participant",
       "StartDate": "2018-06-01",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D070"
     },
     {
       "PersonID": "P054",
       "MovementID": "M019",
       "Role": "founding_member",
       "StartDate": "2018-04-01",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D070"
     },
     {
       "PersonID": "P055",
       "MovementID": "M019",
       "Role": "member_of",
       "StartDate": "2018-09-01",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D070"
     },
     {
       "PersonID": "P038",
       "MovementID": "M001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D080"
     },
     {
       "PersonID": "P050",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P056",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P057",
       "MovementID": "M001",
       "Role": "integral_participant",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     }
   ],
   "PersonInstitutions": [
@@ -7664,1435 +7740,1640 @@
       "InstitutionID": "I001",
       "Role": "leader_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D001"
     },
     {
       "PersonID": "P001",
       "InstitutionID": "I002",
       "Role": "lay_representative",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D002"
     },
     {
       "PersonID": "P001",
       "InstitutionID": "I003",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D001"
     },
     {
       "PersonID": "P001",
       "InstitutionID": "I004",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D001"
     },
     {
       "PersonID": "P001",
       "InstitutionID": "I005",
       "Role": "union_delegate",
       "StartDate": "1979-05-01",
-      "EndDate": "1979-07-01"
+      "EndDate": "1979-07-01",
+      "SourceDocumentID": "D001"
     },
     {
       "PersonID": "P001",
       "InstitutionID": "I006",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D003"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I007",
       "Role": "coordinator_of",
       "StartDate": "1960",
-      "EndDate": "1960"
+      "EndDate": "1960",
+      "SourceDocumentID": "D004"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I001",
       "Role": "leader_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D004"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I008",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D004"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I009",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D004"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I007",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D005"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D005"
     },
     {
       "PersonID": "P002",
       "InstitutionID": "I010",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D005"
     },
     {
       "PersonID": "P003",
       "InstitutionID": "I011",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D007"
     },
     {
       "PersonID": "P003",
       "InstitutionID": "I007",
       "Role": "member_of",
       "StartDate": "1963",
-      "EndDate": "1967"
+      "EndDate": "1967",
+      "SourceDocumentID": "D007"
     },
     {
       "PersonID": "P004",
       "InstitutionID": "I012",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D008"
     },
     {
       "PersonID": "P004",
       "InstitutionID": "I013",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D008"
     },
     {
       "PersonID": "P004",
       "InstitutionID": "I014",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D008"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I015",
       "Role": "employee",
       "StartDate": "1961",
-      "EndDate": "1965"
+      "EndDate": "1965",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I016",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I017",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I009",
       "Role": "founding_member",
       "StartDate": "1980",
-      "EndDate": "1990"
+      "EndDate": "1990",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I008",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I018",
       "Role": "founding_member",
       "StartDate": "1991",
-      "EndDate": "1991"
+      "EndDate": "1991",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I019",
       "Role": "secretary_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P005",
       "InstitutionID": "I020",
       "Role": "director_of",
       "StartDate": "2011",
-      "EndDate": "2011"
+      "EndDate": "2011",
+      "SourceDocumentID": "D010"
     },
     {
       "PersonID": "P006",
       "InstitutionID": "I021",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D011"
     },
     {
       "PersonID": "P006",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D011"
     },
     {
       "PersonID": "P007",
       "InstitutionID": "I008",
       "Role": "director_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D012"
     },
     {
       "PersonID": "P007",
       "InstitutionID": "I023",
       "Role": "founding_member",
       "StartDate": "1992",
-      "EndDate": "1992"
+      "EndDate": "1992",
+      "SourceDocumentID": "D012"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I024",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I025",
       "Role": "student",
       "StartDate": "1960",
-      "EndDate": "1961"
+      "EndDate": "1961",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I026",
       "Role": "member_of",
       "StartDate": "1961",
-      "EndDate": "1961"
+      "EndDate": "1961",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I027",
       "Role": "leader_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D015"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I028",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P008",
       "InstitutionID": "I005",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D013"
     },
     {
       "PersonID": "P009",
       "InstitutionID": "I008",
       "Role": "director_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P009",
       "InstitutionID": "I029",
       "Role": "founder_and_president",
       "StartDate": "1988",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P009",
       "InstitutionID": "I030",
       "Role": "director_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P009",
       "InstitutionID": "I032",
       "Role": "employee",
       "StartDate": "1982",
-      "EndDate": "1982"
+      "EndDate": "1982",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P009",
       "InstitutionID": "I033",
       "Role": "founder_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D016"
     },
     {
       "PersonID": "P010",
       "InstitutionID": "I034",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D017"
     },
     {
       "PersonID": "P011",
       "InstitutionID": "I035",
       "Role": "pastoral_agent",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D018"
     },
     {
       "PersonID": "P034",
       "InstitutionID": "I035",
       "Role": "pastoral_agent",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D057"
     },
     {
       "PersonID": "P011",
       "InstitutionID": "I002",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D018"
     },
     {
       "PersonID": "P011",
       "InstitutionID": "I036",
       "Role": "opposition_candidate",
       "StartDate": "1980",
-      "EndDate": "1980"
+      "EndDate": "1980",
+      "SourceDocumentID": "D077"
     },
     {
       "PersonID": "P012",
       "InstitutionID": "I037",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D020"
     },
     {
       "PersonID": "P012",
       "InstitutionID": "I005",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D020"
     },
     {
       "PersonID": "P012",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D020"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "1959",
-      "EndDate": "1959"
+      "EndDate": "1959",
+      "SourceDocumentID": "D022"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I038",
       "Role": "founder_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D022"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I039",
       "Role": "member_of",
       "StartDate": "2006",
-      "EndDate": "2006"
+      "EndDate": "2006",
+      "SourceDocumentID": "D022"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I040",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D023"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I041",
       "Role": "student",
       "StartDate": "",
-      "EndDate": "1982"
+      "EndDate": "1982",
+      "SourceDocumentID": "D023"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I042",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D023"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I009",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D023"
     },
     {
       "PersonID": "P015",
       "InstitutionID": "I043",
       "Role": "student",
       "StartDate": "1970",
-      "EndDate": "1970"
+      "EndDate": "1970",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P015",
       "InstitutionID": "I044",
       "Role": "employee",
       "StartDate": "1977",
-      "EndDate": "1979"
+      "EndDate": "1979",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P015",
       "InstitutionID": "I001",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P015",
       "InstitutionID": "I003",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P015",
       "InstitutionID": "I045",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D025"
     },
     {
       "PersonID": "P016",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "1945",
-      "EndDate": "1945"
+      "EndDate": "1945",
+      "SourceDocumentID": "D026"
     },
     {
       "PersonID": "P016",
       "InstitutionID": "I005",
       "Role": "leader_of",
       "StartDate": "1950",
-      "EndDate": "1950"
+      "EndDate": "1950",
+      "SourceDocumentID": "D026"
     },
     {
       "PersonID": "P016",
       "InstitutionID": "I046",
       "Role": "leader_of",
       "StartDate": "1962",
-      "EndDate": "1962"
+      "EndDate": "1962",
+      "SourceDocumentID": "D026"
     },
     {
       "PersonID": "P017",
       "InstitutionID": "I047",
       "Role": "student",
       "StartDate": "1961",
-      "EndDate": "1966"
+      "EndDate": "1966",
+      "SourceDocumentID": "D029"
     },
     {
       "PersonID": "P017",
       "InstitutionID": "I048",
       "Role": "organizer",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D028"
     },
     {
       "PersonID": "P017",
       "InstitutionID": "I049",
       "Role": "president_of",
       "StartDate": "1964",
-      "EndDate": "1965"
+      "EndDate": "1965",
+      "SourceDocumentID": "D028"
     },
     {
       "PersonID": "P017",
       "InstitutionID": "I046",
       "Role": "leader_of",
       "StartDate": "1974",
-      "EndDate": "1974"
+      "EndDate": "1974",
+      "SourceDocumentID": "D029"
     },
     {
       "PersonID": "P018",
       "InstitutionID": "I050",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D030"
     },
     {
       "PersonID": "P018",
       "InstitutionID": "I051",
       "Role": "athlete",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D031"
     },
     {
       "PersonID": "P018",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D030"
     },
     {
       "PersonID": "P018",
       "InstitutionID": "I052",
       "Role": "federal_deputy",
       "StartDate": "1947",
-      "EndDate": "1947"
+      "EndDate": "1947",
+      "SourceDocumentID": "D030"
     },
     {
       "PersonID": "P018",
       "InstitutionID": "I046",
       "Role": "founding_member",
       "StartDate": "1962",
-      "EndDate": "1962"
+      "EndDate": "1962",
+      "SourceDocumentID": "D031"
     },
     {
       "PersonID": "P019",
       "InstitutionID": "I053",
       "Role": "member_of",
       "StartDate": "1968",
-      "EndDate": "1968"
+      "EndDate": "1968",
+      "SourceDocumentID": "D032"
     },
     {
       "PersonID": "P019",
       "InstitutionID": "I054",
       "Role": "coordinator_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D032"
     },
     {
       "PersonID": "P019",
       "InstitutionID": "I055",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D032"
     },
     {
       "PersonID": "P020",
       "InstitutionID": "I056",
       "Role": "employee",
       "StartDate": "1977",
-      "EndDate": "1977"
+      "EndDate": "1977",
+      "SourceDocumentID": "D033"
     },
     {
       "PersonID": "P021",
       "InstitutionID": "I057",
       "Role": "employee",
       "StartDate": "1969",
-      "EndDate": "1972"
+      "EndDate": "1972",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P021",
       "InstitutionID": "I007",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P021",
       "InstitutionID": "I044",
       "Role": "employee",
       "StartDate": "1973",
-      "EndDate": "1978"
+      "EndDate": "1978",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P021",
       "InstitutionID": "I001",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P021",
       "InstitutionID": "I058",
       "Role": "employee",
       "StartDate": "1990",
-      "EndDate": "1990"
+      "EndDate": "1990",
+      "SourceDocumentID": "D034"
     },
     {
       "PersonID": "P022",
       "InstitutionID": "I059",
       "Role": "member_of",
       "StartDate": "1962",
-      "EndDate": "1962"
+      "EndDate": "1962",
+      "SourceDocumentID": "D035"
     },
     {
       "PersonID": "P022",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D035"
     },
     {
       "PersonID": "P022",
       "InstitutionID": "I060",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D035"
     },
     {
       "PersonID": "P023",
       "InstitutionID": "I061",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D036"
     },
     {
       "PersonID": "P024",
       "InstitutionID": "I062",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D037"
     },
     {
       "PersonID": "P024",
       "InstitutionID": "I063",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D037"
     },
     {
       "PersonID": "P024",
       "InstitutionID": "I008",
       "Role": "founding_member",
       "StartDate": "1980",
-      "EndDate": "1980"
+      "EndDate": "1980",
+      "SourceDocumentID": "D037"
     },
     {
       "PersonID": "P024",
       "InstitutionID": "I009",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D037"
     },
     {
       "PersonID": "P025",
       "InstitutionID": "I022",
       "Role": "leader_of",
       "StartDate": "1955",
-      "EndDate": "1955"
+      "EndDate": "1955",
+      "SourceDocumentID": "D038"
     },
     {
       "PersonID": "P025",
       "InstitutionID": "I009",
       "Role": "founding_member",
       "StartDate": "1980",
-      "EndDate": "1980"
+      "EndDate": "1980",
+      "SourceDocumentID": "D038"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I065",
       "Role": "student",
       "StartDate": "1933",
-      "EndDate": "1933"
+      "EndDate": "1933",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I066",
       "Role": "teaches_at",
       "StartDate": "1946",
-      "EndDate": "1950"
+      "EndDate": "1950",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I067",
       "Role": "teaches_at",
       "StartDate": "1946",
-      "EndDate": "1950"
+      "EndDate": "1950",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I068",
       "Role": "member_of",
       "StartDate": "1953-07",
-      "EndDate": "1953-07"
+      "EndDate": "1953-07",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I064",
       "Role": "associated_with",
       "StartDate": "1960",
-      "EndDate": "1960"
+      "EndDate": "1960",
+      "SourceDocumentID": "D040"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I069",
       "Role": "founder_of",
       "StartDate": "1963-03",
-      "EndDate": "1964-04-01"
+      "EndDate": "1964-04-01",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I013",
       "Role": "associated_with",
       "StartDate": "1963-03",
-      "EndDate": "1964-04-01"
+      "EndDate": "1964-04-01",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I070",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": "1993"
+      "EndDate": "1993",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I071",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P026",
       "InstitutionID": "I072",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D041"
     },
     {
       "PersonID": "P027",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "1940",
-      "EndDate": "1940"
+      "EndDate": "1940",
+      "SourceDocumentID": "D042"
     },
     {
       "PersonID": "P027",
       "InstitutionID": "I073",
       "Role": "leader_of",
       "StartDate": "1940",
-      "EndDate": "1940"
+      "EndDate": "1940",
+      "SourceDocumentID": "D042"
     },
     {
       "PersonID": "P027",
       "InstitutionID": "I009",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D042"
     },
     {
       "PersonID": "P027",
       "InstitutionID": "I045",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D042"
     },
     {
       "PersonID": "P027",
       "InstitutionID": "I074",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D043"
     },
     {
       "PersonID": "P028",
       "InstitutionID": "I064",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D044"
     },
     {
       "PersonID": "P028",
       "InstitutionID": "I003",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D044"
     },
     {
       "PersonID": "P028",
       "InstitutionID": "I001",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D044"
     },
     {
       "PersonID": "P029",
       "InstitutionID": "I022",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D045"
     },
     {
       "PersonID": "P029",
       "InstitutionID": "I075",
       "Role": "employee",
       "StartDate": "1964",
-      "EndDate": "1972"
+      "EndDate": "1972",
+      "SourceDocumentID": "D045"
     },
     {
       "PersonID": "P029",
       "InstitutionID": "I076",
       "Role": "president_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D045"
     },
     {
       "PersonID": "P030",
       "InstitutionID": "I078",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "InstitutionID": "I077",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "InstitutionID": "I079",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "InstitutionID": "I080",
       "Role": "resident",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P030",
       "InstitutionID": "I081",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D046"
     },
     {
       "PersonID": "P031",
       "InstitutionID": "I044",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D047"
     },
     {
       "PersonID": "P031",
       "InstitutionID": "I007",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D047"
     },
     {
       "PersonID": "P032",
       "InstitutionID": "I082",
       "Role": "student",
       "StartDate": "1976",
-      "EndDate": "1976"
+      "EndDate": "1976",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P032",
       "InstitutionID": "I084",
       "Role": "priest",
       "StartDate": "1980",
-      "EndDate": "1980"
+      "EndDate": "1980",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P032",
       "InstitutionID": "I001",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P032",
       "InstitutionID": "I083",
       "Role": "parish_priest",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D048"
     },
     {
       "PersonID": "P033",
       "InstitutionID": "I005",
       "Role": "lawyer",
       "StartDate": "1958",
-      "EndDate": "1975"
+      "EndDate": "1975",
+      "SourceDocumentID": "D049"
     },
     {
       "PersonID": "P033",
       "InstitutionID": "I085",
       "Role": "founding_member",
       "StartDate": "1972",
-      "EndDate": "1972"
+      "EndDate": "1972",
+      "SourceDocumentID": "D049"
     },
     {
       "PersonID": "P033",
       "InstitutionID": "I086",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D050"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I102",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D055"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I098",
       "Role": "researcher",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D055"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I099",
       "Role": "associated_with",
       "StartDate": "1994",
-      "EndDate": "1994"
+      "EndDate": "1994",
+      "SourceDocumentID": "D054"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I100",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D054"
     },
     {
       "PersonID": "P013",
       "InstitutionID": "I101",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D054"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I087",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I088",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I089",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I090",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I091",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I092",
       "Role": "founder_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I093",
       "Role": "founder_of",
       "StartDate": "1980",
-      "EndDate": "1980"
+      "EndDate": "1980",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I009",
       "Role": "advisor",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I042",
       "Role": "advisor",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I008",
       "Role": "advisor",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P014",
       "InstitutionID": "I094",
       "Role": "founder_of",
       "StartDate": "2006",
-      "EndDate": "2006"
+      "EndDate": "2006",
+      "SourceDocumentID": "D051"
     },
     {
       "PersonID": "P023",
       "InstitutionID": "I096",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D052"
     },
     {
       "PersonID": "P023",
       "InstitutionID": "I095",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D052"
     },
     {
       "PersonID": "P037",
       "InstitutionID": "I041",
       "Role": "student",
       "StartDate": "1968",
-      "EndDate": "1968"
+      "EndDate": "1968",
+      "SourceDocumentID": "D053"
     },
     {
       "PersonID": "P037",
       "InstitutionID": "I086",
       "Role": "associated_with",
       "StartDate": "2000",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D053"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I079",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I108",
       "Role": "advisor",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I008",
       "Role": "advisor",
       "StartDate": "1992",
-      "EndDate": "1994"
+      "EndDate": "1994",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I107",
       "Role": "founding_member",
       "StartDate": "2000",
-      "EndDate": "2000"
+      "EndDate": "2000",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I119",
       "Role": "researcher",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P039",
       "InstitutionID": "I137",
       "Role": "advisor",
       "StartDate": "1989",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P040",
       "InstitutionID": "I129",
       "Role": "teaches_at",
       "StartDate": "1960",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D069"
     },
     {
       "PersonID": "P040",
       "InstitutionID": "I119",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D069"
     },
     {
       "PersonID": "P041",
       "InstitutionID": "I112",
       "Role": "president_of",
       "StartDate": "1987",
-      "EndDate": "1989"
+      "EndDate": "1989",
+      "SourceDocumentID": "D059"
     },
     {
       "PersonID": "P041",
       "InstitutionID": "I009",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D059"
     },
     {
       "PersonID": "P041",
       "InstitutionID": "I008",
       "Role": "director_of",
       "StartDate": "1987",
-      "EndDate": "1989"
+      "EndDate": "1989",
+      "SourceDocumentID": "D061"
     },
     {
       "PersonID": "P041",
       "InstitutionID": "I127",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D068"
     },
     {
       "PersonID": "P041",
       "InstitutionID": "I128",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D068"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I118",
       "Role": "student",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I117",
       "Role": "employee",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I116",
       "Role": "coordinator_of",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I130",
       "Role": "employee",
       "StartDate": "1974",
-      "EndDate": "1976"
+      "EndDate": "1976",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I131",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P042",
       "InstitutionID": "I132",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D062"
     },
     {
       "PersonID": "P043",
       "InstitutionID": "I062",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D063"
     },
     {
       "PersonID": "P043",
       "InstitutionID": "I110",
       "Role": "volunteer",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D063"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I134",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I133",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I115",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I125",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I138",
       "Role": "elected_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P044",
       "InstitutionID": "I140",
       "Role": "founding_member",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D071"
     },
     {
       "PersonID": "P045",
       "InstitutionID": "I008",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I108",
       "Role": "teaches_at",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I111",
       "Role": "educator",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I113",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I112",
       "Role": "advisor",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I114",
       "Role": "associated_with",
       "StartDate": "1980",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D065"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I127",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P046",
       "InstitutionID": "I128",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P047",
       "InstitutionID": "I115",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D066"
     },
     {
       "PersonID": "P047",
       "InstitutionID": "I111",
       "Role": "educator",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P048",
       "InstitutionID": "I008",
       "Role": "director_of",
       "StartDate": "1988",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P048",
       "InstitutionID": "I107",
       "Role": "coordinator_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P048",
       "InstitutionID": "I108",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I120",
       "Role": "member_of",
       "StartDate": "1977",
-      "EndDate": "1990"
+      "EndDate": "1990",
+      "SourceDocumentID": "D074"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I122",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I136",
       "Role": "teaches_at",
       "StartDate": "1977",
-      "EndDate": "1978"
+      "EndDate": "1978",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I110",
       "Role": "employee",
       "StartDate": "1979",
-      "EndDate": "1987"
+      "EndDate": "1987",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I109",
       "Role": "member_of",
       "StartDate": "1979",
-      "EndDate": "1985"
+      "EndDate": "1985",
+      "SourceDocumentID": "D066"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I108",
       "Role": "educator",
       "StartDate": "1989",
-      "EndDate": "1996"
+      "EndDate": "1996",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I137",
       "Role": "teacher_trainer",
       "StartDate": "1989",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D073"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I121",
       "Role": "member_of",
       "StartDate": "2026",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D074"
     },
     {
       "PersonID": "P049",
       "InstitutionID": "I135",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D072"
     },
     {
       "PersonID": "P050",
       "InstitutionID": "I117",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P050",
       "InstitutionID": "I116",
       "Role": "associated_with",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P051",
       "InstitutionID": "I132",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P053",
       "InstitutionID": "I117",
       "Role": "employee",
       "StartDate": "1982",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P053",
       "InstitutionID": "I116",
       "Role": "member_of",
       "StartDate": "1982",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P056",
       "InstitutionID": "I117",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P056",
       "InstitutionID": "I116",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P057",
       "InstitutionID": "I117",
       "Role": "employee",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P057",
       "InstitutionID": "I116",
       "Role": "member_of",
       "StartDate": "",
-      "EndDate": ""
+      "EndDate": "",
+      "SourceDocumentID": "D064"
     },
     {
       "PersonID": "P058",
@@ -10210,2942 +10491,3530 @@
     {
       "EventID": "E001",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D001"
     },
     {
       "EventID": "E001",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D001"
     },
     {
       "EventID": "E001",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D001"
     },
     {
       "EventID": "E001",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E001",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E001",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E002",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E002",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E002",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D003"
     },
     {
       "EventID": "E002",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D003"
     },
     {
       "EventID": "E003",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D004"
     },
     {
       "EventID": "E003",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D004"
     },
     {
       "EventID": "E003",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D005"
     },
     {
       "EventID": "E003",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D005"
     },
     {
       "EventID": "E004",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D004"
     },
     {
       "EventID": "E004",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D004"
     },
     {
       "EventID": "E004",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D005"
     },
     {
       "EventID": "E004",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D005"
     },
     {
       "EventID": "E005",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E005",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E005",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E005",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E005",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E005",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E006",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E006",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E006",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E007",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E007",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E007",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E007",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E007",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E007",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E008",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E008",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E008",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E008",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E008",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E008",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E009",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E009",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E009",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E009",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E009",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E009",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E010",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E010",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E010",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E010",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E010",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E010",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E010",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E010",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E010",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E010",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E010",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E010",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E010",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E010",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E010",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E011",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E011",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E011",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E011",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E011",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E011",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E011",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E011",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E011",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E011",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E011",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E011",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E011",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E011",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E011",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E012",
       "ConceptID": "C001",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E012",
       "ConceptID": "C004",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E012",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E013",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E013",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E013",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E013",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E014",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E014",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E014",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E014",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E015",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E015",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E015",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E015",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E016",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E016",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E017",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E017",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E018",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E018",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E019",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E019",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E020",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E020",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E020",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E020",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E021",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E021",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E022",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E022",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E023",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E023",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E024",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E024",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E025",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E025",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E026",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E026",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E027_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E027_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E028",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E028",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E028",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E028",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E029",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E029",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E030",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E031",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E031",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E032",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E032",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E032",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E032",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E033",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E033",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E033",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E033",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E034",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E034",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E035",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E035",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E036",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D019"
     },
     {
       "EventID": "E037",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E037",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E038_A",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E038_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E038_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E038_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E038_C",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E038_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E039",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E039",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E039",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E039",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E040",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E040",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E041",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E041",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E042",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E042",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E042",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E042",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E043",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E043",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E043",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E043",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E044",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E044",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E044",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E044",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E045",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E045",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
-    },
-    {
-      "EventID": "E045",
-      "ConceptID": "C007",
-      "RelationType": "characterized_as"
-    },
-    {
-      "EventID": "E045",
-      "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E045",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E045",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E045",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E045",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
+    },
+    {
+      "EventID": "E045",
+      "ConceptID": "C007",
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
+    },
+    {
+      "EventID": "E045",
+      "ConceptID": "C006",
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E046",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E046",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E046",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E046",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E047",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E047",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E047",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E047",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E048",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E048",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E049",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E049",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E050",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E050",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E050",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E050",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E051",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E051",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E052",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E052",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D030"
     },
     {
       "EventID": "E052",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E052",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D031"
     },
     {
       "EventID": "E053",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E053",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E054",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E054",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E055",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D003"
     },
     {
       "EventID": "E055",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D003"
     },
     {
       "EventID": "E056",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E056",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E056",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D013"
     },
     {
       "EventID": "E056",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E056",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E056",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D015"
     },
     {
       "EventID": "E057",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E057",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E057",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E057",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E057",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E057",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E058",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E058",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D008"
     },
     {
       "EventID": "E058",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E058",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D009"
     },
     {
       "EventID": "E061",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E061",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E061",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E062",
       "ConceptID": "C015",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E062",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D018"
     },
     {
       "EventID": "E064",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E064",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E064",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E064",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E064",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E064",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D021"
     },
     {
       "EventID": "E065",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E065",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E065",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E065",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E065",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E065",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D027"
     },
     {
       "EventID": "E065",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E065",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E065",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E068",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E068",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E068",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D002"
     },
     {
       "EventID": "E069",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E069",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E069",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D026"
     },
     {
       "EventID": "E070",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E070",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E070",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D028"
     },
     {
       "EventID": "E070",
       "ConceptID": "C016",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E070",
       "ConceptID": "C018",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E070",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D029"
     },
     {
       "EventID": "E071",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E071",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E072",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E072",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E073",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E073",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E074",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E074",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E075",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E075",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D007"
     },
     {
       "EventID": "E076",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E076",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E076",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E076",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E077",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E077",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E078",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E078",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E078",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E078",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E078",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E078",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E079",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E079",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E080",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E080",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E080",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E080",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_A",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E081_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D014"
     },
     {
       "EventID": "E081_A",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_C",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_D",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_E",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E081_E",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D010"
     },
     {
       "EventID": "E082",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E082",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D011"
     },
     {
       "EventID": "E083",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E083",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E084",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E084",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E085",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E085",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E086",
       "ConceptID": "C019",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E086",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E087",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E087",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D012"
     },
     {
       "EventID": "E088",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D016"
     },
     {
       "EventID": "E088",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D016"
     },
     {
       "EventID": "E089",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D016"
     },
     {
       "EventID": "E089",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D016"
     },
     {
       "EventID": "E090",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E090",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E091_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E092_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E093",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E093",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E094",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E094",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E095_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E095_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E095_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E095_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D017"
     },
     {
       "EventID": "E096",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E096",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_A",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_D",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D054"
     },
     {
       "EventID": "E097_E",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_E",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D022"
     },
     {
       "EventID": "E097_F",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E097_F",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D055"
     },
     {
       "EventID": "E098",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E098",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E098",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E098",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E098",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E098",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E099_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E099_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E099_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E100",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E100",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D023"
     },
     {
       "EventID": "E100",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E100",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D024"
     },
     {
       "EventID": "E100",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E100",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E101",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E101",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D051"
     },
     {
       "EventID": "E102",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E102",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E102",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E103",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E103",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E104",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E104",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E105",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E105",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D025"
     },
     {
       "EventID": "E106",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E106",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E107_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E110",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E110",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D032"
     },
     {
       "EventID": "E111",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E111",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E112",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E112",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E112",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E113",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E113",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E114",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E114",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E115",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E115",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E116",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E116",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D033"
     },
     {
       "EventID": "E117",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E117",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E118",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E118",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E118",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E119",
       "ConceptID": "C012",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E119",
       "ConceptID": "C014",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E119",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E120",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E120",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E121",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E121",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E122",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E122",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E123",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E123",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D034"
     },
     {
       "EventID": "E124",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E124",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E125",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E125",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E126_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E126_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E126_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E126_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E128",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E128",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E129",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E129",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D035"
     },
     {
       "EventID": "E132",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E132",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E133",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E133",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E134",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E134",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D037"
     },
     {
       "EventID": "E135",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D044"
     },
     {
       "EventID": "E135",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D044"
     },
     {
       "EventID": "E136",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D044"
     },
     {
       "EventID": "E136",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D044"
     },
     {
       "EventID": "E137",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E137",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E138",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E138",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E139",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E139",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E140",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E140",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E141",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E141",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D045"
     },
     {
       "EventID": "E142",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E142",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E143",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E143",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E144_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E144_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E144_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E144_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E145",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E145",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E146",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E146",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D046"
     },
     {
       "EventID": "E147",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E147",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E148",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E148",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E149",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E149",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D047"
     },
     {
       "EventID": "E150",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E150",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E151",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E151",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E152_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E152_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E152_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E152_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D048"
     },
     {
       "EventID": "E153",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E153",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E153",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E153",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E154",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E154",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E155_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E155_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E155_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E155_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D038"
     },
     {
       "EventID": "E155_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E155_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D039"
     },
     {
       "EventID": "E156",
       "ConceptID": "C019",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E156",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E157",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D040"
     },
     {
       "EventID": "E157",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D040"
     },
     {
       "EventID": "E157",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E157",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E158_A",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E158_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E158_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D040"
     },
     {
       "EventID": "E158_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D040"
     },
     {
       "EventID": "E158_B",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E158_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D041"
     },
     {
       "EventID": "E159",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E159",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E159",
       "ConceptID": "C022",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E159",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E160",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E160",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E161",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E161",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E162",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E162",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E163_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E163_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E163_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E163_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E165",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E165",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E166",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E166",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D043"
     },
     {
       "EventID": "E167",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E167",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D042"
     },
     {
       "EventID": "E168",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E168",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_A",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_A",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_B",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_B",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_C",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_C",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_D",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_D",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_E",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_E",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_F",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_F",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_G",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_G",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_H",
       "ConceptID": "C008",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E169_H",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E174",
       "ConceptID": "C007",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E174",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E175",
       "ConceptID": "C021",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E175",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D053"
     },
     {
       "EventID": "E009",
       "ConceptID": "C023",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D020"
     },
     {
       "EventID": "E197",
       "ConceptID": "C011",
-      "RelationType": "claims"
+      "RelationType": "claims",
+      "SourceDocumentID": "D077"
     },
     {
       "EventID": "E203",
       "ConceptID": "C011",
-      "RelationType": "exercises"
+      "RelationType": "exercises",
+      "SourceDocumentID": "D077"
     },
     {
       "EventID": "E205",
       "ConceptID": "C011",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D077"
     },
     {
       "EventID": "E205",
       "ConceptID": "C006",
-      "RelationType": "characterized_as"
+      "RelationType": "characterized_as",
+      "SourceDocumentID": "D077"
     },
     {
       "EventID": "E204",
       "ConceptID": "C020",
-      "RelationType": "violates"
+      "RelationType": "violates",
+      "SourceDocumentID": "D056"
     },
     {
       "EventID": "E194",
       "ConceptID": "C003",
-      "RelationType": "exercises"
+      "RelationType": "exercises",
+      "SourceDocumentID": "D001"
     }
   ],
   "DocumentPersons": [
@@ -14746,203 +15615,253 @@
   "DocumentLocations": [
     {
       "DocumentID": "D005",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_violation"
     },
     {
       "DocumentID": "D004",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D004",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D008",
-      "PlaceID": "L031"
+      "PlaceID": "L031",
+      "RelationType": "place_of_persecution"
     },
     {
       "DocumentID": "D008",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D008",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D009",
-      "PlaceID": "L031"
+      "PlaceID": "L031",
+      "RelationType": "place_of_persecution"
     },
     {
       "DocumentID": "D009",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D009",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D011",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D011",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D013",
-      "PlaceID": "L038"
+      "PlaceID": "L038",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D013",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D013",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D013",
-      "PlaceID": "L040"
+      "PlaceID": "L040",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D018",
-      "PlaceID": "L034"
+      "PlaceID": "L034",
+      "RelationType": "place_of_arbitrary_detention"
     },
     {
       "DocumentID": "D018",
-      "PlaceID": "L034"
+      "PlaceID": "L034",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D019",
-      "PlaceID": "L034"
+      "PlaceID": "L034",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D019",
-      "PlaceID": "L034"
+      "PlaceID": "L034",
+      "RelationType": "place_of_arbitrary_detention"
     },
     {
       "DocumentID": "D026",
-      "PlaceID": "L178"
+      "PlaceID": "L178",
+      "RelationType": "place_of_surveillance"
     },
     {
       "DocumentID": "D028",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D028",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D029",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D029",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D030",
-      "PlaceID": "L207"
+      "PlaceID": "L207",
+      "RelationType": "place_of_intimidation"
     },
     {
       "DocumentID": "D030",
-      "PlaceID": "L178"
+      "PlaceID": "L178",
+      "RelationType": "place_of_surveillance"
     },
     {
       "DocumentID": "D030",
-      "PlaceID": "L056"
+      "PlaceID": "L056",
+      "RelationType": "place_of_concealment_of_a_body"
     },
     {
       "DocumentID": "D031",
-      "PlaceID": "L207"
+      "PlaceID": "L207",
+      "RelationType": "place_of_intimidation"
     },
     {
       "DocumentID": "D005",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D005",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D015",
-      "PlaceID": "L038"
+      "PlaceID": "L038",
+      "RelationType": "place_of_incarceration"
     },
     {
       "DocumentID": "D015",
-      "PlaceID": "L005"
+      "PlaceID": "L005",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D027",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D031",
-      "PlaceID": "L006"
+      "PlaceID": "L006",
+      "RelationType": "place_of_torture"
     },
     {
       "DocumentID": "D008",
-      "PlaceID": "L056"
+      "PlaceID": "L056",
+      "RelationType": "place_of_concealment_of_a_body"
     },
     {
       "DocumentID": "D009",
-      "PlaceID": "L056"
+      "PlaceID": "L056",
+      "RelationType": "place_of_concealment_of_a_body"
     },
     {
       "DocumentID": "D013",
-      "PlaceID": "L007"
+      "PlaceID": "L007",
+      "RelationType": "place_of_falsification_of_cause_of_death_or_evidence_tampering"
     },
     {
       "DocumentID": "D015",
-      "PlaceID": "L007"
+      "PlaceID": "L007",
+      "RelationType": "place_of_falsification_of_cause_of_death_or_evidence_tampering"
     },
     {
       "DocumentID": "D059",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D061",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D062",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D063",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D067",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D068",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D069",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D071",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D064",
-      "PlaceID": "L040"
+      "PlaceID": "L040",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D066",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D070",
-      "PlaceID": "L254"
+      "PlaceID": "L254",
+      "RelationType": "place_of_interview"
     },
     {
       "DocumentID": "D072",
-      "PlaceID": "L004"
+      "PlaceID": "L004",
+      "RelationType": "place_of_interview"
     }
   ],
   "EventActors": [
@@ -15193,7 +16112,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_period",
-      "Confidence": "medium"
+      "Confidence": "medium",
+      "SourceDocumentID": "D072"
     },
     {
       "SourceInstitutionID": "I116",
@@ -15202,7 +16122,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "documented",
-      "Confidence": "high"
+      "Confidence": "high",
+      "SourceDocumentID": "D064"
     },
     {
       "SourceInstitutionID": "I138",
@@ -15229,7 +16150,8 @@
       "StartDate": "1998",
       "EndDate": "",
       "ReviewStatus": "documented",
-      "Confidence": "high"
+      "Confidence": "high",
+      "SourceDocumentID": "D073"
     },
     {
       "SourceInstitutionID": "I107",
@@ -15238,7 +16160,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "documented",
-      "Confidence": "medium"
+      "Confidence": "medium",
+      "SourceDocumentID": "D073"
     },
     {
       "SourceInstitutionID": "I108",
@@ -15247,7 +16170,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_scope",
-      "Confidence": "medium"
+      "Confidence": "medium",
+      "SourceDocumentID": "D072"
     },
     {
       "SourceInstitutionID": "I110",
@@ -15256,7 +16180,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_scope",
-      "Confidence": "low"
+      "Confidence": "low",
+      "SourceDocumentID": "D066"
     }
   ],
   "MovementRelations": [
@@ -15302,7 +16227,8 @@
       "StartDate": "1979",
       "EndDate": "",
       "ReviewStatus": "documented",
-      "Confidence": "high"
+      "Confidence": "high",
+      "SourceDocumentID": "D073"
     },
     {
       "MovementID": "M001",
@@ -15329,7 +16255,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_scope",
-      "Confidence": "medium"
+      "Confidence": "medium",
+      "SourceDocumentID": "D064"
     },
     {
       "MovementID": "M001",
@@ -15338,7 +16265,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_scope",
-      "Confidence": "medium"
+      "Confidence": "medium",
+      "SourceDocumentID": "D072"
     },
     {
       "MovementID": "M001",
@@ -15347,7 +16275,8 @@
       "StartDate": "",
       "EndDate": "",
       "ReviewStatus": "review_scope",
-      "Confidence": "low"
+      "Confidence": "low",
+      "SourceDocumentID": "D066"
     }
   ],
   "Controlled_vocab": [
