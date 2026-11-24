@@ -114,6 +114,19 @@ const eventLabels = {
 const eventLabel = x => eventLabels[text(x)]||text(x).replace(/_/g,' ');
 function canDisplayEdge(e){ return $('role').value==='' || e.relation===$('role').value; }
 
+// ATLAS_SOCIAL_PROJECTION_V1
+// Acontecimentos, documentos, locais e categorias juridicas continuam na base
+// sem criar arestas que posicionem pessoas na rede de organizacoes.
+const TIPOS_SOCIAIS = new Set(['Pessoa','Instituição','Movimento']);
+function arestaSocial(e){
+ const a=nodeById.get(e.from),b=nodeById.get(e.to);
+ if(!a||!b||!TIPOS_SOCIAIS.has(a.kind)||!TIPOS_SOCIAIS.has(b.kind))return false;
+ // Relações sociais somente entre pessoa-organização e organização-organização.
+ if(a.kind==='Pessoa' && b.kind==='Pessoa')return false;
+ return true;
+}
+function arestasSociais(){return edgeRows.filter(arestaSocial);}
+
 async function normalize(){
   nodeById=new Map();edgeRows=[];imageCache=new Map();
   for(const [table,[key,labels,kind]] of Object.entries(schema)){
@@ -135,17 +148,17 @@ async function normalize(){
 
 function updateSelectors(){
  const focus=$('focus'),role=$('role'),previous=focus.value;
- const sorted=[...nodeById.values()].sort((a,b)=>a.label.localeCompare(b.label,'pt'));
+ const sorted=[...nodeById.values()].filter(n=>TIPOS_SOCIAIS.has(n.kind)).sort((a,b)=>a.label.localeCompare(b.label,'pt'));
  focus.innerHTML='<option value="">Todas as pessoas</option>'+sorted.map(n=>'<option value="'+HTML(n.id)+'">'+HTML(n.label)+' ('+n.id+')</option>').join('');
  if(nodeById.has(previous)) focus.value=previous;
  const current=role.value;
  role.innerHTML='<option value="">Todos os vínculos</option>'+
-   [...new Set(edgeRows.map(e=>e.relation))].sort((a,b)=>roleLabel(a).localeCompare(roleLabel(b),'pt')).map(raw=>'<option value="'+HTML(raw)+'">'+HTML(roleLabel(raw))+'</option>').join('');
+   [...new Set(arestasSociais().map(e=>e.relation))].sort((a,b)=>roleLabel(a).localeCompare(roleLabel(b),'pt')).map(raw=>'<option value="'+HTML(raw)+'">'+HTML(roleLabel(raw))+'</option>').join('');
  if([...role.options].some(o=>o.value===current))role.value=current;
 }
 
 function neighbors(id){
-  const result=[];for(const e of edgeRows){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
+  const result=[];for(const e of arestasSociais()){if(e.from===id)result.push(e.to);else if(e.to===id)result.push(e.from);}
   return [...new Set(result)].sort();
 }
 function resetGraph(){
@@ -202,13 +215,13 @@ function graphNode(n){
  return {id:n.id,label,group:n.kind,educational:focosEducacionais.has(n.id),
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
   image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:focosEducacionais.has(n.id)?28:16,
-  borderWidth:2,title:'<b>'+HTML(n.label)+'</b><br>'+HTML(n.id)+' · '+HTML(n.kind),
+  borderWidth:2,title:'<b>'+HTML(n.label)+'</b>',
   color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
 }
 function drawGraph(){
  const el=$('network');if(!window.vis&&!window.d3){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
- const visibleEdges=edgeRows.filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
- if(!$('role').value)visibleEdges.push(...coAffiliationEdges().filter(e=>visible.has(e.from)&&visible.has(e.to)));
+ const visibleEdges=arestasSociais().filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
+  // Coparticipação permanece consultável, sem gerar ligação pessoal automática.
  const groups=new Map();
  for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
  const graphEdges=[...groups.values()].map((g,i)=>({id:'e'+i,from:g[0].from,to:g[0].to,
@@ -236,7 +249,7 @@ function drawGraph(){
   });
   if(selected && net?.focus)net.focus(selected,{lock:selected==='M001'});
   const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
-  $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
+  $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+arestasSociais().length+' vínculos sociais ou organizacionais cadastrados.';
   return;
  }
  if(net){net.destroy();net=null;}
@@ -256,15 +269,63 @@ function drawGraph(){
 
 function showDetail(id){
  const n=nodeById.get(id);if(!n)return;
- const d=$('detail'),description=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN'])||text(miniBiografias[id]);
- let html='<button id="closeDetail" aria-label="Fechar painel">×</button>';
- if(n.photo)html+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
- html+='<h3>'+HTML(n.label)+'</h3><p class="muted">'+HTML(n.kind)+' · '+HTML(n.id)+'</p>';
- if(description)html+='<p class="mini-bio">'+HTML(description)+'</p>'; else if(n.kind==='Pessoa')html+='<p class="mini-bio">Minibiografia em preparação documental.</p>';
- const related=edgeRows.filter(e=>e.from===id||e.to===id);
- html+='<strong>'+related.length+' vínculos documentados ou em revisão</strong><ul>'+related.slice(0,16).map(e=>
-  '<li>'+HTML(roleLabel(e.relation))+' — '+HTML(nodeById.get(e.from===id?e.to:e.from)?.label||'')+'</li>').join('')+'</ul>';
- d.innerHTML=html;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
+ const d=$('detail');
+ const desc=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN'])||text(miniBiografias[id]);
+ let out='<button id="closeDetail" aria-label="Fechar painel">×</button>';
+ if(n.photo)out+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
+ out+='<h3>'+HTML(n.label)+'</h3>';
+ if(desc)out+='<p class="mini-bio">'+HTML(desc)+'</p>';
+ else if(n.kind==='Pessoa')out+='<p class="mini-bio">Minibiografia ainda não disponível nesta versão pública.</p>';
+
+ const dedup=new Set();
+ const ligacoes=arestasSociais().filter(e=>e.from===id||e.to===id).map(e=>{
+   const peer=e.from===id?e.to:e.from;
+   const vizinho=nodeById.get(peer);
+   return {nome:vizinho?.label||'',papel:roleLabel(e.relation),chave:peer+'|'+e.relation};
+ }).filter(v=>{if(!v.nome||dedup.has(v.chave))return false;dedup.add(v.chave);return true;});
+ if(ligacoes.length){
+   out+='<h4>Participação e vínculos organizacionais</h4><ul>';
+   out+=ligacoes.map(v=>'<li>'+HTML(v.papel)+': <strong>'+HTML(v.nome)+'</strong></li>').join('');
+   out+='</ul>';
+ }
+
+ if(n.kind==='Pessoa'){
+   const diretamenteOSM=arestasSociais().some(e=>(e.from===id&&e.to==='M001')||(e.to===id&&e.from==='M001'));
+   if(!diretamenteOSM){
+     out+='<p class="muted" style="font-size:12px">A presença no Atlas não comprova participação na OSM-SP; não há vínculo direto registrado nesta matriz.</p>';
+   }
+   const eventos=new Map(rows('Events').map(e=>[text(e.EventID),e]));
+   const vivencias=new Map();
+   for(const r of rows('EventPersons')){
+     if(text(r.PersonID)!==id)continue;
+     const e=eventos.get(text(r.EventID));if(!e)continue;
+     // Agrupamento por tipo e papel; não converter acontecimento em conexão social.
+     const tipo=eventLabel(e.EventType);
+     const papel=roleLabel(r.Role);
+     const key=papel+'|'+tipo;
+     if(!vivencias.has(key))vivencias.set(key,{papel,tipo,quantidade:0});
+     vivencias.get(key).quantidade++;
+   }
+   if(vivencias.size){
+     out+='<details class="atlas-context"><summary>Acontecimentos e experiências registrados</summary><ul>';
+     for(const x of vivencias.values())out+='<li>'+HTML(x.papel)+': '+HTML(x.tipo)+(x.quantidade>1?' ('+x.quantidade+' ocorrências)':'')+'</li>';
+     out+='</ul></details>';
+   }
+   const docs=new Map(rows('Documents').map(r=>[text(r.DocumentID),r]));
+   const bibliografia=new Map();
+   for(const r of rows('DocumentPersons')){
+     if(text(r.PersonID)!==id)continue;
+     const doc=docs.get(text(r.DocumentID));if(!doc)continue;
+     const titulo=first(doc,['Title_ORIG','DisplayTitle_ORIG','DisplayTitle_EN','Title_EN','Repository']);
+     if(titulo)bibliografia.set(text(r.DocumentID),titulo);
+   }
+   if(bibliografia.size){
+     out+='<details class="atlas-context"><summary>Fontes relacionadas ('+bibliografia.size+')</summary><ul>';
+     for(const titulo of bibliografia.values())out+='<li>'+HTML(titulo)+'</li>';
+     out+='</ul></details>';
+   }
+ }
+ d.innerHTML=out;d.hidden=false;$('closeDetail').onclick=()=>d.hidden=true;
 }
 
 function updateCounts(){
