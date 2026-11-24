@@ -166,7 +166,7 @@ function relationEvidence(table,raw){
  const refs=ids.map(sourceReference);
  const url=first(raw,['SourceURL'])||(/^https?:\/\//i.test(text(raw.Confidence))?text(raw.Confidence):'');
  if(url)refs.push(url);
- if(refs.length||passage)return [...new Set([...refs,...(passage?[passage]:[])])].join(' · ');
+ if(refs.length||passage)return [...new Set([...refs,...(text(raw.Notes)?[text(raw.Notes)]:[]),...(passage?[passage]:[])])].join(' · ');
  if(['EventPersons','EventActors'].includes(table)){
   const docs=[...new Set(rows('DocumentEvents').filter(d=>d.EventID===raw.EventID).map(d=>d.DocumentID).filter(Boolean))];
   if(docs.length)return 'Documentos do evento (referência contextual, não individualizada para este vínculo): '+docs.map(sourceReference).join(' · ');
