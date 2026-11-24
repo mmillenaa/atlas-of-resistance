@@ -255,9 +255,17 @@ function updateMap(){
  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
  if(!leafletMap){
   leafletMap=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([-23.55,-46.63],5);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'© OpenStreetMap contributors',maxZoom:19,className:'atlas-grayscale-tiles'
-  }).addTo(leafletMap);
+  
+L.tileLayer(
+  "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png?key=SUA_CHAVE_CARTO",
+  {
+    attribution:
+      "&copy; OpenStreetMap contributors &copy; CARTO",
+    maxZoom: 19,
+    className: "atlas-grayscale-tiles"
+  }
+).addTo(leafletMap);
+
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
  const chosen=$('mapConcept').value;
