@@ -10,7 +10,6 @@ const d3=window.d3;
 const positions=new Map();
 let previous=null;
 const palette={Pessoa:'#9D2235',Movimento:'#d1b078',Instituição:'#c5cbd1',Documento:'#e0e0e0',Evento:'#96b4c3',Conceito:'#c4b3da',Local:'#afc5b7'};
-const educationalIDs=new Set(['I108','I119','I126','I137','I139']);
 function degreeMap(edges){
  const m=new Map();const pairs=new Set();
  for(const e of edges){
@@ -26,7 +25,6 @@ function radius(node,degree){
  const n=degree.get(node.id)||0;
  if(node.id==='M001')return 62;
  if(node.group==='Pessoa')return Math.max(33,Math.min(53,34+5.5*Math.log2(n+1)));
- if(educationalIDs.has(node.id))return 30;
  if(node.group==='Movimento')return Math.max(18,Math.min(28,18+2*Math.log2(n+1)));
  if(node.group==='Instituição')return Math.max(14,Math.min(25,14+2*Math.log2(n+1)));
  return 13;
@@ -57,7 +55,7 @@ function draw(nodeRows,edgeRows,onSelect){
  });
  // Desenhar pessoas e OSM por último impede que círculos de organizações
  // cubram rostos quando os nós ficam próximos.
- const frontWeight=n=>n.id==='M001'?3:n.kind==='Pessoa'?2:educationalIDs.has(n.id)?1:0;
+ const frontWeight=n=>n.id==='M001'?3:n.kind==='Pessoa'?2:0;
  nodes.sort((a,b)=>frontWeight(a)-frontWeight(b));
  const links=edgeRows.filter(l=>ids.has(l.from)&&ids.has(l.to)).map(e=>({...e,source:e.from,target:e.to}));
  const svg=d3.select(parent).append('svg').attr('viewBox',`0 0 ${width} ${height}`)
@@ -74,12 +72,12 @@ function draw(nodeRows,edgeRows,onSelect){
  edge.append('title').text(l=>String(l.title||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' '));
  const defs=svg.append('defs');
  const groups=nodeLayer.selectAll('g.lj-node').data(nodes,n=>n.id).enter().append('g')
-  .attr('class',n=>'lj-node'+(n.kind==='Pessoa'?' atlas-person':' atlas-organization')+(educationalIDs.has(n.id)?' atlas-educational':''))
+  .attr('class',n=>'lj-node'+(n.kind==='Pessoa'?' atlas-person':' atlas-organization'))
   .attr('tabindex',0).attr('role','button').attr('aria-label',n=>n.fullLabel||n.id);
  groups.each(function(n){
-  const g=d3.select(this),osm=n.id==='M001',educational=educationalIDs.has(n.id);
-  g.append('circle').attr('r',n.r).attr('class',osm?'member-highlight':educational?'educational-focus':'')
-    .attr('fill',osm?'#9D2235':educational?'#ff2b1f':palette[n.kind]||'#ccc');
+  const g=d3.select(this),osm=n.id==='M001';
+  g.append('circle').attr('r',n.r).attr('class',osm?'member-highlight':'')
+    .attr('fill',osm?'#9D2235':palette[n.kind]||'#ccc');
   if(n.image){
    const clipId='clip-'+n.id.replace(/[^a-zA-Z0-9_-]/g,'');
    defs.append('clipPath').attr('id',clipId).append('circle').attr('r',Math.max(5,n.r-2));

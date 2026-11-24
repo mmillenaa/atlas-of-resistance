@@ -79,14 +79,11 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 #network .atlas-organization .node-label{display:none}
 #network .atlas-person .node-label{font:600 13px/1.2 Roboto,Arial,sans-serif;fill:#2f3033;stroke:#fff;stroke-width:4px;paint-order:stroke;pointer-events:none}
 #network .lj-node.atlas-person>circle{stroke:#9D2235;stroke-width:2.3px}
-#network .lj-node.atlas-educational>circle.educational-focus{stroke:#ff2b1f;stroke-width:5px;filter:drop-shadow(0 0 3px rgba(255,40,20,.3))}
-#network .lj-node.atlas-educational.atlas-selected>circle{stroke:#9a0900;stroke-width:6px}
 #network .lj-node.atlas-selected>circle{stroke:#141414;stroke-width:5px}
 #network .lj-node.atlas-linked.atlas-person>circle{stroke:#9D2235;stroke-width:3px}
 #network .lj-node.atlas-dimmed{opacity:.095}
 #network .lj-edge.atlas-dimmed{stroke-opacity:.025!important}
 #network .lj-edge.atlas-highlight-link{stroke:#9D2235;stroke-opacity:.85!important;stroke-width:2.6px}
-#network .lj-node.atlas-educational .node-label{fill:#df291c}
 #network .lj-node.atlas-selected .node-label{display:block!important;font-weight:700;fill:#222}
 #network .lj-node.atlas-dimmed .node-label{display:none!important}
 .map-history{font:14px/1.75 Roboto,Arial,sans-serif;white-space:pre-line;text-align:left;color:#383838;margin-bottom:18px}
@@ -100,12 +97,11 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 
 /* ATLAS_EDUCACAO_20261124_V1: curadoria sob demanda, sem barra de filtros. */
 .atlas-internal-filters[hidden]{display:none!important}
-.education-control-bar{padding:10px 0 17px;border-bottom:1px solid #e6e6e6;margin-bottom:15px}
-.education-control-bar>button,.education-map-actions>button{background:#fff;border:1px solid #b6b6b6;color:#9D2235;padding:9px 15px;border-radius:3px;font-family:Roboto,sans-serif;cursor:pointer}
-.education-control-bar>button:hover,.education-map-actions>button:hover{border-color:#9D2235;background:#fff8f8}
-#educationList,#eduMapList{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-#educationList[hidden],#eduMapList[hidden]{display:none!important}
-.atlas-edu-card{background:#fff;border:1px solid #ddd;padding:12px 14px;border-left:3px solid #FF2B1F;border-radius:3px;font:13px/1.6 Roboto,Arial,sans-serif}
+.education-map-actions>button{background:#fff;border:1px solid #b6b6b6;color:#9D2235;padding:9px 15px;border-radius:3px;font-family:Roboto,sans-serif;cursor:pointer}
+.education-map-actions>button:hover{border-color:#9D2235;background:#fff8f8}
+#eduMapList{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+#eduMapList[hidden]{display:none!important}
+.atlas-edu-card{position:relative;min-width:0;display:flex;flex-direction:column;gap:2px;padding:20px 18px 17px;background:#faf8f1;border:0;border-radius:0;font:13px/1.65 Roboto,Arial,sans-serif;color:#292929}
 .atlas-edu-card strong,.atlas-edu-card small{display:block}
 .atlas-edu-card small,.atlas-edu-precision{color:#666;font-size:12px}
 .atlas-edu-card p{margin:5px 0}
@@ -115,7 +111,7 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 .graph-detail details.atlas-context>summary{cursor:pointer;color:#9D2235;font-weight:500}
 .graph-detail details.atlas-context ul{padding-left:20px;font-size:13px;line-height:1.55}
 .graph-detail .mini-bio{font-size:13px;line-height:1.65}
-@media(max-width:760px){#educationList,#eduMapList{grid-template-columns:1fr}}
+@media(max-width:760px){#eduMapList{grid-template-columns:1fr}}
 
 /* ATLAS_ENTREVISTA_20261124_V2 — listas recolhidas discretas, sem setas */
 .atlas-context > summary {list-style:none !important;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#AD1F34;color:#AD1F34;font-weight:400;background:none;padding:8px 0;}
@@ -128,8 +124,7 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 /* Geografia: três categorias; mapa independente de CDN. */
 .map-grid{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
 .map-grid>div,.legal-grid>div{min-width:0}
-.map-legend .pin.education{background:#FF2B1F;border-color:#A51A12}
-.map-legend .pin.memory{background:#365E7D;border-color:#244967}
+.map-legend .pin.memory{background:#DC143C;border-color:#A10F2D}
 .map-legend .pin.other{background:#9AA0A6;border-color:#777}
 #map.atlas-raster{height:600px;min-height:340px;position:relative;overflow:hidden;touch-action:none;background-color:#f0f2f3;background-image:linear-gradient(#dce2e5 1px,transparent 1px),linear-gradient(90deg,#dce2e5 1px,transparent 1px);background-size:64px 64px;cursor:grab;isolation:isolate}
 .atlas-raster:active{cursor:grabbing}
@@ -160,3 +155,18 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 #dados .table td:nth-child(4),#dados .table td:nth-child(5){min-width:180px;white-space:normal}
 #dados .data-tools{margin:14px 0 12px;flex-wrap:wrap}
 @media(max-width:920px){.map-grid,#juridico .legal-grid{grid-template-columns:minmax(0,1fr)}#juridico .side-panel{padding:0}#map.atlas-raster{height:460px}}
+
+/* Molduras de traço livre: SVG em CSS, sem ícones ou imagens externas. */
+#eduMapList{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:17px;margin-top:18px}
+#eduMapList .atlas-edu-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M1.5 1.9 Q24 1 48 1.5 T98 1.3 Q98.8 23 98.1 48 T98.8 98.1 Q77 97.8 51 98.8 T1.4 98.4 Q2.1 77 1.3 51 T1.5 1.9 Z' fill='none' stroke='%232b2926' stroke-width='1.55' vector-effect='non-scaling-stroke' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+#eduMapList .atlas-edu-card:nth-child(3n+2)::before{transform:scaleX(-1)}
+#eduMapList .atlas-edu-card:nth-child(3n)::before{transform:scaleY(-1)}
+#eduMapList .atlas-edu-title{font:600 17px/1.35 'Courier New',Courier,monospace;letter-spacing:-.045em;color:#242321;overflow-wrap:anywhere}
+#eduMapList .atlas-edu-card small{font:13px/1.4 'Courier New',Courier,monospace;color:#514d47;margin:3px 0 7px}
+#eduMapList .atlas-edu-address{font-weight:500}
+#eduMapList .atlas-edu-precision{color:#615b52;font-size:12px}
+#eduMapList .atlas-edu-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:auto;padding-top:9px}
+#eduMapList .atlas-edu-actions:empty{display:none}
+#eduMapList .atlas-edu-actions button,#eduMapList .atlas-edu-actions a{display:inline-block;margin:0;background:transparent;border:1px solid #49433c;border-radius:2px 4px 2px 3px;color:#2e2b26;padding:5px 9px;font:12px/1.35 'Courier New',Courier,monospace;text-decoration:none;cursor:pointer}
+#eduMapList .atlas-edu-actions button:hover,#eduMapList .atlas-edu-actions a:hover{background:#efe9db;color:#9D2235}
+#eduMapList .atlas-edu-actions button:focus-visible,#eduMapList .atlas-edu-actions a:focus-visible{outline:2px solid #DC143C;outline-offset:3px}

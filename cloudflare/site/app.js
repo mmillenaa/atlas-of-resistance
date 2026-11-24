@@ -31,9 +31,6 @@ let db={}, nodeById=new Map(), edgeRows=[], visible=new Set(), selected='', net=
 let imageCache=new Map();
 let historicosLocais={};
 let primeiroAjusteMapa=false;
-// Destaques experimentais de iniciativas de educação de trabalhadores.
-// A lista é explícita e pode ser revisada após a qualificação.
-const focosEducacionais = new Set(['I108','I119','I121','I126','I129','I136','I137','I139']);
 
 let miniBiografias={};
 const rows=key=>Array.isArray(db[key])?db[key]:[];
@@ -174,9 +171,6 @@ function resetGraph(){
      if(a?.kind==='Pessoa'&&['Instituição','Movimento'].includes(b?.kind))visible.add(e.to);
      if(b?.kind==='Pessoa'&&['Instituição','Movimento'].includes(a?.kind))visible.add(e.from);
    }
-   // As iniciativas educacionais da pesquisa aparecem mesmo sem vínculo
-   // individual imediato, sem inventar nenhuma aresta documental.
-   for(const id of focosEducacionais)if(nodeById.has(id))visible.add(id);
    // Ligações diretas entre organizações já cadastradas; sem criar nós ausentes.
  } else if(focus&&nodeById.has(focus)) {
    visible.add(focus);neighbors(focus).forEach(x=>visible.add(x));
@@ -213,9 +207,9 @@ function coAffiliationEdges(){
 function graphNode(n){
  const isPerson=n.kind==='Pessoa';
  const label=(isPerson || n.id===selected)?n.label:'';
- return {id:n.id,label,group:n.kind,educational:focosEducacionais.has(n.id),
+ return {id:n.id,label,group:n.kind,
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
-  image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:focosEducacionais.has(n.id)?28:16,
+  image:n.photo||undefined,size:isPerson?34:n.id==='M001'?56:16,
   borderWidth:2,title:'<b>'+HTML(n.label)+'</b>',
   color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
 }
@@ -350,6 +344,7 @@ function updateCounts(){
 const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
 const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
+const atlasMapColors={historical:'#DC143C',other:'#9AA0A6',historicalBorder:'#A10F2D',otherBorder:'#777'};
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
  const L=window.AtlasRaster;
@@ -374,7 +369,8 @@ function updateMap(){
    const ne=eventCounts.get(text(r.PlaceID))||0;
    // Filtrar por categoria somente quando a opção está selecionada; na visão geral, todas as localizações.
    if(chosen&&chosen!=='ALL'&&ne===0)continue;
-   const isEvent=ne>0 || /^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH));
+   const isMemory=/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||historicosLocais[text(r.PlaceID)]?.fonte==='MDH';
+    const isEvent=ne>0||isMemory;
    const label=first(r,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||r.PlaceID;
    const radius=$('heat').checked?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
    const memoria=historicosLocais[text(r.PlaceID)]||{};
@@ -411,21 +407,22 @@ function updateMap(){
    detalhes+='<p class="auxiliary">Identificador: '+HTML(r.PlaceID)+' · Coordenadas: '+lat+', '+lon+'</p>';
    L.circleMarker([lat,lon],{
       radius,
-      color:isEvent?'#244967':'#777',
-       fillColor:isEvent?'#365E7D':'#9AA0A6',priority:isEvent?1:0,
+      color:isEvent?atlasMapColors.historicalBorder:atlasMapColors.otherBorder,
+       fillColor:isEvent?atlasMapColors.historical:atlasMapColors.other,priority:isMemory?3:isEvent?2:0,
       weight:1.4, fillOpacity:$('heat').checked?.42:.77
     })
     .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
- const education=atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords));
- // A camada educacional permanece visível mesmo ao filtrar os acontecimentos jurídicos.
- for(const item of education){atlasPlotEducation(item,false);coords.push(item.coords);}
+ // A matriz Locations tem prioridade de enquadramento e sobreposição.
+ const supplements=(!chosen||chosen==='ALL')?atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords)):[];
+ for(const item of supplements)atlasPlotEducation(item,false);
+ if(!coords.length)for(const item of supplements)coords.push(item.coords);
  leafletMap.__atlasCoords=coords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
  if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais históricos · '+eventPlaces+' associados a eventos ou memória · '+education.length+' iniciativas educacionais georreferenciadas. Contorno tracejado = localização aproximada.';
+ $('mapStatus').textContent=total+' locais georreferenciados da matriz · '+eventPlaces+' associados a acontecimentos ou memória'+(supplements.length?' · '+supplements.length+' endereços complementares':'')+'. Contorno tracejado = localização aproximada.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -716,18 +713,17 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  if(!leafletMap||!coords)return;
  const L=window.AtlasRaster;
  const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
- const marker=L.circleMarker(coords,{radius:10,color:item.educacional===false?'#777':'#A51A12',fillColor:item.educacional===false?'#9AA0A6':'#FF2B1F',weight:2,fillOpacity:.94,priority:item.educacional===false?0:3,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
+ const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.historicalBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.historical,weight:1.4,fillOpacity:$('heat').checked?.42:.77,priority:item.educacional===false?0:1,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
 const atlasEduGeoCache = new Map();
-let atlasEducationLayer = null, atlasEducationVisible = false;
 let atlasEduGeocodeInProgress = false;
 function atlasEduCard(item,idx,withAction=false){
  const btn=withAction&&item.localizavel?'<button type="button" data-edu-find="'+idx+'">Localizar no mapa</button>':'';
  const link=item.fonte?'<a target="_blank" rel="noopener noreferrer" href="'+HTML(item.fonte)+'">Fonte</a>':'';
- return '<article class="atlas-edu-card"><strong>'+HTML(item.nome)+'</strong><small>'+HTML(item.periodo)+'</small>'+ 
-  '<p>'+HTML(item.endereco)+'</p><p class="atlas-edu-precision">'+HTML(item.precisao)+'</p>'+ 
-  '<p>'+HTML(item.nota)+'</p>'+btn+(link?' '+link:'')+'</article>';
+ return '<article class="atlas-edu-card"><strong class="atlas-edu-title">'+HTML(item.nome)+'</strong><small>'+HTML(item.periodo)+'</small>'+ 
+  '<p class="atlas-edu-address">'+HTML(item.endereco)+'</p><p class="atlas-edu-precision">'+HTML(item.precisao)+'</p>'+ 
+  '<p>'+HTML(item.nota)+'</p>'+ '<div class="atlas-edu-actions">'+btn+link+'</div></article>';
 }
 async function atlasEduGeocode(item){
  if(item.coords)return item.coords;
@@ -761,33 +757,12 @@ function atlasEduShowList(container,withAction){
  }));
 }
 function atlasEduInit(){
- const list=$('educationList'),toggle=$('educationToggle');
- if(list && toggle){
-  atlasEduShowList(list,false);
-  list.addEventListener('click',event=>{
-    const el=event.target.closest('[data-edu-org]');if(!el)return;
-    const id=el.getAttribute('data-edu-org');
-    // Não recalcula a física nem cria vínculos: destaca a iniciativa já existente.
-    if(!nodeById.has(id))return;
-    selected=id;showDetail(id);
-    if(net && net.focus)net.focus(id,{lock:true});
-    if($('network'))$('network').scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
-  toggle.addEventListener('click',()=>{
-    list.hidden=!list.hidden;toggle.setAttribute('aria-expanded',String(!list.hidden));
-  });
-  list.querySelectorAll('article').forEach((article,i)=>{
-    const id=atlasIniciativas[i].id;
-    const b=document.createElement('button');b.type='button';b.textContent='Destacar no grafo';b.dataset.eduOrg=id;
-    article.appendChild(b);
-  });
- }
+
  const m=$('eduMapList'),mToggle=$('eduMapToggle');
  if(m&&mToggle){
   atlasEduShowList(m,true);
   mToggle.addEventListener('click',()=>{
     m.hidden=!m.hidden;mToggle.setAttribute('aria-expanded',String(!m.hidden));
-    if(!m.hidden && leafletMap){leafletMap.fitBounds(atlasIniciativas.filter(i=>i.coords&&i.educacional!==false).map(i=>i.coords),{maxZoom:13});}
   });
  }
 }
