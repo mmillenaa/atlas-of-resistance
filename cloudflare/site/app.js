@@ -29,6 +29,7 @@ const color={Pessoa:'#9D2235',Movimento:'#e2c68e',Instituição:'#d5d5d5',Evento
 const hubs=['M001','I008','I108','I107','M018','I116','I119','I005'];
 let db={}, nodeById=new Map(), edgeRows=[], visible=new Set(), selected='', net=null, leafletMap=null, manifest={};
 let imageCache=new Map();
+let miniBiografias={};
 const rows=key=>Array.isArray(db[key])?db[key]:[];
 
 function parseCSV(csv){
@@ -90,12 +91,14 @@ const rolePT = Object.freeze({
  articulated_with:'Articulou-se com', contested_leadership_of:'Disputou a direção de',
  contributed_to_creation_of:'Contribuiu para criar', documented_by:'Documentado por',
  political_current_within:'Corrente política em', related_to:'Relacionado a',
- co_present_at:'Participaram do mesmo evento'
+ co_present_at:'Participaram do mesmo evento', co_affiliation_inferred:'Compartilham participação em organizações'
 });
 
 const additionalRoleLabels = {"place_of_surveillance": "Local de vigilância", "adjudicating_court": "Órgão julgador", "place_of_interview": "Local de entrevista", "supporting_agency": "Órgão de apoio", "place_of_arbitrary_detention": "Local de detenção arbitrária", "participant_agency": "Órgão participante", "place_of_violation": "Local da violação", "target_agency": "Órgão visado", "depicts": "Retrata", "place_of_intimidation": "Local de intimidação", "place_of_persecution": "Local de perseguição", "place_of_torture": "Local de tortura", "perpetrator_agency": "Órgão responsável pela violação", "organizer_agency": "Órgão organizador", "place_of_falsification_of_cause_of_death_or_evidence_tampering": "Local de falsificação da causa da morte ou adulteração de provas", "place_of_incarceration": "Local de encarceramento", "place_of_concealment_of_a_body": "Local de ocultação de cadáver"};
 const roleLabel = x => rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
-const roleStatus = s => s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
+const legalPT={"right":"Direito","violation":"Violação","crime":"Crime","Labor Law":"Direito do Trabalho","Positive Penal Law":"Direito Penal positivo","Human Rights":"Direitos humanos","Analytical Category":"Categoria analítica","Civil Rights / Constitutional Law":"Direitos civis / Direito Constitucional","International Law":"Direito Internacional","Human Rights / Transitional Justice":"Direitos humanos / Justiça de transição","Human Rights / Constitutional Law":"Direitos humanos / Direito Constitucional","Analytical Category / Int. Criminal Law":"Categoria analítica / Direito Penal Internacional","Human Rights / Int. Law":"Direitos humanos / Direito Internacional","Codified as Crime":"Tipificado como crime"," (Analytical)":"Categoria analítica","Formally recognized / Selective suppression":"Formalmente reconhecido / supressão seletiva","Suspended / Regulated by State":"Suspenso / regulamentado pelo Estado","Treated as Subversion / Criminalized":"Tratado como subversão / criminalizado","Uncodified Crime / Officially denied":"Não tipificado / oficialmente negado","Legalized Exception (Habeas Corpus suspended)":"Exceção legalizada (habeas corpus suspenso)","Partially Maintained / Politically Controlled":"Parcialmente mantido / controlado politicamente","Ignored / ":"Ignorado","Suspended / State Intervention":"Suspenso / intervenção estatal","Unregulated / Permitted":"Sem regulamentação / permitido","Facilitated by State":"Facilitado pelo Estado","Uncodified / Ignored":"Não tipificado / ignorado","Denied / Eradicated":"Negado / reprimido","Formally recognised / Heavily censored":"Formalmente reconhecido / fortemente censurado","Suspended for political targets":"Suspenso para alvos políticos","Restricted by decree":"Restringido por decreto","Framed as National Security defence":"Enquadrado como defesa da segurança nacional","Falsified as legitimate defence":"Apresentado falsamente como legítima defesa","Violated by State Policy (executions, disappearances)":"Violado por política estatal (execuções, desaparecimentos)","Repression of political and civil groups":"Repressão de grupos políticos e civis","Violent repression / Military intervention":"Repressão violenta / intervenção militar","Selective enforcement / Falsified as suicide":"Aplicação seletiva / falsificação como suicídio","Ignored for political crimes / Impunity":"Ignorado em crimes políticos / impunidade","Institutional Policy":"Política institucional","Institutional Practice / Systemic tool":"Prática institucional / instrumento sistêmico","Institutional Practice / Mass detentions":"Prática institucional / detenções em massa","State intervention / Peleguismo":"Intervenção estatal / peleguismo","Incompatible with economic model":"Incompatível com o modelo econômico","Intervention in unions / Cassation of leaders":"Intervenção nos sindicatos / cassação de dirigentes","Institutional Practice (SNI / Listas Sujas)":"Prática institucional (SNI / listas sujas)","Institutional Practice / State-Corporate Complicity":"Prática institucional / conivência entre Estado e empresas","Corporate-State complicity / Mass dismissals":"Conivência entre empresas e Estado / demissões em massa","Institutional Practice / Mass graves":"Prática institucional / valas comuns","Systemic institutional cover-up":"Encobrimento institucional sistêmico","Systematic elimination / State terrorism":"Eliminação sistemática / terrorismo de Estado","State secrecy / Censorship":"Sigilo estatal / censura","Prior censorship / Banning of books and arts":"Censura prévia / proibição de livros e manifestações artísticas","Systemic surveillance / Wiretapping":"Vigilância sistêmica / interceptações telefônicas","Exile, banishment, and passport confiscation":"Exílio, banimento e apreensão de passaportes","Purges, cassations, and institutional targeting":"Expurgos, cassações e perseguição institucional","Institutional practice / Death squads":"Prática institucional / esquadrões da morte","Constitution of 1967/1969":"Constituição de 1967/1969","Penal Code (1940)":"Código Penal (1940)","Law 4.898/1965":"Lei 4.898/1965","Law 4.330/1964 / LSN":"Lei 4.330/1964 / LSN","CLT (1943)":"CLT (1943)","None (State denied practice)":"Nenhuma (prática negada pelo Estado)","State repression apparatus":"Aparato estatal de repressão","Law 9.029/1995":"Lei 9.029/1995","Law 13.869/2019":"Lei 13.869/2019","Transitional Justice framework":"Marco da justiça de transição","Law 9.455/1997":"Lei 9.455/1997","Penal Code (1940) Art. 211":"Código Penal (1940), art. 211","Penal Code (1940) Arts. 299 and 347":"Código Penal (1940), arts. 299 e 347","Inter-American Convention on Forced Disappearance":"Convenção Interamericana sobre o Desaparecimento Forçado de Pessoas","Inter-American Court Jurisprudence / LAI":"Jurisprudência da Corte Interamericana / Lei de Acesso à Informação","Rome Statute / Lei de Anistia (1979)":"Estatuto de Roma / Lei de Anistia (1979)","UN Principles on Extra-legal Executions / Rome Statute":"Princípios da ONU sobre execuções extralegais / Estatuto de Roma"," (Emergent post-dictatorship)":"(Categoria emergente após a ditadura)"," (Modern ILO framework)":"(Marco contemporâneo da OIT)"," (Prosecuted as kidnapping/homicide)":"(Processado como sequestro/homicídio)"," (State denied practice)":"(Prática negada pelo Estado)","AI-1 to AI-5 (Cassation of rights) / LSN":"AI-1 a AI-5 (cassação de direitos) / LSN","AI-5 (1968) / Banishment Penalty (Decree-Law 898/1969 - LSN)":"AI-5 (1968) / pena de banimento (Decreto-Lei 898/1969 — LSN)","AI-5 (1968) / Creation of SNI (Law 4.341/1964)":"AI-5 (1968) / criação do SNI (Lei 4.341/1964)","AI-5 (1968) / LSN":"AI-5 (1968) / Lei de Segurança Nacional","CLT (corporatist base) / LSN":"CLT (estrutura corporativista) / LSN","Constitution of 1967 / Press Law (Law 5.250/1967)":"Constituição de 1967 / Lei de Imprensa (Lei 5.250/1967)","Corporate practices backed by DOPS":"Práticas empresariais respaldadas pelo DOPS","Creation of FGTS (Law 5.107/1966)":"Criação do FGTS (Lei 5.107/1966)","Information exchange network":"Rede de intercâmbio de informações","Art. 5, CF/88":"Art. 5º, CF/88","Art. 5, CF/88; Law 13.869":"Art. 5º, CF/88; Lei 13.869","Art. 5, IV and IX, CF/88":"Art. 5º, IV e IX, CF/88","Art. 5, X and XII, CF/88 / LGPD":"Art. 5º, X e XII, CF/88 / LGPD","Art. 5, XV, CF/88":"Art. 5º, XV, CF/88","Art. 6, CF/88; ILO Conventions":"Art. 6º, CF/88; Convenções da OIT","Art. 7, CF/88":"Art. 7º, CF/88","Art. 7, I, CF/88; CLT":"Art. 7º, I, CF/88; CLT","Art. 8, CF/88":"Art. 8º, CF/88","Art. 9, CF/88":"Art. 9º, CF/88"};
+const legalLabel=x=>legalPT[text(x)]||text(x).replace(/\bConstitution of\b/g,'Constituição de').replace(/\bPenal Code\b/g,'Código Penal').replace(/\bLaw\b/g,'Lei').replace(/\bCreation of\b/g,'Criação de').replace(/\bPress Law\b/g,'Lei de Imprensa').replace(/\bILO Conventions\b/g,'Convenções da OIT').replace(/\bState\b/g,'Estado');
+const roleStatus = s => s==='inferred' ? 'inferência visual, não comprova vínculo pessoal' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
 const eventLabels = {
  assassination:'Assassinato',strike:'Greve',torture:'Tortura',persecution:'Perseguição',
  dismissal:'Demissão',intimidation:'Intimidação',incarceration:'Prisão',surveillance:'Vigilância',
@@ -160,6 +163,30 @@ function resetGraph(){
 }
 
 function expand(id,cap=24){if(!nodeById.has(id))return;neighbors(id).filter(x=>!visible.has(x)).slice(0,cap).forEach(x=>visible.add(x));drawGraph();}
+
+// Projeção analítica visual; nunca altera as relações documentais.
+// Dois vínculos compartilhados em organizações específicas NÃO provam contato pessoal.
+function coAffiliationEdges(){
+ const byPerson=new Map(),members=new Map(),orgTypes=new Set(['Instituição','Movimento']);
+ for(const e of edgeRows){
+   const from=nodeById.get(e.from),to=nodeById.get(e.to);if(!from||!to)continue;
+   const p=from.kind==='Pessoa'&&orgTypes.has(to.kind)?from.id:to.kind==='Pessoa'&&orgTypes.has(from.kind)?to.id:null;
+   if(!p)continue;
+   const org=p===from.id?to.id:from.id;
+   if(!byPerson.has(p))byPerson.set(p,new Set());byPerson.get(p).add(org);
+   if(!members.has(org))members.set(org,new Set());members.get(org).add(p);
+ }
+ const people=[...byPerson.keys()].sort(),inferred=[];
+ for(let i=0;i<people.length;i++)for(let j=i+1;j<people.length;j++){
+   const a=people[i],b=people[j];
+   const shared=[...byPerson.get(a)].filter(org=>byPerson.get(b).has(org)&&org!=='M001'&&members.get(org).size<=22);
+   if(shared.length<2)continue;
+   inferred.push({from:a,to:b,relation:'co_affiliation_inferred',status:'inferred',
+     evidence:'Aparecem em '+shared.length+' organizações cadastradas: '+shared.map(id=>nodeById.get(id)?.label||id).join(' · ')+'; não implica contato ou colaboração direta.'});
+ }
+ return inferred;
+}
+
 function graphNode(n){
  const isPerson=n.kind==='Pessoa';
  const label=(isPerson||hubs.includes(n.id)||n.id===selected)?n.label:'';
@@ -167,18 +194,29 @@ function graphNode(n){
   shape:n.photo?'circularImage':n.kind==='Movimento'?'dot':'dot',
   image:n.photo||undefined,size:isPerson?22:hubs.includes(n.id)?30:19,
   borderWidth:2,title:'<b>'+HTML(n.label)+'</b><br>'+HTML(n.id)+' · '+HTML(n.kind),
-  color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}}};
+  color:{background:color[n.kind]||'#ddd',border:'#777',highlight:{border:'#9D2235'}},fullLabel:n.label};
 }
 function drawGraph(){
  const el=$('network');if(!window.vis){el.textContent='Não foi possível carregar a biblioteca visual do grafo.';return;}
  const visibleEdges=edgeRows.filter(e=>visible.has(e.from)&&visible.has(e.to)&&canDisplayEdge(e));
+ if(!$('role').value)visibleEdges.push(...coAffiliationEdges().filter(e=>visible.has(e.from)&&visible.has(e.to)));
  const groups=new Map();
  for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
  const graphEdges=[...groups.values()].map((g,i)=>({id:'e'+i,from:g[0].from,to:g[0].to,
   title:g.map(e=>'<b>'+HTML(roleLabel(e.relation))+'</b> — '+roleStatus(e.status)+(e.evidence?'<br>'+HTML(e.evidence.slice(0,340)):'')).join('<hr>'),
+  dashes:g.some(e=>e.status==='inferred'),
   // Não desenhar rótulos sobre linhas; a proposta de pesquisa é diferenciada no tooltip.
   color:{color:'#b7b7b7',highlight:'#9D2235',hover:'#9D2235'},width:1.1}));
  const graphNodes=[...visible].map(id=>nodeById.get(id)).filter(Boolean).map(graphNode);
+ if(window.d3 && window.drawAtlasD3Graph){
+  if(net && typeof net.destroy==='function')net.destroy();
+  net=window.drawAtlasD3Graph(graphNodes,graphEdges,id=>{
+   selected=id;showDetail(id);expand(id,24);
+  });
+  const persons=[...visible].filter(id=>nodeById.get(id)?.kind==='Pessoa').length;
+  $('graphStatus').textContent=persons+' pessoas · '+graphNodes.length+' nós · '+graphEdges.length+' conexões visíveis · '+edgeRows.length+' relações registradas.';
+  return;
+ }
  if(net){net.destroy();net=null;}
  net=new vis.Network(el,{nodes:graphNodes,edges:graphEdges},{
   layout:{randomSeed:42,improvedLayout:false},
@@ -196,11 +234,11 @@ function drawGraph(){
 
 function showDetail(id){
  const n=nodeById.get(id);if(!n)return;
- const d=$('detail'),description=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN']);
+ const d=$('detail'),description=first(n.raw,['Biography_ORIG','Notes','AnalyticalNote','Biography_EN'])||text(miniBiografias[id]);
  let html='<button id="closeDetail" aria-label="Fechar painel">×</button>';
  if(n.photo)html+='<img src="'+HTML(n.photo)+'" alt="Retrato de '+HTML(n.label)+'">';
  html+='<h3>'+HTML(n.label)+'</h3><p class="muted">'+HTML(n.kind)+' · '+HTML(n.id)+'</p>';
- if(description)html+='<p>'+HTML(description)+'</p>';
+ if(description)html+='<p class="mini-bio">'+HTML(description)+'</p>'; else if(n.kind==='Pessoa')html+='<p class="mini-bio">Minibiografia em preparação documental.</p>';
  const related=edgeRows.filter(e=>e.from===id||e.to===id);
  html+='<strong>'+related.length+' vínculos documentados ou em revisão</strong><ul>'+related.slice(0,16).map(e=>
   '<li>'+HTML(roleLabel(e.relation))+' — '+HTML(nodeById.get(e.from===id?e.to:e.from)?.label||'')+'</li>').join('')+'</ul>';
@@ -213,11 +251,12 @@ function updateCounts(){
   if($('summary'))$('summary').innerHTML=html;if($('dataCounts'))$('dataCounts').innerHTML=html;updateDataTable();
 }
 function updateMap(){
+ if(!document.getElementById('mapa').classList.contains('active'))return;
  if(!window.L){$('mapStatus').textContent='Não foi possível carregar a biblioteca do mapa.';return;}
  if(!leafletMap){
   leafletMap=L.map('map',{scrollWheelZoom:false,zoomControl:true}).setView([-23.55,-46.63],5);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-    attribution:'© OpenStreetMap contributors · © CARTO',maxZoom:19,subdomains:'abcd'
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'© OpenStreetMap contributors',maxZoom:19,className:'atlas-grayscale-tiles'
   }).addTo(leafletMap);
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
@@ -244,7 +283,7 @@ function updateMap(){
     .on('click',()=>{$('mapSide').innerHTML='<h3>'+HTML(label)+'</h3><p><b>Município:</b> '+HTML(r.Municipality)+' · '+HTML(r.State)+'</p><p><b>Tipo de local:</b> '+HTML(r.PlaceType)+'</p><p><b>Acontecimentos relacionados:</b> '+ne+'</p><p>'+HTML(first(r,['MDH_Summary','Notes','MDH_Summary_EN']))+'</p><p class="auxiliary">Coordenadas: '+lat+', '+lon+'</p>';});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
- leafletMap.__atlasCoords=coords; if(coords.length&&chosen==='ALL'&&document.getElementById('mapa').classList.contains('active')){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:7});}
+ leafletMap.__atlasCoords=coords; if(coords.length&&chosen==='ALL'&&document.getElementById('mapa').classList.contains('active')){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});}
  $('mapStatus').textContent=total+' locais georreferenciados · '+eventPlaces+' locais associados a eventos ou memória. Legenda: vinho = memória/acontecimentos; cinza = demais localizações.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
@@ -255,7 +294,7 @@ function updateLaw(){
   select.innerHTML=items.map(r=>'<option value="'+HTML(r.ConceptID)+'">'+HTML(first(r,['Label_PT','Label_ORIG','ConceptName_ORIG','Label_EN'])||r.ConceptID)+'</option>').join('');
   if(items.some(r=>r.ConceptID===old))select.value=old;
   const c=items.find(r=>r.ConceptID===select.value);
-  $('conceptDetail').innerHTML=c?'<p><b>Tipo:</b> '+HTML(c.ConceptType)+'</p><p><b>Natureza:</b> '+HTML(c.ConceptNature)+'</p><p><b>Estatuto legal histórico:</b> '+HTML(c.HistoricalLegalStatus)+'</p><p><b>Estatuto prático:</b> '+HTML(c.HistoricalPracticalStatus)+'</p><p><b>Referência histórica:</b> '+HTML(c.HistoricalAnchor)+'</p><p><b>Referência atual:</b> '+HTML(c.CurrentAnchor)+'</p><hr><p><b>Nota analítica:</b><br>'+HTML(c.AnalyticalNote)+'</p>':'Carregue Concepts.csv para consultar o compêndio.';
+  $('conceptDetail').innerHTML=c?'<p><b>Tipo:</b> '+HTML(legalLabel(c.ConceptType))+'</p><p><b>Natureza:</b> '+HTML(legalLabel(c.ConceptNature))+'</p><p><b>Estatuto legal histórico:</b> '+HTML(legalLabel(c.HistoricalLegalStatus))+'</p><p><b>Estatuto prático:</b> '+HTML(legalLabel(c.HistoricalPracticalStatus))+'</p><p><b>Referência histórica:</b> '+HTML(legalLabel(c.HistoricalAnchor))+'</p><p><b>Referência atual:</b> '+HTML(legalLabel(c.CurrentAnchor))+'</p><hr><p><b>Nota analítica:</b><br>'+HTML(legalLabel(c.AnalyticalNote))+'</p>':'Carregue Concepts.csv para consultar o compêndio.';
   const ids=new Set(rows('EventConcepts').filter(r=>r.ConceptID===select.value).map(r=>r.EventID));
   const ev=rows('Events').filter(e=>ids.has(e.EventID));
   const evPersons=new Map();for(const ep of rows('EventPersons')){if(!evPersons.has(ep.EventID))evPersons.set(ep.EventID,[]);evPersons.get(ep.EventID).push(nodeById.get(ep.PersonID)?.label||ep.PersonID);}
@@ -276,12 +315,12 @@ function updateConceptChart(){
 
 async function restore(){
   const response=await fetch('data/atlas-estrutura.json',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
-  db=await response.json();await normalize();updateAdditionalData();$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (biografias e evidências textuais não são publicadas).';
+  db=await response.json();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
   const updated={};let count=0;
   for(const f of list){if(/\.json$/i.test(f.name)){const parsed=JSON.parse(await f.text());for(const [key,val] of Object.entries(parsed)){if(Array.isArray(val))updated[key]=val;}count++;continue;}let key=f.name.replace(/\.csv$/i,'').replace(/\s*\(\d+\)$/,'');if(!key)continue;if(key==='MovementInstitution')key='MovementInstitutionRelations';updated[key]=parseCSV(await f.text());count++;}
-  db=updated;await normalize();updateAdditionalData();$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
+  db=updated;await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
 }
 async function cosmov(){
   const term=$('cosQuery').value.trim(),box=$('cosResults');if(!term)return;box.textContent='Consultando OpenAlex...';
@@ -293,18 +332,20 @@ document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
     document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));
-    if(b.dataset.page==='mapa'&&leafletMap)setTimeout(()=>{leafletMap.invalidateSize();if(leafletMap.__atlasCoords?.length)leafletMap.fitBounds(leafletMap.__atlasCoords,{padding:[25,25],maxZoom:7});},120);
+    if(b.dataset.page==='mapa')setTimeout(()=>{updateMap();if(leafletMap){leafletMap.invalidateSize();if(leafletMap.__atlasCoords?.length)leafletMap.fitBounds(leafletMap.__atlasCoords,{padding:[25,25],maxZoom:9});}},140);
     if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();net.fit({animation:false});},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
   $('focus').onchange=resetGraph;$('role').onchange=drawGraph;
   $('reset').onclick=()=>{$('focus').value='';resetGraph();};
   $('expand').onclick=()=>{if(selected)expand(selected,50);else hubs.forEach(h=>{if(nodeById.has(h))neighbors(h).slice(0,8).forEach(x=>visible.add(x));});drawGraph();};
   $('concept').onchange=()=>{updateLaw();updateConceptChart();};
-  $('csvUpload').onchange=async e=>{try{await importFiles([...e.target.files]);}catch(err){$('uploadStatus').textContent='Erro: '+err.message;}};
-  $('restore').onclick=()=>restore().catch(e=>$('uploadStatus').textContent=e.message);
+  if($('csvUpload'))$('csvUpload').onchange=async e=>{try{await importFiles([...e.target.files]);}catch(err){if($('uploadStatus'))$('uploadStatus').textContent='Erro: '+err.message;}};
+  if($('restore'))$('restore').onclick=()=>restore().catch(e=>{if($('uploadStatus'))$('uploadStatus').textContent=e.message;});
   $('cosSearch').onclick=cosmov;setupAdditionalUI();
-  try{manifest=await (await fetch('assets/people/manifest.json')).json();await restore();}
-  catch(e){$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
+  try{manifest=await (await fetch('assets/people/manifest.json')).json();
+   const b=await fetch('data/minibiografias-publicas.json');if(b.ok)miniBiografias=await b.json();
+   await restore();}
+  catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
 
 
@@ -399,9 +440,9 @@ const DATA_PAGE_SIZE=50;
 function renderDatasetOptions(){
  const el=$('datasetSelect');if(!el)return;
  const prior=el.value;
- el.innerHTML='<option value="__links">Vínculos pessoa–organização</option>'+Object.entries(matrixLabels).map(([k,v])=>
+ el.innerHTML=Object.entries(matrixLabels).map(([k,v])=>
   '<option value="'+HTML(k)+'">'+HTML(v)+' ('+rows(k).length+')</option>').join('');
- if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;
+ if(prior && [...el.options].some(o=>o.value===prior))el.value=prior;else el.value='Persons';
 }
 function updateDataTable(){
  const dest=$('dataTable'),pager=$('dataPager');if(!dest)return;
@@ -443,3 +484,8 @@ function exportDataTable(){
   const csv=[['Origem','Relacao','Destino','Evidencia'],...matches.map(e=>[nodeById.get(e.from)?.label||e.from,roleLabel(e.relation),nodeById.get(e.to)?.label||e.to,e.evidence])].map(row=>row.map(quote).join(',')).join('\r\n');
   const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='atlas-relacoes-filtradas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const panel=document.getElementById('pesquisaLocal');
+  if(panel && new URLSearchParams(location.search).get('pesquisa')==='1')panel.hidden=false;
+});
