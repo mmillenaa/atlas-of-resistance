@@ -869,7 +869,7 @@ function updateCounts(){
 const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
 const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
-const atlasMapColors={historical:'#DC143C',other:'#9AA0A6',historicalBorder:'#A10F2D',otherBorder:'#777'};
+const atlasMapColors={historical:'#DC143C',education:'#FF2B1F',other:'#9AA0A6',historicalBorder:'#A10F2D',educationBorder:'#A51A12',otherBorder:'#777'};
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
  const L=window.AtlasRaster;
@@ -941,13 +941,13 @@ function updateMap(){
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
  // A matriz Locations tem prioridade de enquadramento e sobreposição.
- const supplements=(!chosen||chosen==='ALL')?atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords)):[];
+ const supplements=atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords));
  for(const item of supplements)atlasPlotEducation(item,false);
  if(!coords.length)for(const item of supplements)coords.push(item.coords);
  leafletMap.__atlasCoords=coords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
  if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais georreferenciados da matriz · '+eventPlaces+' associados a acontecimentos ou memória'+(supplements.length?' · '+supplements.length+' endereços complementares':'')+'. Contorno tracejado = localização aproximada.';
+ $('mapStatus').textContent=total+' locais georreferenciados da matriz · '+eventPlaces+' associados a acontecimentos ou memória'+(supplements.length?' · '+supplements.length+' locais de iniciativas educacionais':'')+'. Contorno tracejado = localização aproximada.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -1230,7 +1230,7 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  if(!leafletMap||!coords)return;
  const L=window.AtlasRaster;
  const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
- const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.historicalBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.historical,weight:1.4,fillOpacity:$('heat').checked?.42:.77,priority:item.educacional===false?0:1,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
+ const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.educationBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.education,weight:1.4,fillOpacity:.94,priority:item.educacional===false?0:4,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
 // Address records remain available as map markers; no address-list UI or geocoding.

@@ -172,3 +172,5 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 #eduMapList .atlas-edu-actions button:focus-visible,#eduMapList .atlas-edu-actions a:focus-visible{outline:2px solid #DC143C;outline-offset:3px}
 
 .graph-filter-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 16px;padding:0 0 12px;border-bottom:1px solid #ddd}.graph-filter-bar label{font-weight:500;color:#555}.graph-filter-bar select{width:auto;min-width:220px;max-width:100%;font-size:14px}.graph-filter-bar .auxiliary{margin:0;flex:1;min-width:220px}.graph-filter-bar .auxiliary[hidden]{display:none}
+
+.map-legend .pin.education{background:#FF2B1F;border-color:#A51A12}
