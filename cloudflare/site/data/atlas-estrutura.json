@@ -7094,6 +7094,13 @@
       "Repository": "Registro de revisão da pesquisadora",
       "Title_ORIG": "Esclarecimentos de identificação e participação na OSM-SP (24/11/2026)",
       "Notes": "Informação fornecida pela pesquisadora em 24/11/2026: Célia Rossi integrou a OSM-SP e ajudou Waldemar Rossi na construção do movimento; Raymond e Raimundo Perillat são a mesma pessoa."
+    },
+    {
+      "DocumentID": "D090",
+      "DocumentType": "researcher_annotation",
+      "Repository": "Registro de revisão da pesquisadora",
+      "Title_ORIG": "Revisão de pertencimento à OSM-SP: Maria Nilde Mascellani (25/11/2026)",
+      "Notes": "Correção de curadoria fornecida pela pesquisadora em 25/11/2026: Maria Nilde Mascellani integrou a OSM-SP. A atuação educacional integra a história e a identidade do movimento."
     }
   ],
   "Concepts": [
@@ -8030,6 +8037,17 @@
       "SourceDocumentID": "D087",
       "Confidence": "high",
       "Notes": "Ficha pública da Prefeitura."
+    },
+    {
+      "PersonID": "P058",
+      "MovementID": "M001",
+      "Role": "member_of",
+      "StartDate": "",
+      "EndDate": "",
+      "SourceDocumentID": "D090",
+      "Confidence": "researcher_confirmed",
+      "Notes": "Pertencimento à OSM-SP confirmado pela pesquisadora em 25/11/2026.",
+      "ReviewStatus": "researcher_reported"
     }
   ],
   "PersonInstitutions": [
@@ -15037,6 +15055,11 @@
       "PersonID": "P002",
       "RelationshipType": "mentions",
       "Notes": "Registro de esclarecimento da pesquisadora."
+    },
+    {
+      "DocumentID": "D090",
+      "PersonID": "P058",
+      "RelationshipType": "is_about"
     }
   ],
   "DocumentEvents": [
@@ -17710,7 +17733,7 @@
       "RelationshipType": "shared_educational_project",
       "SourceDocumentID": "D069",
       "ReviewStatus": "documented",
-      "Notes": "Ambas atuaram no projeto dos Ginásios Vocacionais (I129): Cecília na docência, Maria Nilde na coordenação. Aresta de atuação no mesmo projeto, não afirma relação pessoal ou simultaneidade não demonstrada; ver também D072, discussão sobre contribuições educacionais."
+      "Notes": "Ambas atuaram no projeto dos Ginásios Vocacionais (I129): Cecília na docência, Maria Nilde na coordenação. Ver também D072, discussão sobre contribuições educacionais."
     }
   ]
 }

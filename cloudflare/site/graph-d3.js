@@ -68,7 +68,7 @@ function draw(nodeRows,edgeRows,onSelect){
  svg.call(zoom).on('dblclick.zoom',null);
  const edge=edgeLayer.selectAll('line.lj-edge').data(links).enter().append('line')
   .attr('class','lj-edge')
-  .attr('stroke-dasharray',l=>l.dashes||/proposta|revisão|pesquisadora|inferida/i.test(l.title||'')?'4 4':null);
+  .attr('stroke-dasharray',l=>l.dashes?'4 4':null);
  edge.append('title').text(l=>String(l.title||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' '));
  const defs=svg.append('defs');
  const groups=nodeLayer.selectAll('g.lj-node').data(nodes,n=>n.id).enter().append('g')

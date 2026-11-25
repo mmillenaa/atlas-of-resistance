@@ -1,0 +1,2 @@
+"PersonID","MovementID","Role","StartDate","EndDate","SourceDocumentID","Confidence","Notes","ReviewStatus"
+"P058","M001","member_of","","","D090","researcher_confirmed","Pertencimento à OSM-SP confirmado pela pesquisadora em 25/11/2026.","researcher_reported"

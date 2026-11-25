@@ -69,7 +69,7 @@ async function portrait(n){
 
 const rolePT = Object.freeze({
  active_member:'Integrante ativo', associated_with:'Vinculado a', coordinator_of:'Coordenação de',
- founding_member:'Integrante fundador', integral_participant:'Integrante constitutivo do coletivo',
+ founding_member:'Integrante fundador', integral_participant:'Integrante de (atuação constitutiva)',
  leader_of:'Liderança de', member_of:'Integrante de', organizer:'Organização',
  participant:'Participante', president_of:'Presidência de', representative_of:'Representante de',
  subcommander_of:'Subcomandante de', advisor:'Assessoria a', athlete:'Atleta em',
@@ -105,7 +105,7 @@ const canonicalRole=x=>educationRoles.has(text(x))?'educational_activity_at':tex
 const roleLabel = x => text(x)==='shared_educational_project'?'Atuou no mesmo projeto educacional que':text(x)==='participated_in_network'?'Participou da rede':text(x)==='educational_network_via_school'?'Rede educacional articulada via Nova Piratininga': text(x)==='educational_activity_at'?'Atuação educacional em':text(x)==='documents_event'?'Documenta': rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
 const legalPT={"right":"Direito","violation":"Violação","crime":"Crime","Labor Law":"Direito do Trabalho","Positive Penal Law":"Direito Penal positivo","Human Rights":"Direitos humanos","Analytical Category":"Categoria analítica","Civil Rights / Constitutional Law":"Direitos civis / Direito Constitucional","International Law":"Direito Internacional","Human Rights / Transitional Justice":"Direitos humanos / Justiça de transição","Human Rights / Constitutional Law":"Direitos humanos / Direito Constitucional","Analytical Category / Int. Criminal Law":"Categoria analítica / Direito Penal Internacional","Human Rights / Int. Law":"Direitos humanos / Direito Internacional","Codified as Crime":"Tipificado como crime"," (Analytical)":"Categoria analítica","Formally recognized / Selective suppression":"Formalmente reconhecido / supressão seletiva","Suspended / Regulated by State":"Suspenso / regulamentado pelo Estado","Treated as Subversion / Criminalized":"Tratado como subversão / criminalizado","Uncodified Crime / Officially denied":"Não tipificado / oficialmente negado","Legalized Exception (Habeas Corpus suspended)":"Exceção legalizada (habeas corpus suspenso)","Partially Maintained / Politically Controlled":"Parcialmente mantido / controlado politicamente","Ignored / ":"Ignorado","Suspended / State Intervention":"Suspenso / intervenção estatal","Unregulated / Permitted":"Sem regulamentação / permitido","Facilitated by State":"Facilitado pelo Estado","Uncodified / Ignored":"Não tipificado / ignorado","Denied / Eradicated":"Negado / reprimido","Formally recognised / Heavily censored":"Formalmente reconhecido / fortemente censurado","Suspended for political targets":"Suspenso para alvos políticos","Restricted by decree":"Restringido por decreto","Framed as National Security defence":"Enquadrado como defesa da segurança nacional","Falsified as legitimate defence":"Apresentado falsamente como legítima defesa","Violated by State Policy (executions, disappearances)":"Violado por política estatal (execuções, desaparecimentos)","Repression of political and civil groups":"Repressão de grupos políticos e civis","Violent repression / Military intervention":"Repressão violenta / intervenção militar","Selective enforcement / Falsified as suicide":"Aplicação seletiva / falsificação como suicídio","Ignored for political crimes / Impunity":"Ignorado em crimes políticos / impunidade","Institutional Policy":"Política institucional","Institutional Practice / Systemic tool":"Prática institucional / instrumento sistêmico","Institutional Practice / Mass detentions":"Prática institucional / detenções em massa","State intervention / Peleguismo":"Intervenção estatal / peleguismo","Incompatible with economic model":"Incompatível com o modelo econômico","Intervention in unions / Cassation of leaders":"Intervenção nos sindicatos / cassação de dirigentes","Institutional Practice (SNI / Listas Sujas)":"Prática institucional (SNI / listas sujas)","Institutional Practice / State-Corporate Complicity":"Prática institucional / conivência entre Estado e empresas","Corporate-State complicity / Mass dismissals":"Conivência entre empresas e Estado / demissões em massa","Institutional Practice / Mass graves":"Prática institucional / valas comuns","Systemic institutional cover-up":"Encobrimento institucional sistêmico","Systematic elimination / State terrorism":"Eliminação sistemática / terrorismo de Estado","State secrecy / Censorship":"Sigilo estatal / censura","Prior censorship / Banning of books and arts":"Censura prévia / proibição de livros e manifestações artísticas","Systemic surveillance / Wiretapping":"Vigilância sistêmica / interceptações telefônicas","Exile, banishment, and passport confiscation":"Exílio, banimento e apreensão de passaportes","Purges, cassations, and institutional targeting":"Expurgos, cassações e perseguição institucional","Institutional practice / Death squads":"Prática institucional / esquadrões da morte","Constitution of 1967/1969":"Constituição de 1967/1969","Penal Code (1940)":"Código Penal (1940)","Law 4.898/1965":"Lei 4.898/1965","Law 4.330/1964 / LSN":"Lei 4.330/1964 / LSN","CLT (1943)":"CLT (1943)","None (State denied practice)":"Nenhuma (prática negada pelo Estado)","State repression apparatus":"Aparato estatal de repressão","Law 9.029/1995":"Lei 9.029/1995","Law 13.869/2019":"Lei 13.869/2019","Transitional Justice framework":"Marco da justiça de transição","Law 9.455/1997":"Lei 9.455/1997","Penal Code (1940) Art. 211":"Código Penal (1940), art. 211","Penal Code (1940) Arts. 299 and 347":"Código Penal (1940), arts. 299 e 347","Inter-American Convention on Forced Disappearance":"Convenção Interamericana sobre o Desaparecimento Forçado de Pessoas","Inter-American Court Jurisprudence / LAI":"Jurisprudência da Corte Interamericana / Lei de Acesso à Informação","Rome Statute / Lei de Anistia (1979)":"Estatuto de Roma / Lei de Anistia (1979)","UN Principles on Extra-legal Executions / Rome Statute":"Princípios da ONU sobre execuções extralegais / Estatuto de Roma"," (Emergent post-dictatorship)":"(Categoria emergente após a ditadura)"," (Modern ILO framework)":"(Marco contemporâneo da OIT)"," (Prosecuted as kidnapping/homicide)":"(Processado como sequestro/homicídio)"," (State denied practice)":"(Prática negada pelo Estado)","AI-1 to AI-5 (Cassation of rights) / LSN":"AI-1 a AI-5 (cassação de direitos) / LSN","AI-5 (1968) / Banishment Penalty (Decree-Law 898/1969 - LSN)":"AI-5 (1968) / pena de banimento (Decreto-Lei 898/1969 — LSN)","AI-5 (1968) / Creation of SNI (Law 4.341/1964)":"AI-5 (1968) / criação do SNI (Lei 4.341/1964)","AI-5 (1968) / LSN":"AI-5 (1968) / Lei de Segurança Nacional","CLT (corporatist base) / LSN":"CLT (estrutura corporativista) / LSN","Constitution of 1967 / Press Law (Law 5.250/1967)":"Constituição de 1967 / Lei de Imprensa (Lei 5.250/1967)","Corporate practices backed by DOPS":"Práticas empresariais respaldadas pelo DOPS","Creation of FGTS (Law 5.107/1966)":"Criação do FGTS (Lei 5.107/1966)","Information exchange network":"Rede de intercâmbio de informações","Art. 5, CF/88":"Art. 5º, CF/88","Art. 5, CF/88; Law 13.869":"Art. 5º, CF/88; Lei 13.869","Art. 5, IV and IX, CF/88":"Art. 5º, IV e IX, CF/88","Art. 5, X and XII, CF/88 / LGPD":"Art. 5º, X e XII, CF/88 / LGPD","Art. 5, XV, CF/88":"Art. 5º, XV, CF/88","Art. 6, CF/88; ILO Conventions":"Art. 6º, CF/88; Convenções da OIT","Art. 7, CF/88":"Art. 7º, CF/88","Art. 7, I, CF/88; CLT":"Art. 7º, I, CF/88; CLT","Art. 8, CF/88":"Art. 8º, CF/88","Art. 9, CF/88":"Art. 9º, CF/88"};
 const legalLabel=x=>legalPT[text(x)]||text(x).replace(/\bConstitution of\b/g,'Constituição de').replace(/\bPenal Code\b/g,'Código Penal').replace(/\bLaw\b/g,'Lei').replace(/\bCreation of\b/g,'Criação de').replace(/\bPress Law\b/g,'Lei de Imprensa').replace(/\bILO Conventions\b/g,'Convenções da OIT').replace(/\bState\b/g,'Estado');
-const roleStatus = s => s==='inferred' ? 'inferência visual, não comprova vínculo pessoal' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
+const roleStatus = s => s==='inferred' ? 'percurso relacional inferido' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'confirmação da pesquisadora' : 'em revisão';
 const eventLabels = {
   "assassination": "Assassinato",
   "forced displacement": "Deslocamento forçado",
@@ -305,7 +305,7 @@ const atlasInterview= {
       "EP08",
       "Régis (identificação pendente)",
       "44",
-      "Contato na aproximação de Nádia com a OSM-SP, p. 44; identificação e pertencimento ainda não demonstrados.",
+      "Participou dos contatos por meio dos quais Nádia se aproximou da OSM-SP, conforme a entrevista, p. 44. Identificação nominal em pesquisa.",
       []
     ],
     [
@@ -324,14 +324,14 @@ const atlasInterview= {
       "EP10",
       "Giuseppina de Grazia (Pina)",
       "66",
-      "Referida por Rosângela e Nadine pela experiência e pesquisa sobre associações da Mooca, p. 66. Vínculo pessoal com a OSM-SP não demonstrado.",
+      "Referida por Rosângela e Nadine pela experiência e pesquisa sobre as associações da Mooca, p. 66.",
       []
     ],
     [
       "EP13",
       "Elissam (identificação pendente)",
       "72",
-      "Nadine menciona atuação na zona sul, p. 72; vínculo individual e identidade completa não confirmados.",
+      "Nadine menciona sua atuação na zona sul, p. 72. Identificação nominal em pesquisa.",
       []
     ],
     [
@@ -649,7 +649,7 @@ function interviewNodes(mode){
   const evidence=['EP24','EP25'].includes(id)&&to==='M001'?sourceReference('D074')+' · D072, nota 8.':id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.';
   atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence,status:'documented'});
  }
- if(education&&ids.has('M001')&&ids.has('I126'))atlasInterviewEdges.push({from:'M001',to:'I126',relation:'educational_network_via_school',evidence:'Projeção de percurso M001 → I108 → I126; D073, pp. 145–146. Conselho criado em 1989; não indica filiação ou subordinação direta.',status:'inferred'});
+ if(education&&ids.has('M001')&&ids.has('I126'))atlasInterviewEdges.push({from:'M001',to:'I126',relation:'educational_network_via_school',evidence:'Projeção de percurso M001 → I108 → I126; D073, pp. 145–146. Conselho criado em 1989. A articulação evidencia a continuidade das experiências formativas.',status:'inferred'});
  return ids;
 }
 function resetGraph(){
@@ -690,7 +690,7 @@ function coAffiliationEdges(){
    const shared=[...byPerson.get(a)].filter(org=>byPerson.get(b).has(org)&&org!=='M001'&&members.get(org).size<=22);
    if(shared.length<2)continue;
    inferred.push({from:a,to:b,relation:'co_affiliation_inferred',status:'inferred',
-     evidence:'Aparecem em '+shared.length+' organizações cadastradas: '+shared.map(id=>nodeById.get(id)?.label||id).join(' · ')+'; não implica contato ou colaboração direta.'});
+     evidence:'Aparecem em '+shared.length+' organizações cadastradas: '+shared.map(id=>nodeById.get(id)?.label||id).join(' · ')+'. Percurso analítico por organizações compartilhadas.'});
  }
  return inferred;
 }
@@ -717,7 +717,7 @@ function drawGraph(){
  for(const e of visibleEdges){const key=[e.from,e.to].sort().join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(e);}
  const graphEdges=[...groups.values()].map((g,i)=>({id:'e'+i,from:g[0].from,to:g[0].to,
   title:g.map(e=>'<b>'+HTML(roleLabel(e.relation))+'</b> — '+roleStatus(e.status)+(e.evidence?'<br>'+HTML(e.evidence.slice(0,340)):'')).join('<hr>'),
-  dashes:g.some(e=>e.status==='inferred'),
+  dashes:g.some(e=>['inferred','review_period','review_scope'].includes(e.status)),
   // Não desenhar rótulos sobre linhas; a proposta de pesquisa é diferenciada no tooltip.
   color:{color:'#b7b7b7',highlight:'#9D2235',hover:'#9D2235'},width:1.1}));
  const osmIds=osmOrganizationIds();
@@ -761,7 +761,7 @@ function drawGraph(){
 // na bibliografia; requerem revisão editorial antes da publicação definitiva.
 const atlasResumoEducacional={
  I129:'Rede pública de Ginásios Vocacionais de São Paulo coordenada pelo Serviço de Ensino Vocacional na década de 1960. Maria Nilde Mascellani participou de sua implantação e coordenação; Cecília Guaraná atuou como educadora e diretora em unidades do projeto. Sua proposta integrava currículo, trabalho em equipe, estudos do meio e participação da comunidade. A experiência foi encerrada sob a ditadura militar.',
- I108:'Escola de formação profissional e política de trabalhadores criada em 1979 por militantes da Oposição Sindical Metalúrgica e redes de educação popular. Com sedes sucessivas no Brás, na Rua Riachuelo e na Rua Silveira Martins, articulou conhecimentos técnicos e formação política até 1996. Maria Nilde Mascellani participou da articulação de recursos internacionais para o projeto. Não se presume subordinação jurídica formal à OSM-SP.',
+ I108:'Escola de formação profissional e política de trabalhadores criada em 1979 por militantes da Oposição Sindical Metalúrgica e redes de educação popular. Com sedes sucessivas no Brás, na Rua Riachuelo e na Rua Silveira Martins, articulou conhecimentos técnicos e formação política até 1996. Maria Nilde Mascellani, integrante da OSM-SP, participou da articulação de recursos internacionais para a escola, contribuindo para a construção do projeto educativo do movimento.',
  I109:'Associação dos Trabalhadores da Região do Ipiranga, atuante desde 1979. Reuniu militantes e educadoras em cursos de matemática, geometria, preparação para o SENAI, formação sindical, atividades culturais e iniciativas de organização pela base.',
  I110:'Centro Pastoral Vergueiro, também denominado Centro de Documentação e Pesquisa Vergueiro. Ofereceu espaço e apoio à documentação e a experiências educativas, incluindo atividades do supletivo de trabalhadores da ARNO narradas na entrevista.',
  I111:'Reconstrução de Lutas Operárias, posteriormente Reconstrução – Educação, Assessoria e Pesquisa. Articulou formação de dirigentes, assessoria sindical e circulação de materiais políticos e pedagógicos em sindicatos e instâncias da CUT.',
@@ -779,9 +779,9 @@ function showDetail(id){
   const n=nodeById.get(id);if(!n)return;
   const d=$('detail');
   const resumoMovimento={
-    M001:'Articulação sindical e política de trabalhadores e trabalhadoras metalúrgicos de São Paulo, com atuação na democratização sindical, nas comissões de fábrica, na formação profissional e na educação popular durante a ditadura e a redemocratização. Incluiu militantes operários e participantes constitutivos de iniciativas pedagógicas, documentais e de organização.',
+    M001:'Movimento político e social constituído por trabalhadores e trabalhadoras metalúrgicos, educadoras e educadores, assessores, militantes e outros sujeitos que construíram coletivamente a OSM-SP. Suas lutas pela democratização sindical, pela organização de base, pela educação popular e pela formação de trabalhadores integraram a resistência à ditadura e o processo de redemocratização. A diversidade de trajetórias, experiências e formas de atuação constitui a identidade histórica do movimento.',
     M018:'Corrente de atuação político-sindical formada no interior da Central Única dos Trabalhadores, com participação de militantes oriundos de diferentes oposições sindicais, inclusive da OSM-SP.',
-    M019:'Coletivo constituído no período democrático recente e relacionado a ações de memória e defesa da democracia. Seu vínculo de articulação com a rede histórica da OSM-SP não equivale a filiação sindical no período ditatorial.'
+    M019:'Coletivo constituído no período democrático recente e relacionado a ações de memória e defesa da democracia. Articula-se com a memória e as trajetórias históricas da OSM-SP.'
   };
   let descricao=first(n.raw,['Biography_ORIG','Description_ORIG','HistoricalDescription','Notes','AnalyticalNote','Biography_EN']) || text(miniBiografias[id]) || text(atlasResumoEducacional[id]) || text(resumoMovimento[id]);
   if(!descricao&&n.kind==='Movimento')descricao='Movimento registrado na pesquisa. Síntese histórica específica ainda não cadastrada.';
@@ -806,8 +806,6 @@ function showDetail(id){
     out+='</ul></details>';
   }
   if(n.kind==='Pessoa'){
-    const diretamenteOSM=ligados.some(e=>(e.from===id&&e.to==='M001')||(e.to===id&&e.from==='M001'));
-    if(!diretamenteOSM&&!n.interviewOnly)out+='<p class="muted" style="font-size:12px">Não há vínculo individual direto com a OSM-SP registrado nas matrizes; a presença no Atlas pode decorrer de outras trajetórias de resistência.</p>';
     const eventos=new Map(rows('Events').map(e=>[text(e.EventID),e]));
     const vivencias=new Map();
     for(const r of rows('EventPersons')){
@@ -979,7 +977,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json?v=atlas25',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas29',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1149,7 +1147,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   try{
     // Optional enrichments never prevent the public dataset/map from loading.
     const optional=async(url,apply)=>{try{const r=await fetch(url);if(r.ok)apply(await r.json());}catch(e){console.info('Dados auxiliares indisponíveis:',url);}};
-    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas14',x=>miniBiografias=x),optional('data/lugares-memoria.json?v=atlas26',x=>historicosLocais=x)]);
+    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas29',x=>miniBiografias=x),optional('data/lugares-memoria.json?v=atlas26',x=>historicosLocais=x)]);
     await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
