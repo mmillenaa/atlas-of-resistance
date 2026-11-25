@@ -10,7 +10,7 @@ nav#tabs button:hover{color:#75001a;background:#fbfbfb}nav#tabs button.active{bo
 main{padding:16px 24px 48px;max-width:1600px;margin:auto}.page{display:none}.page.active{display:block}
 h2{font:400 27px/1.4 'Merriweather',Georgia,serif;color:#424242;padding:15px 0 20px;border-bottom:1px solid #ccc;margin:6px 0 25px}
 h3{font:400 19px/1.4 'Merriweather',Georgia,serif;color:#424242;margin:12px 0}
-p{margin:0 0 19px;line-height:2}.page>p{font-size:16px}.section-intro{color:#666;font-style:italic;margin-bottom:20px}.auxiliary{color:#666;font-size:12px;line-height:1.6;margin-top:10px}.subtle-note{color:#777;font-size:13px}
+p{margin:0 0 19px;line-height:2}.page>p{font-size:16px}.section-intro{color:var(--ink);font-style:normal;margin-bottom:20px}.auxiliary{color:#666;font-size:12px;line-height:1.6;margin-top:10px}.subtle-note{color:#777;font-size:13px}
 .research-card{background:white;border-left:4px solid var(--wine);box-shadow:0 2px 7px #0001;padding:23px 26px;margin:30px 0 20px}.research-card h3{color:var(--wine)}
 .author-links{display:flex;gap:12px;flex-wrap:wrap}.author-links a{color:white;text-decoration:none;background:var(--wine);font-size:13px;font-weight:700;padding:5px 10px;border-radius:3px}
 .filter-card{background:white;border:1px solid #e3e3e3;padding:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;margin-bottom:24px;box-shadow:0 1px 3px #0001}
@@ -87,7 +87,7 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 #network .lj-node.atlas-selected .node-label{display:block!important;font-weight:700;fill:#222}
 #network .lj-node.atlas-dimmed .node-label{display:none!important}
 .map-history{font:14px/1.75 Roboto,Arial,sans-serif;white-space:pre-line;text-align:left;color:#383838;margin-bottom:18px}
-.map-address{border-bottom:1px solid #ececec;padding-bottom:10px;color:#555;font-style:italic}
+.map-address{border-bottom:1px solid #ececec;padding-bottom:10px;color:var(--ink);font-style:normal}
 .map-events{padding-left:20px;font:13px/1.7 Roboto,Arial,sans-serif}
 .map-events li{padding-bottom:7px}
 .map-source{border-top:1px dashed #ccc;padding-top:10px;font-size:11px!important;color:#6c6c6c}
@@ -178,3 +178,10 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 
 /* Notas metodológicas: leitura complementar sem ocupar permanentemente a área de exploração. */
 .method-note{margin:0 0 19px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;color:var(--ink)}.method-note>summary{padding:11px 2px;color:var(--wine);font-size:14px;font-weight:500;cursor:pointer}.method-note>summary:focus-visible{outline:2px solid var(--wine);outline-offset:2px}.method-body{padding:2px 5px 14px;max-width:1100px}.method-body p{font-size:14px;line-height:1.75;margin:0 0 12px}.method-body h3{font-size:15px;color:var(--wine);margin:13px 0 6px}.method-legend{display:flex;flex-wrap:wrap;gap:10px 24px;margin:12px 0 15px;font-size:13px}.method-legend>span{display:inline-flex;align-items:center;gap:8px}.method-dot{width:13px;height:13px;border-radius:50%;background:var(--dot);display:inline-block;flex-shrink:0}.method-line{display:inline-block;width:28px;border-top:2px solid #a3aab5;flex-shrink:0}.method-line.dashed{border-top-style:dashed}.method-body p:last-child{margin-bottom:0}
+
+/* Hand-drawn disclosure markers from the Atlas illustrations. The source PNGs have generous transparent margins. */
+details:not(.atlas-context)>summary{list-style:none;position:relative;padding-left:21px;cursor:pointer}details:not(.atlas-context)>summary::marker{content:'';font-size:0}details:not(.atlas-context)>summary::-webkit-details-marker{display:none}details:not(.atlas-context)>summary::before{content:'';display:block;position:absolute;left:2px;top:1em;transform:translateY(-50%);width:13px;height:13px;background:url('./icons/left.png') center center / 120px 120px no-repeat}details[open]:not(.atlas-context)>summary::before{background-image:url('./icons/down.png');background-size:92px 92px;background-position:center calc(50% - 1.4px)}
+/* Supporting text uses the same ink color and upright style as body copy. */
+.section-intro,.auxiliary,.subtle-note,.map-address,.inverted-america figcaption,.query-advanced label,.dataset-loader summary,.data-pager,#network .lj-empty,.atlas-edu-card small,.atlas-edu-precision,footer{color:var(--ink);font-style:normal}
+/* Temporary suspension: leave the underlying pilot intact for future reactivation. */
+.oral-pilot-suspended[hidden]{display:none!important}.oral-suspended-illustration{margin:24px auto 38px;max-width:660px;width:100%;text-align:center}.oral-suspended-illustration img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;margin:auto}

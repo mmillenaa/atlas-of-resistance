@@ -8,15 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="./styles.css?v=atlas20">
+<link rel="stylesheet" href="./styles.css?v=atlas21">
 <script defer src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
 <script defer src="./atlas-map.js?v=3"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script defer src="./graph-d3.js?v=atlas15"></script>
 <script defer src="./app.js?v=atlas19"></script>
-<meta name="atlas-release" content="atlas20-20261125">
-<link rel="stylesheet" href="./atlas-pilot.css?v=2">
-<script defer src="./atlas-pilot.js?v=2"></script>
+<meta name="atlas-release" content="atlas21-20261125">
+<link rel="stylesheet" href="./atlas-pilot.css?v=3">
+<script defer src="./atlas-pilot.js?v=3"></script>
 </head>
 <body>
 <header class="original-header">
@@ -99,6 +99,8 @@
 </section>
 <section id="laboratorio" class="page atlas-pilot">
 <h2>Lab_Oralidades</h2>
+<figure class="oral-suspended-illustration"><img src="./icons/emconstr.png" alt="Em construção"></figure>
+<div class="oral-pilot-suspended" hidden inert>
 <p class="section-intro">Laboratório de leitura e curadoria de fontes orais, concebido para explorar a passagem da narrativa dos sujeitos históricos à estruturação de relações no Atlas. A leitura das entrevistas preserva a localização do trecho e a atribuição do interlocutor, permitindo formular, discutir e revisar proposições semânticas a partir dos testemunhos.</p><details class="method-note"><summary>Do testemunho à relação semântica</summary><div class="method-body"><p>O formato de conversa facilita a navegação por falas; não representa uma troca de mensagens original nem substitui a entrevista integral. A seleção de um trecho permite propor uma relação entre sujeito, predicado e objeto, indicar sua fonte e registrar o estatuto da interpretação. A segmentação e a identificação dos interlocutores devem ser conferidas na transcrição.</p><p>Uma menção nominal não comprova participação, filiação ou colaboração. A distinção entre relação documentada no excerto, inferência analítica, evidência insuficiente e proposta a revisar explicita etapas de interpretação da fonte oral. As propostas exportadas podem ser compartilhadas para revisão, mas não ingressam automaticamente nas matrizes oficiais. A curadoria preserva a diferença entre testemunho, interpretação e representação dos dados.</p></div></details>
 <p class="pilot-notice"><strong>Área experimental local.</strong> Não há autenticação, submissão ao servidor ou publicação automática. O texto e as propostas ficam apenas na memória desta aba até a exportação; recarregar a página os apaga. Não utilize dados sensíveis em computadores compartilhados.</p>
 <div class="oral-import"><label class="oral-upload"><strong>Carregar acervo local de entrevistas (.json)</strong><input id="oralCorpus" type="file" accept=".json,application/json"></label><span id="oralStatus" role="status">14 entrevistas catalogadas. Carregue o arquivo local para ler as transcrições.</span></div><div class="oral-workspace"><aside class="oral-library"><div class="oral-head">Entrevistas</div><input id="oralSearch" type="search" placeholder="Pesquisar entrevista"><div id="oralList"></div></aside><div class="oral-conversation"><div class="oral-head"><strong id="oralTitle">Selecione uma entrevista</strong><small id="oralRef"></small></div><div class="oral-find"><input id="oralFind" type="search" placeholder="Localizar palavra ou nome na conversa"><button id="oralPrev" type="button" aria-label="Trechos anteriores">←</button><span id="oralPage"></span><button id="oralNext" type="button" aria-label="Próximos trechos">→</button></div><div id="oralChat" class="oral-chat"><p>O acervo permanece neste navegador. Selecione uma entrevista após carregar o arquivo.</p></div></div><aside class="oral-classify"><div class="oral-head">Qualificar relação</div><p id="oralSelected" class="auxiliary">Clique em uma fala para começar.</p><div id="oralMentions"></div><div id="oralFormSlot"></div></aside></div><details class="oral-manual"><summary>Entrada manual e importação de propostas</summary><div class="pilot-controls"><label>Modo de trabalho<select id="labMode"><option value="demo">Exemplo com metadados públicos</option><option value="local">Novo excerto local</option></select></label><label>Carregar texto local (.txt)<input id="labFile" type="file" accept=".txt,text/plain"></label><label>Importar propostas (.json)<input id="labImport" type="file" accept=".json,application/json"></label></div>
@@ -109,6 +111,8 @@
 <h3>Fila de revisão <span id="labCount" class="auxiliary"></span></h3>
 <div class="pilot-controls"><label class="pilot-check"><input id="labInclude" type="checkbox"> Incluir excertos e observações na exportação (podem conter dados privados)</label><button class="small-button" id="labJSON">Exportar JSON</button><button class="small-button" id="labCSV">Exportar CSV</button></div><div id="labQueue" class="table-shell"></div>
 <p class="auxiliary">A colaboração neste piloto ocorre por troca de arquivos JSON. Nenhuma proposta é inserida automaticamente no grafo ou no repositório de dados. Uma relação documentada exige conferência humana.</p>
+
+</div>
 </section>
 </main><footer>Atlas da Resistência · Projeto de pesquisa em desenvolvimento · Universidade de São Paulo</footer>
 </body></html>
