@@ -209,3 +209,14 @@ main .map-history,main .map-events,main .graph-detail details.atlas-context ul{l
   main h3{font-size:17px}
   main .method-body h3{font-size:15px}
 }
+
+/* Cartografia: detailed location card replaces the title-only balloon. */
+#map .atlas-raster-popup{transform:none;box-sizing:border-box;width:min(365px,calc(100% - 16px));max-height:min(340px,65%);overflow:auto;overscroll-behavior:contain;touch-action:pan-y;padding:16px 30px 16px 16px;border-radius:4px;font:13px/1.4 Roboto,Arial,sans-serif;color:var(--ink);cursor:auto}
+#map .atlas-raster-popup h3{font:400 17px/1.25 'Merriweather',Georgia,serif;color:var(--wine);margin:0 0 12px}
+#map .atlas-raster-popup h4{font-size:13px;margin:12px 0 5px}
+#map .atlas-raster-popup p{font-size:13px;margin:0 0 9px;line-height:1.4}
+#map .atlas-raster-popup .map-history,#map .atlas-raster-popup .map-events{font-size:13px;line-height:1.4;margin:0 0 10px;overflow-wrap:anywhere}
+#map .atlas-raster-popup .map-events{padding-left:17px}
+#map .atlas-raster-popup .map-source{font-size:12px;color:var(--ink);font-style:normal}
+#map .atlas-raster-popup .atlas-popup-close{position:sticky;float:right;top:0;right:0;margin:-8px -22px 0 6px;background:#fff;border:0;font-size:22px;line-height:1;cursor:pointer;z-index:1}
+@media(max-width:600px){#map .atlas-raster-popup{width:min(330px,calc(100% - 16px));max-height:60%}}

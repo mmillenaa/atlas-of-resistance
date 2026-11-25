@@ -9,163 +9,210 @@
     {
       "PersonID": "P001",
       "Name": "Santo Dias",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/134091/Santo-Dias-da-Silva.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/134091/Santo-Dias-da-Silva.jpg",
+      "BirthPlaceID": "L002",
+      "DeathPlaceID": "L001"
     },
     {
       "PersonID": "P002",
       "Name": "Waldemar Rossi",
-      "ImageURL": "https://www.brasildefato.com.br/wp-content/uploads/2024/09/image_processing20200201-29235-15bsvfb.jpg"
+      "ImageURL": "https://www.brasildefato.com.br/wp-content/uploads/2024/09/image_processing20200201-29235-15bsvfb.jpg",
+      "BirthPlaceID": "L003",
+      "DeathPlaceID": "L004"
     },
     {
       "PersonID": "P003",
       "Name": "Elias Stein",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/EliasStein.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/EliasStein.jpg",
+      "BirthPlaceID": "L009"
     },
     {
       "PersonID": "P004",
       "Name": "Luiz Hirata",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133504/Luiz-Hirata.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133504/Luiz-Hirata.jpg",
+      "BirthPlaceID": "L010",
+      "DeathPlaceID": "L005"
     },
     {
       "PersonID": "P005",
       "Name": "José Ibrahim",
-      "ImageURL": "https://mst.org.br/wp-content/uploads/2013/05/Jos%C3%A9-Ibrahim.jpg"
+      "ImageURL": "https://mst.org.br/wp-content/uploads/2013/05/Jos%C3%A9-Ibrahim.jpg",
+      "BirthPlaceID": "L004",
+      "DeathPlaceID": "L004"
     },
     {
       "PersonID": "P006",
       "Name": "Manoel Fiel Filho",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133564/Manoel-Fiel-Filho.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133564/Manoel-Fiel-Filho.jpg",
+      "BirthPlaceID": "L011",
+      "DeathPlaceID": "L006"
     },
     {
       "PersonID": "P007",
       "Name": "Vito Giannotti",
-      "ImageURL": "https://www.brasildefato.com.br/wp-content/uploads/2024/09/image_processing20200201-29235-1k89owx.jpg"
+      "ImageURL": "https://www.brasildefato.com.br/wp-content/uploads/2024/09/image_processing20200201-29235-1k89owx.jpg",
+      "BirthPlaceID": "L012",
+      "DeathPlaceID": "L037"
     },
     {
       "PersonID": "P008",
       "Name": "Olavo Hanssen",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133833/Olavo-Hanssen.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133833/Olavo-Hanssen.jpg",
+      "BirthPlaceID": "L004",
+      "DeathPlaceID": "L007"
     },
     {
       "PersonID": "P009",
       "Name": "Cleodon Silva",
-      "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Cleodon_Silva.jpg"
+      "ImageURL": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Cleodon_Silva.jpg",
+      "BirthPlaceID": "L013",
+      "DeathPlaceID": "L004"
     },
     {
       "PersonID": "P010",
       "Name": "Carlos Gilberto Pereira",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2026/04/cropped-Carlos-Gilberto.png"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2026/04/cropped-Carlos-Gilberto.png",
+      "BirthPlaceID": "L014"
     },
     {
       "PersonID": "P011",
       "Name": "Raimundo Ferreira Lima",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133987/Raimundo-Ferreira-Lima.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133987/Raimundo-Ferreira-Lima.jpg",
+      "BirthPlaceID": "L015",
+      "DeathPlaceID": "L034"
     },
     {
       "PersonID": "P012",
       "Name": "Antônio Raymundo de Lucena",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132128/Antonio-Raymundo-de-Lucena.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132128/Antonio-Raymundo-de-Lucena.jpg",
+      "BirthPlaceID": "L016",
+      "DeathPlaceID": "L035"
     },
     {
       "PersonID": "P013",
       "Name": "José Luiz Del Roio",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49994/JoseDelRoio.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49994/JoseDelRoio.jpg",
+      "BirthPlaceID": "L017"
     },
     {
       "PersonID": "P014",
       "Name": "Celso Antunes Horta",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50580/CelsoHorta-scaled.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50580/CelsoHorta-scaled.jpg",
+      "BirthPlaceID": "L018"
     },
     {
       "PersonID": "P015",
       "Name": "Sofia Dias Batista",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50704/SofiaDias.png"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50704/SofiaDias.png",
+      "BirthPlaceID": "L019"
     },
     {
       "PersonID": "P016",
       "Name": "Ângelo Arroyo",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132007/Angelo-Arroyo.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132007/Angelo-Arroyo.jpg",
+      "BirthPlaceID": "L004",
+      "DeathPlaceID": "L008"
     },
     {
       "PersonID": "P017",
       "Name": "João Batista Franco Drummond",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132968/Joao-Batista-Franco-Drummond.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/132968/Joao-Batista-Franco-Drummond.jpg",
+      "BirthPlaceID": "L020",
+      "DeathPlaceID": "L008"
     },
     {
       "PersonID": "P018",
       "Name": "Pedro Ventura Felipe de Araújo Pomar",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133970/Pedro-Ventura-Felipe-de-Araujo-Pomar.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/133970/Pedro-Ventura-Felipe-de-Araujo-Pomar.jpg",
+      "BirthPlaceID": "L021",
+      "DeathPlaceID": "L008"
     },
     {
       "PersonID": "P019",
       "Name": "Stanislaw Szermeta",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/48698/StanislawSzermeta.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/48698/StanislawSzermeta.jpg",
+      "BirthPlaceID": "L022"
     },
     {
       "PersonID": "P020",
       "Name": "Jorge Luiz dos Santos Oliveira",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49704/JorgeLuizOliveira.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49704/JorgeLuizOliveira.jpg",
+      "BirthPlaceID": "L023"
     },
     {
       "PersonID": "P021",
       "Name": "Maria José Soares",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49732/MariaJoseSoares.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49732/MariaJoseSoares.jpg",
+      "BirthPlaceID": "L024"
     },
     {
       "PersonID": "P022",
       "Name": "Raimundo Moreira de Oliveira",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49816/RaimundoOliveira.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49816/RaimundoOliveira.jpg",
+      "BirthPlaceID": "L025"
     },
     {
       "PersonID": "P023",
       "Name": "Ana Maria do Carmo Silva / Ana Dias",
-      "ImageURL": "https://memoriasdaditadura.org.br/wp-content/uploads/2023/09/Retrato-AnaDias.jpg"
+      "ImageURL": "https://memoriasdaditadura.org.br/wp-content/uploads/2023/09/Retrato-AnaDias.jpg",
+      "BirthPlaceID": "L026"
     },
     {
       "PersonID": "P024",
       "Name": "Salvador Pires",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49876/SalvadorPires.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49876/SalvadorPires.jpg",
+      "BirthPlaceID": "L027"
     },
     {
       "PersonID": "P025",
       "Name": "Cloves de Castro",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/ClovesCastro.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/ClovesCastro.jpg",
+      "BirthPlaceID": "L004",
+      "DeathPlaceID": "L004"
     },
     {
       "PersonID": "P026",
       "Name": "Carlos Josaphat",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49931/FreiJosaphat.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49931/FreiJosaphat.jpg",
+      "BirthPlaceID": "L028",
+      "DeathPlaceID": "L036"
     },
     {
       "PersonID": "P027",
       "Name": "Raphael Martinelli",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/RaphaelMartinelli.png"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/RaphaelMartinelli.png",
+      "BirthPlaceID": "L008"
     },
     {
       "PersonID": "P028",
       "Name": "Raymond (Raimundo) Perillat",
       "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/51225/RaymondPerillat.jpg",
-      "Notes": "Raimundo e Raymond são a mesma pessoa (D089); atuação na Comunidade Santa Cristina referida por Sueli Bossam (D072, nota 8; D074)."
+      "Notes": "Raimundo e Raymond são a mesma pessoa (D089); atuação na Comunidade Santa Cristina referida por Sueli Bossam (D072, nota 8; D074).",
+      "BirthPlaceID": "L029"
     },
     {
       "PersonID": "P029",
       "Name": "Lúcio Machado Bellentani",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/51121/LucioBellentani.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/51121/LucioBellentani.jpg",
+      "BirthPlaceID": "L030"
     },
     {
       "PersonID": "P030",
       "Name": "Ricardo Frota de Albuquerque Maranhão",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50337/RicardoMaranhao-scaled.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50337/RicardoMaranhao-scaled.jpg",
+      "BirthPlaceID": "L031"
     },
     {
       "PersonID": "P031",
       "Name": "Antonio Prado de Andrade",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50054/AntonioPrado.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/50054/AntonioPrado.jpg",
+      "BirthPlaceID": "L032"
     },
     {
       "PersonID": "P032",
       "Name": "Paulo Sérgio Bezerra",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49904/PePauloBezerra.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/49904/PePauloBezerra.jpg",
+      "BirthPlaceID": "L033"
     },
     {
       "PersonID": "P033",
@@ -180,7 +227,8 @@
     {
       "PersonID": "P037",
       "Name": "Maurice Politi",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/MauricePoliti_2018.jpg"
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/2021/03/MauricePoliti_2018.jpg",
+      "BirthPlaceID": "L236"
     },
     {
       "PersonID": "P038",
@@ -190,7 +238,8 @@
     {
       "PersonID": "P039",
       "Name": "Carmen Sylvia Vidigal Moraes",
-      "ImageURL": "https://imagens.usp.br/wp-content/uploads/Carmen-Sylvia-Vidigal-Moraes-267-11-Foto-Cec%C3%ADlia-Bastos-06.jpeg"
+      "ImageURL": "https://imagens.usp.br/wp-content/uploads/Carmen-Sylvia-Vidigal-Moraes-267-11-Foto-Cec%C3%ADlia-Bastos-06.jpeg",
+      "BirthPlaceID": "L249"
     },
     {
       "PersonID": "P040",
@@ -200,7 +249,8 @@
     {
       "PersonID": "P050",
       "Name": "Djalma (Dija)",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L040"
     },
     {
       "PersonID": "P051",
@@ -210,12 +260,14 @@
     {
       "PersonID": "P041",
       "Name": "Francisco Carlos de Souza",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L249"
     },
     {
       "PersonID": "P042",
       "Name": "Geraldo Ferreira da Silva",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L024"
     },
     {
       "PersonID": "P052",
@@ -225,7 +277,8 @@
     {
       "PersonID": "P043",
       "Name": "Isabel Peres",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L007"
     },
     {
       "PersonID": "P053",
@@ -245,22 +298,26 @@
     {
       "PersonID": "P044",
       "Name": "Maria do Carmo Gomes",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L253"
     },
     {
       "PersonID": "P045",
       "Name": "Maria Rosângela Batistoni",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L250"
     },
     {
       "PersonID": "P047",
       "Name": "Nadine Habert",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L251"
     },
     {
       "PersonID": "P046",
       "Name": "Nádia Gebara da Silva",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L252"
     },
     {
       "PersonID": "P056",
@@ -280,7 +337,8 @@
     {
       "PersonID": "P049",
       "Name": "Sueli Bossam",
-      "ImageURL": ""
+      "ImageURL": "",
+      "BirthPlaceID": "L004"
     },
     {
       "PersonID": "P058",

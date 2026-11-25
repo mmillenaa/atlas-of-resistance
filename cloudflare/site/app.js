@@ -839,6 +839,45 @@ const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Ci
 const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
 const atlasMapColors={historical:'#9D2235',education:'#FF2B1F',other:'#9AA0A6',historicalBorder:'#791A29',educationBorder:'#A51A12',otherBorder:'#777'};
+
+const mapCountryPT={"Germany":"Alemanha","Brazil":"Brasil","Italy":"Itália","France":"França","Mexico":"México","Cuba":"Cuba","Chile":"Chile","Panama":"Panamá","Belgium":"Bélgica","Peru":"Peru","Russia":"Rússia","Israel":"Israel","Switzerland":"Suíça","Argelia":"Argélia","Egypt":"Egito"};
+const mapDocRolePT={place_of_violation:'Local de violação',place_of_incarceration:'Local de encarceramento',place_of_torture:'Local de tortura',place_of_persecution:'Local de perseguição',place_of_arbitrary_detention:'Local de detenção arbitrária',place_of_surveillance:'Local de vigilância',place_of_intimidation:'Local de intimidação',place_of_concealment_of_a_body:'Local de ocultação de cadáver',place_of_falsification_of_cause_of_death_or_evidence_tampering:'Local relacionado à falsificação da causa da morte ou adulteração de evidências',place_of_interview:'Local de entrevista',mentions:'Local mencionado'};
+const mapGeoPT={country_centroid:'Ponto representativo do país, não endereço exato.',state_centroid:'Ponto representativo do estado, não endereço exato.',municipality_centroid:'Ponto representativo do município, não endereço exato.',neighborhood_centroid:'Ponto representativo do bairro, não endereço exato.',municipality:'Localização em escala municipal.'};
+function mapLocationLabel(r){const name=first(r,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||r.PlaceID;return mapCountryPT[name]||name;}
+function mapSourceTitle(doc){const t=first(doc,['Title_ORIG','DisplayTitle_ORIG','DisplayTitle_EN','Title_EN','Repository'])||doc.DocumentID;return t.replace(/^Biographical profile of /,'Perfil biográfico de ');}
+function mapSourceLink(doc){const t=HTML(mapSourceTitle(doc)),url=text(doc.SourceURL);return /^https?:\/\//i.test(url)?'<a href="'+HTML(url)+'" target="_blank" rel="noopener noreferrer">'+t+'</a>':t;}
+function buildMapLocationCard(r,events,eventPersonIds,documents,documentLocations){
+ const id=text(r.PlaceID),label=mapLocationLabel(r),memoria=historicosLocais[id]||{};
+ const born=rows('Persons').filter(p=>text(p.BirthPlaceID)===id);
+ const died=rows('Persons').filter(p=>text(p.DeathPlaceID)===id);
+ const relacionados=events.filter(e=>text(e.PlaceID)===id);
+ const descr=first(r,['MDH_Summary','Notes','MDH_Summary_EN'])||text(memoria.descricao);
+ const endereco=first(r,['Address'])||text(memoria.endereco);
+ const links=new Map();
+ for(const link of documentLocations.get(id)||[]){const doc=documents.get(text(link.DocumentID));if(!doc)continue;if(!links.has(doc.DocumentID))links.set(doc.DocumentID,{doc,roles:new Set()});links.get(doc.DocumentID).roles.add(mapDocRolePT[text(link.RelationType)]||roleLabel(link.RelationType));}
+ let out='<h3>'+HTML(label)+'</h3>';
+ if(endereco)out+='<p class="map-address">'+HTML(endereco)+'</p>';
+ if(descr)out+='<h4>Histórico do local</h4><div class="map-history">'+HTML(descr)+'</div>';
+ if(born.length)out+='<p><b>Nascimentos associados:</b> '+HTML([...new Set(born.map(p=>p.Name))].join(', '))+'</p>';
+ if(died.length)out+='<p><b>Falecimentos associados:</b> '+HTML([...new Set(died.map(p=>p.Name))].join(', '))+'</p>';
+ if(id==='L022'&&born.some(p=>p.PersonID==='P019')){
+  out+='<p>Stanislaw Szermeta nasceu na Alemanha em 4 de maio de 1945. Emigrou para o Brasil com a família, estabelecendo-se em Osasco em 1949.</p>';
+  const doc=documents.get('D032');if(doc)out+='<p class="map-source">Referência biográfica: '+mapSourceLink(doc)+(doc.Repository?' · '+HTML(doc.Repository):'')+'.</p>';
+ }
+ if(relacionados.length){
+  out+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4><ul class="map-events">'+relacionados.map(ev=>{
+   const people=(eventPersonIds.get(ev.EventID)||[]).map(pid=>nodeById.get(pid)?.label||rows('Persons').find(p=>p.PersonID===pid)?.Name).filter(Boolean);
+   const dates=[text(ev.StartDate),text(ev.EndDate)].filter(Boolean).join(' – ');
+   return '<li><b>'+HTML(eventLabel(ev.EventType))+'</b>'+(dates?' · '+HTML(dates):'')+(people.length?' — '+HTML([...new Set(people)].join(', ')):'')+'</li>';
+  }).join('')+'</ul>';
+ }
+ if(links.size)out+='<h4>Fontes documentais relacionadas</h4><ul class="map-events">'+[...links.values()].map(({doc,roles})=>'<li>'+mapSourceLink(doc)+(roles.size?' — '+HTML([...roles].join('; ')):'')+(doc.Repository?' · '+HTML(doc.Repository):'')+'</li>').join('')+'</ul>';
+ if(/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||memoria.fonte==='MDH')out+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
+ if(!descr&&!born.length&&!died.length&&!relacionados.length&&!links.size&&!endereco)out+='<p class="map-source">Registro geográfico cadastrado, ainda sem informação histórica ou vínculo individualizado nesta seleção.</p>';
+ if(mapGeoPT[text(r.GeoPrecision)])out+='<p class="map-source">'+HTML(mapGeoPT[text(r.GeoPrecision)])+'</p>';
+ return out;
+}
+
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
  const L=window.AtlasRaster;
@@ -855,6 +894,8 @@ function updateMap(){
   events=events.filter(e=>ids.has(e.EventID));
  }
  const eventCounts=new Map();for(const e of events){const id=text(e.PlaceID);if(id)eventCounts.set(id,(eventCounts.get(id)||0)+1);}
+ const eventPersonIds=new Map();for(const ep of rows('EventPersons')){if(!eventPersonIds.has(ep.EventID))eventPersonIds.set(ep.EventID,[]);eventPersonIds.get(ep.EventID).push(ep.PersonID);}
+ const documents=new Map(rows('Documents').map(d=>[text(d.DocumentID),d]));const documentLocations=new Map();for(const link of rows('DocumentLocations')){const id=text(link.PlaceID);if(!documentLocations.has(id))documentLocations.set(id,[]);documentLocations.get(id).push(link);}
  let total=0;const coords=[];let eventPlaces=0;
  for(const r of rows('Locations')){
    const latRaw=text(r.Latitude),lonRaw=text(r.Longitude);if(!latRaw||!lonRaw)continue;
@@ -865,43 +906,16 @@ function updateMap(){
    if(chosen&&chosen!=='ALL'&&ne===0)continue;
    const isMemory=/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||historicosLocais[text(r.PlaceID)]?.fonte==='MDH';
     const isEvent=ne>0||isMemory;
-   const label=first(r,['PlaceName_ORIG','PlaceName_EN','PlaceName'])||r.PlaceID;
+   const label=mapLocationLabel(r);
    const radius=$('heat').checked?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
-   const memoria=historicosLocais[text(r.PlaceID)]||{};
-   const born=rows('Persons').filter(p=>text(p.BirthPlaceID)===text(r.PlaceID)).map(p=>p.Name);
-   const died=rows('Persons').filter(p=>text(p.DeathPlaceID)===text(r.PlaceID)).map(p=>p.Name);
-   const relacionados=events.filter(e=>text(e.PlaceID)===text(r.PlaceID));
-   const eventPersonIds=new Map();
-   for(const ep of rows('EventPersons')){
-     if(!eventPersonIds.has(ep.EventID))eventPersonIds.set(ep.EventID,[]);
-     eventPersonIds.get(ep.EventID).push(ep.PersonID);
-   }
-   const descr=first(r,['MDH_Summary','Notes','MDH_Summary_EN'])||text(memoria.descricao);
-   let detalhes='<h3>'+HTML(label)+'</h3>';
-   const endereco=first(r,['Address'])||text(memoria.endereco);
-   if(endereco)detalhes+='<p class="map-address">'+HTML(endereco)+'</p>';
-   if(descr)detalhes+='<h4>Histórico do local</h4><div class="map-history">'+HTML(descr)+'</div>';
-   if(born.length)detalhes+='<p><b>Nascimentos associados:</b> '+HTML([...new Set(born)].join(', '))+'</p>';
-   if(died.length)detalhes+='<p><b>Falecimentos associados:</b> '+HTML([...new Set(died)].join(', '))+'</p>';
-   if(relacionados.length){
-      detalhes+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4>';
-      detalhes+='<ul class="map-events">'+relacionados.slice(0,35).map(ev=>{
-        const people=(eventPersonIds.get(ev.EventID)||[]).map(pid=>nodeById.get(pid)?.label).filter(Boolean);
-        const dates=[text(ev.StartDate),text(ev.EndDate)].filter(Boolean).join(' – ');
-        return '<li><b>'+HTML(eventLabel(ev.EventType))+'</b>'+(dates?' · '+HTML(dates):'')+
-          (people.length?' — '+HTML([...new Set(people)].join(', ')):'')+'</li>';
-      }).join('')+'</ul>';
-   }
-   if(text(r.Source_MDH).toUpperCase()==='TRUE' || memoria.fonte==='MDH'){
-     detalhes+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
-   }
+   const detalhes=buildMapLocationCard(r,events,eventPersonIds,documents,documentLocations);
    L.circleMarker([lat,lon],{
-      radius,
+      radius,label,
       color:isEvent?atlasMapColors.historicalBorder:atlasMapColors.otherBorder,
        fillColor:isEvent?atlasMapColors.historical:atlasMapColors.other,priority:isMemory?3:isEvent?2:0,
       weight:1.4, fillOpacity:$('heat').checked?.42:.77
     })
-    .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong>')
+    .addTo(leafletMap).bindPopup(detalhes)
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
@@ -951,7 +965,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json?v=atlas14',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas25',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1338,7 +1352,7 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  if(!leafletMap||!coords)return;
  const L=window.AtlasRaster;
  const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
- const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.educationBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.education,weight:1.4,fillOpacity:.94,priority:item.educacional===false?0:4,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong>').on('click',()=>{$('mapSide').innerHTML=details;});
+ const marker=L.circleMarker(coords,{radius:7,label:item.nome,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.educationBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.education,weight:1.4,fillOpacity:.94,priority:item.educacional===false?0:4,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup(details).on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
 // Address records remain available as map markers; no address-list UI or geocoding.
