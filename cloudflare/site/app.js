@@ -1104,6 +1104,22 @@ async function cosmov(){
   renderCosmov(box,cosmovMerge([...local,...(result.results||[])]));
  }catch(e){if($('cosQuery').value.trim()===term)renderCosmov(box,local,'OpenAlex indisponível: '+e.message+'. As referências selecionadas localmente continuam acessíveis.');}
 }
+function setupMobileNavigation(){
+  const toggle=document.getElementById('mobileNavToggle'),nav=document.getElementById('tabs'),current=document.getElementById('mobileNavCurrent');
+  if(!toggle||!nav||!current)return;
+  const buttons=Array.from(nav.querySelectorAll('button[data-page]'));
+  const mobile=window.matchMedia('(max-width: 920px)');
+  function setOpen(open){toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('mobile-open',open);}
+  function sync(b){if(!b)return;current.textContent=b.textContent.trim();buttons.forEach(x=>{if(x===b)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current');});}
+  function close(restoreFocus=false){const wasOpen=toggle.getAttribute('aria-expanded')==='true';setOpen(false);if(restoreFocus&&wasOpen&&mobile.matches)toggle.focus();}
+  toggle.addEventListener('click',()=>setOpen(toggle.getAttribute('aria-expanded')!=='true'));
+  buttons.forEach(b=>b.addEventListener('click',()=>{sync(b);close(true);}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true')close(true);});
+  document.addEventListener('click',e=>{if(!toggle.contains(e.target)&&!nav.contains(e.target))close();});
+  if(mobile.addEventListener)mobile.addEventListener('change',()=>close());else if(mobile.addListener)mobile.addListener(()=>close());
+  sync(buttons.find(b=>b.classList.contains('active'))||buttons[0]);
+  document.documentElement.classList.add('atlas-mobile-nav-ready');
+}
 document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
     document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('active',x===b));
@@ -1111,6 +1127,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
     if(b.dataset.page==='mapa')requestAnimationFrame(()=>{try{updateMap();leafletMap?.invalidateSize();}catch(e){console.error('Mapa:',e);$('mapStatus').textContent='Erro ao atualizar os marcadores: '+e.message;}});
     if(b.dataset.page==='grafo'&&net)setTimeout(()=>{net.redraw();},120);if(b.dataset.page==='juridico')updateConceptChart();
   }));
+  setupMobileNavigation();
   $('graphFilter').onchange=resetGraph;$('focus').onchange=resetGraph;$('role').onchange=drawGraph;
   $('reset').onclick=()=>{$('focus').value='';resetGraph();};
   $('expand').onclick=()=>{if(selected)expand(selected,50);else hubs.forEach(h=>{if(nodeById.has(h))neighbors(h).slice(0,8).forEach(x=>visible.add(x));});drawGraph();};
