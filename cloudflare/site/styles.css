@@ -175,3 +175,6 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 
 .map-legend .pin.education{background:#FF2B1F;border-color:#A51A12}
 
+
+/* Notas metodológicas: leitura complementar sem ocupar permanentemente a área de exploração. */
+.method-note{margin:0 0 19px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;color:var(--ink)}.method-note>summary{padding:11px 2px;color:var(--wine);font-size:14px;font-weight:500;cursor:pointer}.method-note>summary:focus-visible{outline:2px solid var(--wine);outline-offset:2px}.method-body{padding:2px 5px 14px;max-width:1100px}.method-body p{font-size:14px;line-height:1.75;margin:0 0 12px}.method-body h3{font-size:15px;color:var(--wine);margin:13px 0 6px}.method-legend{display:flex;flex-wrap:wrap;gap:10px 24px;margin:12px 0 15px;font-size:13px}.method-legend>span{display:inline-flex;align-items:center;gap:8px}.method-dot{width:13px;height:13px;border-radius:50%;background:var(--dot);display:inline-block;flex-shrink:0}.method-line{display:inline-block;width:28px;border-top:2px solid #a3aab5;flex-shrink:0}.method-line.dashed{border-top-style:dashed}.method-body p:last-child{margin-bottom:0}
