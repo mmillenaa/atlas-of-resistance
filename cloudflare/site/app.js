@@ -14,6 +14,7 @@ const schema = {
   Locations:['PlaceID',['PlaceName_ORIG','PlaceName_EN','PlaceName'],'Local']
 };
 const relations = [
+ ['PersonRelations','SourcePersonID','TargetPersonID','RelationshipType'],
  ['PersonMovements','PersonID','MovementID','Role'],
  ['PersonInstitutions','PersonID','InstitutionID','Role'],
  ['EventPersons','PersonID','EventID','Role'],
@@ -101,7 +102,7 @@ const rolePT = Object.freeze({
 const additionalRoleLabels = {"place_of_surveillance": "Local de vigilância", "adjudicating_court": "Órgão julgador", "place_of_interview": "Local de entrevista", "supporting_agency": "Órgão de apoio", "place_of_arbitrary_detention": "Local de detenção arbitrária", "participant_agency": "Órgão participante", "place_of_violation": "Local da violação", "target_agency": "Órgão visado", "depicts": "Retrata", "place_of_intimidation": "Local de intimidação", "place_of_persecution": "Local de perseguição", "place_of_torture": "Local de tortura", "perpetrator_agency": "Órgão responsável pela violação", "organizer_agency": "Órgão organizador", "place_of_falsification_of_cause_of_death_or_evidence_tampering": "Local de falsificação da causa da morte ou adulteração de provas", "place_of_incarceration": "Local de encarceramento", "place_of_concealment_of_a_body": "Local de ocultação de cadáver"};
 const educationRoles=new Set(['teacher','professor','teaches_at','educator','teacher_trainer','educational_activity_at']);
 const canonicalRole=x=>educationRoles.has(text(x))?'educational_activity_at':text(x);
-const roleLabel = x => text(x)==='educational_activity_at'?'Atuação educacional em':text(x)==='documents_event'?'Documenta': rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
+const roleLabel = x => text(x)==='shared_educational_project'?'Atuou no mesmo projeto educacional que':text(x)==='participated_in_network'?'Participou da rede':text(x)==='educational_network_via_school'?'Rede educacional articulada via Nova Piratininga': text(x)==='educational_activity_at'?'Atuação educacional em':text(x)==='documents_event'?'Documenta': rolePT[text(x)] || additionalRoleLabels[text(x)] || text(x).replace(/_/g,' ').replace(/^./,c=>c.toUpperCase());
 const legalPT={"right":"Direito","violation":"Violação","crime":"Crime","Labor Law":"Direito do Trabalho","Positive Penal Law":"Direito Penal positivo","Human Rights":"Direitos humanos","Analytical Category":"Categoria analítica","Civil Rights / Constitutional Law":"Direitos civis / Direito Constitucional","International Law":"Direito Internacional","Human Rights / Transitional Justice":"Direitos humanos / Justiça de transição","Human Rights / Constitutional Law":"Direitos humanos / Direito Constitucional","Analytical Category / Int. Criminal Law":"Categoria analítica / Direito Penal Internacional","Human Rights / Int. Law":"Direitos humanos / Direito Internacional","Codified as Crime":"Tipificado como crime"," (Analytical)":"Categoria analítica","Formally recognized / Selective suppression":"Formalmente reconhecido / supressão seletiva","Suspended / Regulated by State":"Suspenso / regulamentado pelo Estado","Treated as Subversion / Criminalized":"Tratado como subversão / criminalizado","Uncodified Crime / Officially denied":"Não tipificado / oficialmente negado","Legalized Exception (Habeas Corpus suspended)":"Exceção legalizada (habeas corpus suspenso)","Partially Maintained / Politically Controlled":"Parcialmente mantido / controlado politicamente","Ignored / ":"Ignorado","Suspended / State Intervention":"Suspenso / intervenção estatal","Unregulated / Permitted":"Sem regulamentação / permitido","Facilitated by State":"Facilitado pelo Estado","Uncodified / Ignored":"Não tipificado / ignorado","Denied / Eradicated":"Negado / reprimido","Formally recognised / Heavily censored":"Formalmente reconhecido / fortemente censurado","Suspended for political targets":"Suspenso para alvos políticos","Restricted by decree":"Restringido por decreto","Framed as National Security defence":"Enquadrado como defesa da segurança nacional","Falsified as legitimate defence":"Apresentado falsamente como legítima defesa","Violated by State Policy (executions, disappearances)":"Violado por política estatal (execuções, desaparecimentos)","Repression of political and civil groups":"Repressão de grupos políticos e civis","Violent repression / Military intervention":"Repressão violenta / intervenção militar","Selective enforcement / Falsified as suicide":"Aplicação seletiva / falsificação como suicídio","Ignored for political crimes / Impunity":"Ignorado em crimes políticos / impunidade","Institutional Policy":"Política institucional","Institutional Practice / Systemic tool":"Prática institucional / instrumento sistêmico","Institutional Practice / Mass detentions":"Prática institucional / detenções em massa","State intervention / Peleguismo":"Intervenção estatal / peleguismo","Incompatible with economic model":"Incompatível com o modelo econômico","Intervention in unions / Cassation of leaders":"Intervenção nos sindicatos / cassação de dirigentes","Institutional Practice (SNI / Listas Sujas)":"Prática institucional (SNI / listas sujas)","Institutional Practice / State-Corporate Complicity":"Prática institucional / conivência entre Estado e empresas","Corporate-State complicity / Mass dismissals":"Conivência entre empresas e Estado / demissões em massa","Institutional Practice / Mass graves":"Prática institucional / valas comuns","Systemic institutional cover-up":"Encobrimento institucional sistêmico","Systematic elimination / State terrorism":"Eliminação sistemática / terrorismo de Estado","State secrecy / Censorship":"Sigilo estatal / censura","Prior censorship / Banning of books and arts":"Censura prévia / proibição de livros e manifestações artísticas","Systemic surveillance / Wiretapping":"Vigilância sistêmica / interceptações telefônicas","Exile, banishment, and passport confiscation":"Exílio, banimento e apreensão de passaportes","Purges, cassations, and institutional targeting":"Expurgos, cassações e perseguição institucional","Institutional practice / Death squads":"Prática institucional / esquadrões da morte","Constitution of 1967/1969":"Constituição de 1967/1969","Penal Code (1940)":"Código Penal (1940)","Law 4.898/1965":"Lei 4.898/1965","Law 4.330/1964 / LSN":"Lei 4.330/1964 / LSN","CLT (1943)":"CLT (1943)","None (State denied practice)":"Nenhuma (prática negada pelo Estado)","State repression apparatus":"Aparato estatal de repressão","Law 9.029/1995":"Lei 9.029/1995","Law 13.869/2019":"Lei 13.869/2019","Transitional Justice framework":"Marco da justiça de transição","Law 9.455/1997":"Lei 9.455/1997","Penal Code (1940) Art. 211":"Código Penal (1940), art. 211","Penal Code (1940) Arts. 299 and 347":"Código Penal (1940), arts. 299 e 347","Inter-American Convention on Forced Disappearance":"Convenção Interamericana sobre o Desaparecimento Forçado de Pessoas","Inter-American Court Jurisprudence / LAI":"Jurisprudência da Corte Interamericana / Lei de Acesso à Informação","Rome Statute / Lei de Anistia (1979)":"Estatuto de Roma / Lei de Anistia (1979)","UN Principles on Extra-legal Executions / Rome Statute":"Princípios da ONU sobre execuções extralegais / Estatuto de Roma"," (Emergent post-dictatorship)":"(Categoria emergente após a ditadura)"," (Modern ILO framework)":"(Marco contemporâneo da OIT)"," (Prosecuted as kidnapping/homicide)":"(Processado como sequestro/homicídio)"," (State denied practice)":"(Prática negada pelo Estado)","AI-1 to AI-5 (Cassation of rights) / LSN":"AI-1 a AI-5 (cassação de direitos) / LSN","AI-5 (1968) / Banishment Penalty (Decree-Law 898/1969 - LSN)":"AI-5 (1968) / pena de banimento (Decreto-Lei 898/1969 — LSN)","AI-5 (1968) / Creation of SNI (Law 4.341/1964)":"AI-5 (1968) / criação do SNI (Lei 4.341/1964)","AI-5 (1968) / LSN":"AI-5 (1968) / Lei de Segurança Nacional","CLT (corporatist base) / LSN":"CLT (estrutura corporativista) / LSN","Constitution of 1967 / Press Law (Law 5.250/1967)":"Constituição de 1967 / Lei de Imprensa (Lei 5.250/1967)","Corporate practices backed by DOPS":"Práticas empresariais respaldadas pelo DOPS","Creation of FGTS (Law 5.107/1966)":"Criação do FGTS (Lei 5.107/1966)","Information exchange network":"Rede de intercâmbio de informações","Art. 5, CF/88":"Art. 5º, CF/88","Art. 5, CF/88; Law 13.869":"Art. 5º, CF/88; Lei 13.869","Art. 5, IV and IX, CF/88":"Art. 5º, IV e IX, CF/88","Art. 5, X and XII, CF/88 / LGPD":"Art. 5º, X e XII, CF/88 / LGPD","Art. 5, XV, CF/88":"Art. 5º, XV, CF/88","Art. 6, CF/88; ILO Conventions":"Art. 6º, CF/88; Convenções da OIT","Art. 7, CF/88":"Art. 7º, CF/88","Art. 7, I, CF/88; CLT":"Art. 7º, I, CF/88; CLT","Art. 8, CF/88":"Art. 8º, CF/88","Art. 9, CF/88":"Art. 9º, CF/88"};
 const legalLabel=x=>legalPT[text(x)]||text(x).replace(/\bConstitution of\b/g,'Constituição de').replace(/\bPenal Code\b/g,'Código Penal').replace(/\bLaw\b/g,'Lei').replace(/\bCreation of\b/g,'Criação de').replace(/\bPress Law\b/g,'Lei de Imprensa').replace(/\bILO Conventions\b/g,'Convenções da OIT').replace(/\bState\b/g,'Estado');
 const roleStatus = s => s==='inferred' ? 'inferência visual, não comprova vínculo pessoal' : s==='documented' ? 'documentada' : s==='researcher_reported' ? 'declaração da pesquisadora' : 'em revisão';
@@ -145,8 +146,8 @@ const TIPOS_SOCIAIS = new Set(['Pessoa','Instituição','Movimento']);
 function arestaSocial(e){
  const a=nodeById.get(e.from),b=nodeById.get(e.to);
  if(!a||!b||!TIPOS_SOCIAIS.has(a.kind)||!TIPOS_SOCIAIS.has(b.kind))return false;
- // Relações sociais somente entre pessoa-organização e organização-organização.
- if(a.kind==='Pessoa' && b.kind==='Pessoa')return false;
+ // Relações pessoa–pessoa explícitas da matriz, não inferências por cofiliação.
+ if(a.kind==='Pessoa' && b.kind==='Pessoa')return ['collaborated_with','shared_educational_project'].includes(e.relation);
  return true;
 }
 function arestasSociais(){return edgeRows.filter(arestaSocial);}
@@ -263,7 +264,10 @@ const atlasInterview= {
     "P064",
     "I143",
     "I144",
-    "M022"
+    "M022",
+    "P028",
+    "I129",
+    "I119"
   ],
   "people": [
     [
@@ -438,26 +442,18 @@ const atlasInterview= {
       ]
     ],
     [
-      "EP23",
-      "Raimundo (padre operário)",
-      "46",
-      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
-      [
-        [
-          "I122",
-          "priest"
-        ]
-      ]
-    ],
-    [
       "EP24",
       "Ricardo (padre operário)",
       "46",
-      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+      "Padre operário da Comunidade Santa Cristina e participante da OSM-SP, conforme relato de Sueli Bossam (D072, nota 8; D074). Nome completo ainda não identificado.",
       [
         [
           "I122",
           "priest"
+        ],
+        [
+          "M001",
+          "integral_participant"
         ]
       ]
     ],
@@ -465,11 +461,15 @@ const atlasInterview= {
       "EP25",
       "Virgíneo (padre operário)",
       "46",
-      "Mencionado na organização comunitária da região do Parque Bristol e Jardim São Savério.",
+      "Padre operário da Comunidade Santa Cristina e participante da OSM-SP, conforme relato de Sueli Bossam (D072, nota 8; D074). Nome completo ainda não identificado.",
       [
         [
           "I122",
           "priest"
+        ],
+        [
+          "M001",
+          "integral_participant"
         ]
       ]
     ],
@@ -629,7 +629,7 @@ const atlasInterview= {
   ]
 };
 let atlasInterviewEdges=[];
-const verifiedInterviewOSM=new Set();
+const verifiedInterviewOSM=new Set(['EP24','EP25']);
 function graphSocialEdges(){return [...arestasSociais(),...atlasInterviewEdges];}
 function interviewNodes(mode){
  for(const [id,n] of nodeById)if(n.interviewOnly)nodeById.delete(id);
@@ -646,9 +646,10 @@ function interviewNodes(mode){
  for(const [id,label,pages,summary,links] of [...people,...initiatives])for(const [to,original] of links)if(ids.has(to)&&(education||to==='M001')){
   const reverse=nodeById.get(id)?.kind!=='Pessoa'&&nodeById.get(to)?.kind==='Pessoa';
   const relation=id==='EP02'&&to==='M001'?'integral_participant':original;
-  const evidence=id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.';
+  const evidence=['EP24','EP25'].includes(id)&&to==='M001'?sourceReference('D074')+' · D072, nota 8.':id==='EP07'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 218, 405; '+atlasThesisURL:id==='EP11'&&to==='M001'?'BATISTONI, Maria Rosângela (2001), PDF pp. 6, 382, 493; '+atlasThesisURL:'Entrevista coletiva de 27/09/2026, p. '+pages+'.';
   atlasInterviewEdges.push({from:reverse?to:id,to:reverse?id:to,relation,evidence,status:'documented'});
  }
+ if(education&&ids.has('M001')&&ids.has('I126'))atlasInterviewEdges.push({from:'M001',to:'I126',relation:'educational_network_via_school',evidence:'Projeção de percurso M001 → I108 → I126; D073, pp. 145–146. Conselho criado em 1989; não indica filiação ou subordinação direta.',status:'inferred'});
  return ids;
 }
 function resetGraph(){
@@ -954,7 +955,7 @@ function updateConceptChart(){
 
 
 async function restore(){
-  const response=await fetch('data/atlas-estrutura.json?v=atlas13',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
+  const response=await fetch('data/atlas-estrutura.json?v=atlas14',{cache:'no-store'});if(!response.ok)throw Error('Dados estruturais indisponíveis');
   db=await response.json();updateMap();await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent='Estrutura da planilha atual carregada: 22 tabelas (minibiografias resumidas e estrutura pública; depoimentos e evidências integrais não são publicados).';
 }
 async function importFiles(list){
@@ -1006,7 +1007,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   try{
     // Optional enrichments never prevent the public dataset/map from loading.
     const optional=async(url,apply)=>{try{const r=await fetch(url);if(r.ok)apply(await r.json());}catch(e){console.info('Dados auxiliares indisponíveis:',url);}};
-    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas13',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
+    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas14',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
     await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });
@@ -1081,6 +1082,7 @@ function refreshMapConcept(){
   if(old&&[...c.options].some(x=>x.value===old))c.value=old;
 }
 const matrixLabels = {
+ PersonRelations:'Pessoas e pessoas',
   Persons:'Pessoas', Events:'Eventos', Locations:'Localizações', Documents:'Documentos',
   EventPersons:'Pessoas e eventos', DocumentEvents:'Documentos e eventos',
   DocumentPersons:'Documentos e pessoas', Institutions:'Instituições',

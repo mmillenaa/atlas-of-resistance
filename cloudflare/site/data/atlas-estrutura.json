@@ -143,8 +143,9 @@
     },
     {
       "PersonID": "P028",
-      "Name": "Raymond Perillat",
-      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/51225/RaymondPerillat.jpg"
+      "Name": "Raymond (Raimundo) Perillat",
+      "ImageURL": "https://memorialdaresistenciasp.org.br/wp-content/uploads/tainacan-items/3161/51225/RaymondPerillat.jpg",
+      "Notes": "Raimundo e Raymond são a mesma pessoa (D089); atuação na Comunidade Santa Cristina referida por Sueli Bossam (D072, nota 8; D074)."
     },
     {
       "PersonID": "P029",
@@ -325,8 +326,8 @@
       "PersonID": "P064",
       "Name": "Maria Célia Vieira Rossi",
       "ImageURL": "",
-      "Biography_ORIG": "Educadora popular e militante dos movimentos sociais da zona leste de São Paulo, conhecida como Célia Rossi. Integrou a Juventude Operária Católica, a Pastoral Operária e o Movimento de Saúde da Zona Leste, e coordenou o IN-FORMAR Cultura e Educação Popular nas décadas de 1970 e 1980. Carmen Sylvia Vidigal Moraes destaca sua participação nas lutas do movimento operário na entrevista coletiva. Não se presume filiação formal à OSM-SP.",
-      "Notes": "Fontes: D072, pp. 63–64; D087, Prefeitura de São Paulo; D088, identificação nominal"
+      "Biography_ORIG": "Educadora popular e militante dos movimentos sociais da zona leste de São Paulo, conhecida como Célia Rossi. Integrou a Juventude Operária Católica, a Pastoral Operária e o Movimento de Saúde da Zona Leste, e coordenou o IN-FORMAR Cultura e Educação Popular nas décadas de 1970 e 1980. Carmen Sylvia Vidigal Moraes destaca sua participação nas lutas do movimento operário na entrevista coletiva. Integrou a OSM-SP e colaborou com Waldemar Rossi na construção do movimento, conforme esclarecimento da pesquisadora (24/11/2026).",
+      "Notes": "Fontes: D072, pp. 63–64; D087, Prefeitura de São Paulo; D088, identificação nominal; D089, confirmação da pesquisadora."
     }
   ],
   "Institutions": [
@@ -7028,6 +7029,13 @@
       "SourceURL": "https://tede.pucsp.br/bitstream/handle/44427/1/JAINE%20FERNANDA%20MENDON%C3%87A%20ANUNCIA%C3%87%C3%83O.pdf",
       "Notes": "Identificação nominal Maria Célia Vieira Rossi; nota sobre entrevista de 05/12/2019. Datas biográficas não cadastradas.",
       "StandardCitation": ""
+    },
+    {
+      "DocumentID": "D089",
+      "DocumentType": "researcher_annotation",
+      "Repository": "Registro de revisão da pesquisadora",
+      "Title_ORIG": "Esclarecimentos de identificação e participação na OSM-SP (24/11/2026)",
+      "Notes": "Informação fornecida pela pesquisadora em 24/11/2026: Célia Rossi integrou a OSM-SP e ajudou Waldemar Rossi na construção do movimento; Raymond e Raimundo Perillat são a mesma pessoa."
     }
   ],
   "Concepts": [
@@ -7947,12 +7955,13 @@
     {
       "PersonID": "P064",
       "MovementID": "M001",
-      "Role": "associated_with",
+      "Role": "member_of",
       "StartDate": "",
       "EndDate": "",
-      "SourceDocumentID": "D072",
-      "Confidence": "high",
-      "Notes": "pp. 63–64; vínculo contextual, sem filiação comprovada."
+      "SourceDocumentID": "D089",
+      "Confidence": "researcher_confirmed",
+      "Notes": "Confirmação da pesquisadora: integrou a OSM-SP e ajudou Waldemar Rossi na construção do movimento. Ver também D072, pp. 63–64.",
+      "ReviewStatus": "researcher_reported"
     },
     {
       "PersonID": "P064",
@@ -9709,6 +9718,14 @@
       "SourceDocumentID": "D087",
       "Confidence": "high",
       "Notes": "Décadas de 1970 e 1980."
+    },
+    {
+      "PersonID": "P028",
+      "InstitutionID": "I122",
+      "Role": "priest",
+      "SourceDocumentID": "D074",
+      "ReviewStatus": "documented",
+      "Notes": "Sueli Bossam identifica Raimundo, Ricardo e Virgíneo como padres operários da Comunidade Santa Cristina e participantes da OSM-SP (D072, nota 8; D074); identidade confirmada pela pesquisadora em D089."
     }
   ],
   "EventPersons": [
@@ -14944,6 +14961,24 @@
       "EvidenceType": "documentary_reference",
       "Confidence": "high",
       "Notes": "Nome completo na nota sobre entrevista de 05/12/2019"
+    },
+    {
+      "DocumentID": "D089",
+      "PersonID": "P064",
+      "RelationshipType": "mentions",
+      "Notes": "Registro de esclarecimento da pesquisadora."
+    },
+    {
+      "DocumentID": "D089",
+      "PersonID": "P028",
+      "RelationshipType": "mentions",
+      "Notes": "Registro de esclarecimento da pesquisadora."
+    },
+    {
+      "DocumentID": "D089",
+      "PersonID": "P002",
+      "RelationshipType": "mentions",
+      "Notes": "Registro de esclarecimento da pesquisadora."
     }
   ],
   "DocumentEvents": [
@@ -16641,6 +16676,17 @@
       "ReviewStatus": "review_scope",
       "Confidence": "low",
       "SourceDocumentID": "D066"
+    },
+    {
+      "SourceInstitutionID": "I108",
+      "TargetInstitutionID": "I126",
+      "RelationshipType": "participated_in_network",
+      "StartDate": "1989",
+      "DatePrecision": "year",
+      "SourceDocumentID": "D073",
+      "ReviewStatus": "documented",
+      "Confidence": "high",
+      "Notes": "Moraes (2024), capítulo 4, pp. 145–146, nota 7 e depoimento de Sebastião Neto: participação inicial da Nova Piratininga na rede nacional de escolas, não subordinação à OSM-SP."
     }
   ],
   "MovementRelations": [
@@ -17589,6 +17635,24 @@
     {
       "Coluna A (EventType)": "banishment / expulsion",
       "Coluna B (ConceptID)": "C006"
+    }
+  ],
+  "PersonRelations": [
+    {
+      "SourcePersonID": "P064",
+      "TargetPersonID": "P002",
+      "RelationshipType": "collaborated_with",
+      "SourceDocumentID": "D089",
+      "ReviewStatus": "researcher_reported",
+      "Notes": "Colaborou na construção da OSM-SP, segundo esclarecimento da pesquisadora."
+    },
+    {
+      "SourcePersonID": "P040",
+      "TargetPersonID": "P058",
+      "RelationshipType": "shared_educational_project",
+      "SourceDocumentID": "D069",
+      "ReviewStatus": "documented",
+      "Notes": "Ambas atuaram no projeto dos Ginásios Vocacionais (I129): Cecília na docência, Maria Nilde na coordenação. Aresta de atuação no mesmo projeto, não afirma relação pessoal ou simultaneidade não demonstrada; ver também D072, discussão sobre contribuições educacionais."
     }
   ]
 }

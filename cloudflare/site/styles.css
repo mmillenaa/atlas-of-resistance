@@ -174,3 +174,9 @@ button.small-button,.cos-search button{width:max-content;background:var(--wine);
 .graph-filter-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 16px;padding:0 0 12px;border-bottom:1px solid #ddd}.graph-filter-bar label{font-weight:500;color:#555}.graph-filter-bar select{width:auto;min-width:220px;max-width:100%;font-size:14px}.graph-filter-bar .auxiliary{margin:0;flex:1;min-width:220px}.graph-filter-bar .auxiliary[hidden]{display:none}
 
 .map-legend .pin.education{background:#FF2B1F;border-color:#A51A12}
+
+/* Moldura discreta do nó OSM-SP; não interfere nas demais categorias. */
+#network .lj-node circle.osm-gold-base{fill:none;stroke:#9f7c38;stroke-width:5px;pointer-events:none}
+#network .lj-node circle.osm-gold-shimmer{fill:none;stroke:url(#osm-gold-shimmer);stroke-width:3.5px;pointer-events:none;transform-box:fill-box;transform-origin:center;animation:atlasGoldTurn 8s linear infinite}
+@keyframes atlasGoldTurn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#network .lj-node circle.osm-gold-shimmer{animation:none}}
