@@ -71,8 +71,6 @@ function draw(nodeRows,edgeRows,onSelect){
   .attr('stroke-dasharray',l=>l.dashes||/proposta|revisão|pesquisadora|inferida/i.test(l.title||'')?'4 4':null);
  edge.append('title').text(l=>String(l.title||'').replace(/<[^>]*>/g,' ').replace(/&[^;]+;/g,' '));
  const defs=svg.append('defs');
- const gold=defs.append('linearGradient').attr('id','osm-gold-shimmer').attr('x1','0%').attr('y1','0%').attr('x2','100%').attr('y2','100%');
- for(const [offset,color] of [['0%','#916c29'],['28%','#c9a452'],['47%','#f8e7ae'],['58%','#d8b867'],['80%','#a77c31'],['100%','#916c29']])gold.append('stop').attr('offset',offset).attr('stop-color',color);
  const groups=nodeLayer.selectAll('g.lj-node').data(nodes,n=>n.id).enter().append('g')
   .attr('class',n=>'lj-node'+(n.kind==='Pessoa'?' atlas-person':' atlas-organization'))
   .attr('tabindex',0).attr('role','button').attr('aria-label',n=>n.fullLabel||n.id);
@@ -92,7 +90,6 @@ function draw(nodeRows,edgeRows,onSelect){
   }else if(n.kind==='Pessoa'){
    g.append('text').attr('class','lj-fallback').attr('text-anchor','middle').attr('dy','.35em').text(initials(n.fullLabel));
   }
-  if(osm){g.append('circle').attr('class','osm-gold-base').attr('r',n.r+3).attr('fill','none');g.append('circle').attr('class','osm-gold-shimmer').attr('r',n.r+3).attr('fill','none').attr('stroke','url(#osm-gold-shimmer)');}
   const lbl=g.append('text').attr('class','node-label').attr('text-anchor','middle').attr('y',n.r+17);
   for(const [i,line]of labelLines(n.fullLabel).entries())lbl.append('tspan').attr('x',0).attr('dy',i?14:0).text(line);
   g.append('title').text(n.fullLabel+' · '+n.kind+' · '+(degrees.get(n.id)||0)+' conexões nesta visão');
