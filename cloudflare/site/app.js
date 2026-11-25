@@ -873,6 +873,7 @@ function buildMapLocationCard(r,events,eventPersonIds,documents,documentLocation
  }
  if(links.size)out+='<h4>Fontes documentais relacionadas</h4><ul class="map-events">'+[...links.values()].map(({doc,roles})=>'<li>'+mapSourceLink(doc)+(roles.size?' — '+HTML([...roles].join('; ')):'')+(doc.Repository?' · '+HTML(doc.Repository):'')+'</li>').join('')+'</ul>';
  if(/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||memoria.fonte==='MDH')out+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
+ if(memoria.fonte==='OWN')out+='<p class="map-source">Síntese da matriz original de pesquisa; referência específica e coordenadas a conferir.</p>';
  if(!descr&&!born.length&&!died.length&&!relacionados.length&&!links.size&&!endereco)out+='<p class="map-source">Registro geográfico cadastrado, ainda sem informação histórica ou vínculo individualizado nesta seleção.</p>';
  if(mapGeoPT[text(r.GeoPrecision)])out+='<p class="map-source">'+HTML(mapGeoPT[text(r.GeoPrecision)])+'</p>';
  return out;
@@ -1135,7 +1136,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   try{
     // Optional enrichments never prevent the public dataset/map from loading.
     const optional=async(url,apply)=>{try{const r=await fetch(url);if(r.ok)apply(await r.json());}catch(e){console.info('Dados auxiliares indisponíveis:',url);}};
-    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas14',x=>miniBiografias=x),optional('data/lugares-memoria.json',x=>historicosLocais=x)]);
+    await Promise.all([optional('assets/people/manifest.json?v=atlas13',x=>manifest=x),optional('data/minibiografias-publicas.json?v=atlas14',x=>miniBiografias=x),optional('data/lugares-memoria.json?v=atlas26',x=>historicosLocais=x)]);
     await restore();}
   catch(e){if($('uploadStatus'))$('uploadStatus').textContent=e.message;$('network').textContent=e.message;}
 });

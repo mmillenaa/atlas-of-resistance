@@ -823,5 +823,41 @@
     "descricao": "O prédio que abriga o 1º Batalhão de Polícia de Choque - Ronda Ostensiva Tobias de Aguiar (ROTA) foi construído em 1891 para abrigar o corpo de polícia. Inspirado na arquitetura militar francesa, o local possuía uma rede de túneis usados para fazer ligações com o Presídio Tiradentes e a Estação da Luz, situados na mesma região. No ano de 1970, com a criação da Polícia Militar, o local passou a sediar a ROTA. Durante a ditadura militar, os túneis do local chegaram a ser utilizados para aprisionar presos políticos. Posteriormente, esses túneis foram aterrados, mas os 100 metros restantes abrigam uma “sala de memória” com peças antigas do quartel e do batalhão. O prédio foi tombado em 1992 pelo Conselho de Defesa do Patrimônio Histórico, Arqueológico, Artístico e Turístico do Estado de São Paulo (Condephaat) e segue com a mesma finalidade.",
     "endereco": "Avenida Tiradentes, 440, Luz",
     "fonte": "MDH"
+  },
+  "L233": {
+    "descricao": "O Instituto Médico Legal (IML), órgão técnico da polícia responsável por necropsias e perícias, tornou-se peça central do aparato repressivo durante a ditadura civil-militar. Sua atuação foi marcada pela legitimação de mortes e desaparecimentos políticos: laudos e certidões de óbito eram produzidos para sustentar as versões oficiais apresentadas pelo Deops/SP e pelo DOI-Codi/SP, ocultando assassinatos cometidos por seus agentes. Além de forjar causas de morte, peritos do IML colaboraram na ocultação de cadáveres, registrando militantes com identidades falsas, apesar de conhecerem suas verdadeiras. Esse expediente impediu que inúmeras famílias pudessem reconhecer, receber e enterrar seus mortos, perpetuando a violência estatal para além da execução física.",
+    "endereco": "Av. Enéas Carvalho de Aguiar, 600. São Paulo, SP.",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
+  },
+  "L243": {
+    "descricao": "Igreja Matriz de São Bernardo (e a Praça da Matriz): Tornou-se o principal refúgio e local alternativo para a realização de assembleias quando o Estádio de Vila Euclides e o Paço Municipal foram cercados e ocupados pela Polícia Militar.",
+    "endereco": "Praca da Matriz S/N - Centro, São Bernardo do Campo - SP, 09030-325",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
+  },
+  "L244": {
+    "descricao": "Estádio Jaçatuba (também citado como Vila Joaçaba, em Santo André) é o principal local utilizado para as assembleias dos metalúrgicos de Santo André.",
+    "endereco": "R. dos Ramalhões, 126 - Jardim Monte Libano, Santo André - SP, 09290-625",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
+  },
+  "L245": {
+    "descricao": "Igreja de Nosso Senhor do Bonfim (Santo André) foi um pátio utilizado para reunir milhares de metalúrgicos de Santo André em assembleias sob a vigilância de helicópteros militares.",
+    "endereco": "R Oratório, 1458 - Parque das Nações, Santo André - SP, 09210-120",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
+  },
+  "L246": {
+    "descricao": "O Paço Municipal de São Bernardo foi utilizado como rota de passeatas (especialmente a do 1º de maio) e considerado como um local alternativo para assembleias.",
+    "endereco": "Pça. Samuel Sabatini, S/N - Centro, São Bernardo do Campo - SP, 09810-390",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
+  },
+  "L247": {
+    "descricao": "Rua Marechal Deodoro e Faria Lima (São Bernardo) foram vias importantes do centro da cidade que foram percorridas pela grande passeata de 1º de Maio no ABC (estado de São Paulo).",
+    "endereco": "São Bernardo do Campo, São Paulo",
+    "fonte": "OWN",
+    "notaFonte": "Fonte própria (OWN); verificar fonte e coordenadas nos campos restantes."
   }
 }
