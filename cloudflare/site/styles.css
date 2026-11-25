@@ -192,77 +192,20 @@ details:not([open]):not(.atlas-context)>summary::before{animation:atlas-disclosu
 details[open]:not(.atlas-context)>summary::before{animation:none;transform:translateY(-50%)}
 @media(prefers-reduced-motion:reduce){details:not([open]):not(.atlas-context)>summary::before{animation:none}}
 
-/* Compact editorial prose: leave all table rules and cell spacing untouched. */
-main p:not(table p){line-height:1.15;margin-bottom:12px}
-main .section-intro,main .auxiliary,main .subtle-note,main .method-body p,main .research-card p,main .graph-detail p,main .graph-detail .mini-bio,main .side-panel p,main .legal-grid #conceptDetail p,main .map-history,main .map-events,main .graph-detail details.atlas-context ul{line-height:1.15}
-main .method-body p:last-child{margin-bottom:0}
-main .method-body h3{line-height:1.25}
-main .method-body .method-legend{line-height:1.15}
-main .section-intro{margin-bottom:14px}
-main .method-note{margin-bottom:15px}
-/* Mobile navigation uses the original nine tab buttons and existing illustrated arrows. */
-.mobile-nav-toggle{display:none}
+/* Atlas 24: preserve the original header and navigation; refine text hierarchy only. */
+main p:not(table p),
+main .section-intro,main .auxiliary,main .subtle-note,
+main .method-body p,main .research-card p,
+main .graph-detail p,main .graph-detail .mini-bio,
+main .side-panel p,main .legal-grid #conceptDetail p,
+main .map-history,main .map-events,main .graph-detail details.atlas-context ul{line-height:1.4}
 @media(max-width:920px){
-  .original-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;min-height:0;padding:24px 22px 20px}
-  .header-copy{max-width:none;min-width:0}
-  .original-header h1{font:400 clamp(27px,4.4vw,36px)/1.13 'Merriweather',Georgia,serif;letter-spacing:-.025em}
-  .atlas-title-main{display:block}
-  .atlas-title-sub{display:block;font:400 clamp(15px,2.45vw,20px)/1.22 'Merriweather',Georgia,serif;letter-spacing:0;margin-top:8px}
-  .inverted-america{min-width:0;width:clamp(85px,17vw,155px)}
-  .inverted-america img{display:block;margin:auto;width:100%;height:auto;max-height:145px;object-fit:contain}
-  .inverted-america figcaption{font-size:9px;line-height:1.15;margin-top:5px}
-  .atlas-mobile-nav-ready .mobile-nav-toggle{width:calc(100% - 44px);margin:0 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;background:white;color:var(--wine);border:0;border-top:2px solid var(--wine);border-bottom:1px solid var(--line);padding:10px 8px;min-height:52px;font:500 15px/1.2 Roboto,Arial,sans-serif;cursor:pointer}
-  .mobile-nav-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
-  .mobile-nav-kicker{font-size:11px;font-weight:400;color:var(--ink)}
-  .mobile-nav-icon{display:block;flex:0 0 13px;width:13px;height:13px;background:url('./icons/left.png') center/120px 120px no-repeat}
-  .mobile-nav-toggle[aria-expanded=true] .mobile-nav-icon{background-image:url('./icons/down.png');background-size:92px 92px;background-position:center calc(50% - 1.4px)}
-  .atlas-mobile-nav-ready nav#tabs{display:none;min-height:0;margin:0 22px;border-top:0;border-bottom:1px solid var(--line);padding:3px 0 6px}
-  .atlas-mobile-nav-ready nav#tabs.mobile-open{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}
-  .atlas-mobile-nav-ready nav#tabs button{display:flex;align-items:center;width:100%;min-height:44px;text-align:left;font:400 14px/1.2 Roboto,Arial,sans-serif;padding:10px 12px;border:0;border-left:2px solid transparent;border-bottom:1px solid #eee;border-radius:0;white-space:normal}
-  .atlas-mobile-nav-ready nav#tabs button.active{border-left-color:var(--wine);background:#fbf3f4;color:var(--wine);font-weight:500}
-  .mobile-nav-toggle:focus-visible,nav#tabs button:focus-visible{outline:2px solid var(--wine);outline-offset:-2px}
-  main{padding:12px 22px 36px;min-width:0}
-  main .page{min-width:0}
-  main h2{font-size:clamp(19px,3.2vw,24px);line-height:1.2;margin:4px 0 16px;padding:12px 0 12px;overflow-wrap:anywhere}
-  main h3{font-size:17px;line-height:1.2}
-  main .method-body h3{font-size:15px}
-  .method-note>summary{line-height:1.2;min-height:42px}
-  .query-block,.data-tools,.cos-search,.pilot-split,.pilot-chart-shell{min-width:0;max-width:100%}
-  .query-entity{min-width:0}
-  .query-entity label{min-width:0}
-  .query-entity select{min-width:0;max-width:100%}
-  #network{height:clamp(440px,68svh,700px);min-height:0}
-  #map.atlas-raster{height:clamp(360px,58svh,520px)}
-  .graph-filter-bar select{min-width:0;width:100%}
-  .graph-filter-bar .auxiliary{min-width:0;flex-basis:100%}
-  .inner-tabs{flex-wrap:wrap}
-  .inner-tabs button{white-space:normal}
+  .original-header h1{font-size:29px}
+  main h2{font-size:24px}
 }
 @media(max-width:600px){
-  .original-header{padding:18px 15px 16px;gap:12px;align-items:start}
-  .original-header h1{font-size:clamp(25px,7vw,32px)}
-  .atlas-title-sub{font-size:clamp(14px,3.65vw,17px);margin-top:7px}
-  .inverted-america{width:clamp(68px,19vw,110px)}
-  .inverted-america img{max-height:112px}
-  .inverted-america figcaption{font-size:9px}
-  .atlas-mobile-nav-ready .mobile-nav-toggle{margin:0 15px;width:calc(100% - 30px)}
-  .atlas-mobile-nav-ready nav#tabs{margin:0 15px}
-  .atlas-mobile-nav-ready nav#tabs.mobile-open{grid-template-columns:minmax(0,1fr)}
-  main{padding:10px 15px 30px}
+  .original-header h1{font-size:23px}
   main h2{font-size:20px}
-  main .page>p{font-size:15px}
-  .research-card{padding:16px;margin:18px 0}
-  .filter-card{padding:12px;gap:12px}
-  .map-grid,.legal-grid{gap:16px}
-  #grafo .network-frame{margin-inline:0;width:100%}
-  .query-block{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px}
-  .query-entity label{flex:1}
-  .query-entity select,.data-tools select{width:100%;max-width:100%;min-width:0}
-  .data-tools input{flex:1 1 100%;min-width:0}
-  .run-query-btn{justify-self:center;margin:0}
-  .cos-search button{max-width:none}
-  .data-pager{flex-wrap:wrap}
-  .map-controls select{width:100%;max-width:100%}
-  .map-legend{gap:8px 15px;line-height:1.15}
-  .graph-detail{left:8px;bottom:8px;max-width:calc(100% - 16px);padding:12px}
+  main h3{font-size:17px}
+  main .method-body h3{font-size:15px}
 }

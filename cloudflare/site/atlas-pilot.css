@@ -6,6 +6,4 @@
 
 .pilot-record small,.oral-import,.oral-person small,.oral-bubble small,.oral-empty,.oral-head small,.pilot-axis button{color:var(--ink);font-style:normal}
 
-/* Compact explanations, preserving table and record row formatting. */
-main .atlas-pilot .pilot-detail p,main .atlas-pilot .pilot-notice{line-height:1.15}
-@media(max-width:600px){.atlas-pilot .pilot-controls{gap:8px}.atlas-pilot .pilot-controls label{min-width:0;flex:1 1 44%}.pilot-split{gap:12px}.pilot-detail{padding:12px}.pilot-chart-shell{max-width:100%;min-width:0}}
+main .atlas-pilot .pilot-detail p,main .atlas-pilot .pilot-notice{line-height:1.4}
