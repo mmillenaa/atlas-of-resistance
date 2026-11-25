@@ -226,3 +226,13 @@ main .map-history,main .map-events,main .graph-detail details.atlas-context ul{l
 #map .map-biographies li,#mapSide .map-biographies li{margin-bottom:8px;overflow-wrap:anywhere}
 #map .map-biographies p,#mapSide .map-biographies p{margin:5px 0;line-height:1.4}
 #map .map-biographies details summary,#mapSide .map-biographies details summary{font-size:12px;cursor:pointer;color:var(--wine);margin:4px 0}
+
+/* Justificar somente a prosa de apresentação e explicação das abas. */
+main .page > p:not(.auxiliary):not(.subtle-note),
+main .page .section-intro,
+main .page .method-body p,
+main #sobre .research-card > p {
+  text-align: justify;
+  text-align-last: start;
+  hyphens: auto;
+}
