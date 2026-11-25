@@ -14,8 +14,8 @@ export default {
    }catch{return new Response('Tile unavailable',{status:502});}
   }
   const asset=await env.ASSETS.fetch(request);
-  if(/\/(?:index\.html|app\.js|graph-d3\.js|styles\.css)?$/.test(url.pathname)){
-   const headers=new Headers(asset.headers);headers.set('Cache-Control','no-cache, must-revalidate');headers.set('X-Atlas-Release','atlas17-20261125');
+  if(/\/(?:index\.html|app\.js|graph-d3\.js|styles\.css|atlas-pilot\.js|atlas-pilot\.css)?$/.test(url.pathname)){
+   const headers=new Headers(asset.headers);headers.set('Cache-Control','no-cache, must-revalidate');headers.set('X-Atlas-Release','atlas18-20261125');
    return new Response(asset.body,{status:asset.status,statusText:asset.statusText,headers});
   }
   return asset;

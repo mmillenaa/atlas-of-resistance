@@ -14,7 +14,9 @@
 <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script defer src="./graph-d3.js?v=atlas15"></script>
 <script defer src="./app.js?v=atlas17"></script>
-<meta name="atlas-release" content="atlas17-20261125">
+<meta name="atlas-release" content="atlas18-20261125">
+<link rel="stylesheet" href="./atlas-pilot.css?v=1">
+<script defer src="./atlas-pilot.js?v=1"></script>
 </head>
 <body>
 <header class="original-header">
@@ -25,6 +27,8 @@
   <button data-page="sobre" class="active">Sobre o projeto</button>
   <button data-page="grafo">Grafo de conhecimento</button>
   <button data-page="mapa">Geografia da resistência</button>
+  <button data-page="cronologia">Cronologia</button>
+  <button data-page="laboratorio">Laboratório de História Oral</button>
   <button data-page="juridico">Compêndio jurídico</button>
   <button data-page="semantica">Assistente semântico</button>
   <button data-page="dados">Repositório de dados</button>
@@ -78,6 +82,30 @@
 <section id="cosmov" class="page">
 <h2><img src="icons/stars.png" class="stars-head" alt="">Acervos de Movimentos Sociais (Cosmov)</h2><p>Pesquisa bibliográfica pela API OpenAlex, complementada por referências selecionadas pela pesquisadora. Explore artigos acadêmicos, teses e publicações relacionadas aos movimentos sociais catalogados no Atlas.</p>
 <div class="cos-search"><label for="cosQuery">Termo de pesquisa:<input id="cosQuery" type="search" value="Oposição Sindical Metalúrgica de São Paulo"></label><button id="cosSearch">Pesquisar publicações</button></div><div id="cosResults" class="table-shell"></div>
+</section>
+
+<section id="cronologia" class="page atlas-pilot">
+<h2>Cronologia da resistência</h2>
+<p class="section-intro">Acontecimentos, trajetórias e iniciativas educacionais em perspectiva temporal. Piloto baseado exclusivamente na matriz pública.</p>
+<div class="pilot-controls"><label>De <input id="tlFrom" type="number" min="1800" max="2100" value="1960"></label><label>Até <input id="tlTo" type="number" min="1800" max="2100" value="2000"></label><label>Camada<select id="tlLayer"><option value="">Todas</option><option value="repression">Repressão e violações</option><option value="resistance">Resistência e organização</option><option value="education">Educação e formação</option><option value="other">Outras relações e acontecimentos</option></select></label><label>Busca por pessoa, instituição ou evento<input id="tlSearch" type="search" placeholder="Ex.: Nova Piratininga"></label><button class="small-button" id="tlReset">Redefinir</button></div>
+<p id="tlSummary" class="auxiliary" role="status">Carregando matriz pública…</p>
+<div class="pilot-chart-shell"><div id="tlChart" aria-label="Distribuição temporal por camada"></div></div>
+<p class="auxiliary">As barras indicam registros iniciados em cada ano, não intensidade histórica. Selecione um ano para examinar os registros que se sobrepõem a ele. Um início sem término não representa duração comprovada.</p>
+<div class="pilot-split"><div><h3 id="tlListTitle">Registros no período</h3><div id="tlList" class="pilot-scroll"></div></div><aside class="pilot-detail" id="tlDetail"><h3>Ficha temporal</h3><p>Selecione um registro para consultar datas, entidades e referências.</p></aside></div>
+<details class="pilot-undated"><summary id="tlUnknownTitle">Registros sem início temporal seguro</summary><div id="tlUnknown" class="pilot-scroll"></div></details>
+</section>
+<section id="laboratorio" class="page atlas-pilot">
+<h2>Laboratório de História Oral</h2>
+<p class="section-intro">Piloto de curadoria de relações inspirado no Linked Jazz. Leia um excerto, identifique as entidades e formule uma relação verificável.</p>
+<p class="pilot-notice"><strong>Área experimental local.</strong> Não há autenticação, submissão ao servidor ou publicação automática. O texto e as propostas ficam apenas na memória desta aba até a exportação; recarregar a página os apaga. Não utilize dados sensíveis em computadores compartilhados.</p>
+<div class="pilot-controls"><label>Modo de trabalho<select id="labMode"><option value="demo">Exemplo com metadados públicos</option><option value="local">Novo excerto local</option></select></label><label>Carregar texto local (.txt)<input id="labFile" type="file" accept=".txt,text/plain"></label><label>Importar propostas (.json)<input id="labImport" type="file" accept=".json,application/json"></label></div>
+<div class="pilot-lab-grid">
+<div class="pilot-detail"><h3>Documento e excerto</h3><label>Fonte / referência documental<input id="labSource" type="text" placeholder="ID ou referência bibliográfica"></label><label>Página, trecho ou minutagem<input id="labLocator" type="text" placeholder="Ex.: p. 45 ou 00:12:30"></label><label>Excerto para análise<textarea id="labExcerpt" rows="10" placeholder="Cole o trecho da entrevista. Nenhum texto será enviado ao servidor."></textarea></label><p class="auxiliary" id="labDemoNote"></p></div>
+<form id="labForm" class="pilot-detail"><h3>Classificação da relação</h3><label>Sujeito<select id="labSubject" required></select></label><label>Predicado<select id="labPredicate" required></select></label><label id="labCustomWrap" hidden>Predicado proposto<input id="labCustom" type="text"></label><label>Objeto<select id="labObject" required></select></label><label>Estado da interpretação<select id="labStatus"><option value="review">A revisar</option><option value="documented">Documentada no excerto</option><option value="inferred">Inferência analítica</option><option value="insufficient">Evidência insuficiente</option></select></label><label>Observações<textarea id="labNotes" rows="3"></textarea></label><div id="labTriple" class="pilot-triple"></div><button class="small-button" type="submit">Registrar proposta local</button><p class="auxiliary" id="labFeedback" role="status"></p></form>
+</div>
+<h3>Fila de revisão <span id="labCount" class="auxiliary"></span></h3>
+<div class="pilot-controls"><label class="pilot-check"><input id="labInclude" type="checkbox"> Incluir excertos e observações na exportação (podem conter dados privados)</label><button class="small-button" id="labJSON">Exportar JSON</button><button class="small-button" id="labCSV">Exportar CSV</button></div><div id="labQueue" class="table-shell"></div>
+<p class="auxiliary">A colaboração neste piloto ocorre por troca de arquivos JSON. Nenhuma proposta é inserida automaticamente no grafo ou no repositório de dados. Uma relação documentada exige conferência humana.</p>
 </section>
 </main><footer>Atlas da Resistência · Projeto de pesquisa em desenvolvimento · Universidade de São Paulo</footer>
 </body></html>
