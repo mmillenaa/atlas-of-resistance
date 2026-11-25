@@ -13,10 +13,10 @@
 <script defer src="./atlas-map.js?v=3"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script defer src="./graph-d3.js?v=atlas15"></script>
-<script defer src="./app.js?v=atlas17"></script>
-<meta name="atlas-release" content="atlas18-20261125">
-<link rel="stylesheet" href="./atlas-pilot.css?v=1">
-<script defer src="./atlas-pilot.js?v=1"></script>
+<script defer src="./app.js?v=atlas19"></script>
+<meta name="atlas-release" content="atlas19-20261125">
+<link rel="stylesheet" href="./atlas-pilot.css?v=2">
+<script defer src="./atlas-pilot.js?v=2"></script>
 </head>
 <body>
 <header class="original-header">
@@ -24,14 +24,14 @@
 <figure class="inverted-america"><img src="assets/pngegg.png" alt="América Invertida, de Joaquín Torres García"><figcaption>América Invertida (1943). Joaquín Torres García.</figcaption></figure>
 </header>
 <nav id="tabs" aria-label="Navegação principal">
-  <button data-page="sobre" class="active">Sobre o projeto</button>
+  <button data-page="sobre" class="active">Sobre</button>
   <button data-page="grafo">Grafo de conhecimento</button>
-  <button data-page="mapa">Geografia da resistência</button>
-  <button data-page="cronologia">Cronologia</button>
-  <button data-page="laboratorio">Laboratório de História Oral</button>
+  <button data-page="mapa">Cartografia</button>
+  <button data-page="cronologia">Linhas</button>
+  <button data-page="laboratorio">Lab_Oralidades</button>
   <button data-page="juridico">Compêndio jurídico</button>
-  <button data-page="semantica">Assistente semântico</button>
-  <button data-page="dados">Repositório de dados</button>
+  <button data-page="semantica">Oceano semântico</button>
+  <button data-page="dados">Horizonte de dados</button>
   <button data-page="cosmov"><img src="icons/stars.png" class="stars" alt="">Cosmov</button>
 </nav>
 <main>
@@ -72,7 +72,7 @@
 <h3>Resultados da consulta</h3><div id="sparqlResults" class="table-shell"></div>
 </section>
 <section id="dados" class="page">
-<h2>Repositório de dados</h2><p class="section-intro">Consulte exclusivamente as tabelas relacionais entre entidades. As referências documentais identificadas são apresentadas; os excertos inéditos permanecem reservados à matriz de pesquisa.</p>
+<h2>Horizonte de dados</h2><p class="section-intro">Consulte exclusivamente as tabelas relacionais entre entidades. As referências documentais identificadas são apresentadas; os excertos inéditos permanecem reservados à matriz de pesquisa.</p>
 <div class="research-card" id="pesquisaLocal" hidden><details class="dataset-loader"><summary>Carregar a matriz completa, com evidências, neste navegador</summary>
 <p class="auxiliary">Selecione os CSVs da pasta app/data do seu computador. Nenhum arquivo será transmitido ao Cloudflare.</p>
 <label for="csvUpload"><strong>Selecionar arquivos CSV:</strong></label><input id="csvUpload" type="file" accept=".csv,text/csv,.json,application/json" multiple>
@@ -95,14 +95,14 @@
 <details class="pilot-undated"><summary id="tlUnknownTitle">Registros sem início temporal seguro</summary><div id="tlUnknown" class="pilot-scroll"></div></details>
 </section>
 <section id="laboratorio" class="page atlas-pilot">
-<h2>Laboratório de História Oral</h2>
-<p class="section-intro">Piloto de curadoria de relações inspirado no Linked Jazz. Leia um excerto, identifique as entidades e formule uma relação verificável.</p>
+<h2>Lab_Oralidades</h2>
+<p class="section-intro">Leia os depoimentos como conversas, selecione uma fala e qualifique as relações entre as pessoas e organizações mencionadas.</p>
 <p class="pilot-notice"><strong>Área experimental local.</strong> Não há autenticação, submissão ao servidor ou publicação automática. O texto e as propostas ficam apenas na memória desta aba até a exportação; recarregar a página os apaga. Não utilize dados sensíveis em computadores compartilhados.</p>
-<div class="pilot-controls"><label>Modo de trabalho<select id="labMode"><option value="demo">Exemplo com metadados públicos</option><option value="local">Novo excerto local</option></select></label><label>Carregar texto local (.txt)<input id="labFile" type="file" accept=".txt,text/plain"></label><label>Importar propostas (.json)<input id="labImport" type="file" accept=".json,application/json"></label></div>
+<div class="oral-import"><label class="oral-upload"><strong>Carregar acervo local de entrevistas (.json)</strong><input id="oralCorpus" type="file" accept=".json,application/json"></label><span id="oralStatus" role="status">14 entrevistas catalogadas. Carregue o arquivo local para ler as transcrições.</span></div><div class="oral-workspace"><aside class="oral-library"><div class="oral-head">Entrevistas</div><input id="oralSearch" type="search" placeholder="Pesquisar entrevista"><div id="oralList"></div></aside><div class="oral-conversation"><div class="oral-head"><strong id="oralTitle">Selecione uma entrevista</strong><small id="oralRef"></small></div><div class="oral-find"><input id="oralFind" type="search" placeholder="Localizar palavra ou nome na conversa"><button id="oralPrev" type="button" aria-label="Trechos anteriores">←</button><span id="oralPage"></span><button id="oralNext" type="button" aria-label="Próximos trechos">→</button></div><div id="oralChat" class="oral-chat"><p>O acervo permanece neste navegador. Selecione uma entrevista após carregar o arquivo.</p></div></div><aside class="oral-classify"><div class="oral-head">Qualificar relação</div><p id="oralSelected" class="auxiliary">Clique em uma fala para começar.</p><div id="oralMentions"></div><div id="oralFormSlot"></div></aside></div><details class="oral-manual"><summary>Entrada manual e importação de propostas</summary><div class="pilot-controls"><label>Modo de trabalho<select id="labMode"><option value="demo">Exemplo com metadados públicos</option><option value="local">Novo excerto local</option></select></label><label>Carregar texto local (.txt)<input id="labFile" type="file" accept=".txt,text/plain"></label><label>Importar propostas (.json)<input id="labImport" type="file" accept=".json,application/json"></label></div>
 <div class="pilot-lab-grid">
 <div class="pilot-detail"><h3>Documento e excerto</h3><label>Fonte / referência documental<input id="labSource" type="text" placeholder="ID ou referência bibliográfica"></label><label>Página, trecho ou minutagem<input id="labLocator" type="text" placeholder="Ex.: p. 45 ou 00:12:30"></label><label>Excerto para análise<textarea id="labExcerpt" rows="10" placeholder="Cole o trecho da entrevista. Nenhum texto será enviado ao servidor."></textarea></label><p class="auxiliary" id="labDemoNote"></p></div>
 <form id="labForm" class="pilot-detail"><h3>Classificação da relação</h3><label>Sujeito<select id="labSubject" required></select></label><label>Predicado<select id="labPredicate" required></select></label><label id="labCustomWrap" hidden>Predicado proposto<input id="labCustom" type="text"></label><label>Objeto<select id="labObject" required></select></label><label>Estado da interpretação<select id="labStatus"><option value="review">A revisar</option><option value="documented">Documentada no excerto</option><option value="inferred">Inferência analítica</option><option value="insufficient">Evidência insuficiente</option></select></label><label>Observações<textarea id="labNotes" rows="3"></textarea></label><div id="labTriple" class="pilot-triple"></div><button class="small-button" type="submit">Registrar proposta local</button><p class="auxiliary" id="labFeedback" role="status"></p></form>
-</div>
+</div></details>
 <h3>Fila de revisão <span id="labCount" class="auxiliary"></span></h3>
 <div class="pilot-controls"><label class="pilot-check"><input id="labInclude" type="checkbox"> Incluir excertos e observações na exportação (podem conter dados privados)</label><button class="small-button" id="labJSON">Exportar JSON</button><button class="small-button" id="labCSV">Exportar CSV</button></div><div id="labQueue" class="table-shell"></div>
 <p class="auxiliary">A colaboração neste piloto ocorre por troca de arquivos JSON. Nenhuma proposta é inserida automaticamente no grafo ou no repositório de dados. Uma relação documentada exige conferência humana.</p>

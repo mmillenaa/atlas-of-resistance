@@ -880,32 +880,28 @@ function updateMap(){
    let detalhes='<h3>'+HTML(label)+'</h3>';
    const endereco=first(r,['Address'])||text(memoria.endereco);
    if(endereco)detalhes+='<p class="map-address">'+HTML(endereco)+'</p>';
-   detalhes+='<p><b>Município:</b> '+HTML(r.Municipality)+' · '+HTML(r.State)+'</p>';
-   detalhes+='<p><b>Categoria:</b> '+HTML(tipoLocalPT(r.PlaceType))+'</p>';
    if(descr)detalhes+='<h4>Histórico do local</h4><div class="map-history">'+HTML(descr)+'</div>';
-   else detalhes+='<p class="auxiliary">Este local ainda não possui síntese histórica pública cadastrada. Consulte as fontes relacionadas abaixo.</p>';
    if(born.length)detalhes+='<p><b>Nascimentos associados:</b> '+HTML([...new Set(born)].join(', '))+'</p>';
    if(died.length)detalhes+='<p><b>Falecimentos associados:</b> '+HTML([...new Set(died)].join(', '))+'</p>';
-   detalhes+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4>';
    if(relacionados.length){
+      detalhes+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4>';
       detalhes+='<ul class="map-events">'+relacionados.slice(0,35).map(ev=>{
         const people=(eventPersonIds.get(ev.EventID)||[]).map(pid=>nodeById.get(pid)?.label).filter(Boolean);
         const dates=[text(ev.StartDate),text(ev.EndDate)].filter(Boolean).join(' – ');
         return '<li><b>'+HTML(eventLabel(ev.EventType))+'</b>'+(dates?' · '+HTML(dates):'')+
           (people.length?' — '+HTML([...new Set(people)].join(', ')):'')+'</li>';
       }).join('')+'</ul>';
-   }else detalhes+='<p class="auxiliary">Nenhum evento diretamente vinculado a este identificador na tabela Events.</p>';
+   }
    if(text(r.Source_MDH).toUpperCase()==='TRUE' || memoria.fonte==='MDH'){
      detalhes+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
    }
-   detalhes+='<p class="auxiliary">Identificador: '+HTML(r.PlaceID)+' · Coordenadas: '+lat+', '+lon+'</p>';
    L.circleMarker([lat,lon],{
       radius,
       color:isEvent?atlasMapColors.historicalBorder:atlasMapColors.otherBorder,
        fillColor:isEvent?atlasMapColors.historical:atlasMapColors.other,priority:isMemory?3:isEvent?2:0,
       weight:1.4, fillOpacity:$('heat').checked?.42:.77
     })
-    .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong><br>'+HTML(text(r.Municipality))+'<br>Acontecimentos: '+ne)
+    .addTo(leafletMap).bindPopup('<strong>'+HTML(label)+'</strong>')
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
@@ -1342,7 +1338,7 @@ function atlasPlotEducation(item,open=false,coords=item.coords){
  if(!leafletMap||!coords)return;
  const L=window.AtlasRaster;
  const details='<h3>'+HTML(item.nome)+'</h3><p class="map-address">'+HTML(item.endereco)+'</p><p><b>Período:</b> '+HTML(item.periodo)+'</p><p><b>Precisão:</b> '+HTML(item.precisao)+'</p><div class="map-history">'+HTML(item.nota)+'</div>'+(item.fonte?'<a href="'+HTML(item.fonte)+'" target="_blank" rel="noopener noreferrer">Fonte de referência</a>':'');
- const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.educationBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.education,weight:1.4,fillOpacity:.94,priority:item.educacional===false?0:4,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong><br>'+HTML(item.endereco)+(item.aproximado||!item.coords?'<br><em>Localização aproximada</em>':'' )).on('click',()=>{$('mapSide').innerHTML=details;});
+ const marker=L.circleMarker(coords,{radius:7,color:item.educacional===false?atlasMapColors.otherBorder:atlasMapColors.educationBorder,fillColor:item.educacional===false?atlasMapColors.other:atlasMapColors.education,weight:1.4,fillOpacity:.94,priority:item.educacional===false?0:4,approximate:item.aproximado||!item.coords}).addTo(leafletMap).bindPopup('<strong>'+HTML(item.nome)+'</strong>').on('click',()=>{$('mapSide').innerHTML=details;});
  if(open){$('mapSide').innerHTML=details;leafletMap.setView(coords,15);marker.openPopup();}
 }
 // Address records remain available as map markers; no address-list UI or geocoding.
