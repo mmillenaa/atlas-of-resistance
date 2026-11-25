@@ -964,19 +964,138 @@ async function importFiles(list){
   db=updated;await normalize();updateAdditionalData();if($('uploadStatus'))$('uploadStatus').textContent=count+' tabela(s) carregada(s) localmente. Os arquivos não foram enviados ao servidor.';
 }
 const atlasThesisURL='https://centrovictormeyer.org.br/wp-content/uploads/2010/04/MOSMSP-Tese-de-Maria-R-Batistoni.pdf';
-const cosmovLocal=[{publication_year:2001,title:'Entre a fábrica e o sindicato: os dilemas da Oposição Sindical Metalúrgica de São Paulo (1967–1987)',authors:['Maria Rosângela Batistoni'],url:atlasThesisURL,curated:true}];
+const cosmovLocal=[
+  {
+    "publication_year": 2001,
+    "title": "Entre a fábrica e o sindicato: os dilemas da Oposição Sindical Metalúrgica de São Paulo (1967–1987)",
+    "authors": [
+      "Maria Rosângela Batistoni"
+    ],
+    "url": "https://centrovictormeyer.org.br/wp-content/uploads/2010/04/MOSMSP-Tese-de-Maria-R-Batistoni.pdf",
+    "accessLabel": "PDF integral",
+    "type": "Tese",
+    "aliases": [
+      "Entre a fábrica e o sindicato: dilemas da oposição sindical metalúrgica de São Paulo (1967-1987)"
+    ],
+    "curated": true,
+    "keywords": [
+      "OSM-SP",
+      "Oposição Sindical Metalúrgica de São Paulo",
+      "MOSM-SP",
+      "movimento operário"
+    ]
+  },
+  {
+    "publication_year": 1982,
+    "title": "Entre a fábrica e o sindicato: os desafios da Oposição Sindical Metalúrgica de São Paulo",
+    "authors": [
+      "Eder Sader",
+      "Vera Telles"
+    ],
+    "type": "Artigo",
+    "venue": "Desvios, n. 1, p. 29–44",
+    "aliases": [
+      "Entre a fábrica e o sindicato, os dilemas da OSM de S. Paulo"
+    ],
+    "referenceSource": "https://doi.org/10.23925/ls.v0i25-26.18586",
+    "curated": true,
+    "keywords": [
+      "OSM-SP",
+      "Oposição Sindical Metalúrgica de São Paulo",
+      "MOSM-SP",
+      "movimento operário"
+    ]
+  },
+  {
+    "publication_year": 1986,
+    "title": "A experiência operária nos anos de resistência: a Oposição Sindical Metalúrgica de São Paulo e a dinâmica do movimento operário (1964–1978)",
+    "authors": [
+      "Hamilton José Barreto de Faria"
+    ],
+    "type": "Dissertação",
+    "venue": "Mestrado em Ciências Sociais, PUC-SP",
+    "aliases": [
+      "A experiência operária nos anos de resistência: a Oposição Metalúrgica de São Paulo e a dinâmica do movimento operário (1964-1978)",
+      "A experiência operária nos anos de resistência"
+    ],
+    "referenceSource": "https://www.cambridge.org/core/journals/international-labor-and-working-class-history/article/labor-and-dictatorship-in-brazil-a-historiographical-review/4FF282F5B4A08827D2FC98722A178096",
+    "curated": true,
+    "keywords": [
+      "OSM-SP",
+      "Oposição Sindical Metalúrgica de São Paulo",
+      "MOSM-SP",
+      "movimento operário"
+    ]
+  },
+  {
+    "publication_year": 2002,
+    "title": "Duas estratégias sindicais: o sindicato metalúrgico de S. Paulo e o de S. Bernardo do Campo, 1978–1988",
+    "authors": [
+      "Cecília Ornellas Renner"
+    ],
+    "type": "Livro",
+    "venue": "São Paulo: Letras à Margem",
+    "aliases": [
+      "Duas estratégias sindicais: o sindicato metalúrgico de São Paulo e o de São Bernardo do Campo, 1978-1988"
+    ],
+    "referenceSource": "https://www.encyclopedia.com/humanities/encyclopedias-almanacs-transcripts-and-maps/factory-commissions-brazil",
+    "curated": true,
+    "keywords": [
+      "OSM-SP",
+      "Oposição Sindical Metalúrgica de São Paulo",
+      "MOSM-SP",
+      "movimento operário"
+    ]
+  },
+  {
+    "publication_year": 2014,
+    "title": "Oposição sindical metalúrgica de São Paulo: história, organização e lutas",
+    "authors": [
+      "Maria Rosângela Batistoni"
+    ],
+    "type": "Capítulo de livro",
+    "venue": "In: ABRAMIDES, Maria Beatriz Costa; DURIGUETTO, Maria Lúcia (org.). Movimentos sociais e Serviço Social: uma relação necessária. São Paulo: Cortez.",
+    "referenceSource": "https://www.scielo.br/j/sssoc/a/sdGtjJNHNJQrfKn5zZKf4Sd/?lang=pt",
+    "curated": true,
+    "keywords": [
+      "OSM-SP",
+      "Oposição Sindical Metalúrgica de São Paulo",
+      "MOSM-SP",
+      "movimento operário"
+    ]
+  }
+];
+
 const searchNorm=s=>text(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 function abntAuthor(name){
  const words=text(name).split(/\s+/).filter(Boolean);if(words.length<2)return words.join('').toUpperCase();
  let surname=words.pop();if(/^(filho|neto|junior|júnior|sobrinho)$/i.test(surname)&&words.length>1)surname=words.pop()+' '+surname;
  return surname.toLocaleUpperCase('pt-BR')+', '+words.join(' ');
 }
-function cosmovCurated(term){const t=searchNorm(term);return cosmovLocal.filter(w=>/\b(osm|mosm)( sp)?\b/.test(t)||/oposicao (sindical )?metalurgica/.test(t)||(t.length>2&&searchNorm(w.title+' '+w.authors.join(' ')).includes(t)));}
+const cosmovAuthors=w=>w.authors||(w.authorships||[]).map(a=>a.author?.display_name).filter(Boolean);
+const cosmovTitle=s=>searchNorm(s).replace(/\bs paulo\b/g,'sao paulo').replace(/\bs bernardo\b/g,'sao bernardo');
+const cosmovTitles=w=>[w.title,...(w.aliases||[])].map(cosmovTitle).filter(Boolean);
+const cosmovIds=w=>[w.doi,w.id,w.url].map(x=>text(x).toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//,'').replace(/^https?:\/\/openalex\.org\//,'').replace(/\/$/,'')).filter(x=>/^10\.\d{4,9}\/\S+|^w\d+$/.test(x));
+function cosmovSame(a,b){
+ const ids=cosmovIds(a);if(cosmovIds(b).some(x=>ids.includes(x)))return true;
+ if(!a.publication_year||!b.publication_year||Number(a.publication_year)!==Number(b.publication_year))return false;
+ const aa=cosmovAuthors(a).map(x=>searchNorm(abntAuthor(x).split(',')[0]));
+ const bb=cosmovAuthors(b).map(x=>searchNorm(abntAuthor(x).split(',')[0]));
+ return aa.some(x=>bb.includes(x))&&cosmovTitles(a).some(x=>cosmovTitles(b).includes(x));
+}
+function cosmovMerge(works){
+ const result=[];for(const w of works){const at=result.findIndex(x=>cosmovSame(x,w));if(at<0){result.push(w);continue;}
+ const a=result[at],primary=a.curated?a:w.curated?w:a,other=primary===a?w:a;
+ result[at]={...other,...primary,doi:primary.doi||other.doi,id:primary.id||other.id,url:primary.url||other.url,aliases:[...new Set([...(primary.aliases||[]),...(other.aliases||[]),other.title].filter(Boolean))]};
+ }return result;
+}
+function cosmovCurated(term){const t=searchNorm(term);return cosmovLocal.filter(w=>/\b(osm|mosm)( sp)?\b/.test(t)||/oposicao (sindical )?metalurgica/.test(t)||(t.length>2&&searchNorm(w.title+' '+cosmovAuthors(w).join(' ')+' '+(w.keywords||[]).join(' ')+' '+(w.venue||'')).includes(t)));}
 function renderCosmov(box,works,note=''){
  const htmlRows=works.map(w=>{
-  const authors=w.authors||(w.authorships||[]).map(a=>a.author?.display_name).filter(Boolean);
-  const url=w.url||w.doi||w.id;const link=/^https?:\/\//i.test(url||'')?'<a href="'+HTML(url)+'" target="_blank" rel="noopener noreferrer">'+(w.curated?'PDF integral':'Acessar publicação')+'</a>':HTML(url||'—');
-  return '<tr><td>'+HTML(w.publication_year||'—')+'</td><td>'+HTML(authors.map(abntAuthor).join('; ')||'Autoria não informada')+'</td><td>'+HTML(w.title||'')+'</td><td>'+link+'</td></tr>';
+  const authors=cosmovAuthors(w);
+  const url=w.url||w.doi||w.id;const link=/^https?:\/\//i.test(url||'')?'<a href="'+HTML(url)+'" target="_blank" rel="noopener noreferrer">'+HTML(w.accessLabel||'Acessar registro')+'</a>':HTML(w.curated?'Acesso digital não localizado':'—');
+  const detail=w.venue?'<br><small>'+HTML(w.venue)+'</small>':'';
+  return '<tr><td>'+HTML(w.publication_year||'—')+'</td><td>'+HTML(authors.map(abntAuthor).join('; ')||'Autoria não informada')+'</td><td>'+HTML(w.title||'')+detail+'</td><td>'+link+'</td></tr>';
  });
  box.innerHTML=(note?'<p class="auxiliary">'+HTML(note)+'</p>':'')+(htmlRows.length?'<table class="table"><thead><tr><th>Ano</th><th>Autoria</th><th>Título</th><th>Acesso</th></tr></thead><tbody>'+htmlRows.join('')+'</tbody></table>':'Nenhuma publicação encontrada.');
 }
@@ -986,8 +1105,7 @@ async function cosmov(){
  try{
   const response=await fetch('https://api.openalex.org/works?search='+encodeURIComponent(term)+'&per-page=15');if(!response.ok)throw Error('HTTP '+response.status);
   const result=await response.json();if($('cosQuery').value.trim()!==term)return;
-  const works=(result.results||[]).filter(w=>!local.some(x=>searchNorm(x.title)===searchNorm(w.title)||searchNorm(w.title).includes('entre a fabrica e o sindicato os dilemas da oposicao sindical metalurgica')));
-  renderCosmov(box,[...local,...works]);
+  renderCosmov(box,cosmovMerge([...local,...(result.results||[])]));
  }catch(e){if($('cosQuery').value.trim()===term)renderCosmov(box,local,'OpenAlex indisponível: '+e.message+'. As referências selecionadas localmente continuam acessíveis.');}
 }
 document.addEventListener('DOMContentLoaded',async()=>{
