@@ -835,7 +835,7 @@ function updateCounts(){
   const html=keys.map(([k,l])=>'<div class="stat"><strong>'+rows(k).length+'</strong>'+l+'</div>').join('');
   if($('summary'))$('summary').innerHTML=html;if($('dataCounts'))$('dataCounts').innerHTML=html;updateDataTable();
 }
-const tiposLocaisPT={neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
+const tiposLocaisPT={country:'País',state:'Estado',neighborhood:'Bairro',landmark:'Lugar de memória',city:'Cidade',municipality:'Município',factory:'Fábrica',prison:'Estabelecimento prisional',union:'Sindicato',workplace:'Local de trabalho',church:'Igreja',square:'Praça',military_base:'Instalação militar',police_station:'Unidade policial',residence:'Residência',park:'Parque',street:'Rua',region:'Região',building:'Edifício',institution:'Instituição',hospital:'Hospital',cemetery:'Cemitério'};
 const tipoLocalPT=v=>tiposLocaisPT[text(v)]||text(v).replace(/_/g,' ');
 
 const atlasMapColors={historical:'#9D2235',education:'#FF2B1F',other:'#9AA0A6',historicalBorder:'#791A29',educationBorder:'#A51A12',otherBorder:'#777'};
@@ -856,13 +856,25 @@ function buildMapLocationCard(r,events,eventPersonIds,documents,documentLocation
  const links=new Map();
  for(const link of documentLocations.get(id)||[]){const doc=documents.get(text(link.DocumentID));if(!doc)continue;if(!links.has(doc.DocumentID))links.set(doc.DocumentID,{doc,roles:new Set()});links.get(doc.DocumentID).roles.add(mapDocRolePT[text(link.RelationType)]||roleLabel(link.RelationType));}
  let out='<h3>'+HTML(label)+'</h3>';
+ const country=mapCountryPT[text(r.Country)]||text(r.Country);
+ const region=[text(r.Municipality),text(r.State),country].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i&&v!==label);
+ const type=tipoLocalPT(r.PlaceType);
+ if(type||region.length)out+='<p class="map-location-meta">'+HTML([type,...region].filter(Boolean).join(' · '))+'</p>';
  if(endereco)out+='<p class="map-address">'+HTML(endereco)+'</p>';
  if(descr)out+='<h4>Histórico do local</h4><div class="map-history">'+HTML(descr)+'</div>';
- if(born.length)out+='<p><b>Nascimentos associados:</b> '+HTML([...new Set(born.map(p=>p.Name))].join(', '))+'</p>';
- if(died.length)out+='<p><b>Falecimentos associados:</b> '+HTML([...new Set(died.map(p=>p.Name))].join(', '))+'</p>';
- if(id==='L022'&&born.some(p=>p.PersonID==='P019')){
-  out+='<p>Stanislaw Szermeta nasceu na Alemanha em 4 de maio de 1945. Emigrou para o Brasil com a família, estabelecendo-se em Osasco em 1949.</p>';
-  const doc=documents.get('D032');if(doc)out+='<p class="map-source">Referência biográfica: '+mapSourceLink(doc)+(doc.Repository?' · '+HTML(doc.Repository):'')+'.</p>';
+ const associated=new Map();
+ for(const [people,role] of [[born,'Nascimento'],[died,'Falecimento']]){
+  for(const person of people){const pid=text(person.PersonID);if(!associated.has(pid))associated.set(pid,{person,roles:[]});associated.get(pid).roles.push(role);}
+ }
+ if(associated.size){
+  out+='<h4>Trajetórias biográficas relacionadas</h4><ul class="map-events map-biographies">';
+  for(const [pid,{person,roles}] of associated){
+   const bio=text(miniBiografias[pid]);
+   const refs=[...new Set(rows('DocumentPersons').filter(l=>text(l.PersonID)===pid).map(l=>text(l.DocumentID)))].map(did=>documents.get(did)).filter(d=>d&&text(d.DocumentType)==='biographical_profile');
+   let context=(bio?'<p>'+HTML(bio)+'</p>':'')+(refs.length?'<p class="map-source">Referência biográfica: '+refs.map(doc=>mapSourceLink(doc)+(doc.Repository?' · '+HTML(doc.Repository):'')).join('; ')+'.</p>':'');
+   out+='<li><b>'+HTML(person.Name)+'</b> — '+HTML(roles.join(' e '))+(context?(associated.size===1?context:'<details><summary>Minibiografia e referências disponíveis</summary>'+context+'</details>'):'')+'</li>';
+  }
+  out+='</ul>';
  }
  if(relacionados.length){
   out+='<h4>Acontecimentos relacionados ('+relacionados.length+')</h4><ul class="map-events">'+relacionados.map(ev=>{
@@ -874,7 +886,7 @@ function buildMapLocationCard(r,events,eventPersonIds,documents,documentLocation
  if(links.size)out+='<h4>Fontes documentais relacionadas</h4><ul class="map-events">'+[...links.values()].map(({doc,roles})=>'<li>'+mapSourceLink(doc)+(roles.size?' — '+HTML([...roles].join('; ')):'')+(doc.Repository?' · '+HTML(doc.Repository):'')+'</li>').join('')+'</ul>';
  if(/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||memoria.fonte==='MDH')out+='<p class="map-source">Fonte da síntese: Ministério dos Direitos Humanos e da Cidadania, ObservaDH. Conferir o registro original para citação integral.</p>';
  if(memoria.fonte==='OWN')out+='<p class="map-source">Síntese da matriz original de pesquisa; referência específica e coordenadas a conferir.</p>';
- if(!descr&&!born.length&&!died.length&&!relacionados.length&&!links.size&&!endereco)out+='<p class="map-source">Registro geográfico cadastrado, ainda sem informação histórica ou vínculo individualizado nesta seleção.</p>';
+ if(!descr&&!born.length&&!died.length&&!relacionados.length&&!links.size)out+='<h4>Vínculo histórico em pesquisa</h4><p>Local cadastrado na matriz geográfica. Ainda não há informação histórica ou relação individualizada disponível nesta seleção; a presença do marcador não comprova a ocorrência de um acontecimento.</p>';
  if(mapGeoPT[text(r.GeoPrecision)])out+='<p class="map-source">'+HTML(mapGeoPT[text(r.GeoPrecision)])+'</p>';
  return out;
 }
@@ -914,6 +926,7 @@ function updateMap(){
       radius,label,
       color:isEvent?atlasMapColors.historicalBorder:atlasMapColors.otherBorder,
        fillColor:isEvent?atlasMapColors.historical:atlasMapColors.other,priority:isMemory?3:isEvent?2:0,
+      approximate:/centroid|approximate|municipality|neighborhood/i.test(text(r.GeoPrecision)),
       weight:1.4, fillOpacity:$('heat').checked?.42:.77
     })
     .addTo(leafletMap).bindPopup(detalhes)

@@ -67,7 +67,7 @@ class AtlasMap{
   this.markersPane.replaceChildren();
   for(const m of [...this.layers].filter(l=>l instanceof Marker).sort((a,b)=>(a.opts.priority||0)-(b.opts.priority||0))){
    const [x,y]=point(m.coords);if(x< -40||x>w+40||y< -40||y>h+40)continue;
-   const b=E('button','atlas-raster-marker');b.type='button';b.title=m.opts.label||'Local histórico';b.setAttribute('aria-label',b.title);
+   const b=E('button','atlas-raster-marker');b.type='button';b.setAttribute('aria-label',m.opts.label||'Local histórico');
    const r=m.opts.radius||7;b.style.cssText='left:'+x+'px;top:'+y+'px;width:'+r*2+'px;height:'+r*2+'px;background:'+m.opts.fillColor+';border:'+(m.opts.weight||1.5)+'px '+(m.opts.approximate?'dashed':'solid')+' '+m.opts.color+';opacity:'+(m.opts.fillOpacity??.85);
    b.onclick=()=>{this.active=m;m.handlers.click?.();this.schedule();};this.markersPane.append(b);
   }
