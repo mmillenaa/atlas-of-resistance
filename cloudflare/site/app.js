@@ -891,6 +891,9 @@ function buildMapLocationCard(r,events,eventPersonIds,documents,documentLocation
 
 function updateMap(){
  if(!document.getElementById('mapa').classList.contains('active'))return;
+ const edu=window.AtlasEducation, view=edu.state();
+ if(view.education)edu.renderControls();
+ if(view.vector){if(leafletMap)leafletMap.eachLayer(l=>{if(l instanceof window.AtlasRaster.CircleMarker)leafletMap.removeLayer(l);});edu.renderVector();return;}
  const L=window.AtlasRaster;
  if(!L){$('mapStatus').textContent='Componente cartográfico indisponível. Atualize a página.';return;}
  if(!leafletMap){
@@ -898,8 +901,9 @@ function updateMap(){
   // O componente local controla CARTO e OSM.
  }
  leafletMap.eachLayer(layer=>{if(layer instanceof L.CircleMarker)leafletMap.removeLayer(layer);});
- const chosen=$('mapConcept').value;
- let events=rows('Events');
+ const chosen=view.violations?$('mapConcept').value:'ALL';
+ const heat=view.violations&&$('heat').checked;
+ const allEvents=rows('Events');let events=allEvents;
  if(chosen&&chosen!=='ALL'){
   const ids=new Set(rows('EventConcepts').filter(e=>e.ConceptID===chosen).map(e=>e.EventID));
   events=events.filter(e=>ids.has(e.EventID));
@@ -908,37 +912,38 @@ function updateMap(){
  const eventPersonIds=new Map();for(const ep of rows('EventPersons')){if(!eventPersonIds.has(ep.EventID))eventPersonIds.set(ep.EventID,[]);eventPersonIds.get(ep.EventID).push(ep.PersonID);}
  const documents=new Map(rows('Documents').map(d=>[text(d.DocumentID),d]));const documentLocations=new Map();for(const link of rows('DocumentLocations')){const id=text(link.PlaceID);if(!documentLocations.has(id))documentLocations.set(id,[]);documentLocations.get(id).push(link);}
  let total=0;const coords=[];let eventPlaces=0;
- for(const r of rows('Locations')){
+ if(view.regular||view.violations)for(const r of rows('Locations')){
    const latRaw=text(r.Latitude),lonRaw=text(r.Longitude);if(!latRaw||!lonRaw)continue;
    const lat=Number(latRaw.replace(',','.')),lon=Number(lonRaw.replace(',','.'));
    if(!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)continue;
    const ne=eventCounts.get(text(r.PlaceID))||0;
    // Filtrar por categoria somente quando a opção está selecionada; na visão geral, todas as localizações.
-   if(chosen&&chosen!=='ALL'&&ne===0)continue;
+   if(view.violations&&!view.regular&&ne===0)continue;
    const isMemory=/^(true|1|v|verdadeiro)$/i.test(text(r.Source_MDH))||historicosLocais[text(r.PlaceID)]?.fonte==='MDH';
     const isEvent=ne>0||isMemory;
+   const contextOnly=view.violations&&ne===0;
    const label=mapLocationLabel(r);
-   const radius=$('heat').checked?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
-   const detalhes=buildMapLocationCard(r,events,eventPersonIds,documents,documentLocations);
+   const radius=heat&&ne>0?Math.max(6,Math.min(35,Math.sqrt(ne)*8)):7;
+   const detalhes=buildMapLocationCard(r,contextOnly?allEvents:events,eventPersonIds,documents,documentLocations);
    L.circleMarker([lat,lon],{
       radius,label,
       color:isEvent?atlasMapColors.historicalBorder:atlasMapColors.otherBorder,
        fillColor:isEvent?atlasMapColors.historical:atlasMapColors.other,priority:isMemory?3:isEvent?2:0,
       approximate:/centroid|approximate|municipality|neighborhood/i.test(text(r.GeoPrecision)),
-      weight:1.4, fillOpacity:$('heat').checked?.42:.77
+      weight:1.4, fillOpacity:contextOnly?.25:heat?.42:.77
     })
     .addTo(leafletMap).bindPopup(detalhes)
     .on('click',()=>{$('mapSide').innerHTML=detalhes;});
    total++;if(isEvent)eventPlaces++;coords.push([lat,lon]);
  }
  // A matriz Locations tem prioridade de enquadramento e sobreposição.
- const supplements=atlasIniciativas.filter(i=>i.educacional!==false&&Array.isArray(i.coords));
- for(const item of supplements)atlasPlotEducation(item,false);
- if(!coords.length)for(const item of supplements)coords.push(item.coords);
- leafletMap.__atlasCoords=coords;
+ const supplements=view.education?edu.rasterGroups(leafletMap,L):[];
+ const educationCoords=supplements.map(item=>item.coords);
+ const fitCoords=view.education&&educationCoords.length?educationCoords:coords;
+ leafletMap.__atlasCoords=fitCoords;
  // Não zerar a aproximação escolhida ao trocar de aba ou mexer na intensidade.
- if(coords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(coords,{padding:[25,25],maxZoom:9});primeiroAjusteMapa=true;}
- $('mapStatus').textContent=total+' locais georreferenciados da matriz · '+eventPlaces+' associados a acontecimentos ou memória'+(supplements.length?' · '+supplements.length+' locais de iniciativas educacionais':'')+'. Contorno tracejado = localização aproximada.';
+ if(fitCoords.length&&!primeiroAjusteMapa){leafletMap.fitBounds(fitCoords,{padding:[25,25],maxZoom:view.education?13:9});primeiroAjusteMapa=true;}
+ $('mapStatus').textContent=total+' locais georreferenciados da matriz · '+eventPlaces+' associados a acontecimentos ou memória'+(view.education?' · '+supplements.length+' referências educacionais · '+(edu.records().length-supplements.length)+' sem ponto':'')+'. Contorno tracejado = localização aproximada.';
  setTimeout(()=>leafletMap.invalidateSize(),100);
 }
 
@@ -1161,6 +1166,7 @@ const kindToType=Object.fromEntries(Object.entries(typeToKind).map(([k,v])=>[v,k
 function setupAdditionalUI(){
   // The visible graphFilter is the sole graph mode selector.
 
+  window.AtlasEducation.setup(reset=>{if(reset)primeiroAjusteMapa=false;updateMap();});
   $('heat').onchange=updateMap;
   $('mapConcept').onchange=()=>{primeiroAjusteMapa=false;updateMap();};
   $('legalEventsTab').onclick=()=>showLegalTab(false);$('legalTrendsTab').onclick=()=>showLegalTab(true);
